@@ -1,0 +1,115 @@
+
+/* body */
+
+.container{
+    height: 93.5vh;
+    background-color: #002334;
+    display: grid;
+    grid-template-columns: .1fr 4fr .1fr;
+    grid-template-rows: .1fr 4fr .1fr;
+}
+
+.container2{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: #f1f1f1 ;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: .05fr 4fr .05fr;
+    grid-template-rows: .05fr .2fr .05fr .1fr .05fr 4fr .1fr;
+
+}   
+
+.header-label{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: #D9EDF7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.header-label label{
+    font-weight: bold; 
+    font-size: 18px;
+    color: rgb(26, 26, 26);
+}
+
+.table-container{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    max-height: 75vh;
+    overflow-y: scroll;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th{
+    text-align: start;
+    height: 5px;
+    padding: 5px;
+    background-color: #D9EDF7;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;   
+}
+
+table td{
+    text-align: center  ;
+    padding: 10px;
+    border: 1px solid #dadada;
+    text-transform: capitalize;
+    background-color: #f8f8f8 ;
+}
+
+.edit-btn{
+    background-color: #F0AD4E;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #F0AD4E;
+}
+
+
+.edit-btn:hover{
+    background-color: #d59946;
+}
+
+.delete-btn{
+    background-color: #D9534F;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #D9534F;
+}
+
+
+.delete-btn:hover{
+    background-color: #c14a46;
+}
+
+.edit-btn a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.delete-btn a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}

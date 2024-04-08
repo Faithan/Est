@@ -1,0 +1,132 @@
+
+
+/* body */
+
+
+.image-holder{
+    height: 300px;
+    min-width: 300px;
+    border: 1px  rgb(74, 74, 74);
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    box-shadow:  0 1px 1px rgb(224, 224, 224);
+    padding: 5px;
+}
+
+.image-holder img{
+border-radius: 2px;
+}
+
+
+.form-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 93.5vh;
+    background-color: #002334;
+}
+
+.create-room-form {
+    height: 80vh;
+    width: 180vh;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    border: 1px solid rgb(156, 156, 156);
+    display: grid;
+    grid-template-columns: .1fr 1fr .1fr .01fr  .1fr 1fr .1fr;
+    grid-template-rows: .05fr .2fr .05fr 2fr .2fr ;
+}
+
+.head-label{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    grid-column-start: 3;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.line-a{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+.line-b{
+    grid-column-start: 5;
+    grid-column-end: 7;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+.create-room-form label{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.input_field_holder{
+    margin-top: 10%;
+    margin-left: 25%;
+}
+
+.input_fields{
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(80, 80, 80);
+
+}
+.select_fields{
+    width: 304px;
+    height: 34px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(80, 80, 80);
+}
+
+
+
+.center-label{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.center-label-image{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.header_text{
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 0 1px 1px;
+}
+
+.button1{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color:#005ea6;
+    border: 2px solid #00518f;
+    font-size: 15px;
+}
+
+.button1:hover{
+    color: white;
+    background-color: #004377;
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+

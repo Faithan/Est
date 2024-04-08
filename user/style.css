@@ -1,0 +1,100 @@
+
+
+/* for body */
+
+body {
+    /* background: linear-gradient(360deg, rgb(25, 67, 122) 4%, rgb(182, 206, 251) 50%, rgb(254, 233, 177) 100%); */
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.content {
+    display: grid;
+    grid-template-columns: .2fr 1fr .2fr 1fr .2fr;
+    grid-template-rows: .1fr 1fr .1fr;
+    height: 93.5vh;
+}
+
+.leftcontent {
+    margin-top: 30%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    z-index: 2;
+}
+
+.leftcontent label {
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-shadow: 0 1px 1px;
+    text-align: justify;
+}
+
+.leftcontent p {
+    font-size: 20px;
+    color: white;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+
+.leftcontent button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    background-color: #FA7C0D;
+    border: 1px solid white;
+    color: white;
+    padding: 10px;
+}
+
+
+.leftcontent button:hover{
+    background-color: white;
+    border: 1px solid #fa7c0D;
+    color: #FA7C0D;
+    transition: 0.3s;
+}
+
+
+
+.rightcontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    z-index: 2;
+
+}
+
+
+.logo2 {
+    height: 500px;
+    width: 500px;
+
+}
+
+.for-background {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 6;
+    filter: brightness(10%);
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    background-image: url('../system_images/bg1.jpg');
+    background-size: cover;
+    background-position: center;
+}
