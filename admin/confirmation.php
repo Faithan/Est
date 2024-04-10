@@ -14,11 +14,11 @@ if (isset($_GET['manage_id'])) {
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
 
-if (isset($_POST['checkedin'])) {
+if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
-    $address = $_POST['address'];
+    $address = $_POST['address'];   
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $date_of_arrival = $_POST['date_of_arrival'];
@@ -28,25 +28,19 @@ if (isset($_POST['checkedin'])) {
     $amenities = $_POST['amenities'];
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
-    $hours_of_stay = $_POST['hours_of_stay'];
-    $total_price = $_POST['total_price'];
-    $payment = $_POST['payment'];
-    $cash_change = $_POST['cash_change'];
-    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', hours_of_stay='$hours_of_stay', total_price='$total_price', payment='$payment', cash_change='$cash_change' WHERE reserve_id='$reserve_id'";
+    $reservation_fee = $_POST['reservation_fee'];
+    $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee'  WHERE reserve_id='$reserve_id'";
     if (mysqli_query($con, $update_query)) {
         echo "<script> alert('checked In Successfully')</script>";
     } else {
         echo "Error:" . $sql . "<br>" . mysqli_error($con);
     }
-}
+}   
 
 
 
 
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -59,7 +53,7 @@ if (isset($_POST['checkedin'])) {
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="checkinForm.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="confirmation.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Check In Form</title>
 </head>
@@ -168,49 +162,22 @@ if (isset($_POST['checkedin'])) {
 
 
                     <div class="header-label3">
-                        <label>PAYMENT</label>
+                        <label>RESERVATION ADVANCE PAYMENT</label>
                     </div>
                     <div class="payment-container">
 
                         <div class="line">
                             <div>
-                                <label>Rate Per Hour</label><br>
-                                <input type="number" id="input1" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" readonly>
+                                <label>Reservation Fee</label><br>
+                                <input type="number" name="reservation_fee" required>
                             </div>
-                            <div>
-                                <label>Hours of Stay</label><br>
-                                <input type="number" name="hours_of_stay" id="input2" oninput="multiply()"
-                                    placeholder="Enter Number" required>
-                            </div>
-                            <div>
-                                <label>Total Price</label><br>
-                                <input type="number" name="total_price" id="result" placeholder="Result" readonly>
-                            </div>
+                           
                         </div>
-                        <div class="line">
-                            <div>
-                                <label>Reservation Payment</label><br>
-                                <input type="number" name="reservation_fee" id="input4" value="<?php echo $manage_data['reservation_fee']; ?>">
-                            </div>
-                            <div>
-                                <label>Payment</label><br>
-                                <input type="number" name="payment" id="input3" oninput="subtract()"
-                                    placeholder="Enter Payment" required>
-                            </div>
-                            <div>
-                                <label>Change</label><br>
-                                <input type="number" name="cash_change" id="change" placeholder="Your Change" readonly>
-                            </div>
-                        </div>
-
-
-
+                       
                         <div class="invisible-id">
                             <div>
                                 <label>id</label><br>
-                                <input type="number" name="reserve_id"
-                                    value="<?php echo $manage_data['reserve_id']; ?>">
+                                <input type="number" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>" >
                             </div>
                         </div>
                     </div>
@@ -227,8 +194,8 @@ if (isset($_POST['checkedin'])) {
 
                 <div class="button-container">
                     <div class="button-holder">
-                        <button class="check-btn" type="submit" name="checkedin"><i
-                                class="fa-solid fa-check-to-slot"></i> Checked In</button>
+                        <button class="check-btn" type="submit" name="confirm"><i
+                                class="fa-solid fa-check-to-slot"></i> Confirm</button>
                         <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
                         <div>
 
@@ -237,7 +204,6 @@ if (isset($_POST['checkedin'])) {
         </div>
 
         <script src="calculation.js"></script>
-        <script src="subtract.js"></script>
 </body>
 
 </html>

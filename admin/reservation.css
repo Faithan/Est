@@ -1,7 +1,6 @@
-
 /* body */
 
-.container{
+.container {
     height: 93.5vh;
     background-color: #002334;
     display: grid;
@@ -9,20 +8,20 @@
     grid-template-rows: .1fr 4fr .1fr;
 }
 
-.container2{
+.container2 {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: #f1f1f1 ;
+    background-color: #f1f1f1;
     border-radius: 5px;
     display: grid;
     grid-template-columns: .05fr 4fr .05fr;
     grid-template-rows: .05fr .2fr .05fr .1fr .05fr 4fr .1fr;
 
-}   
+}
 
-.header-label{
+.header-label {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
@@ -34,13 +33,27 @@
     padding: 5px;
 }
 
-.header-label label{
-    font-weight: bold; 
+.header-label label {
+    font-weight: bold;
     font-size: 18px;
     color: rgb(26, 26, 26);
 }
 
-.table-container{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.table-container1 {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 6;
@@ -50,46 +63,121 @@
     overflow-x: none;
 }
 
-table{
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 12px;    
+.table-container2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: none;
+    display: none;
+
 }
 
-table th{
+.table-container3 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: none;
+    display: none;
+}
+
+.table-container4 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: none;
+    display: none;
+}
+
+.table-container5{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 6;
+    grid-row-end: 7;
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: none;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+}
+
+table th {
     text-align: start;
     height: 5px;
     padding: 5px;
     background-color: #D9EDF7;
     top: 0;
     position: -webkit-sticky;
-    position: sticky;   
-   
+    position: sticky;
+
 }
 
-table td{
-    text-align: center  ;
+table td {
+    text-align: center;
     padding: 10px;
     border: 1px solid #dadada;
     text-transform: capitalize;
     background-color: white;
 }
- .special-request{
-    text-align: center  ;
+
+td input {
+    border: none;
+    width: 40px;
+    text-align: center;
+    font-size: 12px;
+
+}
+
+.special-request {
+    text-align: center;
     padding: 10px;
     border: 1px solid #dadada;
     text-transform: capitalize;
-    background-color: #f8f8f8 ;
+    background-color: #f8f8f8;
     max-width: 50px;
     overflow: scroll;
 }
 
-.td2{
+.td2 {
     display: flex;
     gap: 5px;
 }
 
-.edit-btn{
+.edit-btn {
     background-color: #003f88;
     padding-left: 10px;
     padding-right: 10px;
@@ -101,11 +189,11 @@ table td{
 }
 
 
-.edit-btn:hover{
+.edit-btn:hover {
     background-color: #002b5c;
 }
 
-.delete-btn{
+.delete-btn {
     background-color: #D9534F;
     padding-left: 10px;
     padding-right: 10px;
@@ -117,23 +205,23 @@ table td{
 }
 
 
-.delete-btn:hover{
+.delete-btn:hover {
     background-color: #c14a46;
 }
 
-.edit-btn a{
+.edit-btn a {
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
-.delete-btn a{
+.delete-btn {
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
-.buttons-container{
+.buttons-container {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 4;
@@ -142,6 +230,46 @@ table td{
     gap: 10px;
 }
 
-.email{
+.buttons-container button {
+    font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    font-weight: bold;
+    width: 100%;
+    background-color: #002334;
+    color: white;
+}
+
+.buttons-container button:hover {
+    background-color: white;
+    color: #002334;
+    transition: 0.3s;
+}
+
+.buttons-container .rejected-btn {
+    background-color: #650000;
+    color: white;
+}
+
+.buttons-container .pending-btn {
+    background-color: white;
+    color: #002334;
+}
+
+.email {
     text-transform: none;
 }
+
+.table-image-container {
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+.reservation-image {
+    height: 25px;
+}
+
+

@@ -5,7 +5,7 @@ session_start();
 
 
 
-$manage_data = ['room_type' => '', 'no_persons' => '', 'amenities' => '', 'price' => ''];
+$manage_data = ['room_type' => '', 'no_persons' => '', 'amenities' => '', 'price' => '', 'photo' => ''];
 
 
 if (isset($_GET['manage_id'])) {
@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
     $amenities = $_POST['amenities'];
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
-    $room_photo = $_POST['photo'];
-    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo' )";  
+    $room_photo = $manage_data['photo'];
+    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','' )";  
     if (mysqli_query($con,  $savedata)) {
         echo "<script> alert('data accepted succesfully')</script>";
     } else {

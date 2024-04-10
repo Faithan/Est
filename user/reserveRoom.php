@@ -54,7 +54,7 @@ if (isset($_GET['manage_id'])) {
 
                 <div class="background-design2"></div>
 
-                <div class="for-footer"> @Estregan_Beach_Resort_2024 </div>
+                <div class="for-footer"></div>
 
 
           
