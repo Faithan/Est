@@ -154,6 +154,6 @@ if (isset ($_POST['addroom'])) {
     </div>
   </div>
 
-  <script src="add_room.js"></script>
+  <script src="javascripts/add_room.js"></script>
 </body>
 </html>

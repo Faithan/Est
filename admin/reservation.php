@@ -79,6 +79,7 @@ if (isset($_POST['reject'])) {
                 <button onclick="showTablePendings()" id="pending-btn" class="pending-btn">Pendings</button>
                 <button onclick="showTableConfirmed()" id="confirmed-btn">Confirmed</button>
                 <button onclick="showTableCheckedIn()" id="checkedIn-btn">Checked In</button>
+                <button onclick="showTableExtended()" id="extended-btn">Extended</button>
                 <button onclick="showTableCheckedOut()" id="checkedOut-btn">Checked Out</button>
                 <button onclick="showTableRejected()" id="rejected-btn" class="rejected-btn">Rejected</button>
             </div>
@@ -384,7 +385,7 @@ if (isset($_POST['reject'])) {
                                     src="<?php echo $photo ?>"></td>
                             <td class="td2">
                                 <button class="edit-btn" type="submit" name="manage"><a
-                                        href="checkinForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        href="checkedInForm.php?manage_id=<?php echo $reserve_id; ?>"><i
                                             class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></button>
                             </td>
                         </tr>
@@ -397,6 +398,104 @@ if (isset($_POST['reject'])) {
 
 
 
+
+
+
+
+            
+            <!-- for extended table           -->
+
+
+
+
+s
+            <form method="post" action="" class="table-container6" id="table-container6">
+                <table>
+                    <tr>
+                        <th>Reserve ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Date of Arrival</th>
+                        <th>Time of Arrival</th>
+                        <th>Room Type</th>
+                        <th>Number of Person</th>
+                        <th>Amenities</th>
+                        <th>Rate Per Hour</th>
+                        <th>Photo</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='extended'";
+                    $result = mysqli_query($con, $fetchdata);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $reserve_id = $row['reserve_id'];
+                        $fname = $row['fname'];
+                        $lname = $row['lname'];
+                        $address = $row['address'];
+                        $phone_number = $row['phone_number'];
+                        $email = $row['email'];
+                        $date_of_arrival = $row['date_of_arrival'];
+                        $time_of_arrival = $row['time_of_arrival'];
+                        $room_type = $row['room_type'];
+                        $number_of_person = $row['number_of_person'];
+                        $amenities = $row['amenities'];
+                        $rate_per_hour = $row['rate_per_hour'];
+                        $photo = $row['photo'];
+                        $special_request = $row['special_request'];
+
+                        ?>
+                        <tr>
+                            <td>
+                                <input type="number" name="reserve_id" value="<?php echo $reserve_id ?>" readonly>
+                            </td>
+                            <td>
+                                <?php echo $fname ?>
+                            </td>
+                            <td>
+                                <?php echo $lname ?>
+                            </td>
+                            <td>
+                                <?php echo $address ?>
+                            </td>
+                            <td>
+                                <?php echo $phone_number ?>
+                            </td>
+                            <td class="email">
+                                <?php echo $email ?>
+                            </td>
+                            <td>
+                                <?php echo $date_of_arrival ?>
+                            </td>
+                            <td>
+                                <?php echo $time_of_arrival ?>
+                            </td>
+                            <td>
+                                <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $number_of_person ?>
+                            </td>
+                            <td>
+                                <?php echo $amenities ?>
+                            </td>
+                            <td>
+                                <?php echo $rate_per_hour ?>
+                            </td>
+
+                            <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
+                                    src="<?php echo $photo ?>"></td>
+                            <td class="td2">
+                                <button class="edit-btn" type="submit" name="manage"><a
+                                        href="checkedInForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                            class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></button>
+                            </td>
+                        </tr>
+
+                    <?php } ?>
+                </table>
+            </form> <!-- table for pendings -->
 
 
 
@@ -612,8 +711,8 @@ if (isset($_POST['reject'])) {
         <img id="fullscreen-image" src="" alt="">
     </div>
 
-    <script src="fullscreen.js"></script>
-    <script src="reservation.js"></script>
+    <script src="javascripts/fullscreen.js"></script>
+    <script src="javascripts/reservation.js"></script>
 </body>
 
 </html>

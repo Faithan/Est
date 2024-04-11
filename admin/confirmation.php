@@ -203,7 +203,7 @@ if (isset($_POST['confirm'])) {
             </form>
         </div>
 
-        <script src="calculation.js"></script>
+        <script src="javascripts/calculation.js"></script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
     $room_photo = $manage_data['photo'];
-    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','' )";  
+    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','','','','' )";  
     if (mysqli_query($con,  $savedata)) {
         echo "<script> alert('data accepted succesfully')</script>";
     } else {
