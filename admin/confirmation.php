@@ -55,7 +55,7 @@ if (isset($_POST['confirm'])) {
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="confirmation.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <title>Check In Form</title>
+    <title>Confirmation</title>
 </head>
 
 <body>

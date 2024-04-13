@@ -38,8 +38,7 @@ if (isset($_POST['extended'])) {
     $payment_ext = $_POST['payment_ext'];
     $cash_change_ext = $_POST['cash_change_ext'];
 
-
-    $update_query = "UPDATE reserve_room_tbl SET number_of_person='$number_of_person', hours_ext='$hours_ext', payment_ext='$payment_ext', cash_change_ext='$cash_change_ext' WHERE reserve_id='$reserve_id'";
+    $update_query = "UPDATE reserve_room_tbl SET  status = 'extended', number_of_person='$number_of_person', hours_ext='$hours_ext', payment_ext='$payment_ext', cash_change_ext='$cash_change_ext' WHERE reserve_id='$reserve_id'";
     
     if (mysqli_query($con, $update_query)) {
         echo "<script> alert('checked In Successfully')</script>";
@@ -65,7 +64,7 @@ if (isset($_POST['extended'])) {
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="checkedInForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <title>Check In Form</title>
+    <title>Checked In</title>
 </head>
 
 <body>

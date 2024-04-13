@@ -407,8 +407,6 @@ if (isset($_POST['reject'])) {
 
 
 
-
-s
             <form method="post" action="" class="table-container6" id="table-container6">
                 <table>
                     <tr>
@@ -488,7 +486,7 @@ s
                                     src="<?php echo $photo ?>"></td>
                             <td class="td2">
                                 <button class="edit-btn" type="submit" name="manage"><a
-                                        href="checkedInForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        href="extended.php?manage_id=<?php echo $reserve_id; ?>"><i
                                             class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></button>
                             </td>
                         </tr>
@@ -587,7 +585,7 @@ s
                                     src="<?php echo $photo ?>"></td>
                             <td class="td2">
                                 <button class="edit-btn" type="submit" name="manage"><a
-                                        href="checkinForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        href="checkoutForm.php?manage_id=<?php echo $reserve_id; ?>"><i
                                             class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></button>
                             </td>
                         </tr>
@@ -684,7 +682,7 @@ s
                                     src="<?php echo $photo ?>"></td>
                             <td class="td2">
                                 <button class="edit-btn" type="submit" name="manage"><a
-                                        href="checkinForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        href="rejected.php?manage_id=<?php echo $reserve_id; ?>"><i
                                             class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></button>
                             </td>
                         </tr>
