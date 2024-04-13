@@ -72,6 +72,18 @@ table td{
     background-color: #f8f8f8 ;
 }
 
+table .td2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+table .room-image{
+    height: 50px;
+    width: auto;
+}
+
 .edit-btn{
     background-color: #F0AD4E;
     padding-left: 20px;

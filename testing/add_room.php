@@ -38,7 +38,11 @@ if (isset($_POST['addroom'])) {
         $savedata = "INSERT INTO room_tbl  VALUES ('','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','../images/$filenewname')";
 
         if (mysqli_query($con, $savedata)) {
-          echo "<script> alert('Room Added Successfully')</script>";
+          echo "<script>Swal.fire({
+            title: Good job!',
+            text: 'You clicked the button!',
+            icon: 'success'
+          });</script>";
         } else {
           echo "Error:" . $sql . "<br>" . mysqli_error($con);
         }
@@ -67,13 +71,11 @@ if (isset($_POST['addroom'])) {
   <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" type="text/css" href="add_room.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-  
   <title>Add_Room</title>
-
-
-
   <script src="javascripts/inputColor.js" defer></script>
-
+  <script src="jquery-3.7.1.min.js" defer></script>
+  <script src="sweetalert2.all.min.js" defer></script>
+  
 </head>
 
 <body>

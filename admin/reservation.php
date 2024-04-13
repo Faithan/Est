@@ -115,13 +115,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='pending'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='pending' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -133,6 +135,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -169,6 +173,12 @@ if (isset($_POST['reject'])) {
                                 <?php echo $room_type ?>
                             </td>
                             <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
+                            </td>
+                            <td>
                                 <?php echo $number_of_person ?>
                             </td>
                             <td>
@@ -180,6 +190,8 @@ if (isset($_POST['reject'])) {
 
                             <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                     src="<?php echo $photo ?>"></td>
+
+
                             <td class="td2">
                                 <button class="edit-btn" type="submit" name="manage"><a
                                         href="confirmation.php?manage_id=<?php echo $reserve_id; ?>"><i
@@ -217,13 +229,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='confirmed'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='confirmed' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -235,6 +249,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -269,6 +285,12 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
                             </td>
                             <td>
                                 <?php echo $number_of_person ?>
@@ -318,13 +340,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='checkedIn'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='checkedIn' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -336,6 +360,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -370,6 +396,12 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
                             </td>
                             <td>
                                 <?php echo $number_of_person ?>
@@ -402,7 +434,7 @@ if (isset($_POST['reject'])) {
 
 
 
-            
+
             <!-- for extended table           -->
 
 
@@ -419,13 +451,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='extended'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='extended' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -437,6 +471,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -471,6 +507,12 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
                             </td>
                             <td>
                                 <?php echo $number_of_person ?>
@@ -518,13 +560,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='checkedOut'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='checkedOut' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -536,6 +580,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -570,6 +616,12 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
                             </td>
                             <td>
                                 <?php echo $number_of_person ?>
@@ -615,13 +667,15 @@ if (isset($_POST['reject'])) {
                         <th>Date of Arrival</th>
                         <th>Time of Arrival</th>
                         <th>Room Type</th>
+                        <th>Bed Type</th>
+                        <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
                         <th>Rate Per Hour</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='rejected'";
+                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='rejected' ORDER BY reserve_id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
@@ -633,6 +687,8 @@ if (isset($_POST['reject'])) {
                         $date_of_arrival = $row['date_of_arrival'];
                         $time_of_arrival = $row['time_of_arrival'];
                         $room_type = $row['room_type'];
+                        $bed_type = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
                         $number_of_person = $row['number_of_person'];
                         $amenities = $row['amenities'];
                         $rate_per_hour = $row['rate_per_hour'];
@@ -667,6 +723,12 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $room_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_type ?>
+                            </td>
+                            <td>
+                                <?php echo $bed_quantity ?>
                             </td>
                             <td>
                                 <?php echo $number_of_person ?>
@@ -704,6 +766,7 @@ if (isset($_POST['reject'])) {
 
         </div>
     </div>
+
     <div id="fullscreen-overlay">
         <span class="close" onclick="closeFullScreen()">&times;</span>
         <img id="fullscreen-image" src="" alt="">

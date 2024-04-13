@@ -24,6 +24,8 @@ if (isset($_POST['checkedin'])) {
     $date_of_arrival = $_POST['date_of_arrival'];
     $time_of_arrival = $_POST['time_of_arrival'];
     $room_type = $_POST['room_type'];
+    $bed_type = $_POST['bed_type'];
+    $bed_quantity = $_POST['bed_quantity'];
     $number_of_person = $_POST['number_of_person'];
     $amenities = $_POST['amenities'];
     $rate_per_hour = $_POST['rate_per_hour'];
@@ -32,7 +34,9 @@ if (isset($_POST['checkedin'])) {
     $total_price = $_POST['total_price'];
     $payment = $_POST['payment'];
     $cash_change = $_POST['cash_change'];
-    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', hours_of_stay='$hours_of_stay', total_price='$total_price', payment='$payment', cash_change='$cash_change' WHERE reserve_id='$reserve_id'";
+    $time_in = $_POST['time_in'];
+    $time_out = $_POST['time_out'];
+    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',  number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', hours_of_stay='$hours_of_stay', total_price='$total_price', payment='$payment', cash_change='$cash_change', time_in='$time_in', time_out='$time_out' WHERE reserve_id='$reserve_id'";
     if (mysqli_query($con, $update_query)) {
         echo "<script> alert('checked In Successfully')</script>";
     } else {
@@ -132,6 +136,7 @@ if (isset($_POST['checkedin'])) {
                                     value="<?php echo $manage_data['date_of_arrival']; ?>">
                             </div>
                         </div>
+                        
                         <div class="line">
                             <div>
                                 <label>Time of Arrival</label><br>
@@ -143,27 +148,42 @@ if (isset($_POST['checkedin'])) {
                                 <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
                             </div>
                             <div>
+                                <label>Bed Type</label><br>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" >
+                            </div>
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Bed Quantity</label><br>
+                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" >
+                            </div>
+                            <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
                                     value="<?php echo $manage_data['number_of_person']; ?>">
                             </div>
-                        </div>
-                        <div class="line">
                             <div>
                                 <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
+                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" >
                             </div>
+                        </div>
+
+                        <div class="line">
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" readonly>
+                                    value="<?php echo $manage_data['rate_per_hour']; ?>" >
                             </div>
                             <div>
                                 <label>Special Request</label><br>
                                 <input type="text" name="special_request"
-                                    value="<?php echo $manage_data['special_request']; ?>">
+                                    value="<?php echo $manage_data['special_request']; ?>" >
                             </div>
                         </div>
+
+
                     </div>
 
 
@@ -204,6 +224,19 @@ if (isset($_POST['checkedin'])) {
                             </div>
                         </div>
 
+                        <div class="line">
+                            <div>
+                                <label>Time In</label><br>
+                                <input type="time" name="time_in" required>
+                            </div>
+
+                            <div>
+                                <label>Time Out</label><br>
+                                <input type="time" name="time_out"  required>
+                            </div>
+                        
+                        </div>
+
 
 
                         <div class="invisible-id">
@@ -238,6 +271,7 @@ if (isset($_POST['checkedin'])) {
 
         <script src="javascripts/calculation.js"></script>
         <script src="javascripts/subtract.js"></script>
+        
 </body>
 
 </html>

@@ -27,12 +27,14 @@ if (isset($_POST['submit'])) {
     $date_of_arrival = $_POST['date_of_arrival'];
     $time_of_arrival = $_POST['time_of_arrival'];
     $room_type = $_POST['room_type'];
+    $bed_type = $_POST['bed_type'];
+    $bed_quantity = $_POST['bed_quantity'];
     $number_of_person = $_POST['number_of_person'];
     $amenities = $_POST['amenities'];
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
     $room_photo = $manage_data['photo'];
-    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','','','','' )";  
+    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$bed_type','$bed_quantity', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','','','','','','' )";  
     if (mysqli_query($con,  $savedata)) {
         echo "<script> alert('data accepted succesfully')</script>";
     } else {
@@ -57,7 +59,7 @@ if (isset($_POST['submit'])) {
     <title>Room Reservation</title>
     <script src="reserveRoom.js" defer></script>
     <script src="scroll.js" defer></script>
-    <script src="inputColor.js" defer></script>
+    <script src="javascripts/inputColor.js" defer></script>
 </head>
 
 <body>
@@ -139,6 +141,14 @@ if (isset($_POST['submit'])) {
                             <label>Room Type</label><br>
                             <input class="input3" name="room_type" onkeyup="changeColor(this)"
                                 value="<?php echo $manage_data['room_type']; ?>" readonly><br>
+
+                                <label>Bed Type</label><br>
+                            <input class="input3" name="bed_type" onkeyup="changeColor(this)"
+                                value="<?php echo $manage_data['bed_type']; ?>" readonly><br>
+
+                                <label>Numbers of Bed</label><br>
+                            <input class="input3" name="bed_quantity" onkeyup="changeColor(this)"
+                                value="<?php echo $manage_data['bed_quantity']; ?>" readonly><br>
 
                             <label>Number of Persons:</label><br>
                             <input class="input3" name="number_of_person" onkeyup="changeColor(this)"

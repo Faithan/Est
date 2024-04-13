@@ -137,25 +137,38 @@ if (isset($_POST['confirm'])) {
                                 <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
                             </div>
                             <div>
+                                <label>Bed Type</label><br>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" >
+                            </div>
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Bed Quantity</label><br>
+                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" >
+                            </div>
+                            <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
                                     value="<?php echo $manage_data['number_of_person']; ?>">
                             </div>
-                        </div>
-                        <div class="line">
                             <div>
                                 <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
+                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" >
                             </div>
+                        </div>
+
+                        <div class="line">
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" readonly>
+                                    value="<?php echo $manage_data['rate_per_hour']; ?>" >
                             </div>
                             <div>
                                 <label>Special Request</label><br>
                                 <input type="text" name="special_request"
-                                    value="<?php echo $manage_data['special_request']; ?>">
+                                    value="<?php echo $manage_data['special_request']; ?>" >
                             </div>
                         </div>
                     </div>

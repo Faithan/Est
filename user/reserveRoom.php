@@ -103,6 +103,8 @@ if (isset($_GET['manage_id'])) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $id = $row['id'];
                                             $roomType = $row['room_type'];
+                                            $bedType = $row['bed_type'];
+                                            $bed_quantity = $row['bed_quantity'];
                                             $noPersons = $row['no_persons'];
                                             $amenities = $row['amenities'];
                                             $price = $row['price'];
@@ -118,6 +120,18 @@ if (isset($_GET['manage_id'])) {
                                                         <label>
                                                             <b>Room Type:</b>
                                                             <?php echo $roomType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>Bed Type:</b>
+                                                            <?php echo $bedType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>No. of Beds:</b>
+                                                            <?php echo $bed_quantity ?>
                                                         </label>
                                                     </div>
                                                     <div class="label-container">
@@ -221,6 +235,8 @@ if (isset($_GET['manage_id'])) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $id = $row['id'];
                                             $roomType = $row['room_type'];
+                                            $bedType = $row['bed_type'];
+                                            $bed_quantity = $row['bed_quantity'];
                                             $noPersons = $row['no_persons'];
                                             $amenities = $row['amenities'];
                                             $price = $row['price'];
@@ -235,6 +251,18 @@ if (isset($_GET['manage_id'])) {
                                                         <label>
                                                             <b>Room Type:</b>
                                                             <?php echo $roomType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>Bed Type:</b>
+                                                            <?php echo $bedType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>No. of Beds:</b>
+                                                            <?php echo $bed_quantity ?>
                                                         </label>
                                                     </div>
                                                     <div class="label-container">
@@ -343,6 +371,8 @@ if (isset($_GET['manage_id'])) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $id = $row['id'];
                                             $roomType = $row['room_type'];
+                                            $bedType = $row['bed_type'];
+                                            $bed_quantity = $row['bed_quantity'];
                                             $noPersons = $row['no_persons'];
                                             $amenities = $row['amenities'];
                                             $price = $row['price'];
@@ -357,6 +387,18 @@ if (isset($_GET['manage_id'])) {
                                                         <label>
                                                             <b>Room Type:</b>
                                                             <?php echo $roomType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>Bed Type:</b>
+                                                            <?php echo $bedType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>No. of Beds:</b>
+                                                            <?php echo $bed_quantity ?>
                                                         </label>
                                                     </div>
                                                     <div class="label-container">
@@ -450,6 +492,8 @@ if (isset($_GET['manage_id'])) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $id = $row['id'];
                                             $roomType = $row['room_type'];
+                                            $bedType = $row['bed_type'];
+                                            $bed_quantity = $row['bed_quantity'];
                                             $noPersons = $row['no_persons'];
                                             $amenities = $row['amenities'];
                                             $price = $row['price'];
@@ -464,6 +508,18 @@ if (isset($_GET['manage_id'])) {
                                                         <label>
                                                             <b>Room Type:</b>
                                                             <?php echo $roomType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>Bed Type:</b>
+                                                            <?php echo $bedType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>No. of Beds:</b>
+                                                            <?php echo $bed_quantity ?>
                                                         </label>
                                                     </div>
                                                     <div class="label-container">
@@ -554,6 +610,8 @@ if (isset($_GET['manage_id'])) {
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $id = $row['id'];
                                             $roomType = $row['room_type'];
+                                            $bedType = $row['bed_type'];
+                                            $bed_quantity = $row['bed_quantity'];
                                             $noPersons = $row['no_persons'];
                                             $amenities = $row['amenities'];
                                             $price = $row['price'];
@@ -568,6 +626,18 @@ if (isset($_GET['manage_id'])) {
                                                         <label>
                                                             <b>Room Type:</b>
                                                             <?php echo $roomType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>Bed Type:</b>
+                                                            <?php echo $bedType ?>
+                                                        </label>
+                                                    </div>
+                                                    <div class="label-container">
+                                                        <label>
+                                                            <b>No. of Beds:</b>
+                                                            <?php echo $bed_quantity ?>
                                                         </label>
                                                     </div>
                                                     <div class="label-container">

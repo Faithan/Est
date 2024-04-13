@@ -37,8 +37,8 @@ if (isset($_POST['extended'])) {
     $hours_ext = $_POST['hours_ext'];
     $payment_ext = $_POST['payment_ext'];
     $cash_change_ext = $_POST['cash_change_ext'];
-
-    $update_query = "UPDATE reserve_room_tbl SET  status = 'extended', number_of_person='$number_of_person', hours_ext='$hours_ext', payment_ext='$payment_ext', cash_change_ext='$cash_change_ext' WHERE reserve_id='$reserve_id'";
+    $time_out = $_POST['time_out'];
+    $update_query = "UPDATE reserve_room_tbl SET  status = 'extended', number_of_person='$number_of_person', hours_ext='$hours_ext', payment_ext='$payment_ext', cash_change_ext='$cash_change_ext', time_out='$time_out'  WHERE reserve_id='$reserve_id'";
     
     if (mysqli_query($con, $update_query)) {
         echo "<script> alert('checked In Successfully')</script>";
@@ -146,16 +146,29 @@ if (isset($_POST['extended'])) {
                                 <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
                             </div>
                             <div>
+                                <label>Bed Type</label><br>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" readonly>
+                            </div>
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Bed Quantity</label><br>
+                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
+                            </div>
+                            <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
                                     value="<?php echo $manage_data['number_of_person']; ?>" >
                             </div>
-                        </div>
-                        <div class="line">
                             <div>
                                 <label>Amenities</label><br>
                                 <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
                             </div>
+                        </div>
+
+                        <div class="line">
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
@@ -164,7 +177,7 @@ if (isset($_POST['extended'])) {
                             <div>
                                 <label>Special Request</label><br>
                                 <input type="text" name="special_request"
-                                    value="<?php echo $manage_data['special_request']; ?>">
+                                    value="<?php echo $manage_data['special_request']; ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -217,7 +230,19 @@ if (isset($_POST['extended'])) {
                                 <label>Extended Change</label><br>
                                 <input type="number" name="cash_change_ext" id="input4" readonly>
                             </div>
-                           
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Time In</label><br>
+                                <input type="time" name="time_in"  value="<?php echo $manage_data['time_in']; ?>" readonly>
+                            </div>
+
+                            <div>
+                                <label>Time Out</label><br>
+                                <input type="time" name="time_out"  value="<?php echo $manage_data['time_out']; ?>" required>
+                            </div>
                         </div>
 
 
@@ -255,6 +280,7 @@ if (isset($_POST['extended'])) {
         </div>
 
         <script src="javascripts/extendedHours.js"></script>
+        
 
 </body>
 

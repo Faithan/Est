@@ -128,16 +128,29 @@ if (isset($_POST['checkOut'])) {
                                 <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
                             </div>
                             <div>
+                                <label>Bed Type</label><br>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" readonly>
+                            </div>
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Bed Quantity</label><br>
+                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
+                            </div>
+                            <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
                                     value="<?php echo $manage_data['number_of_person']; ?>" readonly>
                             </div>
-                        </div>
-                        <div class="line">
                             <div>
                                 <label>Amenities</label><br>
                                 <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
                             </div>
+                        </div>
+
+                        <div class="line">
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
@@ -199,7 +212,18 @@ if (isset($_POST['checkOut'])) {
                                 <label>Extended Change</label><br>
                                 <input type="number" name="cash_change_ext" value="<?php echo $manage_data['cash_change_ext']; ?>" readonly>
                             </div>
-                           
+                        </div>
+
+                        <div class="line">
+                            <div>
+                                <label>Time In</label><br>
+                                <input type="time" name="time_in"  value="<?php echo $manage_data['time_in']; ?>" readonly>
+                            </div>
+
+                            <div>
+                                <label>Time Out</label><br>
+                                <input type="time" name="time_out"  value="<?php echo $manage_data['time_out']; ?>" readonly>
+                            </div>
                         </div>
 
 

@@ -18,24 +18,26 @@ if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
-    $address = $_POST['address'];   
+    $address = $_POST['address'];
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $date_of_arrival = $_POST['date_of_arrival'];
     $time_of_arrival = $_POST['time_of_arrival'];
     $room_type = $_POST['room_type'];
+    $bed_type = $_POST['bed_type'];
+    $bed_quantity = $_POST['bed_quantity'];
     $number_of_person = $_POST['number_of_person'];
     $amenities = $_POST['amenities'];
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
     $reservation_fee = $_POST['reservation_fee'];
-    $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee'  WHERE reserve_id='$reserve_id'";
+    $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee'  WHERE reserve_id='$reserve_id'";
     if (mysqli_query($con, $update_query)) {
         echo "<script> alert('checked In Successfully')</script>";
     } else {
         echo "Error:" . $sql . "<br>" . mysqli_error($con);
     }
-}   
+}
 
 
 
@@ -134,30 +136,45 @@ if (isset($_POST['confirm'])) {
                             </div>
                             <div>
                                 <label>Room Type</label><br>
-                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
+                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" >
+                            </div>
+                            <div>
+                                <label>Bed Type</label><br>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" >
+                            </div>
+                        </div>
+
+
+                        <div class="line">
+                            <div>
+                                <label>Bed Quantity</label><br>
+                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" >
                             </div>
                             <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
                                     value="<?php echo $manage_data['number_of_person']; ?>">
                             </div>
-                        </div>
-                        <div class="line">
                             <div>
                                 <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
+                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" >
                             </div>
+                        </div>
+
+                        <div class="line">
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" readonly>
+                                    value="<?php echo $manage_data['rate_per_hour']; ?>" >
                             </div>
                             <div>
                                 <label>Special Request</label><br>
                                 <input type="text" name="special_request"
-                                    value="<?php echo $manage_data['special_request']; ?>">
+                                    value="<?php echo $manage_data['special_request']; ?>" >
                             </div>
                         </div>
+
+
                     </div>
 
 
@@ -171,13 +188,14 @@ if (isset($_POST['confirm'])) {
                                 <label>Reservation Fee</label><br>
                                 <input type="number" name="reservation_fee" required>
                             </div>
-                           
+
                         </div>
-                       
+
                         <div class="invisible-id">
                             <div>
                                 <label>id</label><br>
-                                <input type="number" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>" >
+                                <input type="number" name="reserve_id"
+                                    value="<?php echo $manage_data['reserve_id']; ?>">
                             </div>
                         </div>
                     </div>
@@ -194,8 +212,8 @@ if (isset($_POST['confirm'])) {
 
                 <div class="button-container">
                     <div class="button-holder">
-                        <button class="check-btn" type="submit" name="confirm"><i
-                                class="fa-solid fa-check-to-slot"></i> Confirm</button>
+                        <button class="check-btn" type="submit" name="confirm"><i class="fa-solid fa-check-to-slot"></i>
+                            Confirm</button>
                         <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
                         <div>
 
