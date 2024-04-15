@@ -2,6 +2,11 @@
 include ('db_connect.php');
 session_start();
 
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location:../login.php');
+    exit();
+}
+
 
 $manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
 
@@ -18,7 +23,7 @@ if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
-    $address = $_POST['address'];   
+    $address = $_POST['address'];
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $date_of_arrival = $_POST['date_of_arrival'];
@@ -35,7 +40,7 @@ if (isset($_POST['confirm'])) {
     } else {
         echo "Error:" . $sql . "<br>" . mysqli_error($con);
     }
-}   
+}
 
 
 
@@ -65,21 +70,20 @@ if (isset($_POST['confirm'])) {
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-                <li><a>Home</a></li>
-                <li><a>Reservations</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="reservation.php">Reservations</a></li>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Rooms/Cottages</a>
+                    <a href="rooms.php" class="reservation">Rooms/Cottages</a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
-                        <a href="#">Rooms</a>
+                        <a href="rooms.php">Rooms</a>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Add Reservation</a>
+                    <a href="add_room.php" class="reservation">Add Reservation</a>
                     <div class="dropdown-content">
                         <a href="#">Add Cottages</a>
-                        <a href="#">Add Rooms</a>
-
+                        <a href="add_room.php">Add Rooms</a>
             </ul>
-            <button>Log out</button>
+            <a class="logout-btn" href="../logout.php">Log out</a>
         </nav>
     </div>
 
@@ -138,7 +142,7 @@ if (isset($_POST['confirm'])) {
                             </div>
                             <div>
                                 <label>Bed Type</label><br>
-                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" >
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>">
                             </div>
                         </div>
 
@@ -146,7 +150,8 @@ if (isset($_POST['confirm'])) {
                         <div class="line">
                             <div>
                                 <label>Bed Quantity</label><br>
-                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" >
+                                <input type="number" name="bed_quantity"
+                                    value="<?php echo $manage_data['bed_quantity']; ?>">
                             </div>
                             <div>
                                 <label>Number of Persons</label><br>
@@ -155,7 +160,7 @@ if (isset($_POST['confirm'])) {
                             </div>
                             <div>
                                 <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" >
+                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>">
                             </div>
                         </div>
 
@@ -163,12 +168,12 @@ if (isset($_POST['confirm'])) {
                             <div>
                                 <label>Rate Per Hour</label><br>
                                 <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" >
+                                    value="<?php echo $manage_data['rate_per_hour']; ?>">
                             </div>
                             <div>
                                 <label>Special Request</label><br>
                                 <input type="text" name="special_request"
-                                    value="<?php echo $manage_data['special_request']; ?>" >
+                                    value="<?php echo $manage_data['special_request']; ?>">
                             </div>
                         </div>
                     </div>
@@ -184,13 +189,14 @@ if (isset($_POST['confirm'])) {
                                 <label>Reservation Fee</label><br>
                                 <input type="number" name="reservation_fee" readonly>
                             </div>
-                           
+
                         </div>
-                       
+
                         <div class="invisible-id">
                             <div>
                                 <label>id</label><br>
-                                <input type="number" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>" >
+                                <input type="number" name="reserve_id"
+                                    value="<?php echo $manage_data['reserve_id']; ?>">
                             </div>
                         </div>
                     </div>

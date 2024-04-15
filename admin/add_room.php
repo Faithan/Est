@@ -2,6 +2,12 @@
 include ('db_connect.php');
 session_start();
 
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+  header('Location:../login.php');
+  exit();
+}
+
+
 if (isset($_POST['addroom'])) {
   $roomType = $_POST['room_type'];
   $bed_type = $_POST['bed_type'];
@@ -32,7 +38,6 @@ if (isset($_POST['addroom'])) {
         if ($filename) {
           move_uploaded_file($filetempname, $filedestination);
         }
-
 
 
         $savedata = "INSERT INTO room_tbl  VALUES ('','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','../images/$filenewname')";
@@ -67,8 +72,8 @@ if (isset($_POST['addroom'])) {
   <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" type="text/css" href="add_room.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-  
-  <title>Add_Room</title>
+
+  <title>Add Room</title>
 
 
 
@@ -83,21 +88,21 @@ if (isset($_POST['addroom'])) {
       <img src="../system_images/Picture1.png" class="logo1">
       <a class="logoLabel">Estregan Beach Resort</a>
       <ul>
-        <li><a>Home</a></li>
-        <li><a>Reservations</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="reservation.php">Reservations</a></li>
         <li class="dropdown">
-          <a href="#" class="reservation">Rooms/Cottages</a>
+          <a href="rooms.php" class="reservation">Rooms/Cottages</a>
           <div class="dropdown-content">
             <a href="#">Cottages</a>
-            <a href="#">Rooms</a>
+            <a href="rooms.php">Rooms</a>
         <li class="dropdown">
-          <a href="#" class="reservation">Add Reservation</a>
+          <a href="add_room.php" class="reservation">Add Reservation</a>
           <div class="dropdown-content">
             <a href="#">Add Cottages</a>
-            <a href="#">Add Rooms</a>
+            <a href="add_room.php">Add Rooms</a>
 
       </ul>
-      <button>Log out</button>
+      <a class="logout-btn" href="../logout.php">Log out</a>
     </nav>
   </div>
 

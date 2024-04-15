@@ -49,7 +49,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
-    border-radius: 30px;
+    border-radius: 5px;
     background-color: #FA7C0D;
     border: 1px solid white;
     color: white;
@@ -58,9 +58,9 @@ body {
 
 
 .leftcontent button:hover{
-    background-color: white;
-    border: 1px solid #fa7c0D;
-    color: #FA7C0D;
+    background-color: #bb5c09;
+    border: 1px solid white;
+    color: white;
     transition: 0.3s;
 }
 

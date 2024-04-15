@@ -3,8 +3,13 @@ include ('db_connect.php');
 session_start();
 
 
-$manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location:../login.php');
+    exit();
+}
 
+
+$manage_data = ['time_out' => '','cash_change_ext' => '','payment_ext' => '','hours_ext' => '','reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
 
 
 if (isset($_GET['manage_id'])) {
@@ -41,7 +46,8 @@ if (isset($_POST['extended'])) {
     $update_query = "UPDATE reserve_room_tbl SET  status = 'extended', number_of_person='$number_of_person', hours_ext='$hours_ext', payment_ext='$payment_ext', cash_change_ext='$cash_change_ext', time_out='$time_out'  WHERE reserve_id='$reserve_id'";
     
     if (mysqli_query($con, $update_query)) {
-        echo "<script> alert('checked In Successfully')</script>";
+        echo "<script> alert('extended Successfully')</script>";
+        $manage_data = ['time_out' => '','cash_change_ext' => '','payment_ext' => '','hours_ext' => '','reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
     } else {
         echo "Error:" . $sql . "<br>" . mysqli_error($con);
     }
@@ -74,21 +80,21 @@ if (isset($_POST['extended'])) {
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-                <li><a>Home</a></li>
-                <li><a>Reservations</a></li>
+            <li><a href="#">Home</a></li>
+                <li><a href="reservation.php">Reservations</a></li>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Rooms/Cottages</a>
+                    <a href="rooms.php" class="reservation">Rooms/Cottages</a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
-                        <a href="#">Rooms</a>
+                        <a href="rooms.php">Rooms</a>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Add Reservation</a>
+                    <a href="add_room.php" class="reservation">Add Reservation</a>
                     <div class="dropdown-content">
                         <a href="#">Add Cottages</a>
-                        <a href="#">Add Rooms</a>
+                        <a href="add_room.php">Add Rooms</a>
 
             </ul>
-            <button>Log out</button>
+            <a class="logout-btn" href="../logout.php">Log out</a>
         </nav>
     </div>
 

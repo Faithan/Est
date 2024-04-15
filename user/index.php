@@ -1,3 +1,18 @@
+<?php
+include ('../db_connect.php');
+session_start();
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location:../login.php');
+    exit();
+  }
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,21 +29,21 @@
 
     <!-- for nav -->
     <div>
-        <nav class="navbar">
+    <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-                <li><a>Home</a></li>
-                <li><a>About</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#">About</a></li>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Reservation</a>
+                    <a href="reserveRoom.php" class="reservation">Reservation</a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
-                        <a href="#">Rooms</a>
+                        <a href="reserveRoom.php">Rooms</a>
                 <li><a>Contact</a></li>
 
             </ul>
-            <button>Sign up</button>
+            <a class="logout-btn" href="../logout.php">Log out</a>
         </nav>
     </div>
 

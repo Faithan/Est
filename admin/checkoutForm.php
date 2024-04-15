@@ -2,6 +2,11 @@
 include ('db_connect.php');
 session_start();
 
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header('Location:../login.php');
+    exit();
+}
+
 
 $manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
 
@@ -42,21 +47,20 @@ if (isset($_GET['manage_id'])) {
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-                <li><a>Home</a></li>
-                <li><a>Reservations</a></li>
+            <li><a href="#">Home</a></li>
+                <li><a href="reservation.php">Reservations</a></li>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Rooms/Cottages</a>
+                    <a href="rooms.php" class="reservation">Rooms/Cottages</a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
-                        <a href="#">Rooms</a>
+                        <a href="rooms.php">Rooms</a>
                 <li class="dropdown">
-                    <a href="#" class="reservation">Add Reservation</a>
+                    <a href="add_room.php" class="reservation">Add Reservation</a>
                     <div class="dropdown-content">
                         <a href="#">Add Cottages</a>
-                        <a href="#">Add Rooms</a>
-
+                        <a href="add_room.php">Add Rooms</a>
             </ul>
-            <button>Log out</button>
+            <a class="logout-btn" href="../logout.php">Log out</a>
         </nav>
     </div>
 

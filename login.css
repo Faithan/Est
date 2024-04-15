@@ -1,0 +1,218 @@
+/* for body */
+
+body {
+    /* background: linear-gradient(360deg, rgb(25, 67, 122) 4%, rgb(182, 206, 251) 50%, rgb(254, 233, 177) 100%); */
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+
+.container {
+    display: grid;
+    grid-template-columns: .2fr 1fr .2fr 1fr .2fr;
+    grid-template-rows: .1fr 1fr .1fr;
+    height: 93.5vh;
+    background: linear-gradient(180deg, #fcc89b 30%, #942900 70%, #001535 100%);
+}
+
+
+
+.leftcontent {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgb(176, 176, 176);
+    position: relative;
+}
+
+.leftcontent .picture1 {
+    height: 120px;
+    width: 160px;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.leftcontent .picture2 {
+    height: 250px;
+    width: auto;
+    position: absolute;
+    top: -20px;
+    right:-10px;
+}
+
+.leftcontent .center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-content .welcome {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    text-shadow: 0 2px 2px rgb(166, 166, 166);
+}
+
+
+.center-content .to {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-shadow: 0 2px 2px rgb(166, 166, 166);
+}
+
+.center-content .est {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-shadow: 0 2px 2px rgb(166, 166, 166);
+}
+
+.center-content .email-lbl {
+    font-size: 20px;
+    padding-top: 60px;
+    padding-bottom: 10px;
+}
+
+
+.center-content .email-input input {
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #f79c4d;
+}
+
+
+.center-content .email-input input.has-value {
+    background-color: #effaff;
+}
+
+
+.center-content .password-lbl {
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.center-content .password-input input {
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #f79c4d;
+}
+
+.center-content .password-input input.has-value {
+    background-color: #effaff;
+}
+
+
+.center-content .sign-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.center-content .sign-btn button {
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    border: 1px solid;
+    background: linear-gradient(180deg, #f79c4d 20%, #942900 70%, #001535 100%);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgb(168, 168, 168);
+}
+
+.center-content .sign-btn button:hover {
+    background:linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
+}
+
+
+
+
+.rightcontent {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    position: relative;
+    background-image: url(system_images/signupPicture.png);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center;
+}
+
+.rightcontent .new-here{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 260px;
+    color: white;
+    text-shadow: 0 2px 2px rgb(186, 186, 186);
+}
+
+.rightcontent .greetings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: white;
+    font-style: italic;
+}
+
+
+.rightcontent .signup-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+    color: white;
+}
+
+.rightcontent .signup-btn a{
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid;
+    background: linear-gradient(180deg, #f79c4d 20%, #942900 70%, #001535 100%);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.rightcontent .signup-btn a:hover{
+    background:linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
+}
+
+
+

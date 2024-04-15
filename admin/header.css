@@ -95,7 +95,9 @@ nav ul li a {
     color: white;
 }
 
-.navbar button {
+.navbar .logout-btn{
+    font-size: 14px;
+    padding: 7px;
     padding-left: 30px;
     padding-right: 30px;
     margin-top: 8px;
@@ -106,8 +108,12 @@ nav ul li a {
     background-color: #FA7C0D;
     border: 1px solid white;
     color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.navbar button:hover {
+.navbar .logout-btn:hover {
     background-color: white;
     border: 1px solid #fa7c0D;
     color: #FA7C0D;
@@ -120,7 +126,7 @@ nav ul li a {
     display: none;
     position: absolute;
     background-color: #fff;
-    width: 14%;
+    width: 14.5%;
     transition: 0.5s;
 }
 

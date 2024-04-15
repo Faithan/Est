@@ -92,6 +92,8 @@ table .room-image{
     padding-bottom: 5px;
     border-radius: 5px;
     border: 1px solid #F0AD4E;
+    text-decoration: none;
+    color: white;
 }
 
 
@@ -107,6 +109,7 @@ table .room-image{
     padding-bottom: 5px;
     border-radius: 5px;
     border: 1px solid #D9534F;
+    color: white;
 }
 
 

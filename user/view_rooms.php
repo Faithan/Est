@@ -2,25 +2,6 @@
 include ('db_connect.php');
 session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-    header('Location:../login.php');
-    exit();
-}
-
-if(isset($_POST['logout'])){
-    header('location: ../logout.php');
-}
-
-
-if (isset($_GET['manage_id'])) {
-    $manage_id = $_GET['manage_id'];
-    $manage_query = "SELECT * FROM room_tbl WHERE id = $manage_id";
-    $manage_result = mysqli_query($con, $manage_query);
-    $manage_data = mysqli_fetch_assoc($manage_result);
-}
-
-
-
 ?>
 
 
@@ -32,7 +13,7 @@ if (isset($_GET['manage_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="reserveRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="view_rooms.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <title>Room Reservation</title>
     <script src="javascripts/reserveRoom.js" defer></script>
@@ -46,17 +27,17 @@ if (isset($_GET['manage_id'])) {
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a onclick="confirm('You have to log in first!')">Home</a></li>
+                <li><a onclick="confirm('You have to log in first!')">About</a></li>
                 <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation</a>
+                    <a href="view_rooms.php" class="reservation">Reservation</a>
                     <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="reserveRoom.php">Rooms</a>
-                <li><a>Contact</a></li>
+                        <a onclick="confirm('You have to log in first!')">Cottages</a>
+                        <a href="view_rooms.php">Rooms</a>
+                <li><a onclick="confirm('You have to log in first!')">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" href="../login.php">Sign in</a>
         </nav>
         <div>
 
@@ -174,7 +155,7 @@ if (isset($_GET['manage_id'])) {
 
                                                 <div class="button-container">
                                                
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" >
+                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
                                                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
@@ -307,7 +288,7 @@ if (isset($_GET['manage_id'])) {
 
                                                 <div class="button-container">
                                                
-                                               <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" >
+                                               <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" >
                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
@@ -442,7 +423,7 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
+                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
                                                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
@@ -563,7 +544,7 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
+                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
                                                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
@@ -681,7 +662,7 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
+                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
                                                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
