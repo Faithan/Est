@@ -19,7 +19,10 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     $login_query = "SELECT * FROM user_tbl WHERE email='$email' AND password='$password' ";
+
     $result = mysqli_query($con, $login_query);
+
+
 
     if (mysqli_num_rows($result) == 1) {
         $_SESSION['loggedin'] = true;
@@ -67,6 +70,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
     <script src="user/javascripts/inputColor.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>

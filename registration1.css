@@ -17,121 +17,61 @@ body {
     grid-template-rows: .1fr 1fr .1fr;
     height: 93.5vh;
     background: linear-gradient(180deg, #fcc89b 30%, #942900 70%, #001535 100%);
+
+
 }
 
 
 
 .leftcontent {
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 3;
     background-color: white;
     border: 1px solid white;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgb(86, 86, 86);
-    position: relative;
+    box-shadow: 0 0 4px rgb(176, 176, 176);
 }
 
-.leftcontent .picture1 {
-    height: 120px;
-    width: 160px;
-    position: absolute;
-    top: 50px;
-    left: 20px;
-}
-
-.leftcontent .picture2 {
-    height: 250px;
-    width: auto;
-    position: absolute;
-    top: -20px;
-    right:-10px;
-}
-
-.leftcontent .center-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.center-content .welcome {
+.leftcontent .registration-lbl {
     display: flex;
     justify-content: center;
-    font-size: 50px;
+    padding-top: 20px;
+    font-size: 30px;
     font-weight: bold;
-    padding-top: 50px;
-    padding-bottom: 10px;
-    text-shadow: 0 2px 2px rgb(166, 166, 166);
+    color: #f79c4d;
+    text-shadow: 0 1px 1px rgb(127, 127, 127);
 }
 
-
-.center-content .to {
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-    font-weight: bold;
-    padding-bottom: 10px;
-    text-shadow: 0 2px 2px rgb(166, 166, 166);
-}
-
-.center-content .est {
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-    font-weight: bold;
-    padding-bottom: 10px;
-    text-shadow: 0 2px 2px rgb(166, 166, 166);
-}
-
-.center-content .email-lbl {
-    font-size: 20px;
-    padding-top: 60px;
-    padding-bottom: 10px;
-}
-
-
-.center-content .email-input input {
+.leftcontent input {
     width: 100%;
-    height: 30px;
-    font-size: 16px;
-    border: 1px solid #f79c4d;
+    font-size: 18px;
+    height: 40px;
 }
 
+.leftcontent .input1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
-.center-content .email-input input.has-value {
+.leftcontent .input1 input.has-value {
     background-color: #effaff;
 }
 
 
-.center-content .password-lbl {
-    font-size: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.center-content .password-input input {
-    width: 100%;
-    height: 30px;
-    font-size: 16px;
-    border: 1px solid #f79c4d;
-}
-
-.center-content .password-input input.has-value {
-    background-color: #effaff;
-}
-
-
-.center-content .sign-btn {
-    width: 100%;
+.leftcontent .submit-btn {
     display: flex;
     justify-content: center;
     padding-top: 50px;
 }
 
-.center-content .sign-btn button {
+.leftcontent .submit-btn button {
     padding-top: 5px;
-    padding-bottom:5px;
+    padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-weight: bold;
@@ -143,37 +83,44 @@ body {
     box-shadow: 0 2px 2px rgb(168, 168, 168);
 }
 
-.center-content .sign-btn button:hover {
-    background:linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
+
+.leftcontent .submit-btn button:hover {
+    background: linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
 }
+
+
+
+
 
 
 
 
 .rightcontent {
-    grid-column-start: 4;
-    grid-column-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+
     position: relative;
     background-image: url(system_images/signupPicture.png);
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
     background-position: center;
 }
 
-.rightcontent .new-here{
+.rightcontent .new-here {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     padding-top: 260px;
     color: white;
     text-shadow: 0 2px 2px rgb(186, 186, 186);
+
 }
 
-.rightcontent .greetings{
+.rightcontent .greetings {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,7 +133,7 @@ body {
 }
 
 
-.rightcontent .signup-btn{
+.rightcontent .signup-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -197,9 +144,9 @@ body {
     color: white;
 }
 
-.rightcontent .signup-btn a{
+.rightcontent .signup-btn a {
     padding-top: 5px;
-    padding-bottom:5px;
+    padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-weight: bold;
@@ -210,9 +157,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
 }
-.rightcontent .signup-btn a:hover{
-    background:linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
+
+.rightcontent .signup-btn a:hover {
+    background: linear-gradient(180deg, #c17a3b 20%, #681e00 70%, #000a18 100%);
 }
-
-
-

@@ -58,7 +58,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             <p>A place to Stay, A place to Enjoy, A place to Relax.
                 We openly welcome you to stay a moment, for the sea is just beyond the door.
             </p>
-            <button>Reserve Now</button>
+            <a href="reserveRoom.php">Reserve Now!</a>
         </div>
 
         <div class="rightcontent">

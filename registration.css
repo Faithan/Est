@@ -29,9 +29,8 @@ body {
     background-color: white;
     border: 1px solid white;
     border-radius: 5px;
-    box-shadow: 0 0 4px rgb(176, 176, 176);
+    box-shadow: 0 2px 4px rgb(86, 86, 86);
 }
-
 .leftcontent .registration-lbl {
     display: flex;
     justify-content: center;

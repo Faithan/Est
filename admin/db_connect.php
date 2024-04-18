@@ -1,3 +1,3 @@
 <?php
-    $con = mysqli_connect ('localhost','root','','try');
+    $con = mysqli_connect ('localhost','root','','estregan');
 ?>
