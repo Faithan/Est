@@ -33,7 +33,7 @@ body {
     color: white;
     padding-bottom: 30px;
     padding-top: 30px;
-    text-shadow: 0 1px 1px;
+    text-shadow: 0 2px 2px rgb(167, 167, 167);
     text-align: justify;
 }
 
@@ -42,6 +42,7 @@ body {
     color: white;
     padding-bottom: 30px;
     padding-top: 30px;
+    text-shadow: 0 1px 1px rgb(114, 114, 114);
 }
 
 
@@ -51,16 +52,16 @@ body {
     font-weight: bold;
     border-radius: 5px;
     background-color: #FA7C0D;
-    border: 1px solid white;
+    border: 1px solid #FA7C0D;
     color: white;
     padding: 10px;
     text-decoration: none;
+    box-shadow: 0 2px 4px rgb(197, 197, 197);
 }
 
 
 .leftcontent a:hover{
-    background-color: #bb5c09;
-    border: 1px solid white;
+    background-color: #d0670b;
     color: white;
     transition: 0.3s;
 }
@@ -91,11 +92,11 @@ body {
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 6;
-    filter: brightness(10%);
+    filter: brightness(100%);
     z-index: 1;
     margin: 0;
     padding: 0;
-    background-image: url('../system_images/bg1.jpg');
+    background: url(../system_images/aboutbg.jpg);
     background-size: cover;
     background-position: center;
 }

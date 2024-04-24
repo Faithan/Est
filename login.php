@@ -12,6 +12,8 @@ if (!$con) {
     die("connection failed;" . mysqli_connect_error());
 }
 
+
+
 // for user
 
 if (isset($_POST['login'])) {
@@ -33,6 +35,7 @@ if (isset($_POST['login'])) {
     } else {
         $error_message = "Invalid username or password;";
     }
+
 }
 
 
@@ -66,6 +69,11 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
+
+    <link href="fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
@@ -82,16 +90,17 @@ if (isset($_POST['login'])) {
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a onclick="confirm('You have to log in first!')">Home</a></li>
-                <li><a onclick="confirm('You have to log in first!')">About</a></li>
+                <li><a href="user/view_about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="user/view_rooms.php" class="reservation">Reservation</a>
+                    <a href="user/view_rooms.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a onclick="confirm('You have to log in first!')">Cottages</a>
                         <a href="user/view_rooms.php">Rooms</a>
-                <li><a onclick="confirm('You have to log in first!')">Contact</a></li>
+
+                <li><a href="user/view_contact.php">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="registration.php">Sign up</a>
+            <a class="logout-btn" href="registration.php"><i class="fa-solid fa-right-to-bracket"></i> Sign up</a>
         </nav>
     </div>
 
@@ -140,7 +149,6 @@ if (isset($_POST['login'])) {
 
 
 
-    </script>
-</body>
 
+</body>
 </html>

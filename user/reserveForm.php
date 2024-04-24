@@ -2,10 +2,13 @@
 include ('db_connect.php');
 session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location:../login.php');
     exit();
-  }
+}
+
+$message = "";
+$isSuccess = false;
 
 
 $manage_data = ['room_type' => '', 'no_persons' => '', 'amenities' => '', 'price' => '', 'photo' => ''];
@@ -37,12 +40,19 @@ if (isset($_POST['submit'])) {
     $rate_per_hour = $_POST['rate_per_hour'];
     $special_request = $_POST['special_request'];
     $room_photo = $manage_data['photo'];
-    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$bed_type','$bed_quantity', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','','','','','','' )";  
-    if (mysqli_query($con,  $savedata)) {
-        echo "<script> alert('data accepted succesfully')</script>";
+    $savedata = "INSERT INTO reserve_room_tbl  VALUES ('','pending','$fname','$lname','$address ',' $phone_number',' $email','$date_of_arrival',' $time_of_arrival','$room_type', '$bed_type','$bed_quantity', '$number_of_person', '$amenities', ' $rate_per_hour', '$special_request', '$room_photo','','','','','','','','','','' )";
+
+    $query = (mysqli_query($con, $savedata));
+
+
+    if ($query) { // Replace this condition with your actual success condition
+        $message = "Reservation Sent Successfully! please wait for confirmation";
+        $isSuccess = true;
     } else {
-        echo "Error:" . $sql . "<br>" . mysqli_error($con);
+        $message = "Form Submission Failed!";
+        $isSuccess = false;
     }
+
 }
 
 ?>
@@ -60,28 +70,50 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="reserveForm.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <title>Room Reservation</title>
+
+    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+    
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
     <script src="reserveRoom.js" defer></script>
     <script src="scroll.js" defer></script>
     <script src="javascripts/inputColor.js" defer></script>
 </head>
 
 <body>
+
+
+
+            <!-- sweetalert -->
+            <?php if (!empty($message)): ?>
+                <script>
+                    Swal.fire({
+                        title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                        text: '<?php echo $message; ?>',
+                        icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
+                    });
+                </script>
+            <?php endif; ?>
+
     <div class="nav-container">
-    <nav class="navbar">
+        <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation</a>
+                <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
-                <li><a>Contact</a></li>
+                    </div>
+                <li><a href="contact.php">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
         <div>
 
@@ -93,47 +125,50 @@ if (isset($_POST['submit'])) {
 
                 <div class="for-footer"> @Estregan_Beach_Resort_2024 </div>
 
-               
+
                 <div class="reserveForm-display" id="reserveForm-display">
-             
+
                     <div class="reserveForm-container">
-              
+
                         <div class="reserveForm-container1">
-                      
+
                             <div class="image-container">
                                 <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
                             </div>
-                            
+
                         </div>
 
-                    
-                        <form action="" method="post"class="reserveForm-container2">
-                    
+
+                        <form action="" method="post" class="reserveForm-container2">
+
                             <label class="bold-text">Reservation Form</label><br>
-                
-                          
+
+
                             <label>Full Name</label><br>
 
-                           
+
                             <input class="input2" name="first_name" onkeyup="changeColor(this)" placeholder="First Name"
                                 required>
-                                
+
                             <input class="input2" name="last_name" onkeyup="changeColor(this)" placeholder="Last Name"
                                 required><br>
-                         
+
 
                             <label>Address</label><br>
-                            <input name="address" onkeyup="changeColor(this)" placeholder="Ex: Maranding, Lala, Lanao Del Norte"
-                                required><br>
+                            <input name="address" onkeyup="changeColor(this)"
+                                placeholder="Ex: Maranding, Lala, Lanao Del Norte" required><br>
 
                             <label>Phone Number</label><br>
-                            <input type="number" name="phone_number" onkeyup="changeColor(this)" placeholder="Ex: 09123456789" required><br>
+                            <input type="number" name="phone_number" onkeyup="changeColor(this)"
+                                placeholder="Ex: 09123456789" required><br>
 
                             <label>Email</label><br>
-                            <input class="input4" name="email" onkeyup="changeColor(this)" placeholder="Ex: Name@gmail.com" required><br>
+                            <input class="input4" name="email" onkeyup="changeColor(this)"
+                                placeholder="Ex: Name@gmail.com" required><br>
 
                             <label>Date of Arrival</label><br>
-                            <input class="input4" type="date" name="date_of_arrival" onkeyup="changeColor(this)" required><br>
+                            <input class="input4" type="date" name="date_of_arrival" onkeyup="changeColor(this)"
+                                required><br>
 
                             <label>Time of Arrival</label><br>
                             <input type="time" name="time_of_arrival" onkeyup="changeColor(this)" required>
@@ -145,11 +180,11 @@ if (isset($_POST['submit'])) {
                             <input class="input3" name="room_type" onkeyup="changeColor(this)"
                                 value="<?php echo $manage_data['room_type']; ?>" readonly><br>
 
-                                <label>Bed Type</label><br>
+                            <label>Bed Type</label><br>
                             <input class="input3" name="bed_type" onkeyup="changeColor(this)"
                                 value="<?php echo $manage_data['bed_type']; ?>" readonly><br>
 
-                                <label>Numbers of Bed</label><br>
+                            <label>Numbers of Bed</label><br>
                             <input class="input3" name="bed_quantity" onkeyup="changeColor(this)"
                                 value="<?php echo $manage_data['bed_quantity']; ?>" readonly><br>
 
@@ -169,19 +204,25 @@ if (isset($_POST['submit'])) {
                             <textarea name="special_request" onkeyup="changeColor(this)"></textarea><br>
 
                             <div class="button-container2">
-                                <button class="submit-btn" name="submit" type="submit" >Submit</button>
+                                <button class="submit-btn" name="submit" type="submit">Submit</button>
 
                                 <a href="reserveRoom.php" class="cancel-btn">Cancel</a>
                             </div>
-                            </form>
-                       
-                  
+                        </form>
+
+
 
                     </div>
-                   
+
                 </div>
-                
+
             </div>
+
+
+
+
+
+
 </body>
 
 </html>

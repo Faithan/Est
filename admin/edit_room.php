@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 
-$manage_data = ['id' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'photo' => ''];
+$manage_data = ['id' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'price' => '', 'photo' => ''];
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
@@ -16,6 +16,11 @@ if (isset($_GET['manage_id'])) {
     $manage_result = mysqli_query($con, $manage_query);
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
+
+
+
+$message = "";
+$isSuccess = false;
 
 
 if (isset($_POST['save'])) {
@@ -32,18 +37,17 @@ if (isset($_POST['save'])) {
 
     $filename = $_FILES['photo']['name'];
     $filetempname = $_FILES['photo']['tmp_name'];
-    $filsize = $_FILES['photo']['size'];
+    $filesize = $_FILES['photo']['size'];
     $fileerror = $_FILES['photo']['error'];
     $filetype = $_FILES['photo']['type'];
 
     $fileext = explode('.', $filename);
     $filetrueext = strtolower(end($fileext));
-    $array = ['jpg', 'png', 'jpeg'];
+    $allowedExtensions = ['jpg', 'png', 'jpeg'];
 
-
-    if (in_array($filetrueext, $array)) {
+    if (in_array($filetrueext, $allowedExtensions)) {
         if ($fileerror === 0) {
-            if ($filsize < 10000000) {
+            if ($filesize < 10000000) {
                 $filenewname = $filename;
                 $filedestination = '../images/' . $filenewname;
                 if ($filename) {
@@ -51,38 +55,33 @@ if (isset($_POST['save'])) {
                 }
 
                 $update_query = "UPDATE room_tbl SET room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', no_persons='$noPersons', amenities='$amenities', status='$status', photo='../images/$filenewname'  WHERE id='$id'";
-                if (mysqli_query($con, $update_query)) {
-                    // header('Location: rooms_cottages.php');
-                    echo "<script> alert('Room Edited Successfully')</script>";
+
+                $query = (mysqli_query($con, $update_query));
+
+                if ($query) {
+                    $message = "Changes Saved Successfully!";
+                    $isSuccess = true;
 
                 } else {
-                    echo "Error:" . $sql . "<br>" . mysqli_error($con);
+
+                    $message = "Failed!";
+                    $isSuccess = false;
+
                 }
             } else {
-                echo '<script> alert("your file is too big!") </script>';
+                $message = "Failed!";
+                $isSuccess = false;
             }
         }
     } else {
-        echo '<script> alert("cant upload this type of file!") </script>';
+        $message = "Failed!";
+        $isSuccess = false;
     }
 }
-
-
-
-if(isset($_POST['delete'])){
-    $id = $_POST['id'];
-    $update_query = "DELETE FROM room_tbl WHERE id='$id'";
-    if (mysqli_query($con, $update_query)) {
-        echo "<script> alert('Deleted Successfully')</script>";
-        $manage_data = ['id' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'price' => '',  'status' => '', 'photo' => ''];
-    } else {
-        echo "Error: " . $update_query . "<br>" . mysqli_error($con);
-    }
-}
-
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,6 +89,11 @@ if(isset($_POST['delete'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/deleteRoom.js" defer></script>
+    <script src="javascripts/logout.js" defer></script>
+    <!-- <script src="javascripts/deleteRoom.js" defer></script> -->
+
 
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
@@ -128,7 +132,7 @@ if(isset($_POST['delete'])){
                         <a href="#">Add Cottages</a>
                         <a href="add_room.php">Add Rooms</a>
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
     </div>
 
@@ -259,7 +263,8 @@ if(isset($_POST['delete'])){
                             Save Changes</button>
                     </div>
                     <div class="center-label">
-                        <button type="submit" name="delete" class="button2"><i class="fa-solid fa-trash"></i> 
+                        <button type="button" name="delete" class="button2" onclick="confirmDelete()"><i
+                                class="fa-solid fa-trash"></i>
                             Delete</button>
                     </div>
                 </div>
@@ -273,6 +278,71 @@ if(isset($_POST['delete'])){
         <span class="close" onclick="closeFullScreen()">&times;</span>
         <img id="fullscreen-image" src="" alt="">
     </div>
+
+
+    <!-- for save changes -->
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = window.location.href;
+                }
+            });
+        </script>
+    <?php endif; ?>
+
+
+
+    <!-- for delete button -->
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Delete Confirmation',
+                text: 'Are you sure you want to delete this item?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteItem();
+                }
+            });
+        }
+
+        function deleteItem() {
+            var id = document.querySelector('input[name="id"]').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'delete_room.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        Swal.fire({
+                            title: 'Deleted Successfully',
+                            text: 'The item has been deleted.',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = 'edit_room.php'; // Replace with your desired page after deletion
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Delete Error',
+                            text: 'Failed to delete the item.',
+                            icon: 'error'
+                        });
+                    }
+                }
+            };
+            xhr.send('id=' + id);
+        }
+    </script>
+
 
 
 

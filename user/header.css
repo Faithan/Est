@@ -4,6 +4,13 @@
 
 }
 
+.navbar-container{
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+}
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -92,6 +99,7 @@ nav ul li a {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
 }
 .navbar .logout-btn:hover {
     background-color: white;
@@ -106,13 +114,13 @@ nav ul li a {
     display: none;
     position: absolute;
     background-color: #fff;
-    width: 12%;
+    width: 13%;
     transition: 0.5s;
 }
 
 
 .dropdown-content:hover {
-    width: 8%;
+    width: 10%;
     transition: 0.5s;
     padding-left: 0;
 }

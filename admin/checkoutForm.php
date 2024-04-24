@@ -11,7 +11,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 $manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
 
 
-
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
     $manage_query = "SELECT * FROM reserve_room_tbl WHERE reserve_id = $manage_id";
@@ -31,9 +30,14 @@ if (isset($_GET['manage_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
+
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="extended.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -60,7 +64,7 @@ if (isset($_GET['manage_id'])) {
                         <a href="#">Add Cottages</a>
                         <a href="add_room.php">Add Rooms</a>
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+           <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
     </div>
 

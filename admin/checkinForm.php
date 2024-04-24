@@ -12,6 +12,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 $manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
 
 
+$message = "";
+$isSuccess = false;
+
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
@@ -43,11 +46,18 @@ if (isset($_POST['checkedin'])) {
     $time_in = $_POST['time_in'];
     $time_out = $_POST['time_out'];
     $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',  number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', hours_of_stay='$hours_of_stay', total_price='$total_price', payment='$payment', cash_change='$cash_change', time_in='$time_in', time_out='$time_out' WHERE reserve_id='$reserve_id'";
-    if (mysqli_query($con, $update_query)) {
-        echo "<script> alert('checked In Successfully')</script>";
+    
+    $query = (mysqli_query($con, $update_query));
+
+    if ($query) {
+        $message = "Changes Saved Successfully!";
+        $isSuccess = true;
         $manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
+
+       
     } else {
-        echo "Error:" . $sql . "<br>" . mysqli_error($con);
+        $message = "Failed!";
+        $isSuccess = false;
     }
 }
 
@@ -66,9 +76,14 @@ if (isset($_POST['checkedin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
+
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="checkinForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -76,6 +91,25 @@ if (isset($_POST['checkedin'])) {
 </head>
 
 <body>
+
+    <!-- for checkin -->
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.querySelector('.form-container').reset();
+                }
+            });
+            
+        </script>
+    <?php endif; ?>
+
+
 
     <div>
         <nav class="navbar">
@@ -96,7 +130,7 @@ if (isset($_POST['checkedin'])) {
                         <a href="add_room.php">Add Rooms</a>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
     </div>
 

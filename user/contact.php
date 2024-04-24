@@ -2,14 +2,16 @@
 include ('../db_connect.php');
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header('Location:../login.php');
     exit();
-}
+  }
 
 
 
 ?>
+
+
 
 
 
@@ -20,7 +22,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
@@ -29,7 +30,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <script src="javascripts/logout.js" defer></script>
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="index.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="contact.css?v=<?php echo time(); ?>">
 
 </head>
 
@@ -44,7 +45,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
+                <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
@@ -59,21 +60,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
     <!-- for body -->
-    <div class="content">
-        <div class="for-background">
-        </div>
-        <div class="leftcontent">
-            <label>RESERVE FOR COTTAGES</label>
-            <p>A place to Stay, A place to Enjoy, A place to Relax.
-                We openly welcome you to stay a moment, for the sea is just beyond the door.
-            </p>
-            <a href="reserveRoom.php">Reserve Now!</a>
-        </div>
+    <div class="container">
+		<div class="contact-box">
+			<div class="left"></div>
+			<div class="right">
+				<h2>Contact Us</h2>
+				<input type="text" class="field" placeholder="Your Name">
+				<input type="text" class="field" placeholder="Your Email">
+				<input type="text" class="field" placeholder="Phone">
+				<textarea placeholder="Message" class="field"></textarea>
+				<button class="btn">Send</button>
+			</div>
+		</div>
+	</div>
 
-        <div class="rightcontent">
-            <img src="../system_images/Picture4.png" class="logo2">
-        </div>
-    </div>
 
 
 

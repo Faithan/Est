@@ -13,6 +13,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,16 +22,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
-    
+
     <script src="../sweetalert/sweetalert.js"></script>
     <script src="javascripts/logout.js" defer></script>
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="index.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="about.css?v=<?php echo time(); ?>">
 
 </head>
 
@@ -44,7 +45,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
+                <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
@@ -60,19 +61,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- for body -->
     <div class="content">
-        <div class="for-background">
+        <div class="container2">
+            <div class="header-text"><label for="">ABOUT ESTREGAN</label></div>
+            <hr>
+            <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
+                and conference facilities, in order to fulfill the best way in the relevant needs of every guest.
+                Provide our guests a unique experience, through which they connect with the best in our company,
+                and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
+                experience the vacation of your dreams at Estregan Beach Resort.</p>
+            <div class="image-holder"><img src="../system_images/estregan.png" alt="Estregan Beach"></div>
+            <h4>LOCATION ADDRESS</h4>
+            <h5>Address: Estregan beach resort, 9215 Pikalawag SND, Lanao Del Norte.<h5>
+                    <h5>Phone: 0977-804-3668<h5>
+                            <h5>Email: info@estreganbeachresort.com<h5>
         </div>
-        <div class="leftcontent">
-            <label>RESERVE FOR COTTAGES</label>
-            <p>A place to Stay, A place to Enjoy, A place to Relax.
-                We openly welcome you to stay a moment, for the sea is just beyond the door.
-            </p>
-            <a href="reserveRoom.php">Reserve Now!</a>
-        </div>
-
-        <div class="rightcontent">
-            <img src="../system_images/Picture4.png" class="logo2">
-        </div>
+    </div>
     </div>
 
 

@@ -7,6 +7,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
+$message = "";
+$isSuccess = false;
+
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
@@ -18,10 +21,15 @@ if (isset($_GET['manage_id'])) {
 if (isset($_POST['reject'])) {
     $reserve_id = $_POST['reserve_id'];
     $update_query = "UPDATE reserve_room_tbl SET status='rejected' WHERE reserve_id='$reserve_id'";
-    if (mysqli_query($con, $update_query)) {
-        echo "<script> alert('Data declined successfully')</script>";
+    $query = (mysqli_query($con, $update_query));
+
+    if ($query) {
+        $message = "Rejected Successfully!";
+        $isSuccess = true;
+
     } else {
-        echo "Error: " . $update_query . "<br>" . mysqli_error($con);
+        $message = "Failed!";
+        $isSuccess = false;
     }
 }
 
@@ -38,9 +46,14 @@ if (isset($_POST['reject'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
+
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="reservation.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
@@ -49,6 +62,23 @@ if (isset($_POST['reject'])) {
 </head>
 
 <body>
+
+     <!-- for reject -->
+     <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = window.location.href;
+                }
+            });
+        </script>
+    <?php endif; ?>
+
 
     <div>
         <nav class="navbar">
@@ -69,7 +99,7 @@ if (isset($_POST['reject'])) {
                         <a href="add_room.php">Add Rooms</a>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+             <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
     </div>
 

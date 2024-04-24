@@ -16,6 +16,11 @@ session_start();
     <link rel="stylesheet" type="text/css" href="view_rooms.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <title>Room Reservation</title>
+
+    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+    
     <script src="javascripts/reserveRoom.js" defer></script>
     <script src="javascripts/scroll.js" defer></script>
     <script src="javascripts/inputColor.js" defer></script>
@@ -23,21 +28,22 @@ session_start();
 
 <body>
     <div class="nav-container">
-    <nav class="navbar">
+        <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a onclick="confirm('You have to log in first!')">Home</a></li>
-                <li><a onclick="confirm('You have to log in first!')">About</a></li>
+                <li><a href="view_about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="view_rooms.php" class="reservation">Reservation</a>
+                    <a href="view_rooms.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a onclick="confirm('You have to log in first!')">Cottages</a>
                         <a href="view_rooms.php">Rooms</a>
-                <li><a onclick="confirm('You have to log in first!')">Contact</a></li>
+                    </div>
+                <li><a href="view_contact.php">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="../login.php">Sign in</a>
+            <a class="logout-btn" href="../login.php"><i class="fa-solid fa-right-to-bracket"></i>Sign in</a>
         </nav>
         <div>
 
@@ -50,7 +56,7 @@ session_start();
                 <div class="for-footer"></div>
 
 
-          
+
 
 
 
@@ -154,19 +160,21 @@ session_start();
                                                 </div>
 
                                                 <div class="button-container">
-                                               
-                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+
+                                                    <a onclick="confirm('You have to log in first!')"
+                                                        name="book_now"><button class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -287,20 +295,22 @@ session_start();
 
 
                                                 <div class="button-container">
-                                               
-                                               <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" >
-                                                       <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                           viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                           <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                               <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                               <path d="m8 3v4"></path>
-                                                               <path d="m16 3v4"></path>
-                                                               <path d="m4 11h16"></path>
-                                                           </g>
-                                                       </svg>
-                                                       <span class="lable" >Book Now</span>
-                                                   </button></a>
-                                               </div>
+
+                                                    <a onclick="confirm('You have to log in first!')"
+                                                        name="book_now"><button class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
+                                                </div>
                                             </div>
                                         <?php } ?>
 
@@ -423,18 +433,20 @@ session_start();
 
 
                                                 <div class="button-container">
-                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a onclick="confirm('You have to log in first!')"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -544,18 +556,20 @@ session_start();
 
 
                                                 <div class="button-container">
-                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a onclick="confirm('You have to log in first!')"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -662,18 +676,20 @@ session_start();
 
 
                                                 <div class="button-container">
-                                                <a onclick="confirm('You have to log in first!')" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a onclick="confirm('You have to log in first!')"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>

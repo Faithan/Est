@@ -6,6 +6,8 @@ if (!$con) {
     die("connection failed;" . mysqli_connect_error());
 }
 
+$message = "";
+$isSuccess = false;
 
 if (isset($_POST['submit'])) {
     $fname = $_POST['first_name'];
@@ -15,13 +17,16 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $savedata = "INSERT INTO user_tbl VALUES ('','$fname','$mname','$lname','$contact','$email','$password')";
-    $query = (mysqli_query($con, $savedata)) ;
+    $query = (mysqli_query($con, $savedata));
 
-    if ($query) {
-        echo "<script> alert('Signed Up Successfully!')</script>";
+    if ($query) { // Replace this condition with your actual success condition
+        $message = "Registered Successfully!";
+        $isSuccess = true;
     } else {
-        echo "Error:" . "<br>" . mysqli_error($con);
+        $message = "Form Submission Failed!";
+        $isSuccess = false;
     }
+
 }
 
 
@@ -40,10 +45,16 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+
+    <link href="fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="fontawesome/css/solid.css" rel="stylesheet" />
+
+
+    <script src="sweetalert/sweetalert.js"></script>
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="registration.css?v=<?php echo time(); ?>">
-
     <script src="user/javascripts/inputColor.js" defer></script>
 </head>
 
@@ -56,16 +67,16 @@ if (isset($_POST['submit'])) {
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a onclick="confirm('You have to log in first!')">Home</a></li>
-                <li><a onclick="confirm('You have to log in first!')">About</a></li>
+                <li><a href="user/view_about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="user/view_rooms.php" class="reservation">Reservation</a>
+                <a href="user/view_rooms.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a onclick="confirm('You have to log in first!')">Cottages</a>
                         <a href="user/view_rooms.php">Rooms</a>
-                <li><a onclick="confirm('You have to log in first!')">Contact</a></li>
+                        <li><a href="user/view_contact.php">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="login.php">Log in</a>
+            <a class="logout-btn" href="login.php"><i class="fa-solid fa-right-to-bracket"></i>Log in</a>
         </nav>
     </div>
 
@@ -112,7 +123,16 @@ if (isset($_POST['submit'])) {
 
     </div>
 
-   
+    <?php if (!empty($message)) : ?>
+    <script>
+        Swal.fire({
+            title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+            text: '<?php echo $message; ?>',
+            icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
+        });
+    </script>
+    <?php endif; ?>
+
 </body>
 
 </html>

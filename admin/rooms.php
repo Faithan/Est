@@ -34,6 +34,9 @@ if (isset($_GET['manage_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
+
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
@@ -65,7 +68,7 @@ if (isset($_GET['manage_id'])) {
                         <a href="#">Add Cottages</a>
                         <a href="add_room.php">Add Rooms</a>
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i>  Log out</a>
         </nav>
     </div>
 

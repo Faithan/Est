@@ -2,13 +2,17 @@
 include ('db_connect.php');
 session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location:../login.php');
     exit();
 }
 
 
-$manage_data = ['time_out' => '','cash_change_ext' => '','payment_ext' => '','hours_ext' => '','reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
+$manage_data = ['time_out' => '', 'cash_change_ext' => '', 'payment_ext' => '', 'hours_ext' => '', 'reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '', 'payment' => '', 'cash_change' => '', 'time_in' => '', 'time_out' => '', 'reservation_fee' => ''];
+
+
+$message = "";
+$isSuccess = false;
 
 
 
@@ -24,12 +28,16 @@ if (isset($_GET['manage_id'])) {
 if (isset($_POST['checkOut'])) {
     $reserve_id = $_POST['reserve_id'];
     $update_query = "UPDATE reserve_room_tbl SET status='checkedOut' WHERE reserve_id='$reserve_id'";
-    if (mysqli_query($con, $update_query)) {
-        echo "<script> alert('checked out Successfully')</script>";
-        $manage_data = ['time_out' => '','cash_change_ext' => '','payment_ext' => '','hours_ext' => '','reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '' , 'payment' => '' , 'cash_change' => '', 'time_in' => '', 'time_out' => '' , 'reservation_fee' => ''];
+    $query = (mysqli_query($con, $update_query));
+
+    if ($query) {
+        $message = "Changes Saved Successfully!";
+        $isSuccess = true;
+        $manage_data = ['time_out' => '', 'cash_change_ext' => '', 'payment_ext' => '', 'hours_ext' => '', 'reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => '', 'hours_of_stay' => '', 'total_price' => '', 'payment' => '', 'cash_change' => '', 'time_in' => '', 'time_out' => '', 'reservation_fee' => ''];
 
     } else {
-        echo "Error:" . $sql . "<br>" . mysqli_error($con);
+        $message = "Failed!";
+        $isSuccess = false;
     }
 }
 
@@ -47,9 +55,14 @@ if (isset($_POST['checkOut'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
+
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="extended.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -58,12 +71,27 @@ if (isset($_POST['checkOut'])) {
 
 <body>
 
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.querySelector('.create-room-form').reset();    
+                }
+            });
+        </script>
+    <?php endif; ?>
+
     <div>
         <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
-            <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="reservation.php">Reservations</a></li>
                 <li class="dropdown">
                     <a href="rooms.php" class="reservation">Rooms/Cottages</a>
@@ -77,7 +105,7 @@ if (isset($_POST['checkOut'])) {
                         <a href="add_room.php">Add Rooms</a>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
     </div>
 
@@ -116,7 +144,8 @@ if (isset($_POST['checkOut'])) {
                             </div>
                             <div>
                                 <label>Email</label><br>
-                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>" readonly>
+                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>"
+                                    readonly>
                             </div>
                             <div>
                                 <label>Date of Arrival</label><br>
@@ -136,7 +165,8 @@ if (isset($_POST['checkOut'])) {
                             </div>
                             <div>
                                 <label>Bed Type</label><br>
-                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>" readonly>
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>"
+                                    readonly>
                             </div>
                         </div>
 
@@ -144,7 +174,8 @@ if (isset($_POST['checkOut'])) {
                         <div class="line">
                             <div>
                                 <label>Bed Quantity</label><br>
-                                <input type="number" name="bed_quantity" value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
+                                <input type="number" name="bed_quantity"
+                                    value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Number of Persons</label><br>
@@ -185,51 +216,61 @@ if (isset($_POST['checkOut'])) {
                             </div>
                             <div>
                                 <label>Hours of Stay</label><br>
-                                <input type="number" name="hours_of_stay" value="<?php echo $manage_data['hours_of_stay']; ?>" readonly>
+                                <input type="number" name="hours_of_stay"
+                                    value="<?php echo $manage_data['hours_of_stay']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Total Price</label><br>
-                                <input type="number" name="total_price" value="<?php echo $manage_data['total_price']; ?>" readonly>
+                                <input type="number" name="total_price"
+                                    value="<?php echo $manage_data['total_price']; ?>" readonly>
                             </div>
                         </div>
                         <div class="line">
                             <div>
                                 <label>Reservation Payment</label><br>
-                                <input type="number" name="reservation_fee" value="<?php echo $manage_data['reservation_fee']; ?>" readonly>
+                                <input type="number" name="reservation_fee"
+                                    value="<?php echo $manage_data['reservation_fee']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Payment</label><br>
-                                <input type="number" name="payment" value="<?php echo $manage_data['payment']; ?>" readonly>
+                                <input type="number" name="payment" value="<?php echo $manage_data['payment']; ?>"
+                                    readonly>
                             </div>
                             <div>
                                 <label>Change</label><br>
-                                <input type="number" name="cash_change" value="<?php echo $manage_data['cash_change']; ?>" readonly>
+                                <input type="number" name="cash_change"
+                                    value="<?php echo $manage_data['cash_change']; ?>" readonly>
                             </div>
                         </div>
                         <div class="line">
                             <div>
                                 <label>Extended Hours</label><br>
-                                <input type="number" name="hours_ext"  value="<?php echo $manage_data['hours_ext']; ?>" readonly>
+                                <input type="number" name="hours_ext" value="<?php echo $manage_data['hours_ext']; ?>"
+                                    readonly>
                             </div>
                             <div>
                                 <label>Extended Payment</label><br>
-                                <input type="number" name="payment_ext" value="<?php echo $manage_data['payment_ext']; ?>" readonly>
+                                <input type="number" name="payment_ext"
+                                    value="<?php echo $manage_data['payment_ext']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Extended Change</label><br>
-                                <input type="number" name="cash_change_ext" value="<?php echo $manage_data['cash_change_ext']; ?>" readonly>
+                                <input type="number" name="cash_change_ext"
+                                    value="<?php echo $manage_data['cash_change_ext']; ?>" readonly>
                             </div>
                         </div>
 
                         <div class="line">
                             <div>
                                 <label>Time In</label><br>
-                                <input type="time" name="time_in"  value="<?php echo $manage_data['time_in']; ?>" readonly>
+                                <input type="time" name="time_in" value="<?php echo $manage_data['time_in']; ?>"
+                                    readonly>
                             </div>
 
                             <div>
                                 <label>Time Out</label><br>
-                                <input type="time" name="time_out"  value="<?php echo $manage_data['time_out']; ?>" readonly>
+                                <input type="time" name="time_out" value="<?php echo $manage_data['time_out']; ?>"
+                                    readonly>
                             </div>
                         </div>
 

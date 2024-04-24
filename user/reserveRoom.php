@@ -2,12 +2,12 @@
 include ('db_connect.php');
 session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location:../login.php');
     exit();
 }
 
-if(isset($_POST['logout'])){
+if (isset($_POST['logout'])) {
     header('location: ../logout.php');
 }
 
@@ -18,7 +18,6 @@ if (isset($_GET['manage_id'])) {
     $manage_result = mysqli_query($con, $manage_query);
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
-
 
 
 ?>
@@ -35,6 +34,13 @@ if (isset($_GET['manage_id'])) {
     <link rel="stylesheet" type="text/css" href="reserveRoom.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <title>Room Reservation</title>
+
+    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
+    
+    <script src="../sweetalert/sweetalert.js"></script>
+    <script src="javascripts/logout.js" defer></script>
     <script src="javascripts/reserveRoom.js" defer></script>
     <script src="javascripts/scroll.js" defer></script>
     <script src="javascripts/inputColor.js" defer></script>
@@ -42,21 +48,22 @@ if (isset($_GET['manage_id'])) {
 
 <body>
     <div class="nav-container">
-    <nav class="navbar">
+        <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="about.php">About</a></li>
                 <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation</a>
+                <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
-                <li><a>Contact</a></li>
+                    </div>
+                <li><a href="contact.php">Contact</a></li>
 
             </ul>
-            <a class="logout-btn" href="../logout.php">Log out</a>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </nav>
         <div>
 
@@ -69,7 +76,7 @@ if (isset($_GET['manage_id'])) {
                 <div class="for-footer"></div>
 
 
-          
+
 
 
 
@@ -173,19 +180,21 @@ if (isset($_GET['manage_id'])) {
                                                 </div>
 
                                                 <div class="button-container">
-                                               
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+
+                                                    <a href="reserveForm.php?manage_id=<?php echo $id; ?>"
+                                                        name="book_now"><button class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -306,20 +315,22 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                               
-                                               <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" >
-                                                       <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                           viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                           <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                               <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                               <path d="m8 3v4"></path>
-                                                               <path d="m16 3v4"></path>
-                                                               <path d="m4 11h16"></path>
-                                                           </g>
-                                                       </svg>
-                                                       <span class="lable" >Book Now</span>
-                                                   </button></a>
-                                               </div>
+
+                                                    <a href="reserveForm.php?manage_id=<?php echo $id; ?>"
+                                                        name="book_now"><button class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
+                                                </div>
                                             </div>
                                         <?php } ?>
 
@@ -442,18 +453,20 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a href="reserveForm.php?manage_id=<?php echo $id; ?>"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -563,18 +576,20 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a href="reserveForm.php?manage_id=<?php echo $id; ?>"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -681,18 +696,20 @@ if (isset($_GET['manage_id'])) {
 
 
                                                 <div class="button-container">
-                                                <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now" ><button class="button" type="submit" >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                                <path d="m8 3v4"></path>
-                                                                <path d="m16 3v4"></path>
-                                                                <path d="m4 11h16"></path>
-                                                            </g>
-                                                        </svg>
-                                                        <span class="lable" >Book Now</span>
-                                                    </button></a>
+                                                    <a href="reserveForm.php?manage_id=<?php echo $id; ?>"
+                                                        name="book_now"><button class="button" type="submit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                viewBox="0 0 24 24" height="24" fill="none"
+                                                                class="svg-icon">
+                                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                    <path d="m8 3v4"></path>
+                                                                    <path d="m16 3v4"></path>
+                                                                    <path d="m4 11h16"></path>
+                                                                </g>
+                                                            </svg>
+                                                            <span class="lable">Book Now</span>
+                                                        </button></a>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -715,6 +732,9 @@ if (isset($_GET['manage_id'])) {
                     </div> <!-- for real sub container -->
                 </div>
             </div> <!-- for real container -->
+
+
+
 
 </body>
 

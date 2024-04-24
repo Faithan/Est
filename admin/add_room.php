@@ -2,10 +2,13 @@
 include ('db_connect.php');
 session_start();
 
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
   header('Location:../login.php');
   exit();
 }
+
+$message = "";
+$isSuccess = false;
 
 
 if (isset($_POST['addroom'])) {
@@ -42,17 +45,25 @@ if (isset($_POST['addroom'])) {
 
         $savedata = "INSERT INTO room_tbl  VALUES ('','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','../images/$filenewname')";
 
-        if (mysqli_query($con, $savedata)) {
-          echo "<script> alert('Room Added Successfully')</script>";
+        $query = (mysqli_query($con, $savedata));
+
+        if ($query) {
+          $message = "Saved Successfully!";
+          $isSuccess = true;
+
         } else {
-          echo "Error:" . $sql . "<br>" . mysqli_error($con);
+          $message = "Failed!";
+          $isSuccess = false;
+
         }
       } else {
-        echo '<script> alert("your file is too big!") </script>';
+        $message = "Failed!";
+        $isSuccess = false;
       }
     }
   } else {
-    echo '<script> alert("cant upload this type of file!") </script>';
+    $message = "Failed!";
+    $isSuccess = false;
   }
 }
 
@@ -64,6 +75,9 @@ if (isset($_POST['addroom'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="../sweetalert/sweetalert.js"></script>
+  <script src="javascripts/logout.js" defer></script>
 
   <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
   <link href="../fontawesome/css/brands.css" rel="stylesheet" />
@@ -102,7 +116,7 @@ if (isset($_POST['addroom'])) {
             <a href="add_room.php">Add Rooms</a>
 
       </ul>
-      <a class="logout-btn" href="../logout.php">Log out</a>
+      <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
     </nav>
   </div>
 
@@ -193,6 +207,25 @@ if (isset($_POST['addroom'])) {
 
     </div>
   </div>
+
+
+  <!-- for save -->
+  <?php if (!empty($message)): ?>
+    <script>
+      Swal.fire({
+        title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+        text: '<?php echo $message; ?>',
+        icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+        showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = window.location.href;
+        }
+      });
+    </script>
+  <?php endif; ?>
+
+
 
   <script src="javascripts/add_room.js"></script>
 
