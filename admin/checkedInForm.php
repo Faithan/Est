@@ -109,26 +109,26 @@ if (isset($_POST['extended'])) {
     <?php endif; ?>
 
     <div>
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-            <li><a href="#">Home</a></li>
-                <li><a href="reservation.php">Reservations</a></li>
-                <li class="dropdown">
-                    <a href="rooms.php" class="reservation">Rooms/Cottages</a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="rooms.php">Rooms</a>
-                <li class="dropdown">
-                    <a href="add_room.php" class="reservation">Add Reservation</a>
-                    <div class="dropdown-content">
-                        <a href="#">Add Cottages</a>
-                        <a href="add_room.php">Add Rooms</a>
+    <nav class="navbar">
+      <img src="../system_images/Picture1.png" class="logo1">
+      <a class="logoLabel">Estregan Beach Resort</a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="reservation.php">Reservations</a></li>
+        <li class="dropdown">
+          <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
+          <div class="dropdown-content">
+            <a href="#">Cottages</a>
+            <a href="rooms.php">Rooms</a>
+        <li class="dropdown">
+          <a href="add_room.php" class="reservation">Add Reservation <i class="fa-solid fa-caret-down"></i></a>
+          <div class="dropdown-content">
+            <a href="#">Add Cottages</a>
+            <a href="add_room.php">Add Rooms</a>
 
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
+      </ul>
+      <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+    </nav>
     </div>
 
     <div class="container">

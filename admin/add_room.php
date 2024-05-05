@@ -105,12 +105,12 @@ if (isset($_POST['addroom'])) {
         <li><a href="#">Home</a></li>
         <li><a href="reservation.php">Reservations</a></li>
         <li class="dropdown">
-          <a href="rooms.php" class="reservation">Rooms/Cottages</a>
+          <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
           <div class="dropdown-content">
             <a href="#">Cottages</a>
             <a href="rooms.php">Rooms</a>
         <li class="dropdown">
-          <a href="add_room.php" class="reservation">Add Reservation</a>
+          <a href="add_room.php" class="reservation">Add Reservation <i class="fa-solid fa-caret-down"></i></a>
           <div class="dropdown-content">
             <a href="#">Add Cottages</a>
             <a href="add_room.php">Add Rooms</a>

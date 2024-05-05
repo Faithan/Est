@@ -43,6 +43,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
+                <li><a href="myreservation.php">My reservation</a></li>
                 <li class="dropdown">
                     <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
@@ -50,6 +51,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <a href="reserveRoom.php">Rooms</a>
                     </div>
                 <li><a href="contact.php">Contact</a></li>
+                <li><a href="settings.php">Settings</a></li>
 
             </ul>
             <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
