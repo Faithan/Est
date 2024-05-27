@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 
-$manage_data = ['id' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'price' => '', 'photo' => ''];
+$manage_data = ['id' => '', 'room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'price' => '', 'photo' => ''];
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
@@ -25,6 +25,7 @@ $isSuccess = false;
 
 if (isset($_POST['save'])) {
     $id = $_POST['id'];
+    $roomNumber = $_POST['room_number'];
     $room_type = $_POST['room_type'];
     $bed_type = $_POST['bed_type'];
     $bed_quantity = $_POST['bed_quantity'];
@@ -54,7 +55,7 @@ if (isset($_POST['save'])) {
                     move_uploaded_file($filetempname, $filedestination);
                 }
 
-                $update_query = "UPDATE room_tbl SET room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', no_persons='$noPersons', amenities='$amenities', status='$status', photo='../images/$filenewname'  WHERE id='$id'";
+                $update_query = "UPDATE room_tbl SET room_number='$roomNumber', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', no_persons='$noPersons', amenities='$amenities',price='$price', status='$status', photo='../images/$filenewname'  WHERE id='$id'";
 
                 $query = (mysqli_query($con, $update_query));
 
@@ -99,6 +100,7 @@ if (isset($_POST['save'])) {
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="edit_room.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
@@ -150,6 +152,11 @@ if (isset($_POST['save'])) {
                 <div class="line-a">
                     <div class="input_field_holder">
                         <div>
+
+                        <label>Room Number:</label><br>
+                            <input type="number" name="room_number" id="room_number" class="input_fields"
+                                onkeyup="changeColor(this)" value="<?php echo $manage_data['room_number']; ?>"
+                                required><br>
 
                             <label for="room_type">Room Type:</label><br>
                             <select name="room_type" id="room_type" class="select_fields"
@@ -207,7 +214,7 @@ if (isset($_POST['save'])) {
                                 onkeyup="changeColor(this)" value="<?php echo $manage_data['amenities']; ?>"
                                 required><br>
 
-                            <label>Rate per Hours:</label><br>
+                            <label>Price (Good for 22hrs):</label><br>
                             <input type="number" name="price" id="price" class="input_fields"
                                 onkeyup="changeColor(this)" value="<?php echo $manage_data['price']; ?>" required><br>
 
@@ -251,7 +258,7 @@ if (isset($_POST['save'])) {
                     </div>
                     <div class="center-label">
                         <label> Upload New Photo:</label><br>
-                    </div>
+                    </div>  
                     <div class="center-label-image">
                         <div class="image-holder" id="photo_preview"></div>
                     </div>

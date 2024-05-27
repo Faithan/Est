@@ -24,7 +24,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
-    
+
     <script src="../sweetalert/sweetalert.js"></script>
     <script src="javascripts/logout.js" defer></script>
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -43,15 +43,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
-                <li><a href="myreservation.php">My reservation</a></li>
+
                 <li class="dropdown">
                     <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
                     </div>
+                </li>
+                <li><a href="#">My Reservation</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="settings.php">Settings</a></li>
+                <li><a href="#">Settings</a></li>
 
             </ul>
             <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>

@@ -72,7 +72,7 @@
 .reserveForm-container2 .input2 {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 44%;
+    width: 27%;
     margin-right: 3%;
     height: 30px;
     border-radius: 5px;
@@ -186,4 +186,21 @@
     color: white;
     background-color: #410000;
 
+}
+
+
+
+
+
+
+#comment{
+    font-size: 12px;
+    font-style: italic;
+    color: #a1a1a1;
+    margin-left: 10px;
+}
+
+#note{
+    font-size: 13px;
+    text-align: justify;
 }

@@ -1,6 +1,4 @@
-
 function showTablePendings() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
@@ -35,17 +33,16 @@ function showTablePendings() {
     rejected_btn.style.backgroundColor = '#650000';
     rejected_btn.style.color = 'white';
 
+    localStorage.setItem('activeTable', 'table1');
 }
 
 function showTableConfirmed() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
     var table4 = document.getElementById("table-container4");
     var table5 = document.getElementById("table-container5");
     var table6 = document.getElementById("table-container6");
-
 
     table1.style.display = "none";
     table2.style.display = "block";
@@ -74,11 +71,10 @@ function showTableConfirmed() {
     rejected_btn.style.backgroundColor = '#650000';
     rejected_btn.style.color = 'white';
 
+    localStorage.setItem('activeTable', 'table2');
 }
 
-
 function showTableCheckedIn() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
@@ -113,11 +109,10 @@ function showTableCheckedIn() {
     rejected_btn.style.backgroundColor = '#650000';
     rejected_btn.style.color = 'white';
 
-
+    localStorage.setItem('activeTable', 'table3');
 }
 
 function showTableExtended() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
@@ -131,8 +126,7 @@ function showTableExtended() {
     table6.style.display = "block";
     table4.style.display = "none";
     table5.style.display = "none";
-  
-    
+
     var pending_btn = document.getElementById("pending-btn");
     var confirmed_btn = document.getElementById("confirmed-btn");
     var checkedIn_btn = document.getElementById("checkedIn-btn");
@@ -153,12 +147,10 @@ function showTableExtended() {
     rejected_btn.style.backgroundColor = '#650000';
     rejected_btn.style.color = 'white';
 
-
+    localStorage.setItem('activeTable', 'table6');
 }
 
-
 function showTableCheckedOut() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
@@ -172,7 +164,6 @@ function showTableCheckedOut() {
     table6.style.display = "none";
     table4.style.display = "block";
     table5.style.display = "none";
-  
 
     var pending_btn = document.getElementById("pending-btn");
     var confirmed_btn = document.getElementById("confirmed-btn");
@@ -193,11 +184,11 @@ function showTableCheckedOut() {
     checkedOut_btn.style.color = '#002334';
     rejected_btn.style.backgroundColor = '#650000';
     rejected_btn.style.color = 'white';
-    
+
+    localStorage.setItem('activeTable', 'table4');
 }
 
 function showTableRejected() {
-
     var table1 = document.getElementById("table-container1");
     var table2 = document.getElementById("table-container2");
     var table3 = document.getElementById("table-container3");
@@ -231,8 +222,32 @@ function showTableRejected() {
     checkedOut_btn.style.color = 'white';
     rejected_btn.style.backgroundColor = 'white' ;
     rejected_btn.style.color = '#650000';
-    
+
+    localStorage.setItem('activeTable', 'table5');
 }
 
-
-
+window.onload = function() {
+    var activeTable = localStorage.getItem('activeTable');
+    if (activeTable) {
+        switch (activeTable) {
+            case 'table1':
+                showTablePendings();
+                break;
+            case 'table2':
+                showTableConfirmed();
+                break;
+            case 'table3':
+                showTableCheckedIn();
+                break;
+            case 'table6':
+                showTableExtended();
+                break;
+            case 'table4':
+                showTableCheckedOut();
+                break;
+            case 'table5':
+                showTableRejected();
+                break;
+        }
+    }
+}

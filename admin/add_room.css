@@ -150,3 +150,24 @@ border-radius: 2px;
 }
 
 
+
+/* peso sign */
+
+.price {
+    position: relative;
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+  }
+  
+  .currency {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }

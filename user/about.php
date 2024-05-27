@@ -36,21 +36,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 <body>
 
-    <!-- for nav -->
-    <div class="navbar-container">
+     <!-- for nav -->
+     <div class="navbar-container">
         <nav class="navbar">
             <img src="../system_images/Picture1.png" class="logo1">
             <a class="logoLabel">Estregan Beach Resort</a>
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
+
                 <li class="dropdown">
-                <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
+                    <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="#">Cottages</a>
                         <a href="reserveRoom.php">Rooms</a>
                     </div>
+                </li>
+                <li><a href="#">My Reservation</a></li>
                 <li><a href="contact.php">Contact</a></li>
+                <li><a href="#">Settings</a></li>
 
             </ul>
             <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>

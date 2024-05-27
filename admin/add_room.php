@@ -12,6 +12,7 @@ $isSuccess = false;
 
 
 if (isset($_POST['addroom'])) {
+  $roomNumber = $_POST['room_number'];
   $roomType = $_POST['room_type'];
   $bed_type = $_POST['bed_type'];
   $bed_quantity = $_POST['bed_quantity'];
@@ -43,7 +44,7 @@ if (isset($_POST['addroom'])) {
         }
 
 
-        $savedata = "INSERT INTO room_tbl  VALUES ('','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','../images/$filenewname')";
+        $savedata = "INSERT INTO room_tbl  VALUES ('',' $roomNumber','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','../images/$filenewname')";
 
         $query = (mysqli_query($con, $savedata));
 
@@ -83,6 +84,7 @@ if (isset($_POST['addroom'])) {
   <link href="../fontawesome/css/brands.css" rel="stylesheet" />
   <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
+  <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" type="text/css" href="add_room.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -134,6 +136,12 @@ if (isset($_POST['addroom'])) {
 
           <div class="input_field_holder">
 
+
+            <label for="room_type">Room Number:</label><br>
+            <input type="number" name="room_number" id="room_number" class="input_fields" onkeyup="changeColor(this)"
+              required>
+            <br>
+
             <label for="room_type">Room Type:</label><br>
             <select name="room_type" id="room_type" class="select_fields" onchange="changeColorSelect(this)" required>
               <option disabled selected value="">Choose an Option</option>
@@ -171,8 +179,12 @@ if (isset($_POST['addroom'])) {
             <input type="text" name="amenities" id="amenities" class="input_fields" onkeyup="changeColor(this)"
               required><br>
 
-            <label for="room_type">Rate per Hours:</label><br>
-            <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)" required><br>
+          
+            
+            <label for="room_type">Good for 22 hours:</label><br>
+            <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)" placeholder="₱"
+              required>
+            <br>
 
             <label for="room_type">Status:</label><br>
             <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)" required>

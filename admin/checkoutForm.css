@@ -110,18 +110,42 @@
 }
 
 
-
 .line input{
-    width: 250px;
+    width: 200px;
     height: 20px;
     border: 1px solid rgb(207, 207, 207);
     font-size: 15px;
     padding: 5px;
     border-radius: 5px;
-    color: rgb(57, 57, 57);
+    color: rgb(114, 114, 114);
     text-align: center;
     text-transform: capitalize;
 }
+
+#goodfor{
+    font-size: 13px;
+    color: #949494;
+}
+
+.note{
+    margin: 10px;
+    font-size: 13px;
+    text-align: justify;
+}
+
+.line textarea{
+    width: 890px;
+    height: 40px;
+    border: 1px solid rgb(207, 207, 207);
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(114, 114, 114);
+    margin-top: 5px;
+
+}
+
+
 
 .line .notransform{
     text-transform: none;

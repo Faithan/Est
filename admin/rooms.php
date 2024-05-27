@@ -41,6 +41,7 @@ if (isset($_GET['manage_id'])) {
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="rooms.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
@@ -51,26 +52,27 @@ if (isset($_GET['manage_id'])) {
 
 <body>
     <div>
-    <nav class="navbar">
-      <img src="../system_images/Picture1.png" class="logo1">
-      <a class="logoLabel">Estregan Beach Resort</a>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="reservation.php">Reservations</a></li>
-        <li class="dropdown">
-          <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Cottages</a>
-            <a href="rooms.php">Rooms</a>
-        <li class="dropdown">
-          <a href="add_room.php" class="reservation">Add Reservation <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Add Cottages</a>
-            <a href="add_room.php">Add Rooms</a>
+        <nav class="navbar">
+            <img src="../system_images/Picture1.png" class="logo1">
+            <a class="logoLabel">Estregan Beach Resort</a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="reservation.php">Reservations</a></li>
+                <li class="dropdown">
+                    <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Cottages</a>
+                        <a href="rooms.php">Rooms</a>
+                <li class="dropdown">
+                    <a href="add_room.php" class="reservation">Add Reservation <i
+                            class="fa-solid fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Add Cottages</a>
+                        <a href="add_room.php">Add Rooms</a>
 
-      </ul>
-      <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-    </nav>
+            </ul>
+            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+        </nav>
     </div>
 
     <div class="container">
@@ -82,13 +84,13 @@ if (isset($_GET['manage_id'])) {
             <form method="post" action="" class="table-container">
                 <table>
                     <tr>
-                        <th>Room Id</th>
+                        <th>Room Number</th>
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>No. Person</th>
                         <th>Amenities</th>
-                        <th>Price Per Hour</th>
+                        <th>Price (Good for 22hrs)</th>
                         <th>Status</th>
                         <th>Photo</th>
                         <th>Action</td>
@@ -98,6 +100,7 @@ if (isset($_GET['manage_id'])) {
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row['id'];
+                        $roomNumber = $row['room_number'];
                         $roomType = $row['room_type'];
                         $bedType = $row['bed_type'];
                         $bed_quantity = $row['bed_quantity'];
@@ -108,7 +111,7 @@ if (isset($_GET['manage_id'])) {
                         $photo = $row['photo'];
                         ?>
                         <tr>
-                            <td ><?php echo $id ?></td>
+                            <td><?php echo $roomNumber ?></td>
                             <td><?php echo $roomType ?></td>
                             <td><?php echo $bedType ?></td>
                             <td><?php echo $bed_quantity ?></td>
@@ -128,7 +131,7 @@ if (isset($_GET['manage_id'])) {
 
                     <?php } ?>
                 </table>
-                    </form>
+            </form>
         </div>
 
     </div>

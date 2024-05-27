@@ -73,12 +73,7 @@ table td{
     
 }
 
-table .td2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-}
+
 
 table .room-image{
     height: 50px;

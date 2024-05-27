@@ -54,6 +54,7 @@ if (isset($_POST['reject'])) {
     <link href="../fontawesome/css/brands.css" rel="stylesheet" />
     <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="reservation.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
@@ -147,13 +148,12 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -199,9 +199,6 @@ if (isset($_POST['reject'])) {
                             </td>
                             <td>
                                 <?php echo $date_of_arrival ?>
-                            </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
                             </td>
                             <td>
                                 <?php echo $room_type ?>
@@ -261,13 +258,13 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
+
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -314,9 +311,7 @@ if (isset($_POST['reject'])) {
                             <td>
                                 <?php echo $date_of_arrival ?>
                             </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
-                            </td>
+                           
                             <td>
                                 <?php echo $room_type ?>
                             </td>
@@ -372,13 +367,13 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
+                     
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -425,9 +420,7 @@ if (isset($_POST['reject'])) {
                             <td>
                                 <?php echo $date_of_arrival ?>
                             </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
-                            </td>
+                        
                             <td>
                                 <?php echo $room_type ?>
                             </td>
@@ -483,13 +476,13 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
+           
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -536,9 +529,7 @@ if (isset($_POST['reject'])) {
                             <td>
                                 <?php echo $date_of_arrival ?>
                             </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
-                            </td>
+                    
                             <td>
                                 <?php echo $room_type ?>
                             </td>
@@ -592,13 +583,13 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
+                       
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -645,9 +636,7 @@ if (isset($_POST['reject'])) {
                             <td>
                                 <?php echo $date_of_arrival ?>
                             </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
-                            </td>
+                   
                             <td>
                                 <?php echo $room_type ?>
                             </td>
@@ -699,13 +688,13 @@ if (isset($_POST['reject'])) {
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Date of Arrival</th>
-                        <th>Time of Arrival</th>
+                   
                         <th>Room Type</th>
                         <th>Bed Type</th>
                         <th>Bed Quantity</th>
                         <th>Number of Person</th>
                         <th>Amenities</th>
-                        <th>Rate Per Hour</th>
+                        <th>Price (Good for 22 hours)</th>
                         <th>Photo</th>
                         <th>Action</th>
                     </tr>
@@ -752,9 +741,7 @@ if (isset($_POST['reject'])) {
                             <td>
                                 <?php echo $date_of_arrival ?>
                             </td>
-                            <td>
-                                <?php echo $time_of_arrival ?>
-                            </td>
+                       
                             <td>
                                 <?php echo $room_type ?>
                             </td>
