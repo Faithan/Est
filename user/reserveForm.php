@@ -68,9 +68,10 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="reserveRoom.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="reserveForm.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/reserveRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/reserveForm.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
+    
     <title>Room Reservation</title>
 
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />

@@ -44,7 +44,7 @@ body {
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 4;
-    background: url(../system_images/bg7.jpg);
+    background: url(../../system_images/bg7.jpg);
     filter: brightness(90%);
     background-size: cover;
     background-position: center;
@@ -55,7 +55,7 @@ body {
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 4;
-    background: url(../system_images/bg8.jpg);
+    background: url(../../system_images/bg8.jpg);
     filter: brightness(90%);
     background-size: cover;
     background-position: center;

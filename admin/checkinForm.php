@@ -49,7 +49,7 @@ if (isset($_POST['checkedin'])) {
     $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
     room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
-    $manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '','room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'reservation_fee' => '', 'photo' => ''];
+    $manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'reservation_fee' => '', 'photo' => ''];
 
 
 
@@ -82,17 +82,19 @@ if (isset($_POST['checkedin'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../sweetalert/sweetalert.js"></script>
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+        ?>
+
     <script src="javascripts/logout.js" defer></script>
     <script src="javascripts/totalFee2.js" defer></script>
 
-    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="checkinForm.css?v=<?php echo time(); ?>">
+
+    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+   
+    <link rel="stylesheet" type="text/css" href="css/checkinForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Check In</title>
 </head>
@@ -117,30 +119,10 @@ if (isset($_POST['checkedin'])) {
     <?php endif; ?>
 
 
+    <?php
+    include 'header.php'
+        ?>
 
-    <div>
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="reservation.php">Reservations</a></li>
-                <li class="dropdown">
-                    <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="rooms.php">Rooms</a>
-                <li class="dropdown">
-                    <a href="add_room.php" class="reservation">Add Reservation <i
-                            class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Add Cottages</a>
-                        <a href="add_room.php">Add Rooms</a>
-
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
-    </div>
 
     <div class="container">
         <div class="container2">

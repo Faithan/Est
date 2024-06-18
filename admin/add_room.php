@@ -77,16 +77,16 @@ if (isset($_POST['addroom'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="../sweetalert/sweetalert.js"></script>
+  <!-- important files -->
+  <?php
+  include 'assets.php'
+    ?>
+
   <script src="javascripts/logout.js" defer></script>
 
-  <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-  <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-  <link href="../fontawesome/css/solid.css" rel="stylesheet" />
-
-  <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" type="text/css" href="add_room.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+ 
+  <link rel="stylesheet" type="text/css" href="css/add_room.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
   <title>Add Room</title>
@@ -99,28 +99,11 @@ if (isset($_POST['addroom'])) {
 
 <body>
 
-  <div>
-    <nav class="navbar">
-      <img src="../system_images/Picture1.png" class="logo1">
-      <a class="logoLabel">Estregan Beach Resort</a>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="reservation.php">Reservations</a></li>
-        <li class="dropdown">
-          <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Cottages</a>
-            <a href="rooms.php">Rooms</a>
-        <li class="dropdown">
-          <a href="add_room.php" class="reservation">Add Reservation <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Add Cottages</a>
-            <a href="add_room.php">Add Rooms</a>
 
-      </ul>
-      <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-    </nav>
-  </div>
+
+  <?php
+  include 'header.php'
+    ?>
 
 
   <div class="form-holder">
@@ -179,11 +162,11 @@ if (isset($_POST['addroom'])) {
             <input type="text" name="amenities" id="amenities" class="input_fields" onkeyup="changeColor(this)"
               required><br>
 
-          
-            
+
+
             <label for="room_type">Good for 22 hours:</label><br>
-            <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)" placeholder="₱"
-              required>
+            <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)"
+              placeholder="₱" required>
             <br>
 
             <label for="room_type">Status:</label><br>

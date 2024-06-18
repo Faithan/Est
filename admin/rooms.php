@@ -18,10 +18,8 @@ if (isset($_GET['manage_id'])) {
 
 
 
-
-
-
 ?>
+
 
 
 
@@ -33,47 +31,31 @@ if (isset($_GET['manage_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+        ?>
 
-    <script src="../sweetalert/sweetalert.js"></script>
+
     <script src="javascripts/logout.js" defer></script>
 
-    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="rooms.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+   
+    <link rel="stylesheet" type="text/css" href="css/rooms.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Rooms</title>
     <script src="javascripts/fullscreen.js" defer></script>
 </head>
 
 <body>
-    <div>
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="reservation.php">Reservations</a></li>
-                <li class="dropdown">
-                    <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="rooms.php">Rooms</a>
-                <li class="dropdown">
-                    <a href="add_room.php" class="reservation">Add Reservation <i
-                            class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Add Cottages</a>
-                        <a href="add_room.php">Add Rooms</a>
 
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
-    </div>
+
+    <?php
+    include 'header.php'
+        ?>
+
 
     <div class="container">
         <div class="container2">

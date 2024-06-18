@@ -14,7 +14,7 @@ body {
     grid-template-columns: .2fr 4fr .2fr;
     grid-template-rows: .5fr 2fr .5fr;
     height: 93.5vh;
-    background: url(../system_images/aboutbg.jpg);
+    background: url(../../system_images/aboutbg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

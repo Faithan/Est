@@ -25,7 +25,7 @@ body {
 	height: 100%;
 	left: 0;
 	top: 0;
-	background: url("../system_images/beachbg.jpg") no-repeat center;
+	background: url("../../system_images/beachbg.jpg") no-repeat center;
 	background-size: cover;
 	z-index: -1;
 }
@@ -41,7 +41,7 @@ body {
 }
 
 .left{
-	background: url("../system_images/estregan.png") no-repeat center;
+	background: url("../../system_images/estregan.png") no-repeat center;
 	background-size: cover;
 	height: 100%;
 }

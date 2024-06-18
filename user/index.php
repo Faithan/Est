@@ -27,11 +27,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <script src="../sweetalert/sweetalert.js"></script>
     <script src="javascripts/logout.js" defer></script>
+
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="index.css?v=<?php echo time(); ?>">
+    
+    <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/index.css?v=<?php echo time(); ?>">
 
 </head>
+
 
 <body>
 

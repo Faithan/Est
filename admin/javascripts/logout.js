@@ -13,4 +13,4 @@ document.getElementById('logoutBtn').addEventListener('click', function () {
             Swal.fire('Logged Out', 'You have been logged out successfully!', 'success');
         }
     });
-});
+}); 

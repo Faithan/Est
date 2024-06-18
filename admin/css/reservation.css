@@ -276,7 +276,7 @@ td input {
 }
 
 .table-image-container {
-    padding: 0;
+    padding: 5px;
     margin: 0;
     overflow-y: scroll;
 }

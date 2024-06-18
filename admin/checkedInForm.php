@@ -107,18 +107,20 @@ if (isset($_POST['extended'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../sweetalert/sweetalert.js"></script>
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+        ?>
+
+
     <script src="javascripts/logout.js" defer></script>
     <script src="javascripts/totalFee3.js" defer></script>
 
-    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
 
-    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="checkedInForm.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+   
+    <link rel="stylesheet" type="text/css" href="css/checkedInForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Checked In</title>
 </head>
@@ -141,29 +143,11 @@ if (isset($_POST['extended'])) {
         </script>
     <?php endif; ?>
 
-    <div>
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="reservation.php">Reservations</a></li>
-                <li class="dropdown">
-                    <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="rooms.php">Rooms</a>
-                <li class="dropdown">
-                    <a href="add_room.php" class="reservation">Add Reservation <i
-                            class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Add Cottages</a>
-                        <a href="add_room.php">Add Rooms</a>
+    <?php
+    include 'header.php'
+        ?>
 
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
-    </div>
+
 
     <div class="container">
         <div class="container2">

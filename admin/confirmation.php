@@ -68,9 +68,9 @@ if (isset($_POST['confirm'])) {
 }
 
 
-
-
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -80,19 +80,23 @@ if (isset($_POST['confirm'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../sweetalert/sweetalert.js"></script>
+
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+        ?>
 
     <script src="javascripts/logout.js" defer></script>
     <!-- <script src="javascripts/calculation.js" defer></script> -->
     <script src="javascripts/totalFee.js" defer></script>
+    
 
-    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="confirmation.css?v=<?php echo time(); ?>">
+
+
+    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+
+    <link rel="stylesheet" type="text/css" href="css/confirmation.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Confirmation</title>
 </head>
@@ -116,29 +120,57 @@ if (isset($_POST['confirm'])) {
         </script>
     <?php endif; ?>
 
-    <div>
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="reservation.php">Reservations</a></li>
-                <li class="dropdown">
-                    <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="rooms.php">Rooms</a>
-                <li class="dropdown">
-                    <a href="add_room.php" class="reservation">Add Reservation <i
-                            class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Add Cottages</a>
-                        <a href="add_room.php">Add Rooms</a>
 
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
-    </div>
+    <script>
+    function confirmReject() {
+        Swal.fire({
+            title: 'Reject Confirmation',
+            text: 'Are you sure you want reject this reservation?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, reject',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteItem();
+            }
+        });
+    }
+
+    function deleteItem() {
+        var reserve_id = document.querySelector('input[name="reserve_id"]').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'reject.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    Swal.fire({
+                        title: 'Rejected Successfully',
+                        text: 'reservation rejected successfully.',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = 'reservation.php'; // Replace with your desired page after deletion
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Delete Error',
+                        text: 'Failed to reject this reservation.',
+                        icon: 'error'
+                    });
+                }
+            }
+        };
+        xhr.send('reserve_id=' + reserve_id);
+    }
+    </script>
+
+
+    <?php
+    include 'header.php'
+        ?>
+
+
 
     <div class="container">
         <div class="container2">
@@ -297,7 +329,7 @@ if (isset($_POST['confirm'])) {
 
                         <div>
                             <label>Total Fee (₱)</label><br>
-                            <input type="number" name="total_fee" value="" required>
+                            <input type="number" name="total_fee" value="" readonly>
                         </div>
 
                     </div>
@@ -340,9 +372,9 @@ if (isset($_POST['confirm'])) {
                     <div class="button-holder">
                         <button class="check-btn" type="submit" name="confirm"><i class="fa-solid fa-check-to-slot"></i>
                             Confirm</button>
-                        <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
-                        <div>
-
+                        <a class="reject-btn" id="reject-btn" name="reject"  onclick="confirmReject()"><i class="fa-solid fa-trash"></i>
+                            Reject</a>
+                        <a href="reservation.php" class="back-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Back</a>
                         </div>
             </form>
         </div>

@@ -84,26 +84,29 @@ if (isset($_POST['save'])) {
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../sweetalert/sweetalert.js"></script>
+
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+        ?>
+
+
     <script src="javascripts/deleteRoom.js" defer></script>
     <script src="javascripts/logout.js" defer></script>
-    <!-- <script src="javascripts/deleteRoom.js" defer></script> -->
 
 
-    <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="../fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="../fontawesome/css/solid.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="backbtn.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="edit_room.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="fullscreen.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
+  
+    <link rel="stylesheet" type="text/css" href="css/edit_room.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
     <title>Edit Room</title>
@@ -116,28 +119,10 @@ if (isset($_POST['save'])) {
 
 <body>
 
-    <div>
-    <nav class="navbar">
-      <img src="../system_images/Picture1.png" class="logo1">
-      <a class="logoLabel">Estregan Beach Resort</a>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="reservation.php">Reservations</a></li>
-        <li class="dropdown">
-          <a href="rooms.php" class="reservation">Rooms/Cottages <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Cottages</a>
-            <a href="rooms.php">Rooms</a>
-        <li class="dropdown">
-          <a href="add_room.php" class="reservation">Add Reservation <i class="fa-solid fa-caret-down"></i></a>
-          <div class="dropdown-content">
-            <a href="#">Add Cottages</a>
-            <a href="add_room.php">Add Rooms</a>
+    <?php
+    include 'header.php'
+        ?>
 
-      </ul>
-      <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-    </nav>
-    </div>
 
 
     <div class="form-holder">
@@ -153,7 +138,7 @@ if (isset($_POST['save'])) {
                     <div class="input_field_holder">
                         <div>
 
-                        <label>Room Number:</label><br>
+                            <label>Room Number:</label><br>
                             <input type="number" name="room_number" id="room_number" class="input_fields"
                                 onkeyup="changeColor(this)" value="<?php echo $manage_data['room_number']; ?>"
                                 required><br>
@@ -258,7 +243,7 @@ if (isset($_POST['save'])) {
                     </div>
                     <div class="center-label">
                         <label> Upload New Photo:</label><br>
-                    </div>  
+                    </div>
                     <div class="center-label-image">
                         <div class="image-holder" id="photo_preview"></div>
                     </div>
