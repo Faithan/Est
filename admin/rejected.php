@@ -8,7 +8,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 
-$manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
+$manage_data = [
+    'reserve_id' => '',
+    'fname' => '',
+    'lname' => '',
+    'address' => '',
+    'phone_number' => '',
+    'email' => '',
+    'date_of_arrival' => '',
+    'time_of_arrival' => '',
+    'room_type' => '',
+    'number_of_person' => '',
+    'amenities' => '',
+    'rate_per_hour' => '',
+    'special_request' => '',
+    'reservation_type' => '',
+    'photo' => ''
+];
 
 
 
@@ -61,7 +77,7 @@ if (isset($_POST['confirm'])) {
 
     <script src="javascripts/logout.js" defer></script>
 
-    
+
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/rejected.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -80,7 +96,7 @@ if (isset($_POST['confirm'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">RESERVATION</label>
+                <label for="">REJECTED</label>
             </div>
 
 
@@ -183,6 +199,13 @@ if (isset($_POST['confirm'])) {
                         </div>
 
 
+                        <div class="line">
+                            <div>
+                                <label>Type of Reservation</label><br>
+                                <input type="text" class="notransform" name="reservation_type"
+                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                            </div>
+                        </div>
 
                         <div class="line">
                             <div>
@@ -192,6 +215,21 @@ if (isset($_POST['confirm'])) {
                             </div>
                         </div>
 
+                        <div class="header-label3">
+                            <label>*<?php echo $manage_data['status']; ?>*</label>
+                        </div>
+
+                        <!-- reason for rejection -->
+
+                        <div>
+                            <div class="line">
+                                <div>
+                                    <label style="color: red;">Reason for Rejection/Cancellation</label><br>
+                                    <textarea name="rejection_reason" id=""
+                                        disabled><?php echo $manage_data['rejection_reason']; ?></textarea>
+                                </div>
+                            </div>
+                        </div>
 
 
 
@@ -213,9 +251,7 @@ if (isset($_POST['confirm'])) {
                         </p>
                     </div>
 
-                    <div class="header-label3">
-                        <label>*REJECTED*</label>
-                    </div>
+
 
 
                 </div>
@@ -230,7 +266,7 @@ if (isset($_POST['confirm'])) {
 
                 <div class="button-container">
                     <div class="button-holder">
-                        <a class="box" href="reservation.php">
+                        <a class="box" href="roomReservation.php">
                             <p class="text-button">Return</p>
                         </a>
                     </div>

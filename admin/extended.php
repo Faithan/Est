@@ -47,6 +47,7 @@ if (isset($_POST['checkOut'])) {
         'rate_per_hour' => '',
         'special_request' => '',
         'reservation_fee' => '',
+        'reservation_type' => '',
         'photo' => '',
         'extra_bed' => '',
         'extra_person' => '',
@@ -93,7 +94,7 @@ if (isset($_POST['checkOut'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-  
+
     <link rel="stylesheet" type="text/css" href="css/extended.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Extended</title>
@@ -125,7 +126,7 @@ if (isset($_POST['checkOut'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">RESERVATION</label>
+                <label for="">EXTENDED</label>
             </div>
 
 
@@ -227,6 +228,13 @@ if (isset($_POST['checkOut'])) {
 
                         </div>
 
+                        <div class="line">
+                            <div>
+                                <label>Type of Reservation</label><br>
+                                <input type="text" class="notransform" name="reservation_type"
+                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                            </div>
+                        </div>
 
 
                         <div class="line">
@@ -322,7 +330,9 @@ if (isset($_POST['checkOut'])) {
                     <div class="button-holder">
                         <button class="check-btn" type="submit" name="checkOut"><i
                                 class="fa-solid fa-check-to-slot"></i> Check Out</button>
-                        <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
+
+                        <a href="roomReservation.php" class="back-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Back</a>
                         <div>
 
                         </div>

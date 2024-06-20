@@ -18,20 +18,20 @@ if (isset($_GET['manage_id'])) {
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
 
-    // if (isset($_POST['reject'])) {
-    //     $reserve_id = $_POST['reserve_id'];
-    //     $update_query = "UPDATE reserve_room_tbl SET status='rejected' WHERE reserve_id='$reserve_id'";
-    //     $query = (mysqli_query($con, $update_query));
+// if (isset($_POST['reject'])) {
+//     $reserve_id = $_POST['reserve_id'];
+//     $update_query = "UPDATE reserve_room_tbl SET status='rejected' WHERE reserve_id='$reserve_id'";
+//     $query = (mysqli_query($con, $update_query));
 
-    //     if ($query) {
-    //         $message = "Rejected Successfully!";
-    //         $isSuccess = true;
+//     if ($query) {
+//         $message = "Rejected Successfully!";
+//         $isSuccess = true;
 
-    //     } else {
-    //         $message = "Failed!";
-    //         $isSuccess = false;
-    //     }
-    // }
+//     } else {
+//         $message = "Failed!";
+//         $isSuccess = false;
+//     }
+// }
 
 
 ?>
@@ -58,7 +58,7 @@ if (isset($_GET['manage_id'])) {
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
 
-    <link rel="stylesheet" type="text/css" href="css/reservation.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/roomReservation.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Reservation</title>
@@ -89,14 +89,14 @@ include 'header.php'
 <div class="container">
     <div class="container2">
         <div class="header-label">
-            <label for="">RESERVATION</label>
+            <label for="">RESERVATION FOR ROOMS</label>
         </div>
 
         <div class="buttons-container">
             <button onclick="showTablePendings()" id="pending-btn" class="pending-btn">Pendings</button>
             <button onclick="showTableConfirmed()" id="confirmed-btn">Confirmed</button>
             <button onclick="showTableCheckedIn()" id="checkedIn-btn">Checked In</button>
-            <button onclick="showTableExtended()" id="extended-btn">Extended</button>
+            <button onclick="showTableExtended()" id="extended-btn">Extended Stay</button>
             <button onclick="showTableCheckedOut()" id="checkedOut-btn">Checked Out</button>
             <button onclick="showTableRejected()" id="rejected-btn" class="rejected-btn">Rejected</button>
         </div>
@@ -104,16 +104,38 @@ include 'header.php'
 
 
 
+        <div class="under-buttons-container">
+            <div class="select-type">
+                <label for="">Type of Reservation:</label>
+                <select name="" id="">
+                    <option value="all">All</option>
+                    <option value="walk-in">Walk-in</option>
+                    <option value="online">Online</option>
+                </select>
+            </div>
 
+            <div>
+                <div class="group">
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                            </path>
+                        </g>
+                    </svg>
+                    <input placeholder="Search" type="search" class="search-input">
+                </div>
+            </div>
 
+            <div class="add-reservation">
+                <button name="add-reservation" ><i class="fa-solid fa-plus"></i> ADD RESERVATION</button>
+            </div>
+        </div>
 
 
 
 
         <!-- for pending table -->
-
-
-
 
 
 
@@ -273,7 +295,7 @@ include 'header.php'
                     ?>
                     <tr>
                         <td>
-                        <?php echo $reserve_id ?>
+                            <?php echo $reserve_id ?>
                         </td>
                         <td>
                             <?php echo $fname ?>
@@ -678,7 +700,7 @@ include 'header.php'
                     <th>Photo</th>
                     <th>Action</th>
                 </tr>
-                <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='rejected' ORDER BY reserve_id DESC";
+                <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='rejected' OR status='cancelled' ORDER BY reserve_id DESC";
                 $result = mysqli_query($con, $fetchdata);
                 while ($row = mysqli_fetch_assoc($result)) {
                     $reserve_id = $row['reserve_id'];
@@ -751,7 +773,7 @@ include 'header.php'
 
                 <?php } ?>
             </table>
-        </form> <!-- table for pendings -->
+        </form> <!-- table for rejected -->
 
 
 

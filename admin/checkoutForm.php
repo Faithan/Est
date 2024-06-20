@@ -8,7 +8,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 
-$manage_data = ['reserve_id' => '', 'fname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
+$manage_data = [
+    'reserve_id' => '',
+    'fname' => '',
+    'lname' => '',
+    'address' => '',
+    'phone_number' => '',
+    'email' => '',
+    'date_of_arrival' => '',
+    'time_of_arrival' => '',
+    'room_type' => '',
+    'number_of_person' => '',
+    'amenities' => '',
+    'rate_per_hour' => '',
+    'special_request' => '',
+    'reservation_type' => '',
+    'photo' => ''
+];
 
 
 if (isset($_GET['manage_id'])) {
@@ -40,7 +56,7 @@ if (isset($_GET['manage_id'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-  
+
     <link rel="stylesheet" type="text/css" href="css/extended.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Checked Out</title>
@@ -57,7 +73,7 @@ if (isset($_GET['manage_id'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">RESERVATION</label>
+                <label for="">CHECKED OUT</label>
             </div>
 
 
@@ -161,6 +177,13 @@ if (isset($_GET['manage_id'])) {
 
                             </div>
 
+                            <div class="line">
+                                <div>
+                                    <label>Type of Reservation</label><br>
+                                    <input type="text" class="notransform" name="reservation_type"
+                                        value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                                </div>
+                            </div>
 
 
                             <div class="line">
@@ -173,6 +196,7 @@ if (isset($_GET['manage_id'])) {
 
 
                         </div>
+
                         <div class="line">
 
                             <div>
@@ -249,9 +273,9 @@ if (isset($_GET['manage_id'])) {
 
                 <div class="button-container">
                     <div class="button-holder">
-                        <a class="box" href="reservation.php">
-                            <p class="text-button">Return</p>
-                        </a>
+                        <a href="roomReservation.php" class="back-btn"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Back</a>
                     </div>
 
                 </div>

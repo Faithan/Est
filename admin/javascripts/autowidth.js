@@ -11,4 +11,18 @@ navLists.forEach((navList) => {
 
   // Apply the content width to the dropdown content element
   dropdownContent.style.width = `${navListContentWidth}px`;
+
+  // Show dropdown content below the dropdown element on hover
+  navList.addEventListener('mouseover', () => {
+    const navListRect = navList.getBoundingClientRect();
+    dropdownContent.style.position = 'absolute';
+    dropdownContent.style.top = `${navListRect.bottom}px`; // Position the content below the dropdown
+    dropdownContent.style.left = `${navListRect.left}px`;
+    dropdownContent.style.display = 'block';
+  });
+
+  // Hide dropdown content when not hovering
+  navList.addEventListener('mouseout', () => {
+    dropdownContent.style.display = 'none';
+  });
 });

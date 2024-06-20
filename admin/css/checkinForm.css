@@ -323,7 +323,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    gap: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #D9EDF7 ;
@@ -349,6 +349,26 @@
 }
 
 
+.reject-btn{
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid ;
+    background-color:#a2002e ;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgb(138, 138, 138);
+}
+
+.reject-btn:hover{
+    background-color:#550018;
+    transition: 0.3s;
+}
+
 
 .back-btn{
     padding-top: 5px;
@@ -362,7 +382,7 @@
     color: white;
     border-radius: 5px;
     box-shadow: 0 0 4px rgb(138, 138, 138);
-    margin-left: 80px;
+
     text-decoration: none;
 }
 

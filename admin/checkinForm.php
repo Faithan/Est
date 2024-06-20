@@ -49,7 +49,28 @@ if (isset($_POST['checkedin'])) {
     $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
     room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
-    $manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'reservation_fee' => '', 'photo' => ''];
+    $manage_data = [
+        'reserve_id' => '',
+        'fname' => '',
+        'mname' => '',
+        'lname' => '',
+        'address' => '',
+        'phone_number' => '',
+        'email' => '',
+        'date_of_arrival' => '',
+        'time_of_arrival' => '',
+        'room_number' => '',
+        'room_type' => '',
+        'bed_type' => '',
+        'bed_quantity' => '',
+        'number_of_person' => '',
+        'amenities' => '',
+        'rate_per_hour' => '',
+        'special_request' => '',
+        'reservation_fee' => '',
+        'reservation_type' => '',
+        'photo' => ''
+    ];
 
 
 
@@ -93,7 +114,7 @@ if (isset($_POST['checkedin'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-   
+
     <link rel="stylesheet" type="text/css" href="css/checkinForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Check In</title>
@@ -119,6 +140,56 @@ if (isset($_POST['checkedin'])) {
     <?php endif; ?>
 
 
+    <!-- for cancel -->
+    <script>
+        function confirmReject() {
+            Swal.fire({
+                title: 'Reject Confirmation',
+                text: 'Are you sure you want to reject this reservation?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, reject',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var rejection_reason = document.querySelector('textarea[name="rejection_reason"]').value;
+                    rejectItem(rejection_reason);
+                }
+            });
+        }
+
+        function rejectItem(rejection_reason) {
+            var reserve_id = document.querySelector('input[name="reserve_id"]').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'cancel.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (xhr.responseText === 'success') {
+                            Swal.fire({
+                                title: 'Rejected Successfully',
+                                text: 'Reservation rejected successfully.',
+                                icon: 'success'
+                            }).then(() => {
+                                window.location.href = 'roomReservation.php'; // Replace with your desired page after rejection
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Failed to reject this reservation.',
+                                icon: 'error'
+                            });
+                        }
+                    }
+                }
+            };
+            xhr.send('reserve_id=' + reserve_id + '&rejection_reason=' + rejection_reason);
+        }
+    </script>
+
+
+    <!-- for header -->
     <?php
     include 'header.php'
         ?>
@@ -127,7 +198,7 @@ if (isset($_POST['checkedin'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">RESERVATION</label>
+                <label for="">CONFIRMED</label>
             </div>
 
 
@@ -139,6 +210,9 @@ if (isset($_POST['checkedin'])) {
                     </div>
 
                     <div>
+                        <!-- hidden id -->
+                        <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
+
                         <div class="line">
                             <div>
                                 <label>First Name</label><br>
@@ -229,6 +303,13 @@ if (isset($_POST['checkedin'])) {
 
                         </div>
 
+                        <div class="line">
+                            <div>
+                                <label>Type of Reservation</label><br>
+                                <input type="text" class="notransform" name="reservation_type"
+                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                            </div>
+                        </div>
 
 
                         <div class="line">
@@ -283,18 +364,21 @@ if (isset($_POST['checkedin'])) {
 
                         </div>
 
+                    </div>
 
-
-
-
-                        <div class="invisible-id">
+                    <br>
+                    <div>
+                        <div class="line">
                             <div>
-                                <label>id</label><br>
-                                <input type="number" name="reserve_id"
-                                    value="<?php echo $manage_data['reserve_id']; ?>">
+                                <label style="color: red;">Reason for Cancellation <em id="goodfor">*If
+                                        cancelled*</em></label><br>
+                                <textarea name="rejection_reason" id=""></textarea>
                             </div>
                         </div>
                     </div>
+
+
+
 
                 </div>
 
@@ -310,7 +394,14 @@ if (isset($_POST['checkedin'])) {
                     <div class="button-holder">
                         <button class="check-btn" type="submit" name="checkedin"><i
                                 class="fa-solid fa-check-to-slot"></i> Checked In</button>
-                        <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
+
+                        <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
+                                class="fa-solid fa-trash"></i>
+                            Cancel</a>
+
+                        <a href="roomReservation.php" class="back-btn"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Back</a>
                         <div>
 
                         </div>

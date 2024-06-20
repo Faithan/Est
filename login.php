@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) == 1) {
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $adminemail;
-        header('Location:admin/reservation.php');
+        header('Location:admin/roomR    eservation.php');
         exit();
     } else {
         $error_message = "Invalid username or password;";

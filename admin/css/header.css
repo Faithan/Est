@@ -3,6 +3,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     box-sizing: none; /* Add box-sizing property to include padding and border in element's total width */
   }
+
   
 /* width */
 ::-webkit-scrollbar {
@@ -23,6 +24,7 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #002334;
 }
+
 
 
 .navbar {
@@ -89,16 +91,25 @@
     color: white;
 }
 
-
+.dropdown{
+  cursor: pointer;
+}
 
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #fff;
-    width: 11%;
     transition: 0.5s;
 }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  position: absolute;
+  z-index: 99;
+  font-size: 14px;
+}
+
 
 
 
@@ -122,13 +133,6 @@
     }
   }
 
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    z-index: 5;
-    margin-top: 9%;
-    font-size: 14px;
-}
 
 
 

@@ -9,10 +9,10 @@
             <li><a href="#">Dashboard</a></li>
 
             <li class="dropdown">
-                <a class="reservation">Online Reservations <i class="fa-solid fa-caret-down"></i></a>
+                <a class="reservation">Reservations <i class="fa-solid fa-caret-down"></i></a>
                 <div class="dropdown-content">
                     <a href="#">Cottages</a>
-                    <a href="reservation.php">Rooms</a>
+                    <a href="roomReservation.php">Rooms</a>
                 </div>
             </li>
             <li class="dropdown">

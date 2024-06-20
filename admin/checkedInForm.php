@@ -75,6 +75,7 @@ if (isset($_POST['extended'])) {
         'rate_per_hour' => '',
         'special_request' => '',
         'reservation_fee' => '',
+        'reservation_type' => '',
         'photo' => '',
         'extra_bed' => '',
         'extra_person' => '',
@@ -119,7 +120,7 @@ if (isset($_POST['extended'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-   
+
     <link rel="stylesheet" type="text/css" href="css/checkedInForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
     <title>Checked In</title>
@@ -152,7 +153,7 @@ if (isset($_POST['extended'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">RESERVATION</label>
+                <label for="">CHECKED IN</label>
             </div>
 
 
@@ -253,7 +254,13 @@ if (isset($_POST['extended'])) {
 
                         </div>
 
-
+                        <div class="line">
+                            <div>
+                                <label>Type of Reservation</label><br>
+                                <input type="text" class="notransform" name="reservation_type"
+                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                            </div>
+                        </div>
 
                         <div class="line">
                             <div>
@@ -328,14 +335,7 @@ if (isset($_POST['extended'])) {
 
                         </div>
 
-                        <div class="note">
-                            <p>
-                                <b>Tips:</b> If there is an error in the calculation, please refresh the page and try
-                                again. We apologize for any inconvenience caused and appreciate your patience.
 
-
-                            </p>
-                        </div>
 
                         <div class="invisible-id">
                             <div>
@@ -346,6 +346,14 @@ if (isset($_POST['extended'])) {
                         </div>
                     </div>
 
+                    <div class="note">
+                        <p>
+                            <b>Tips:</b> If there is an error in the calculation, please refresh the page and try
+                            again. We apologize for any inconvenience caused and appreciate your patience.
+
+
+                        </p>
+                    </div>
                 </div>
 
 
@@ -360,9 +368,12 @@ if (isset($_POST['extended'])) {
                     <div class="button-holder">
                         <button class="extend-btn" type="submit" name="extended"><i
                                 class="fa-solid fa-check-to-slot"></i> Extend</button>
+
                         <button class="check-btn" type="submit" name="checkOut"><i
                                 class="fa-solid fa-check-to-slot"></i> Check Out</button>
-                        <a href="reservation.php" class="back-btn"><i class="fa-solid fa-rotate-left"></i> Back</a>
+
+                        <a href="roomReservation.php" class="back-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Back</a>
                         <div>
 
                         </div>
