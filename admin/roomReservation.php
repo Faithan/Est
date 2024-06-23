@@ -89,16 +89,22 @@ include 'header.php'
 <div class="container">
     <div class="container2">
         <div class="header-label">
-            <label for="">RESERVATION FOR ROOMS</label>
+            <label for=""><i class="fa-solid fa-bed"></i> RESERVATION FOR ROOMS</label>
         </div>
 
         <div class="buttons-container">
-            <button onclick="showTablePendings()" id="pending-btn" class="pending-btn">Pendings</button>
-            <button onclick="showTableConfirmed()" id="confirmed-btn">Confirmed</button>
-            <button onclick="showTableCheckedIn()" id="checkedIn-btn">Checked In</button>
-            <button onclick="showTableExtended()" id="extended-btn">Extended Stay</button>
-            <button onclick="showTableCheckedOut()" id="checkedOut-btn">Checked Out</button>
-            <button onclick="showTableRejected()" id="rejected-btn" class="rejected-btn">Rejected</button>
+            <button onclick="showTablePendings()" id="pending-btn" class="pending-btn"><i
+                    class="fa-solid fa-hourglass-half"></i> Pendings</button>
+            <button onclick="showTableConfirmed()" id="confirmed-btn"><i class="fa-regular fa-calendar-check"></i>
+                Confirmed</button>
+            <button onclick="showTableCheckedIn()" id="checkedIn-btn"><i class="fa-solid fa-check-to-slot"></i> Checked
+                In</button>
+            <button onclick="showTableExtended()" id="extended-btn"><i class="fa-solid fa-hourglass-start"></i> Extended
+                Stay</button>
+            <button onclick="showTableCheckedOut()" id="checkedOut-btn"><i class="fa-solid fa-user-check"></i> Checked
+                Out</button>
+            <button onclick="showTableRejected()" id="rejected-btn" class="rejected-btn"><i
+                    class="fa-solid fa-user-xmark"></i> Rejected</button>
         </div>
 
 
@@ -128,7 +134,9 @@ include 'header.php'
             </div>
 
             <div class="add-reservation">
-                <button name="add-reservation" ><i class="fa-solid fa-plus"></i> ADD RESERVATION</button>
+                <label for=""><em>For Walk-in <i class="fa-solid fa-hand-point-left fa-flip-horizontal"></i>
+                    </em></label>
+                <button name="add-reservation"><i class="fa-solid fa-plus"></i> ADD RESERVATION</button>
             </div>
         </div>
 
@@ -227,13 +235,13 @@ include 'header.php'
                                 src="<?php echo $photo ?>"></td>
 
 
-                        <td class="td2">
-                            <a class="edit-btn" name="manage"
-                                href="confirmation.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
-                            <!-- <button class="delete-btn" type="submit" name="reject"><i
-                                    class="fa-solid fa-trash-arrow-up"></i><br>Reject</button> -->
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="confirmation.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
                     </tr>
 
                 <?php } ?>
@@ -337,12 +345,17 @@ include 'header.php'
 
                         <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                 src="<?php echo $photo ?>"></td>
-                        <td class="td2">
-                            <a class="edit-btn" name="manage" href="checkinForm.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
-                            <!-- <button class="delete-btn" type="submit" name="reject"><i
-                                    class="fa-solid fa-trash-arrow-up"></i><br>Reject</button> -->
+
+
+
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="checkinForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
+
                     </tr>
 
                 <?php } ?>
@@ -445,11 +458,15 @@ include 'header.php'
 
                         <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                 src="<?php echo $photo ?>"></td>
-                        <td class="td2">
-                            <a class="edit-btn" name="manage"
-                                href="checkedInForm.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
+
+
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="checkedInForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
                     </tr>
 
                 <?php } ?>
@@ -554,10 +571,16 @@ include 'header.php'
 
                         <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                 src="<?php echo $photo ?>"></td>
-                        <td class="td2">
-                            <a class="edit-btn" name="manage" href="extended.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
+
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="extended.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
+
+
                     </tr>
 
                 <?php } ?>
@@ -660,11 +683,16 @@ include 'header.php'
 
                         <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                 src="<?php echo $photo ?>"></td>
-                        <td class="td2">
-                            <a class="edit-btn" name="manage"
-                                href="checkoutForm.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
+
+
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="checkoutForm.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
+
                     </tr>
 
                 <?php } ?>
@@ -765,10 +793,15 @@ include 'header.php'
 
                         <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()"
                                 src="<?php echo $photo ?>"></td>
-                        <td class="td2">
-                            <a class="edit-btn" name="manage" href="rejected.php?manage_id=<?php echo $reserve_id; ?>"><i
-                                    class="fa-solid fa-arrow-up-right-from-square"></i><br>Open</a>
+
+                        <td>
+                            <div class="edit-btn">
+                                <a name="manage" href="rejected.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i>Open</a>
+                            </div>
                         </td>
+
+
                     </tr>
 
                 <?php } ?>

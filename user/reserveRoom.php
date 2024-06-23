@@ -31,7 +31,7 @@ if (isset($_GET['manage_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    
+
     <link rel="stylesheet" type="text/css" href="css/reserveRoom.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
     <title>Room Reservation</title>
@@ -49,29 +49,9 @@ if (isset($_GET['manage_id'])) {
 
 <body>
     <!-- for nav -->
-    <div class="navbar-container">
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">About</a></li>
-
-                <li class="dropdown">
-                    <a href="reserveRoom.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Cottages</a>
-                        <a href="reserveRoom.php">Rooms</a>
-                    </div>
-                </li>
-                <li><a href="#">My Reservation</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="#">Settings</a></li>
-
-            </ul>
-            <a class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </nav>
-    </div>
+    <?php
+    include 'header.php'
+        ?>
 
 
     <div class="real-container">
@@ -138,78 +118,11 @@ if (isset($_GET['manage_id'])) {
                                     $status = $row['status'];
                                     $photo = $row['photo'];
                                     ?>
-                                    <div class="items">
-                                        <img src="<?php echo $photo ?>" alt="" class="item-container">
 
+                                    <?php
+                                    include 'roomDetails.php'
+                                        ?>
 
-                                        <div class="container-of-labels">
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Number:</b>
-                                                    <?php echo $roomNumber ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Type:</b>
-                                                    <?php echo $roomType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Bed Type:</b>
-                                                    <?php echo $bedType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>No. of Beds:</b>
-                                                    <?php echo $bed_quantity ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Number of Persons:</b>
-                                                    <?php echo $noPersons ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Amenities:</b>
-                                                    <?php echo $amenities ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Price (Good for 22hrs):</b>
-                                                    <?php echo $price ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Status:</b>
-                                                    <?php echo $status ?>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="button-container">
-
-                                            <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now"><button
-                                                    class="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="lable">Book Now</span>
-                                                </button></a>
-                                        </div>
-                                    </div>
                                 <?php } ?>
 
                             </div>
@@ -278,79 +191,9 @@ if (isset($_GET['manage_id'])) {
                                     $status = $row['status'];
                                     $photo = $row['photo'];
                                     ?>
-                                    <div class="items">
-                                        <img src="<?php echo $photo ?>" alt="" class="item-container">
-
-                                        <div class="container-of-labels">
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Number:</b>
-                                                    <?php echo $roomNumber ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Type:</b>
-                                                    <?php echo $roomType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Bed Type:</b>
-                                                    <?php echo $bedType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>No. of Beds:</b>
-                                                    <?php echo $bed_quantity ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Number of Persons:</b>
-                                                    <?php echo $noPersons ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Amenities:</b>
-                                                    <?php echo $amenities ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                <b>Price (Good for 22hrs):</b>
-                                                    <?php echo $price ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Status:</b>
-                                                    <?php echo $status ?>
-                                                </label>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="button-container">
-
-                                            <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now"><button
-                                                    class="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="lable">Book Now</span>
-                                                </button></a>
-                                        </div>
-                                    </div>
+                                    <?php
+                                    include 'roomDetails.php'
+                                        ?>
                                 <?php } ?>
 
                             </div>
@@ -422,78 +265,9 @@ if (isset($_GET['manage_id'])) {
                                     $status = $row['status'];
                                     $photo = $row['photo'];
                                     ?>
-                                    <div class="items">
-                                        <img src="<?php echo $photo ?>" alt="" class="item-container">
-
-                                        <div class="container-of-labels">
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Number:</b>
-                                                    <?php echo $roomNumber ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Type:</b>
-                                                    <?php echo $roomType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Bed Type:</b>
-                                                    <?php echo $bedType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>No. of Beds:</b>
-                                                    <?php echo $bed_quantity ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Number of Persons:</b>
-                                                    <?php echo $noPersons ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Amenities:</b>
-                                                    <?php echo $amenities ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                <b>Price (Good for 22hrs):</b>
-                                                    <?php echo $price ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Status:</b>
-                                                    <?php echo $status ?>
-                                                </label>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="button-container">
-                                            <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now"><button
-                                                    class="button" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="lable">Book Now</span>
-                                                </button></a>
-                                        </div>
-                                    </div>
+                                    <?php
+                                    include 'roomDetails.php'
+                                        ?>
                                 <?php } ?>
 
                             </div>
@@ -508,6 +282,14 @@ if (isset($_GET['manage_id'])) {
                     </div>
 
                 </div> <!-- for content center -->
+
+
+
+
+
+
+
+
 
 
 
@@ -551,78 +333,11 @@ if (isset($_GET['manage_id'])) {
                                     $status = $row['status'];
                                     $photo = $row['photo'];
                                     ?>
-                                    <div class="items">
-                                        <img src="<?php echo $photo ?>" alt="" class="item-container">
 
-                                        <div class="container-of-labels">
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Number:</b>
-                                                    <?php echo $roomNumber ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Type:</b>
-                                                    <?php echo $roomType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Bed Type:</b>
-                                                    <?php echo $bedType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>No. of Beds:</b>
-                                                    <?php echo $bed_quantity ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Number of Persons:</b>
-                                                    <?php echo $noPersons ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Amenities:</b>
-                                                    <?php echo $amenities ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                <b>Price (Good for 22hrs):</b>
-                                                    <?php echo $price ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Status:</b>
-                                                    <?php echo $status ?>
-                                                </label>
-                                            </div>
-                                        </div>
+                                    <?php
+                                    include 'roomDetails.php'
+                                        ?>
 
-
-
-                                        <div class="button-container">
-                                            <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now"><button
-                                                    class="button" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="lable">Book Now</span>
-                                                </button></a>
-                                        </div>
-                                    </div>
                                 <?php } ?>
 
                             </div>
@@ -677,78 +392,11 @@ if (isset($_GET['manage_id'])) {
                                     $status = $row['status'];
                                     $photo = $row['photo'];
                                     ?>
-                                    <div class="items">
-                                        <img src="<?php echo $photo ?>" alt="" class="item-container">
 
-                                        <div class="container-of-labels">
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Number:</b>
-                                                    <?php echo $roomNumber ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Room Type:</b>
-                                                    <?php echo $roomType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Bed Type:</b>
-                                                    <?php echo $bedType ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>No. of Beds:</b>
-                                                    <?php echo $bed_quantity ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Number of Persons:</b>
-                                                    <?php echo $noPersons ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Amenities:</b>
-                                                    <?php echo $amenities ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                <b>Price (Good for 22hrs):</b>
-                                                    <?php echo $price ?>
-                                                </label>
-                                            </div>
-                                            <div class="label-container">
-                                                <label>
-                                                    <b>Status:</b>
-                                                    <?php echo $status ?>
-                                                </label>
-                                            </div>
-                                        </div>
+                                    <?php
+                                    include 'roomDetails.php'
+                                        ?>
 
-
-
-                                        <div class="button-container">
-                                            <a href="reserveForm.php?manage_id=<?php echo $id; ?>" name="book_now"><button
-                                                    class="button" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="lable">Book Now</span>
-                                                </button></a>
-                                        </div>
-                                    </div>
                                 <?php } ?>
 
                             </div>

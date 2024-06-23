@@ -104,7 +104,7 @@ if (isset($_POST['save'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-  
+
     <link rel="stylesheet" type="text/css" href="css/edit_room.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -227,7 +227,8 @@ if (isset($_POST['save'])) {
                         </div>
                     </div>
                     <div class="return-holder">
-                        <a class="return-btn" href="rooms.php"><i class="fa-solid fa-rotate-left"></i> Return</a>
+                        <a class="return-btn" href="rooms.php"><i
+                                class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i> Return</a>
                     </div>
                 </div>
 

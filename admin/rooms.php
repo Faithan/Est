@@ -31,7 +31,7 @@ if (isset($_GET['manage_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- important files -->
     <?php
     include 'assets.php'
@@ -41,7 +41,7 @@ if (isset($_GET['manage_id'])) {
     <script src="javascripts/logout.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-   
+
     <link rel="stylesheet" type="text/css" href="css/rooms.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -60,8 +60,39 @@ if (isset($_GET['manage_id'])) {
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">ROOMS</label>
+                <label for=""><i class="fa-solid fa-bed"></i> ROOMS</label>
             </div>
+
+            <div class="under-buttons-container">
+                <div class="select-type">
+                    <label for="">Type of Room:</label>
+                    <select name="" id="">
+                        <option value="all">All</option>
+                        <option value="walk-in">Walk-in</option>
+                        <option value="online">Online</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="group">
+                        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                            <g>
+                                <path
+                                    d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                                </path>
+                            </g>
+                        </svg>
+                        <input placeholder="Search" type="search" class="search-input">
+                    </div>
+                </div>
+
+                <div class="add-reservation">
+                    <button onclick="window.location.href = 'add_room.php'" name="add-reservation"><i
+                            class="fa-solid fa-plus"></i> ADD ROOM</button>
+                </div>
+            </div>
+
+
 
             <form method="post" action="" class="table-container">
                 <table>
@@ -103,11 +134,13 @@ if (isset($_GET['manage_id'])) {
                             <td><?php echo $status ?></td>
                             <td><img class="room-image" onclick="openFullScreen()" src="<?php echo $photo ?>"></td>
 
-                            <td class="td2">
-                                <a class="edit-btn" name="manage" href="edit_room.php?manage_id=<?php echo $id; ?>"><i
-                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                <!-- <button class="delete-btn" type="submit" name="delete"><i
-                                        class="fa-solid fa-trash"></i>Delete</button> -->
+                            <td class="edit-btn-holder">
+                                <div class="edit-btn">
+                                    <a name="manage" href="edit_room.php?manage_id=<?php echo $id; ?>"><i
+                                            class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                </div>
+
+
                             </td>
                         </tr>
 

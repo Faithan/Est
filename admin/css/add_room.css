@@ -61,6 +61,50 @@ border-radius: 2px;
     overflow-y: scroll;
 }
 
+
+.return-btn{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.return-btn a{
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid ;
+    background-color:#5a5a5a ;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgb(138, 138, 138);
+    text-decoration: none;
+}
+
+.return-btn a:hover{
+    background-color:#363636 ;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .line-b{
     grid-column-start: 5;
     grid-column-end: 7;

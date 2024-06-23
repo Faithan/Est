@@ -40,6 +40,124 @@
     color: rgb(26, 26, 26);
 }
 
+
+
+
+
+
+
+
+
+
+
+.under-buttons-container{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* reservation type section */
+.select-type label{
+    font-size: 13.5px;
+}   
+
+.select-type{
+    line-height: 20px;
+}
+.select-type select{
+    width: 150px;
+
+}  
+
+
+
+
+/* search bar section */
+.group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 250px;
+   }
+   
+   .search-input {
+    width: 100%;
+    line-height: 22px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #fff;
+    color: #0d0c22;
+    transition: .3s ease;
+   }
+   
+   .input::placeholder {
+    color: #9e9ea7;
+   }
+   
+   .search-input:focus, input:hover {
+    outline: none;
+    border-color: rgba(76, 89, 234, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(130, 135, 186, 0.1);
+   }
+   
+   .icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+   }
+   
+/* for walkin reservation button */
+
+.add-reservation button{
+    background-color: #003c80;
+    color: white;
+    border: 2px solid #003c80;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.add-reservation button:hover{
+    box-shadow: 0 0 4px rgb(146, 146, 146);
+    background-color: #003c80;
+    border: 2px solid #003c80;
+}
+
+
+.add-reservation label{
+    font-size: 13.5px;
+}
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .table-container{
     grid-column-start: 2;
     grid-column-end: 3;
@@ -52,6 +170,7 @@
 table{
     border-collapse: collapse;
     width: 100%;
+    font-size: 13.5px;
 }
 
 table th{
@@ -66,10 +185,10 @@ table th{
 
 table td{
     text-align: center  ;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #dadada;
     text-transform: capitalize;
-    background-color: #f8f8f8 ;
+    background-color: #ffffff ;
     
 }
 
@@ -80,47 +199,28 @@ table .room-image{
     width: auto;
 }
 
+
+
 .edit-btn{
-    background-color: #F0AD4E;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #F0AD4E;
-    text-decoration: none;
-    color: white;
-}
-
-
-.edit-btn:hover{
-    background-color: #d59946;
-}
-
-.delete-btn{
-    background-color: #D9534F;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #D9534F;
-    color: white;
-}
-
-
-.delete-btn:hover{
-    background-color: #c14a46;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
 }
 
 .edit-btn a{
+    border: 1px solid;
+    text-decoration: none;
     color: white;
     text-decoration: none;
     font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #FA7C0D;
+    font-size: 13.5px;
 }
 
-.delete-btn a{
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+.edit-btn a:hover{
+    background-color: #da6b0a;
+    transition: 0.3s;
 }

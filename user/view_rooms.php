@@ -28,25 +28,10 @@ session_start();
 </head>
 
 <body>
-    <div class="nav-container">
-        <nav class="navbar">
-            <img src="../system_images/Picture1.png" class="logo1">
-            <a class="logoLabel">Estregan Beach Resort</a>
-            <ul>
-                <li><a onclick="confirm('You have to log in first!')">Home</a></li>
-                <li><a href="view_about.php">About</a></li>
-                <li class="dropdown">
-                    <a href="view_rooms.php" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropdown-content">
-                        <a onclick="confirm('You have to log in first!')">Cottages</a>
-                        <a href="view_rooms.php">Rooms</a>
-                    </div>
-                <li><a href="view_contact.php">Contact</a></li>
-
-            </ul>
-            <a class="logout-btn" href="../login.php"><i class="fa-solid fa-right-to-bracket"></i>Sign in</a>
-        </nav>
-        <div>
+      <!-- for nav -->
+      <?php
+    include 'header.php'
+        ?>
 
             <div class="real-container">
 

@@ -214,6 +214,7 @@ body {
 .slide-wrapper1 .list-container .item-container {
     height: 200px;
     max-height: 200px;
+    width: 100%;
 }
 
 
@@ -332,7 +333,7 @@ body {
 .slide-wrapper2 .list-container .item-container {
     height: 200px;
     max-height: 200px;
-
+    width: 100%;
 }
 
 
@@ -453,7 +454,7 @@ body {
 .slide-wrapper3 .list-container .item-container {
     height: 200px;
     max-height: 200px;
-
+    width: 100%;
 }
 
 
@@ -515,6 +516,8 @@ body {
 
 
 
+
+
 /* for barkadahan room */
 .slide-wrapper4 {
     position: relative;
@@ -565,7 +568,7 @@ body {
 .slide-wrapper4 .list-container .item-container {
     height: 200px;
     max-height: 200px;
-
+    width: 100%;
 }
 
 
@@ -592,7 +595,7 @@ body {
     position: absolute;
     height: 100%;
     width: 50%;
-    background: #000;
+    background: #002334;
     border-radius: inherit;
     cursor: grab;
     opacity: 40%;
@@ -616,6 +619,14 @@ body {
 }
 
 /* end */
+
+
+
+
+
+
+
+
 
 
 
@@ -668,10 +679,11 @@ body {
     display: none;
 }
 
+
 .slide-wrapper5 .list-container .item-container {
     height: 200px;
     max-height: 200px;
-
+    width: 100%;
 }
 
 
@@ -704,7 +716,7 @@ body {
     opacity: 40%;
 }
 
-.slider-scrollbar5 .scrollbar-thumb4:active {
+.slider-scrollbar5 .scrollbar-thumb5:active {
     cursor: grabbing;
     height: 8px;
     top: -2px;
@@ -722,6 +734,14 @@ body {
 }
 
 /* end */
+
+
+
+
+
+
+
+
 
 
 
@@ -774,23 +794,48 @@ body {
 }
 
 
+.container-of-labels {
+    max-height: 120px;
+    overflow-y: scroll;
+}   
+
 
 .label-container {
     padding-top: 5px;
     padding-left: 20px;
     padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
 }
+
+.label-container .title-text{
+    color: #535353;
+}
+
+
+.label-container .detail{
+    display: flex;
+    justify-content: flex-end;
+    max-width: 90px;
+   
+}
+
+.label-container .detail p{
+    color: #535353;
+    text-justify: flex-end;
+    text-align: right;
+    padding: 0;
+
+}
+
 
 .label-container label {
     display: flex;
     justify-content: space-between;
-}
-
-.container-of-labels {
-    max-height: 120px;
-    overflow-y: scroll;
 
 }
+
 
 
 

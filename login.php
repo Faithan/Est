@@ -12,8 +12,6 @@ if (!$con) {
     die("connection failed;" . mysqli_connect_error());
 }
 
-
-
 // for user
 
 if (isset($_POST['login'])) {
@@ -52,7 +50,7 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) == 1) {
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $adminemail;
-        header('Location:admin/roomR    eservation.php');
+        header('Location:admin/roomReservation.php');
         exit();
     } else {
         $error_message = "Invalid username or password;";
@@ -78,7 +76,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" type="text/css" href="header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
     <script src="user/javascripts/inputColor.js" defer></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="sweetalert/sweetalert.js"></script>
 </head>
 
 <body>

@@ -83,9 +83,10 @@ if (isset($_POST['addroom'])) {
     ?>
 
   <script src="javascripts/logout.js" defer></script>
+  <script src="javascripts/add_room.js" defer></script>
 
   <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
- 
+
   <link rel="stylesheet" type="text/css" href="css/add_room.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
@@ -114,6 +115,10 @@ if (isset($_POST['addroom'])) {
         <div class="head-label">
           <label class="header_text">ADD ROOM</label><br>
         </div>
+
+
+
+
 
         <div class="line-a">
 
@@ -173,13 +178,42 @@ if (isset($_POST['addroom'])) {
             <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)" required>
               <option disabled selected value="">Choose an Option</option>
               <option value="Available">Available</option>
+              <option value="Occupied">Occupied</option>
               <option value="Coming soon">Coming Soon</option>
               <option value="Under Management">Under Management</option>
-              <option value="Unavailable">Unavailable</option>
+              <option value="Unavailable">Unavailable</option> 
             </select>
             <br>
+
+            <div class="return-btn">
+              <a href="rooms.php"><i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                Return</a>
+            </div>
+
           </div>
+
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="line-b">
           <div class="center-label">
@@ -222,7 +256,7 @@ if (isset($_POST['addroom'])) {
 
 
 
-  <script src="javascripts/add_room.js"></script>
+
 
 </body>
 
