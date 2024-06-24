@@ -51,6 +51,8 @@
     </main>
 
 
+    <div class="separator"></div>
+
 
     <!-- reservation page -->
     <section class="reservation-page">
@@ -91,6 +93,10 @@
 
 
 
+
+
 </body>
+
+
 
 </html>

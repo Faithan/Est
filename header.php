@@ -1,7 +1,7 @@
 <!-- javascripts -->
 <script src="landing_js/loginButton.js" defer></script>
 <script src="landing_js/autowidth.js" defer></script>
-
+<script src="landing_js/switchMode.js" defer></script>
 
 
 
@@ -9,7 +9,7 @@
 <header class="header-main">
 
     <div class="header-logo">
-        <img src="system_images/Picture1.png">
+        <img src="system_images/Picture1.png"  id="logoImg">
         <a class="logoLabel">Estregan Beach Resort</a>
     </div>
 
@@ -23,7 +23,7 @@
                     <a href="#">Rooms</a>
             </li>
             <li><a href="#">About</a></li>
-            
+
             <li><a href="#">Contact</a></li>
         </ul>
 
@@ -34,6 +34,13 @@
             </div>
         </div>
 
+        <div class="switch-mode">
+            <i class="fa-regular fa-moon" id="icon"></i>
+        </div>
+
     </nav>
 
 </header>
+
+<!-- <i class="fa-regular fa-sun"></i> -->
+
