@@ -32,22 +32,25 @@
 
     <!-- home page -->
     <main class="main-home">
-        <div class="home-content">
-            <div>
-                <h1>RESERVE FOR COTTAGES</h1>
-                <p>A place to Stay, A place to Enjoy, A place to Relax.
-                    We openly welcome you to stay a moment, for the sea is just beyond the door.
-                </p>
+        <div class="wrapper-main">
+            <div class="home-content">
+                <div>
+                    <h1>Welcome to Estregan Beach Resort</h1>
+                    <p>A place to Stay, A place to Enjoy, A place to Relax.
+                        We openly welcome you to stay a moment, for the sea is just beyond the door.
+                    </p>
 
-                <button class="learn-more">
-                    <span class="circle" aria-hidden="true">
-                        <span class="icon arrow"></span>
-                    </span>
-                    <span class="button-text">Learn More</span>
-                </button>
+                    <button class="learn-more">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">Learn More</span>
+                    </button>
 
+                </div>
             </div>
         </div>
+
     </main>
 
 
@@ -56,8 +59,23 @@
 
     <!-- reservation page -->
     <section class="reservation-page">
+        <div class="wrapper-main">
+            <div class="reservation-page-header">
+                <h1>Reservation</h1>
+            </div>
+            <div class="reservation-page-intro">
+                <p>Welcome to the Reservation Section of Estregan Beach Resort! Experience convenience at your
+                    fingertips as
+                    you explore our seamless online booking system. Discover the perfect blend of comfort and luxury
+                    with
+                    our range of rooms and cottages. Whether you seek a tranquil retreat or an adventure-filled getaway,
+                    our
+                    reservation platform ensures a hassle-free booking experience. Embrace the beauty of Estregan Beach
+                    Resort and secure your dream accommodation with just a few clicks. Start planning your unforgettable
+                    vacation today!</p>
+            </div>
+        </div>
 
-        <h1>RESERVATION</h1>
 
         <a href="#" class="category-box">
             <div class="dark-overlay"></div>
@@ -72,19 +90,24 @@
 
     <!-- about page -->
     <section class="about-page">
-        <div class="about-page-content">
-            <div class="header-text"><label for="">ABOUT ESTREGAN</label></div>
-            <hr>
-            <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
-                and conference facilities, in order to fulfill the best way in the relevant needs of every guest.
-                Provide our guests a unique experience, through which they connect with the best in our company,
-                and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
-                experience the vacation of your dreams at Estregan Beach Resort.</p>
-            <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
-            <h4>LOCATION ADDRESS</h4>
-            <h5>Address: Estregan beach resort, 9215 Pikalawag SND, Lanao Del Norte.<h5>
-                    <h5>Phone: 0977-804-3668<h5>
-                            <h5>Email: info@estreganbeachresort.com<h5>
+        <div class="wrapper-main about-page-flex">
+            <div class="about-page-content">
+                <div class="header-text">
+                    <label for="">About Estregan </label>
+                </div>
+                <hr>
+                <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
+                    and conference facilities, in order to fulfill the best way in the relevant needs of every guest.
+                    Provide our guests a unique experience, through which they connect with the best in our company,
+                    and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
+                    experience the vacation of your dreams at Estregan Beach Resort.</p>
+                <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
+                <h4>LOCATION ADDRESS</h4>
+                <h5>Address: Estregan beach resort, 9215 Pikalawag SND, Lanao Del Norte.<h5>
+                        <h5>Phone: 0977-804-3668<h5>
+                                <h5>Email: info@estreganbeachresort.com<h5>
+            </div>
+
         </div>
 
     </section>

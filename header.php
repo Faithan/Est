@@ -8,12 +8,12 @@
 <!-- header -->
 <header class="header-main">
 
-    <div class="header-logo">
-        <img src="system_images/Picture1.png"  id="logoImg">
-        <a class="logoLabel">Estregan Beach Resort</a>
-    </div>
-
     <nav class="header-nav">
+        <div class="header-logo">
+            <img src="system_images/Picture1.png" id="logoImg">
+            <a >Estregan Beach Resort</a>
+        </div>
+
         <ul>
             <li><a href="#">Home</a></li>
             <li class="dropdown">
@@ -27,6 +27,11 @@
             <li><a href="#">Contact</a></li>
         </ul>
 
+
+
+    </nav>
+
+    <div class="icons-container">
         <div class="header-btn">
             <div class="login-icon" onmouseover="changeIcon(this)" onmouseout="resetIcon(this)">
                 <i id="loginIcon" class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -37,10 +42,10 @@
         <div class="switch-mode">
             <i class="fa-regular fa-moon" id="icon"></i>
         </div>
+    </div>
 
-    </nav>
+
 
 </header>
 
 <!-- <i class="fa-regular fa-sun"></i> -->
-
