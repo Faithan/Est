@@ -4,24 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- important additional css -->
     <script src="sweetalert/sweetalert.js"></script>
 
     <link href="fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="fontawesome/css/brands.css" rel="stylesheet" />
     <link href="fontawesome/css/solid.css" rel="stylesheet" />
 
-    <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
-
+   
+    <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
-
+    <!-- important css -->
+   
     <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
-
-
+    <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/login.css?v=<?php echo time(); ?>">
-
+    <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
+    <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
-
+    <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>Sign In</title>
 </head>
 
@@ -54,26 +55,23 @@
     </main>
 
 
-    <div class="separator"></div>
 
 
     <!-- reservation page -->
     <section class="reservation-page">
         <div class="wrapper-main">
-            <div class="reservation-page-header">
-                <h1>Reservation</h1>
-            </div>
-            <div class="reservation-page-intro">
-                <p>Welcome to the Reservation Section of Estregan Beach Resort! Experience convenience at your
-                    fingertips as
-                    you explore our seamless online booking system. Discover the perfect blend of comfort and luxury
-                    with
-                    our range of rooms and cottages. Whether you seek a tranquil retreat or an adventure-filled getaway,
-                    our
-                    reservation platform ensures a hassle-free booking experience. Embrace the beauty of Estregan Beach
-                    Resort and secure your dream accommodation with just a few clicks. Start planning your unforgettable
-                    vacation today!</p>
-            </div>
+            <h1>Reservation</h1>
+
+            <p>Welcome to the Reservation Section of Estregan Beach Resort! Experience convenience at your
+                fingertips as
+                you explore our seamless online booking system. Discover the perfect blend of comfort and luxury
+                with
+                our range of rooms and cottages. Whether you seek a tranquil retreat or an adventure-filled getaway,
+                our
+                reservation platform ensures a hassle-free booking experience. Embrace the beauty of Estregan Beach
+                Resort and secure your dream accommodation with just a few clicks. Start planning your unforgettable
+                vacation today!</p>
+
         </div>
 
 
@@ -92,9 +90,9 @@
     <section class="about-page">
         <div class="wrapper-main about-page-flex">
             <div class="about-page-content">
-                <div class="header-text">
-                    <label for="">About Estregan </label>
-                </div>
+
+                <label for="">About Estregan </label>
+
                 <hr>
                 <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
                     and conference facilities, in order to fulfill the best way in the relevant needs of every guest.
@@ -102,10 +100,7 @@
                     and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
                     experience the vacation of your dreams at Estregan Beach Resort.</p>
                 <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
-                <h4>LOCATION ADDRESS</h4>
-                <h5>Address: Estregan beach resort, 9215 Pikalawag SND, Lanao Del Norte.<h5>
-                        <h5>Phone: 0977-804-3668<h5>
-                                <h5>Email: info@estreganbeachresort.com<h5>
+
             </div>
 
         </div>
@@ -114,6 +109,9 @@
 
 
 
+
+    <!-- footer -->
+   <?php include 'footer.php' ?>
 
 
 

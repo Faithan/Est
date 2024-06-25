@@ -1,0 +1,92 @@
+
+.main-footer {
+    width: 100%;
+    background-color: #242526;
+    box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
+    padding: 40px 0 100px;
+}
+
+.main-footer-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}   
+
+
+
+.footer-content-info p {
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #e4e4e4;
+    line-height: 30px;
+}
+
+
+.footer-content-info a {
+    font-size: 1.2rem;
+    color: #b4b4b4;
+    line-height: 20px;
+}
+
+.footer-content-info a:hover{
+    opacity: 80%;
+}
+
+.social-media-section {
+    color: #e4e4e4;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+}
+
+.social-media-section p {
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #e4e4e4;
+}
+
+.social-media-section .email-sub input {
+    color: #e4e4e4;
+    padding-left: 5px;
+    line-height: 30px;
+    border-radius: 5px;
+    border: #e4e4e4 solid 1px;
+    font-size: 1.3rem;
+}
+
+
+.social-media-section .email-sub button {
+    color: #e4e4e4;
+    background-color: #242526;
+    font-weight: bold;
+    padding: 0 10px;
+    line-height: 30px;
+    border-radius: 5px;
+    border: #e4e4e4 solid 1px;
+    font-size: 1.3rem;
+}
+
+.social-media-section .email-sub button:hover {
+    color: #242526;
+    background-color: white;
+    border: #e4e4e4 solid 1px;
+    transition: all ease-in-out 0.3s;
+}
+
+
+.social-media-section .icon-sm {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+}
+
+
+.social-media-section .icon-sm  a{
+ font-size: 1.5rem;
+}
+
+
+.social-media-section .icon-sm a:hover{
+    opacity: 80%;
+}

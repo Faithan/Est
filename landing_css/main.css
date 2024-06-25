@@ -1,0 +1,62 @@
+@font-face {
+    font-family: estregan;
+    src: url(../fonts/Playwrite_MX/PlaywriteMX-VariableFont_wght.ttf);
+}
+
+
+
+:root {
+    --first-color: white;
+    --first-color2: #e0e0e0;
+    --second-color: #EAE2B7;
+    --third-color: #FCBF49;
+    --fourth-color: #F77F00;
+    --fifth-color: #D62828;
+    --sixth-color: #003049;
+    --seventh-color: #18191A;
+    --seventh-color2: #e0e0e0;
+    --seventh-color3: #e0e0e0;
+
+
+    font-size: 10px;
+}
+
+
+.dark-mode {
+    --first-color2: #18191A;
+    --first-color: #242526;
+    --seventh-color: #e4e4e4;
+    --seventh-color2: #101010;
+    --seventh-color3: #545454;
+}
+
+.invert-color {
+    filter: invert(100%);
+}
+
+
+/* scroll bar settings */
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--first-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--first-color2);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--seventh-color);
+}
+
+
+

@@ -4,7 +4,6 @@
 <script src="landing_js/switchMode.js" defer></script>
 
 
-
 <!-- header -->
 <header class="header-main">
 
