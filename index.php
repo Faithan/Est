@@ -95,7 +95,7 @@
 
     <!-- about page -->
     <section class="about-page">
-        <div class="wrapper-main about-page-flex">
+      
             <div class="about-page-content">
 
                 <h1 for="">About Estregan </h1>
@@ -110,7 +110,7 @@
 
             </div>
 
-        </div>
+        
 
     </section>
 

@@ -8,6 +8,9 @@ body {
     margin: 0 auto;
 }
 
+
+
+
 /* home content */
 
 .main-home {
@@ -30,41 +33,48 @@ body {
 }
 
 
+.intro-content {
+    width: 80%;
+}
 
 
 
 
-.wave-text{
+
+.wave-text {
     position: relative;
     bottom: 5vh;
 }
-.wave-text h2{
+
+.wave-text h2 {
     position: absolute;
-    
+
     font-size: 4.5rem;
     transform: translate(0, -50%);
     font-weight: bold;
     line-height: 2;
 }
 
-.wave-text h2:nth-child(1){
+.wave-text h2:nth-child(1) {
     color: transparent;
     background-color: none;
     -webkit-text-stroke: 1px var(--water-border);
 }
-.wave-text h2:nth-child(2){
+
+.wave-text h2:nth-child(2) {
     color: var(--water-color);
     animation: animate 4s ease-in-out infinite;
 }
 
-@keyframes animate{
-    0%,100%{
-        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54%
-        60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100% );
+@keyframes animate {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
     }
-    50%{
-        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51%
-        62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100% );
+
+    50% {
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
     }
 }
 
@@ -81,21 +91,23 @@ body {
 }
 
 
-/* end */
-
-
-
-
-
-
-
-
 
 
 
 
 /* learn more button */
 /*Global btn styles*/
+
+
+/*Container styles*/
+.container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 
 .btn {
     position: relative;
@@ -116,25 +128,16 @@ body {
     text-transform: uppercase;
     text-indent: 50px;
     transition: 300ms;
-    font-weight:bold;
+    font-weight: bold;
     padding: 10px 40px 10px 0;
 
-  }
-  /*Container styles*/
-  .container {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  /*Main button styles*/
-  .btn {
-   
+}
 
-  }
-  
-  .btn::before {
+
+/*Main button styles*/
+.btn {}
+
+.btn::before {
     content: "";
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
@@ -145,9 +148,9 @@ body {
     border-radius: 20px;
     background-color: #282936;
     z-index: -1;
-  }
-  
-  .btn::after {
+}
+
+.btn::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -158,26 +161,27 @@ body {
     border-top: 2px solid #fff;
     border-right: 2px solid #fff;
     transition: 400ms;
-  }
-  
-  .btn:hover {
+}
+
+.btn:hover {
     text-indent: 15px;
     color: white;
     font-weight: 600;
     background-color: #F77F00;
-  }
-  .btn:active {
+}
+
+.btn:active {
     scale: 0.95;
-  }
-  
-  .btn:hover::before {
+}
+
+.btn:hover::before {
     width: 100%;
-  }
-  
-  .btn:hover::after {
+}
+
+.btn:hover::after {
     left: calc(100% - 25px);
-  }
-  
+}
+
 /* end */
 
 
@@ -307,14 +311,11 @@ body {
 .about-page {
     width: 100%;
     background-color: var(--first-color2);
-}
-
-.about-page-flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 150px 0;
-    
+    padding: 150px 60px;
+
 }
 
 
@@ -327,10 +328,16 @@ body {
 }
 
 
+
+
 .about-page-content hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 1px solid var(--seventh-color3);
+}
+
+.about-page-content p {
+    flex-wrap: nowrap;
 }
 
 
@@ -343,12 +350,417 @@ body {
 }
 
 .about-page-content .image-holder img {
-    width: 220px;
-    height: 220px;
+    width: 22rem;
+    height: 22rem;
 }
 
 /* end */
 
 
+/*
+ For small mobile devices:
+@media only screen and (max-width: 480px) {}
+
+For standard mobile devices:
+@media only screen and (min-width: 481px) and (max-width: 767px) {}
+
+For tablets:
+@media only screen and (min-width: 768px) and (max-width: 1023px) {}
+
+For small desktops and laptops:
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {}
+
+For larger desktops and laptops:
+@media only screen and (min-width: 1200px) {} */
 
 
+
+
+
+
+
+
+
+/* for small mobile devices */
+@media only screen and (max-width: 480px) {
+
+    .wrapper-main {
+        width: 100%;
+    }
+
+    /* home content */
+
+    .main-home {
+        background-size: 30vh, cover;
+        background-position: bottom 15% center, center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .home-content {
+        color: white;
+        display: flex;
+        padding-bottom: 5vh;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+
+
+
+
+    .wave-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        bottom: 3vh;
+    }
+
+    .wave-text h2 {
+        position: absolute;
+        font-size: 2rem;
+        transform: translate(0, -50%);
+        font-weight: bold;
+        line-height: 2;
+    }
+
+
+
+    .intro-content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10%;
+    }
+
+    .home-content p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+
+    }
+
+
+    /* learn more button */
+
+
+    /*Container styles*/
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+    .btn {
+        font-size: 1rem;
+        text-indent: 40px;
+    }
+
+
+    .btn::after {
+        width: 5px;
+        height: 5px;
+    }
+
+    /* end */
+
+
+    /* reservation page */
+
+    .reservation-page {
+        padding: 40px 40px;
+        column-gap: 50px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+
+    .reservation-page h1 {
+        font-size: 1.5rem;
+    }
+
+    .reservation-page p {
+        font-size: 1rem;
+    }
+
+    .reservation-page .category-box {
+        width: 100%;
+    }
+
+
+    .category-box h2 {
+        font-size: 1.3rem;
+    }
+
+
+    /* end */
+
+
+
+    /* about page */
+
+    .about-page {
+        padding: 50px 30px;
+    }
+    
+    
+
+
+
+    .about-page-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .about-page-content p {
+        font-size: 1rem;
+    }
+
+
+    .about-page-content .image-holder img {
+        width: 15rem;
+        height: 15rem;
+    }
+    
+
+    /* end */
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For standard mobile devices: */
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+    .wrapper-main {
+        width: 100%;
+    }
+
+    /* home content */
+
+    .main-home {
+        background-size: 40vh, cover;
+        background-position: bottom 15% center, center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .home-content {
+        color: white;
+        display: flex;
+        padding-bottom: 20vh;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+
+
+
+
+    .wave-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        bottom: 3vh;
+    }
+
+    .wave-text h2 {
+        position: absolute;
+        font-size: 2.5rem;
+        transform: translate(0, -50%);
+        font-weight: bold;
+        line-height: 2;
+    }
+
+
+
+    .intro-content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10%;
+    }
+
+    .home-content p {
+
+        font-size: 1.5rem;
+        line-height: 1.5;
+
+    }
+
+
+    /* learn more button */
+
+
+    /*Container styles*/
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 25px;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        text-indent: 40px;
+    }
+
+
+    .btn::after {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* end */
+
+
+    /* reservation page */
+
+    .reservation-page {
+        width: 100%;
+        background-color: var(--first-color2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 80px;
+        column-gap: 50px;
+        flex-wrap: wrap;
+        background-color: var(--first-color);
+        margin-top: 150px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+
+    .reservation-page h1 {
+        font-size: 2rem;
+    }
+
+    .reservation-page p {
+        font-size: 1.3rem;
+    }
+
+    .reservation-page .category-box {
+        width: 100%;
+    }
+
+
+    .category-box h2 {
+        font-size: 1.5rem;
+    }
+
+
+    /* end */
+
+
+
+    /* about page */
+
+    .about-page {
+        padding: 50px 30px;
+    }
+    
+    
+
+
+    .about-page-content h1 {
+        font-size: 2rem;
+    }
+
+    .about-page-content p {
+        font-size: 1.3rem;
+    }
+
+    /* end */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For tablets: */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .wrapper-main {
+        width: 100%;
+    }
+}
+
+
+/* For small desktops and laptops: */
+
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    .wrapper-main {
+        width: 100%;
+    }
+}
+
+
+
+/* For larger desktops and laptops: */
+@media only screen and (min-width: 1200px) {}

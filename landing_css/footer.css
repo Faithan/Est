@@ -50,7 +50,8 @@
     display: flex;
     flex-direction: column;
     align-items: left;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 15px;
 }
 
 .social-media-section p {
@@ -103,3 +104,196 @@
 .social-media-section .icon-sm a:hover {
     opacity: 80%;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*
+ For small mobile devices:
+@media only screen and (max-width: 480px) {}
+
+For standard mobile devices:
+@media only screen and (min-width: 481px) and (max-width: 767px) {}
+
+For tablets:
+@media only screen and (min-width: 768px) and (max-width: 1023px) {}
+
+For small desktops and laptops:
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {}
+
+For larger desktops and laptops:
+@media only screen and (min-width: 1200px) {} */
+
+
+/* for small mobile devices */
+@media only screen and (max-width: 480px) {
+
+
+    /* for alignment */
+    .wrapper-main {
+        width: 100%;
+       
+    }
+
+    .main-footer {
+        padding: 40px 30px 100px;
+    }
+
+    .main-footer-flex {
+        gap: 2rem;
+    }
+
+
+
+    .footer-content-info p {
+        font-size: 1rem;
+    }
+
+
+    .footer-content-info a {
+        font-size: .8rem;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .social-media-section {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-media-section p {
+        font-size: 1rem;
+    }
+
+    .social-media-section .email-sub input {
+        line-height: 2;
+        font-size: 1rem;
+    }
+
+
+    .social-media-section .email-sub button {
+      
+        line-height: 2;
+        font-size: 1rem;
+    }
+
+
+    .social-media-section .icon-sm a {
+        font-size: 1rem;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For standard mobile devices: */
+@media only screen and (min-width: 481px) and (max-width: 767px) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For tablets: */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .header-nav ul {
+        display: none;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For small desktops and laptops: */
+
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    .header-nav ul {
+        display: none;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For larger desktops and laptops:  */
+@media only screen and (min-width: 1200px) {}
+
+/* not recommended */
