@@ -62,7 +62,7 @@
     line-height: 60px;
     font-weight: bold;
     color: var(--seventh-color);
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 
 .header-nav ul li a:hover{
@@ -147,13 +147,13 @@
     cursor: pointer;
     position: relative;
     display: inline-block;
-    font-size: 2rem; /* Adjust the size of the icon */
+    font-size: 20px; /* Adjust the size of the icon */
     margin-right: 10px; /* Add some spacing between the icon and tooltip */
     color: var(--seventh-color);
   }
   
   .tooltip {
-    font-size: 1.2rem;
+    font-size: 12px;
     font-weight: bold;
     visibility: hidden;
     width: 100px;
@@ -196,7 +196,7 @@
   align-items: center;
   justify-content: center;
   margin-left: 20px;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .switch-mode i{

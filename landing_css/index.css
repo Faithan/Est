@@ -26,20 +26,60 @@ body {
     color: white;
     display: flex;
     padding-bottom: 10vh;
-    width: 600px;
+    width: 100vh;
 }
 
-.home-content h1 {
-    font-size: 3rem;
-    padding-bottom: 20px;
-    font-weight: bold;
-    font-family: estregan;
+
+
+
+
+
+.wave-text{
+    position: relative;
+    bottom: 5vh;
 }
+.wave-text h2{
+    position: absolute;
+    
+    font-size: 4.5rem;
+    transform: translate(0, -50%);
+    font-weight: bold;
+    line-height: 2;
+}
+
+.wave-text h2:nth-child(1){
+    color: transparent;
+    background-color: none;
+    -webkit-text-stroke: 1px var(--water-border);
+}
+.wave-text h2:nth-child(2){
+    color: var(--water-color);
+    animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate{
+    0%,100%{
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54%
+        60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100% );
+    }
+    50%{
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51%
+        62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100% );
+    }
+}
+
+
+
+
+
+
 
 .home-content p {
     font-size: 2rem;
-    line-height: 30px;
+    line-height: 1.5;
+    color: white;
 }
+
 
 /* end */
 
@@ -55,98 +95,89 @@ body {
 
 
 /* learn more button */
+/*Global btn styles*/
 
-button.learn-more {
+.btn {
     position: relative;
-    display: inline-block;
     cursor: pointer;
     outline: none;
-    border: 0;
     vertical-align: middle;
     text-decoration: none;
     background: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-family: inherit;
-    margin-top: 20px;
-}
-
-button.learn-more {
-    width: 12rem;
-    height: auto;
-}
-
-button.learn-more .circle {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: relative;
-    display: block;
-    margin: 0;
-    width: 3rem;
-    height: 3rem;
-    background: var(--fourth-color);
-    border-radius: 1.625rem;
-}
-
-button.learn-more .circle .icon {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background: white;
-}
-
-button.learn-more .circle .icon.arrow {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    left: 0.625rem;
-    width: 1.125rem;
-    height: 0.125rem;
-    background: none;
-}
-
-button.learn-more .circle .icon.arrow::before {
-    position: absolute;
-    content: "";
-    top: -0.29rem;
-    right: 0.0625rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-top: 0.125rem solid white;
-    ;
-    border-right: 0.125rem solid white;
-    ;
-    transform: rotate(45deg);
-}
-
-button.learn-more .button-text {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.75rem 0;
-    margin: 0 0 0 1.85rem;
-    color: white;
-    font-weight: 700;
-    line-height: 1.6;
+    font-size: 1.5rem;
+    border: none;
+    width: fit-content;
+    border-radius: 30px;
+    height: fit-content;
+    display: flex;
+    justify-content: left;
+    align-items: center;
     text-align: center;
     text-transform: uppercase;
-}
+    text-indent: 50px;
+    transition: 300ms;
+    font-weight:bold;
+    padding: 10px 40px 10px 0;
 
-button:hover .circle {
-    width: 100%;
-}
+  }
+  /*Container styles*/
+  .container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  /*Main button styles*/
+  .btn {
+   
 
-button:hover .circle .icon.arrow {
-    background: white;
-    transform: translate(1rem, 0);
-}
-
-button:hover .button-text {
+  }
+  
+  .btn::before {
+    content: "";
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    left: 0;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #282936;
+    z-index: -1;
+  }
+  
+  .btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 17px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transition: 400ms;
+  }
+  
+  .btn:hover {
+    text-indent: 15px;
     color: white;
-}
-
+    font-weight: 600;
+    background-color: #F77F00;
+  }
+  .btn:active {
+    scale: 0.95;
+  }
+  
+  .btn:hover::before {
+    width: 100%;
+  }
+  
+  .btn:hover::after {
+    left: calc(100% - 25px);
+  }
+  
 /* end */
 
 
@@ -185,7 +216,6 @@ button:hover .button-text {
 .reservation-page h1 {
     text-align: center;
     flex-basis: 100%;
-    font-size: 2.5rem;
     font-weight: bold;
     color: var(--seventh-color);
     margin-bottom: 20px;
@@ -194,9 +224,7 @@ button:hover .button-text {
 
 
 .reservation-page p {
-    line-height: 30px;
     text-align: justify;
-    font-size: 1.5rem;
     color: var(--seventh-color);
     margin-bottom: 30px;
 }
@@ -206,8 +234,8 @@ button:hover .button-text {
 
 
 .reservation-page .category-box {
-    height: 200px;
-    width: 300px;
+    height: 20rem;
+    width: 30rem;
     color: white;
 
     background-repeat: no-repeat;
@@ -247,12 +275,10 @@ button:hover .button-text {
 
 .category-box h2 {
     font-weight: bold;
-    font-size: 2rem;
     text-align: center;
     text-shadow: 1px 4px 1px #000;
     z-index: 100;
     font-family: estregan;
-
 }
 
 
@@ -300,13 +326,6 @@ button:hover .button-text {
     flex-direction: column;
 }
 
-.about-page-content label {
-    font-weight: bold;
-    font-size: 2.5rem;
-    color: var(--seventh-color);
-    font-family: estregan;
-
-}
 
 .about-page-content hr {
     margin-top: 20px;
@@ -314,12 +333,6 @@ button:hover .button-text {
     border: 1px solid var(--seventh-color3);
 }
 
-.about-page-content p {
-    color: var(--seventh-color);
-    font-size: 1.5rem;
-    line-height: 30px;
-    text-align: justify;
-}
 
 .about-page-content .image-holder {
     padding-top: 20px;

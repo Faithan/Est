@@ -17,8 +17,12 @@
     --seventh-color2: #e0e0e0;
     --seventh-color3: #e0e0e0;
 
+    --water-border:#EAE2B7;
+    --water-color:#0d2cc5;
+    font-size: 62.5%;    /* 10px on default */
+  
 
-    font-size: 10px;
+
 }
 
 
@@ -28,6 +32,10 @@
     --seventh-color: #e4e4e4;
     --seventh-color2: #101010;
     --seventh-color3: #545454;
+
+
+    --water-border: #dddcdb;
+    --water-color:#030c38;
 }
 
 .invert-color {
@@ -57,6 +65,28 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--seventh-color);
 }
+
+
+p{
+    color: var(--seventh-color);
+    font-size: 1.5rem;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+h1{
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: bold;
+    color: var(--seventh-color);
+    font-family: estregan;
+}
+
+h2{
+    font-size: 2rem;
+    line-height: 1.5;
+}
+
 
 
 

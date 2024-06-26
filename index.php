@@ -11,11 +11,14 @@
     <link href="fontawesome/css/brands.css" rel="stylesheet" />
     <link href="fontawesome/css/solid.css" rel="stylesheet" />
 
-   
+
     <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
+    
+    <!-- javascript -->
+    <script src="landing_js/wavingtext.js" defer></script>
+    
     <!-- important css -->
-   
     <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/login.css?v=<?php echo time(); ?>">
@@ -23,7 +26,7 @@
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
-    <title>Sign In</title>
+    <title>Estregan Beach Resort</title>
 </head>
 
 <body>
@@ -36,17 +39,21 @@
         <div class="wrapper-main">
             <div class="home-content">
                 <div>
-                    <h1>Welcome to Estregan Beach Resort</h1>
+                    <div class="wave-text">
+                        <h2>Welcome to Estregan Beach Resort</h2>
+                        <h2>Welcome to Estregan Beach Resort</h2>
+                    </div>
+                    
+                    <div class="intro-content">
                     <p>A place to Stay, A place to Enjoy, A place to Relax.
                         We openly welcome you to stay a moment, for the sea is just beyond the door.
                     </p>
+                    </div>
 
-                    <button class="learn-more">
-                        <span class="circle" aria-hidden="true">
-                            <span class="icon arrow"></span>
-                        </span>
-                        <span class="button-text">Learn More</span>
-                    </button>
+                    <div class="container">
+                        <button class="btn">LEARN MORE</button>
+                    
+                    </div>
 
                 </div>
             </div>
@@ -91,7 +98,7 @@
         <div class="wrapper-main about-page-flex">
             <div class="about-page-content">
 
-                <label for="">About Estregan </label>
+                <h1 for="">About Estregan </h1>
 
                 <hr>
                 <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
@@ -111,7 +118,7 @@
 
 
     <!-- footer -->
-   <?php include 'footer.php' ?>
+    <?php include 'footer.php' ?>
 
 
 
