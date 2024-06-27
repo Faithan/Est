@@ -2,11 +2,7 @@ body {
     background-color: var(--first-color2);
 }
 
-/* for alignment */
-.wrapper-main {
-    width: 1200px;
-    margin: 0 auto;
-}
+
 
 
 
@@ -208,12 +204,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 80px;
+    padding: 60px 80px;
     column-gap: 50px;
     flex-wrap: wrap;
     background-color: var(--first-color);
     margin-top: 150px;
 }
+
 
 
 
@@ -326,7 +323,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 
 
 

@@ -16,6 +16,7 @@ body {
     grid-template-columns: .2fr 1fr .2fr 1fr .2fr;
     grid-template-rows: .1fr 1fr .1fr;
     height: 93.5vh;
+    
     background: linear-gradient(180deg, #fcc89b 30%, #942900 70%, #001535 100%);
 }
 

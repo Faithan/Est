@@ -36,14 +36,3 @@
     white-space: revert;
   }
 
-*{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-button{
-    cursor: pointer;
-}
-
-a{
-    cursor: pointer;
-}

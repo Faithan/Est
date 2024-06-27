@@ -14,14 +14,14 @@
 
     <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
-    
+
     <!-- javascript -->
     <script src="landing_js/wavingtext.js" defer></script>
-    
+    <script src="landing_js/mobileMenu.js" defer></script>
+
     <!-- important css -->
     <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="landing_css/login.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
@@ -43,16 +43,16 @@
                         <h2>Welcome to Estregan Beach Resort</h2>
                         <h2>Welcome to Estregan Beach Resort</h2>
                     </div>
-                    
+
                     <div class="intro-content">
-                    <p>A place to Stay, A place to Enjoy, A place to Relax.
-                        We openly welcome you to stay a moment, for the sea is just beyond the door.
-                    </p>
+                        <p>A place to Stay, A place to Enjoy, A place to Relax.
+                            We openly welcome you to stay a moment, for the sea is just beyond the door.
+                        </p>
                     </div>
 
                     <div class="container">
                         <button class="btn">LEARN MORE</button>
-                    
+
                     </div>
 
                 </div>
@@ -95,9 +95,9 @@
 
     <!-- about page -->
     <section class="about-page">
-      
-            <div class="about-page-content">
 
+        <div class="about-page-content">
+            <div class="wrapper-main">
                 <h1 for="">About Estregan </h1>
 
                 <hr>
@@ -107,10 +107,11 @@
                     and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
                     experience the vacation of your dreams at Estregan Beach Resort.</p>
                 <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
-
             </div>
 
-        
+        </div>
+
+
 
     </section>
 
