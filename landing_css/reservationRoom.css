@@ -1,0 +1,1119 @@
+body {
+    background-color: var(--first-color2);
+    
+}
+
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--seventh-color4);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    opacity: 80%;
+}
+
+
+.main-home{
+    display: none;
+}
+
+
+
+
+
+/*Container styles*/
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.btn {
+    font-size: 1rem;
+    text-indent: 40px;
+}
+
+
+.btn::after {
+    width: 5px;
+    height: 5px;
+}
+
+/* end */
+
+
+
+/* catergory container */
+.category-main-container {
+    width: 100%;
+    margin-top: 20px;
+    background-color: var(--first-color2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px 0;
+
+}
+
+.category-main-container h2 {
+    color: var(--seventh-color);
+    font-family: estregan;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.category-bar-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.category-bar-container select {
+    color: var(--seventh-color);
+    padding: 1rem;
+    background-color: var(--first-color);
+}
+
+
+
+
+
+
+
+
+/* select category */
+
+/*the container must be positioned relative:*/
+.custom-select {
+    position: relative;
+    width: 15rem;
+}
+
+.custom-select select {
+    display: none;
+    color: var(--seventh-color);
+    padding: 1rem;
+    background-color: var(--first-color);
+    font-size: 1rem;
+    font-weight: bold;
+    /*hide original SELECT element:*/
+}
+
+.select-selected {
+    background-color: var(--select-color);
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,
+.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    background-color: var(--select-color2);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* end */
+
+
+
+
+
+
+
+/* search bar section */
+.group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 250px;
+}
+
+.search-input {
+    width: 100%;
+    line-height: 22px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #fff;
+    color: #0d0c22;
+    transition: .3s ease;
+}
+
+.input::placeholder {
+    color: #9e9ea7;
+}
+
+.search-input:focus,
+input:hover {
+    outline: none;
+    border-color: rgba(76, 89, 234, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(130, 135, 186, 0.1);
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+.rooms-main-container {
+    width: 100%;
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rooms-main-container .content-sub-header {
+    display: flex;
+    padding: 10px 0;
+}
+
+.rooms-main-container .content-sub-header label {
+    font-weight: bold;
+    font-family: estregan;
+    font-size: 1.2rem;
+    color: var(--seventh-color);
+    margin-top: 40px;
+
+}
+
+.rooms-main-container .content-center {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--first-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+/* rooms box */
+.items {
+    padding-bottom: 10px;
+    background-color: var(--first-color);
+
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 4px var(--box-shadow);
+}
+
+.items img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.items button {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #FA7C0D;
+    font-size: 1.5rem;
+}
+
+.items button:hover {
+    color: white;
+    background-color: #bd600e;
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+.items label {
+    text-transform: capitalize;
+}
+
+
+.container-of-labels {
+    max-height: 120px;
+    overflow-y: scroll;
+}
+
+
+.label-container {
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.label-container .title-text {
+    color: var(--seventh-color);
+}
+
+
+.label-container .detail {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 90px;
+
+}
+
+.label-container .detail p {
+    color: var(--seventh-color);
+    text-justify: flex-end;
+    text-align: right;
+    padding: 0;
+    font-size: 1rem;
+
+}
+
+
+.label-container label {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ For small mobile devices:
+@media only screen and (max-width: 480px) {}
+
+For standard mobile devices:
+@media only screen and (min-width: 481px) and (max-width: 767px) {}
+
+For tablets:
+@media only screen and (min-width: 768px) and (max-width: 1023px) {}
+
+For small desktops and laptops:
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {}
+
+For larger desktops and laptops:
+@media only screen and (min-width: 1200px) {} */
+
+
+
+
+
+
+
+
+
+/* for small mobile devices */
+@media only screen and (max-width: 480px) {
+
+    .wrapper-main {
+        width: 100%;
+    }
+
+    #scrollToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 10px;
+        z-index: 99;
+        border: none;
+        outline: none;
+        background-color: var(--seventh-color4);
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 50%;
+        opacity: 80%;
+    }
+
+
+
+
+    /* home content */
+
+    
+    .main-home {
+        width: 100%;
+        background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 15vh;
+        background-size: 15vh, cover;
+        background-position: right, center;
+
+    }
+
+    .home-content {
+        color: white;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 10vh;
+    
+
+    }
+
+
+
+
+
+    .wave-text {
+        width: 35vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        top: 8vh;
+        text-transform: uppercase;
+    }
+
+    .wave-text h2 {
+        position: absolute;
+        font-size: 1.5rem;
+        transform: translate(0, -50%);
+        font-weight: bold;
+        line-height: 2;
+    }
+
+
+    .wave-text h2:nth-child(1) {
+        color: transparent;
+        background-color: none;
+        -webkit-text-stroke: 1px var(--water-border);
+    }
+
+    .wave-text h2:nth-child(2) {
+        color: var(--water-color);
+        animation: animate 4s ease-in-out infinite;
+    }
+
+    @keyframes animate {
+
+        0%,
+        100% {
+            clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+        }
+
+        50% {
+            clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+        }
+    }
+
+
+    
+
+    /* learn more button */
+
+
+    /*Container styles*/
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+    .btn {
+        font-size: 1rem;
+        text-indent: 40px;
+    }
+
+
+    .btn::after {
+        width: 5px;
+        height: 5px;
+    }
+
+    /* end */
+
+
+
+    /* catergory container */
+    .category-main-container {
+        width: 100%;
+        margin-top: 20px;
+        background-color: var(--first-color2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 10px 0;
+
+    }
+
+    .category-main-container h2 {
+        color: var(--seventh-color);
+        font-family: estregan;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .category-bar-container {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .category-bar-container select {
+        color: var(--seventh-color);
+        padding: 1rem;
+        background-color: var(--first-color);
+    }
+
+
+
+
+
+
+
+
+    /* select category */
+
+    /*the container must be positioned relative:*/
+    .custom-select {
+        position: relative;
+        width: 15rem;
+    }
+
+    .custom-select select {
+        display: none;
+        color: var(--seventh-color);
+        padding: 1rem;
+        background-color: var(--first-color);
+        font-size: 1rem;
+        font-weight: bold;
+        /*hide original SELECT element:*/
+    }
+
+    .select-selected {
+        background-color: var(--select-color);
+    }
+
+    /*style the arrow inside the select element:*/
+    .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: #fff transparent transparent transparent;
+    }
+
+    /*point the arrow upwards when the select box is open (active):*/
+    .select-selected.select-arrow-active:after {
+        border-color: transparent transparent #fff transparent;
+        top: 7px;
+    }
+
+    /*style the items (options), including the selected item:*/
+    .select-items div,
+    .select-selected {
+        color: #ffffff;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /*style items (options):*/
+    .select-items {
+        position: absolute;
+        background-color: var(--select-color2);
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+    }
+
+    /*hide the items when the select box is closed:*/
+    .select-hide {
+        display: none;
+    }
+
+    .select-items div:hover,
+    .same-as-selected {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+
+
+    /* end */
+
+
+
+
+
+
+
+    /* search bar section */
+    .group {
+        display: flex;
+        align-items: center;
+        position: relative;
+        max-width: 250px;
+    }
+
+    .search-input {
+        width: 100%;
+        line-height: 22px;
+        padding: 0 1rem;
+        padding-left: 2.5rem;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        outline: none;
+        background-color: #fff;
+        color: #0d0c22;
+        transition: .3s ease;
+    }
+
+    .input::placeholder {
+        color: #9e9ea7;
+    }
+
+    .search-input:focus,
+    input:hover {
+        outline: none;
+        border-color: rgba(76, 89, 234, 0.4);
+        background-color: #fff;
+        box-shadow: 0 0 0 4px rgba(130, 135, 186, 0.1);
+    }
+
+    .icon {
+        position: absolute;
+        left: 1rem;
+        fill: #9e9ea7;
+        width: 1rem;
+        height: 1rem;
+    }
+
+
+
+
+
+
+
+
+
+
+    .rooms-main-container {
+        width: 100%;
+        padding: 10px 20px 20px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rooms-main-container .content-sub-header {
+        display: flex;
+        padding: 10px 0;
+    }
+
+    .rooms-main-container .content-sub-header label {
+        font-weight: bold;
+        font-family: estregan;
+        font-size: 1.2rem;
+        color: var(--seventh-color);
+        margin-top: 40px;
+
+    }
+
+    .rooms-main-container .content-center {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: var(--first-color);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+
+
+
+
+
+
+    /* rooms box */
+    .items {
+        padding-bottom: 10px;
+        background-color: var(--first-color);
+
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 0 4px var(--box-shadow);
+    }
+
+    .items img {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .items button {
+        margin-top: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 5px;
+        color: white;
+        background-color: #FA7C0D;
+        font-size: 1.5rem;
+    }
+
+    .items button:hover {
+        color: white;
+        background-color: #bd600e;
+        transition: 0.3s;
+        transform-style: inherit;
+    }
+
+    .items label {
+        text-transform: capitalize;
+    }
+
+
+    .container-of-labels {
+        max-height: 120px;
+        overflow-y: scroll;
+    }
+
+
+    .label-container {
+        padding-top: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+    }
+
+    .label-container .title-text {
+        color: var(--seventh-color);
+    }
+
+
+    .label-container .detail {
+        display: flex;
+        justify-content: flex-end;
+        max-width: 90px;
+
+    }
+
+    .label-container .detail p {
+        color: var(--seventh-color);
+        text-justify: flex-end;
+        text-align: right;
+        padding: 0;
+        font-size: 1rem;
+
+    }
+
+
+    .label-container label {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+
+
+
+    /* end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* for button  must not touch*/
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 9px 12px;
+        gap: 8px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .lable {
+        line-height: 22px;
+        font-size: 12px;
+        color: #fff;
+        font-family: sans-serif;
+        letter-spacing: 1px;
+    }
+
+
+    .button:hover .svg-icon {
+        animation: slope 1s linear infinite;
+    }
+
+    @keyframes slope {
+        0% {}
+
+        50% {
+            transform: rotate(10deg);
+        }
+
+        100% {}
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .button-container a {
+        text-decoration: none;
+    }
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For standard mobile devices: */
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+    .wrapper-main {
+        width: 100%;
+    }
+
+    /* home content */
+
+    .main-home {
+        background-size: 40vh, cover;
+        background-position: bottom 15% center, center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .home-content {
+        color: white;
+        display: flex;
+        padding-bottom: 20vh;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+
+
+
+
+    .wave-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        bottom: 3vh;
+    }
+
+    .wave-text h2 {
+        position: absolute;
+        font-size: 2.5rem;
+        transform: translate(0, -50%);
+        font-weight: bold;
+        line-height: 2;
+    }
+
+
+
+    .intro-content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10%;
+    }
+
+    .home-content p {
+
+        font-size: 1.5rem;
+        line-height: 1.5;
+
+    }
+
+
+    /* learn more button */
+
+
+    /*Container styles*/
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 25px;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        text-indent: 40px;
+    }
+
+
+    .btn::after {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* end */
+
+
+    /* reservation page */
+
+    .reservation-page {
+        width: 100%;
+        background-color: var(--first-color2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 80px;
+        column-gap: 50px;
+        flex-wrap: wrap;
+        background-color: var(--first-color);
+        margin-top: 150px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+
+    .reservation-page h1 {
+        font-size: 2rem;
+    }
+
+    .reservation-page p {
+        font-size: 1.3rem;
+    }
+
+    .reservation-page .category-box {
+        width: 100%;
+    }
+
+
+    .category-box h2 {
+        font-size: 1.5rem;
+    }
+
+
+    /* end */
+
+
+
+    /* about page */
+
+    .about-page {
+        padding: 50px 30px;
+    }
+
+
+
+
+    .about-page-content h1 {
+        font-size: 2rem;
+    }
+
+    .about-page-content p {
+        font-size: 1.3rem;
+    }
+
+    /* end */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For tablets: */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .wrapper-main {
+        width: 100%;
+    }
+}
+
+
+/* For small desktops and laptops: */
+
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    .wrapper-main {
+        width: 100%;
+    }
+}
+
+
+
+/* For larger desktops and laptops: */
+@media only screen and (min-width: 1200px) {}

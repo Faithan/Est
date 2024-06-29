@@ -46,11 +46,13 @@
 
 .header-nav ul {
   list-style: none;
+  gap: 10px;
 }
 
 .header-nav ul li {
   display: inline;
   float: left;
+
 }
 
 .header-nav ul li a {
@@ -61,6 +63,14 @@
   font-weight: bold;
   color: var(--seventh-color);
   font-size: 15px;
+  
+}
+.header-nav ul li a i{
+  padding-right: 10px;
+}
+
+#down-arrow{
+  padding-left: 10px;
 }
 
 .header-nav ul li a:hover {

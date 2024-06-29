@@ -24,15 +24,16 @@
     <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
     <!-- current page css -->
-    <link rel="stylesheet" href="landing_css/login.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="landing_css/signup.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
-    <title>Login</title>
+    <title>Sign up</title>
 </head>
 
 <body>
 
     <!-- for header -->
     <?php include 'header.php' ?>
+
 
     <div class="alignment-container">
 
@@ -50,8 +51,15 @@
             </div>
 
             <div>
-                <h2>Log in to your account✨</h2>
-                <p>Welcome to Estregan Beach Resort! 🌊</p>
+                <h2>Create an account✨</h2>
+                <p>Welcome! Please enter your details.</p>
+            </div>
+
+            <label for="">Name</label>
+
+            <div class="input-container">
+                <span class="input-icon3">&#128100;</span>
+                <input type="text" placeholder="Enter your name">
             </div>
 
             <label for="">Email</label>
@@ -74,18 +82,17 @@
             }
             ?>
 
-           <button name="login" class="btn-grad">Log in</button>
+           <button name="login" class="btn-grad">Sign up</button>
 
            <div class="signup-btn">
-            <p>Don't have an account?</p>
-            <a href="signup.php">Sign up</a>
+            <p>Already have an account?</p>
+            <a href="newlogin.php">Log in</a>
            </div>
 
         </form>
     </main>
 
     </div>
-
 
     <!-- footer -->
     <?php

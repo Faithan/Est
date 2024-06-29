@@ -6,8 +6,6 @@
     background-color: var(--first-color);
 }
 
-
-
 .main-login {
     width: 360px;
     background: linear-gradient(180deg, #fcc89b 30%, #942900 70%, #001535 100%);
@@ -103,6 +101,15 @@
 }
 
 .input-icon2 {
+    color: var(--seventh-color);
+    font-size: 20px;
+    position: absolute;
+    left: 5px;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.input-icon3 {
     color: var(--seventh-color);
     font-size: 20px;
     position: absolute;
@@ -291,6 +298,7 @@ For larger desktops and laptops:
         top: 45%;
         transform: translateY(-50%);
     }
+
     .input-icon3 {
         color: var(--seventh-color);
         font-size: 20px;
@@ -334,7 +342,7 @@ For larger desktops and laptops:
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin-top: 25vh;
+        margin-top: 15vh;
         font-size: 1.3rem;
         gap: 5px;
         padding-bottom: 5vh;

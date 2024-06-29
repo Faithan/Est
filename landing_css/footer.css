@@ -1,4 +1,6 @@
 .main-footer {
+    position: relative;
+    z-index: 500;
     width: 100%;
     background-color: #242526;
     box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
@@ -139,11 +141,10 @@ For larger desktops and laptops:
     /* for alignment */
     .wrapper-main {
         width: 100%;
-       
     }
 
     .main-footer {
-        padding: 40px 30px 100px;
+        padding: 40px 30px 300px;
     }
 
     .main-footer-flex {
@@ -198,6 +199,8 @@ For larger desktops and laptops:
     .social-media-section .icon-sm a {
         font-size: 1rem;
     }
+
+
 
 
 

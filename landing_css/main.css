@@ -3,10 +3,18 @@
     src: url(../fonts/Playwrite_MX/PlaywriteMX-VariableFont_wght.ttf);
 }
 
+
+
+
 *{
     margin: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+body{
+    background-color: var(--first-color2);
+}
+
 
 button{
     cursor: pointer;
@@ -29,6 +37,14 @@ a{
     --seventh-color3: #e0e0e0;
     --seventh-color4: #757575;
 
+
+
+    --select-color: #757575;
+    --select-color2: #8a8a8a;
+
+
+    --box-shadow:#b4b4b4;
+
     --water-border:#EAE2B7;
     --water-color:#0d2cc5;
     font-size: 62.5%;    /* 10px on default */
@@ -45,7 +61,11 @@ a{
     --seventh-color2: #101010;
     --seventh-color3: #545454;
 
+    --select-color: #242526;
+    --select-color2: #353738;
 
+    --box-shadow:#4d4d4d;
+    
     --water-border: #dddcdb;
     --water-color:#030c38;
 }

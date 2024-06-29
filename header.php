@@ -22,19 +22,19 @@
         </div>
 
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
 
             <li class="dropdown">
-                <a href="#" class="reservation">Reservation <i class="fa-solid fa-caret-down"></i></a>
+                <a class="reservation"><i class="fa-solid fa-calendar"></i>Reservation <i class="fa-solid fa-caret-down" id="down-arrow"></i></a>
                 <div class="dropdown-content">
-                    <a href="#">Cottages</a>
-                    <a href="#">Rooms</a>
+                    <a href="#"><i class="fa-solid fa-umbrella-beach"></i>Cottages</a>
+                    <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i>Rooms</a>
                 </div>
             </li>
 
-            <li><a href="#">About</a></li>
+            <li><a href="#"><i class="fa-solid fa-address-card"></i>About</a></li>
 
-            <li><a href="#">Contact</a></li>
+            <li><a href="#"><i class="fa-solid fa-phone"></i>Contact</a></li>
         </ul>
 
 
@@ -49,7 +49,7 @@
 
         <div class="header-btn">
             <div class="login-icon" onmouseover="changeIcon(this)" onmouseout="resetIcon(this)">
-                <i id="loginIcon" class="fa-solid fa-arrow-right-to-bracket"></i>
+                <i id="loginIcon" class="fa-solid fa-arrow-right-to-bracket" onclick="window.location.href = 'newlogin.php';"></i>
                 <span class="tooltip">Login</span>
             </div>
         </div>
@@ -73,11 +73,11 @@
 <!-- burger menu -->
 <nav class="burger-menu" id="mySidenav">
     
-        <a href="#"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#" id="submenu1"><i class="fa-solid fa-calendar"></i> Reservation <i class="fa-solid fa-caret-down"></i></a>
+        <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
+        <a  id="submenu1"><i class="fa-solid fa-calendar"></i> Reservation <i class="fa-solid fa-caret-down"></i></a>
         <div class="submenu" id="subMenuContent1">
             <a href="#"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
-            <a href="#"><i class="fa-solid fa-bed"></i> Rooms</a>
+            <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
         </div>
         <a href="#"><i class="fa-solid fa-address-card"></i> About</a>
         <a href="#"><i class="fa-solid fa-phone"></i> Contact</a>

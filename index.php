@@ -86,7 +86,7 @@
             <div class="dark-overlay"></div>
             <h2>Cottages</h2>
         </a>
-        <a href="#" class="category-box">
+        <a href="reservationRoom.php" class="category-box">
             <div class="dark-overlay"></div>
             <h2>Rooms</h2>
         </a>
