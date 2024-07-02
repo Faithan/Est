@@ -154,12 +154,12 @@ For larger desktops and laptops:
 
 
     .footer-content-info p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
 
     .footer-content-info a {
-        font-size: .8rem;
+        font-size: 1.2rem;
     }
 
 
@@ -180,24 +180,24 @@ For larger desktops and laptops:
     }
 
     .social-media-section p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .social-media-section .email-sub input {
         line-height: 2;
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
 
     .social-media-section .email-sub button {
       
         line-height: 2;
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
 
     .social-media-section .icon-sm a {
-        font-size: 1rem;
+        font-size: 2rem;
     }
 
 

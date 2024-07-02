@@ -11,6 +11,74 @@ if (isset($_GET['manage_id'])) {
 }
 
 
+
+
+//when form is submitted
+if (isset($_POST['submit'])) {
+    $fname = $_POST['first_name'];
+    $mname = $_POST['middle_name'];
+    $lname = $_POST['last_name'];
+    $address = $_POST['address'];
+    $phone_number = $_POST['phone_number'];
+    $email = $_POST['email'];
+    $date_of_arrival = $_POST['date_of_arrival'];
+    $time_of_arrival = $_POST['time_of_arrival'];
+    $room_number = $_POST['room_number'];
+    $room_type = $_POST['room_type'];
+    $bed_type = $_POST['bed_type'];
+    $bed_quantity = $_POST['bed_quantity'];
+    $number_of_person = $_POST['number_of_person'];
+    $amenities = $_POST['amenities'];
+    $rate_per_hour = $_POST['rate_per_hour'];
+    $special_request = $_POST['special_request'];
+    $room_photo = $manage_data['photo'];
+    $savedata = "INSERT INTO reserve_room_tbl  VALUES (
+    '',
+    'pending',
+    'online',
+    '$fname',
+    '$mname',
+    '$lname',
+    '$address',
+    '$phone_number',
+    '$email',
+    '$date_of_arrival',
+    '$time_of_arrival',
+    '$room_number',
+    '$room_type',
+    '$bed_type',
+    '$bed_quantity',
+    '$number_of_person',
+    '$amenities',
+    '$rate_per_hour',
+    '$special_request',
+    '$room_photo',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '')";
+
+    $query = (mysqli_query($con, $savedata));
+
+
+
+
+    if ($query) { // Replace this condition with your actual success condition
+        $message = "Reservation Sent Successfully! please wait for confirmation";
+        $isSuccess = true;
+    } else {
+        $message = "Form Submission Failed!";
+        $isSuccess = false;
+    }
+
+}
+
+
 ?>
 
 
@@ -37,39 +105,48 @@ if (isset($_GET['manage_id'])) {
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
 
     <!-- javascript -->
-    <script src="landing_js/wavingtext.js" defer></script>
+
     <script src="landing_js/mobileMenu.js" defer></script>
-    <script src="landing_js/scroll.js" defer></script>
+    <script src="landing_js/inputColor.js" defer></script>
+
 
     <!-- important css -->
     <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
     <!-- current page css -->
-    <link rel="stylesheet" href="landing_css/reservationRoom.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="landing_css/reserveRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="landing_css/reservationForm.css?v=<?php echo time(); ?>">
+
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
-    <title>Room Reservation</title>
+    <title>Reservation Form</title>
 
 </head>
 
 <body>
-
-    <button onclick="scrollToTop()" id="scrollToTopBtn"><i class="fa-solid fa-arrow-up"></i></button>
+    <!-- sweetalert -->
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
+            });
+        </script>
+    <?php endif; ?>
 
     <!-- for header -->
     <?php include 'header.php' ?>
 
-  
 
     <!-- home page -->
+
     <section class="main-home">
         <div class="wrapper-main">
             <div class="home-content">
                 <div>
                     <div class="wave-text">
-                        <h2>Make a Reservation</h2>
-                        <h2>Make a Reservation</h2>
+                        <h2>Reservation Form</h2>
+                        <h2>Reservation Form</h2>
                     </div>
                 </div>
             </div>
@@ -77,254 +154,101 @@ if (isset($_GET['manage_id'])) {
 
     </section>
 
-    <section class="category-main-container">
+    <main>
 
-        <h2>Categories✨</h2>
-
-        <div class="category-bar-container">
-            <div class="custom-select">
-                <select onchange="scrollToDiv()">
-                    <option disabled selected value="">Select a Room Type</option>
-                    <option value="standard">Standard</option>
-                    <option value="superior">Superior</option>
-                    <option value="family">Family</option>
-                    <option value="barkadahan">Barkadahan</option>
-                    <option value="exclusive">Exclusive</option>
-                </select>
-            </div>
-
-            <div class="custom-select">
-                <select>
-                    <option disabled selected value="">Select a Bed Type</option>
-                    <option value="Single bed">Single Bed</option>
-                    <option value="Double bed">Double Bed</option>
-                    <option value="Queen bed">Queen Bed</option>
-                    <option value="King bed">King Bed</option>
-                    <option value="California king bed">California King Bed</option>
-                    <option value="Sofa bed">Sofa Bed</option>
-                    <option value="Murphy bed">Murphy Bed</option>
-                    <option value="Bunk bed">Bunk Bed</option>
-                </select>
-            </div>
-
-
-
-            <!-- <select id="category-bar" onchange="scrollToCategory(this.value)">
-                <option disabled selected value="">Select a Room Type</option>
-                <option value="standard">Standard</option>
-                <option value="superior">Superior</option>
-                <option value="family">Family</option>
-                <option value="barkadahan">Barkadahan</option>
-                <option value="exclusive">Exclusive Suites</option>
-            </select> -->
+        <div class="image-container">
+            <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
         </div>
 
-        <div class="search-bar-container">
-            <div>
-                <div class="group">
-                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                        <g>
-                            <path
-                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                            </path>
-                        </g>
-                    </svg>
-                    <input placeholder="Search" type="search" class="search-input">
-                </div>
+
+        <form action="" method="post" class="reserveForm-contents">
+
+            <label>Full Name</label>
+
+
+            <input class="input2" name="first_name" onkeyup="changeColor(this)" placeholder="First Name" required>
+
+            <input class="input2" name="middle_name" onkeyup="changeColor(this)" placeholder="Middle Name" required>
+
+
+            <input class="input2" name="last_name" onkeyup="changeColor(this)" placeholder="Last Name" required>
+
+
+            <label>Address</label>
+            <input name="address" onkeyup="changeColor(this)" placeholder="Ex: Maranding, Lala, Lanao Del Norte"
+                required>
+
+            <label>Phone Number</label>
+            <input type="number" name="phone_number" onkeyup="changeColor(this)" placeholder="Ex: 09123456789" required>
+
+            <label>Email (optional)</label>
+            <input class="input4" name="email" onkeyup="changeColor(this)" placeholder="Ex: Name@gmail.com">
+
+            <label>Arrival Date</label>
+            <input class="input4" type="date" name="date_of_arrival" onkeyup="changeColor(this)" required>
+
+            <label>Check-in Time </label>
+
+            <input class="fixed-value-input" type="time" name="time_of_arrival" onkeyup="changeColor(this)"
+                value="14:00" required readonly>
+            <p id="comment"> (fixed) Good for 22 hours, start time 2:00PM - 11:00AM</p>
+
+            <label class="bold-text">Room Details</label>
+
+            <label>Room Number</label>
+            <input class="fixed-value-input" name="room_number" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['room_number']; ?>" readonly>
+
+            <label>Room Type</label>
+            <input class="fixed-value-input" name="room_type" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['room_type']; ?>" readonly>
+
+            <label>Bed Type</label>
+            <input class="fixed-value-input" name="bed_type" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['bed_type']; ?>" readonly>
+
+            <label>Numbers of Bed</label>
+            <input class="fixed-value-input" name="bed_quantity" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
+
+            <label>Number of Persons:</label>
+            <input class="fixed-value-input" name="number_of_person" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['no_persons']; ?>" readonly>
+
+            <label>Amenities</label>
+            <input class="fixed-value-input" name="amenities" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['amenities']; ?>" readonly>
+
+            <label>Price (₱)</label>
+            <input class="fixed-value-input" name="rate_per_hour" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['price']; ?>" readonly>
+
+            <p id="comment"> (fixed) Good for 22 hours</p>
+
+            <label>Do you have any special request?</label>
+            <textarea name="special_request" onkeyup="changeColor(this)"></textarea>
+
+            <p id="note">
+                <b>Note:</b> Please kindly provide all the necessary information required for your reservation.
+                Once you have submitted your reservation, please await confirmation. During the review of your
+                submitted data, we will be in contact with you.
+            </p>
+
+
+            <div class="reservationForm-buttons">
+                <button class="submit-btn" name="submit" type="submit">Submit</button>
+
+                <a href="reservationRoom.php" class="cancel-btn">Cancel</a>
             </div>
-        </div>
-    </section>
+        </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <main class="rooms-main-container">
-        <div class="wrapper-main">
-
-            <!-- for standard room-->
-            <div class="content-sub-header" id="standard">
-                <label>Standard Rooms</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Standard'";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
-                    $roomNumber = $row['room_number'];
-                    $roomType = $row['room_type'];
-                    $bedType = $row['bed_type'];
-                    $bed_quantity = $row['bed_quantity'];
-                    $noPersons = $row['no_persons'];
-                    $amenities = $row['amenities'];
-                    $price = $row['price'];
-                    $status = $row['status'];
-                    $photo = $row['photo'];
-                    ?>
-
-                    <?php
-                    include 'roomDetails.php'
-                        ?>
-
-                <?php } ?>
-            </div> <!-- for content center -->
-
-
-
-
-
-
-            <!-- for Superior room-->
-            <div class="content-sub-header" id="superior">
-                <label>Siuperior Rooms</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <div class="list-container">
-                    <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Superior'";
-                    $result = mysqli_query($con, $fetchdata);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $roomNumber = $row['room_number'];
-                        $roomType = $row['room_type'];
-                        $bedType = $row['bed_type'];
-                        $bed_quantity = $row['bed_quantity'];
-                        $noPersons = $row['no_persons'];
-                        $amenities = $row['amenities'];
-                        $price = $row['price'];
-                        $status = $row['status'];
-                        $photo = $row['photo'];
-                        ?>
-
-                        <?php
-                        include 'roomDetails.php'
-                            ?>
-
-                    <?php } ?>
-                </div>
-
-            </div> <!-- for content center -->
-
-
-
-            <!-- for Superior room-->
-            <div class="content-sub-header" id="family">
-                <label>Family Rooms</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <div class="list-container">
-                    <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Family'";
-                    $result = mysqli_query($con, $fetchdata);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $roomNumber = $row['room_number'];
-                        $roomType = $row['room_type'];
-                        $bedType = $row['bed_type'];
-                        $bed_quantity = $row['bed_quantity'];
-                        $noPersons = $row['no_persons'];
-                        $amenities = $row['amenities'];
-                        $price = $row['price'];
-                        $status = $row['status'];
-                        $photo = $row['photo'];
-                        ?>
-
-                        <?php
-                        include 'roomDetails.php'
-                            ?>
-
-                    <?php } ?>
-                </div>
-
-            </div> <!-- for content center -->
-
-
-
-            <!-- for Superior room-->
-            <div class="content-sub-header" id="barkadahan">
-                <label>Barkadahan Rooms</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <div class="list-container">
-                    <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Barkadahan'";
-                    $result = mysqli_query($con, $fetchdata);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $roomNumber = $row['room_number'];
-                        $roomType = $row['room_type'];
-                        $bedType = $row['bed_type'];
-                        $bed_quantity = $row['bed_quantity'];
-                        $noPersons = $row['no_persons'];
-                        $amenities = $row['amenities'];
-                        $price = $row['price'];
-                        $status = $row['status'];
-                        $photo = $row['photo'];
-                        ?>
-
-                        <?php
-                        include 'roomDetails.php'
-                            ?>
-
-                    <?php } ?>
-                </div>
-
-            </div> <!-- for content center -->
-
-
-
-             <!-- for Superior room-->
-             <div class="content-sub-header" id="exclusive">
-                <label>Exclusive Suite</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <div class="list-container">
-                    <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Exclusive Suite'";
-                    $result = mysqli_query($con, $fetchdata);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $roomNumber = $row['room_number'];
-                        $roomType = $row['room_type'];
-                        $bedType = $row['bed_type'];
-                        $bed_quantity = $row['bed_quantity'];
-                        $noPersons = $row['no_persons'];
-                        $amenities = $row['amenities'];
-                        $price = $row['price'];
-                        $status = $row['status'];
-                        $photo = $row['photo'];
-                        ?>
-
-                        <?php
-                        include 'roomDetails.php'
-                            ?>
-
-                    <?php } ?>
-                </div>
-
-            </div> <!-- for content center -->
-
-
-
-
-
-
-
-
-        </div>
 
     </main>
+
+
+
+
+
 
 
 

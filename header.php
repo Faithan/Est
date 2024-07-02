@@ -32,9 +32,13 @@
                 </div>
             </li>
 
-            <li><a href="#"><i class="fa-solid fa-address-card"></i>About</a></li>
+            <li><a href="#"><i class="fa-solid fa-calendar-day"></i> My Reservation</a></li>
 
-            <li><a href="#"><i class="fa-solid fa-phone"></i>Contact</a></li>
+            <li> <a href="#"><i class="fa-solid fa-address-card"></i> Profile</a></li>
+
+            <li> <a href="#"><i class="fa-solid fa-lock"></i></a></li>
+
+            <li><a href="#"><i class="fa-solid fa-headset"></i></a></li>
         </ul>
 
 
@@ -79,7 +83,9 @@
             <a href="#"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
             <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
         </div>
-        <a href="#"><i class="fa-solid fa-address-card"></i> About</a>
-        <a href="#"><i class="fa-solid fa-phone"></i> Contact</a>
+        <a href="#"><i class="fa-solid fa-calendar-day"></i> My Reservation</a>
+        <a href="#"><i class="fa-solid fa-address-card"></i> Profile</a>
+        <a href="#"><i class="fa-solid fa-lock"></i> Password and Security</a>
+        <a href="#"><i class="fa-solid fa-headset"></i> Customer Support</a>
 </nav>
 

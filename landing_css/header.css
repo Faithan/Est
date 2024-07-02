@@ -271,6 +271,7 @@ For larger desktops and laptops:
   .icons-container {
     font-size: 13px;
     gap: 20px;
+    margin-right: 20px;
   }
 
   .tooltip {
@@ -291,6 +292,11 @@ For larger desktops and laptops:
 
   .burger-icon {
     display: block;
+    margin-left: 10px;
+  }
+
+  .burger-icon i{
+    font-size: 25px;
   }
 
   .burger-menu {
@@ -303,9 +309,9 @@ For larger desktops and laptops:
   }
 
   .burger-menu a {
-    padding: 10px 15px;
+    padding: 20px 15px;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 1.5rem;
     color: var(--seventh-color);
     display: block;
     border-top: 2px solid var(--seventh-color2);
@@ -329,7 +335,7 @@ For larger desktops and laptops:
     
 }
 .submenu a{
-  font-size: 11px;
+  font-size: 1.3rem;
 }
 
 

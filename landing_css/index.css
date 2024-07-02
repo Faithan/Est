@@ -481,11 +481,11 @@ For larger desktops and laptops:
 
 
     .reservation-page h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .reservation-page p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .reservation-page .category-box {
@@ -494,7 +494,7 @@ For larger desktops and laptops:
 
 
     .category-box h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
 
@@ -513,17 +513,17 @@ For larger desktops and laptops:
 
 
     .about-page-content h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .about-page-content p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
 
     .about-page-content .image-holder img {
-        width: 15rem;
-        height: 15rem;
+        width: 20rem;
+        height: 20rem;
     }
     
 

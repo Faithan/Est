@@ -67,7 +67,7 @@ body {
 
 .category-main-container h2 {
     color: var(--seventh-color);
-    font-family: estregan;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.3rem;
     font-weight: bold;
 }
@@ -238,7 +238,6 @@ input:hover {
     font-family: estregan;
     font-size: 1.2rem;
     color: var(--seventh-color);
-    margin-top: 40px;
 
 }
 
@@ -496,7 +495,7 @@ For larger desktops and laptops:
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 25px;
+        margin-top: 10px;
     }
 
     .btn {
@@ -517,22 +516,23 @@ For larger desktops and laptops:
     /* catergory container */
     .category-main-container {
         width: 100%;
-        margin-top: 20px;
+        margin-top: 10px;
         background-color: var(--first-color2);
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         gap: 1rem;
-        padding: 10px 0;
+        padding: 5px 0;
 
     }
 
     .category-main-container h2 {
         color: var(--seventh-color);
-        font-family: estregan;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
         font-weight: bold;
+        margin-top: 20px;
     }
 
     .category-bar-container {
@@ -698,10 +698,11 @@ For larger desktops and laptops:
 
     .rooms-main-container .content-sub-header label {
         font-weight: bold;
-        font-family: estregan;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.2rem;
         color: var(--seventh-color);
-        margin-top: 40px;
+        padding-top: 20px ;
+
 
     }
 

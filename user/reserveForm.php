@@ -11,7 +11,13 @@ $message = "";
 $isSuccess = false;
 
 
-$manage_data = ['room_type' => '', 'no_persons' => '', 'amenities' => '', 'price' => '', 'photo' => ''];
+$manage_data = [
+    'room_type' => '',
+    'no_persons' => '',
+    'amenities' => '',
+    'price' => '',
+    'photo' => ''
+];
 
 
 if (isset($_GET['manage_id'])) {
@@ -52,7 +58,7 @@ if (isset($_POST['submit'])) {
         $isSuccess = true;
     } else {
         $message = "Form Submission Failed!";
-        $isSuccess = false; 
+        $isSuccess = false;
     }
 
 }
@@ -71,7 +77,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="css/reserveRoom.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/reserveForm.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
-    
+
     <title>Room Reservation</title>
 
     <link href="../fontawesome/css/fontawesome.css" rel="stylesheet" />
@@ -100,8 +106,8 @@ if (isset($_POST['submit'])) {
         </script>
     <?php endif; ?>
 
-     <!-- for nav -->
-     <?php
+    <!-- for nav -->
+    <?php
     include 'header.php'
         ?>
 
@@ -197,7 +203,7 @@ if (isset($_POST['submit'])) {
                     <input class="input3" name="rate_per_hour" onkeyup="changeColor(this)"
                         value="<?php echo $manage_data['price']; ?>" readonly><br>
 
-                        <p id="comment"> (fixed) Good for 22 hours</p><br>
+                    <p id="comment"> (fixed) Good for 22 hours</p><br>
 
                     <label>Do you have any special request?</label><br>
                     <textarea name="special_request" onkeyup="changeColor(this)"></textarea><br>
