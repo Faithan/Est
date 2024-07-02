@@ -32,9 +32,11 @@
                 </div>
             </li>
 
+       
+
             <li><a href="#"><i class="fa-solid fa-calendar-day"></i> My Reservation</a></li>
 
-            <li> <a href="#"><i class="fa-solid fa-address-card"></i> Profile</a></li>
+            <li> <a href="#"><i class="fa-solid fa-address-card"></i></a></li>
 
             <li> <a href="#"><i class="fa-solid fa-lock"></i></a></li>
 
