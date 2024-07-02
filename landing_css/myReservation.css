@@ -296,7 +296,7 @@ input:hover {
 
 
 .container-of-labels {
-    max-height: 120px;
+    max-height: 200px;
     overflow-y: scroll;
 }
 
@@ -530,7 +530,6 @@ For larger desktops and laptops:
         color: var(--seventh-color);
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
- 
         font-weight: bold;
         margin-top: 20px;
     }

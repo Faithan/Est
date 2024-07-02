@@ -1,17 +1,20 @@
+<?php
+include ('db_connect.php');
+session_start();
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- important additional css -->
-    <script src="sweetalert/sweetalert.js"></script>
-
-    <link href="fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="fontawesome/css/solid.css" rel="stylesheet" />
-
-
+  
+  
     <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
 
@@ -19,13 +22,13 @@
     <script src="landing_js/wavingtext.js" defer></script>
     <script src="landing_js/mobileMenu.js" defer></script>
 
-    <!-- important css -->
-    <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
+    <?php 
+    include 'important.php'
+    ?>
+
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
-    <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
+    
     <title>Estregan Beach Resort</title>
 </head>
 

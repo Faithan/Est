@@ -3,6 +3,8 @@ include ('db_connect.php');
 session_start();
 
 
+$user_id = ''; // Initialize user_id
+
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
     $manage_query = "SELECT * FROM room_tbl WHERE id = $manage_id";
@@ -10,8 +12,10 @@ if (isset($_GET['manage_id'])) {
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
 
-
-
+// Retrieve the user ID of the logged-in user from the session if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id']; // Assuming you store the user ID in the session
+}
 
 //when form is submitted
 if (isset($_POST['submit'])) {
@@ -34,6 +38,7 @@ if (isset($_POST['submit'])) {
     $room_photo = $manage_data['photo'];
     $savedata = "INSERT INTO reserve_room_tbl  VALUES (
     '',
+    '$user_id', 
     'pending',
     'online',
     '$fname',
@@ -93,12 +98,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- important additional css -->
-    <script src="sweetalert/sweetalert.js"></script>
-
-    <link href="fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="fontawesome/css/brands.css" rel="stylesheet" />
-    <link href="fontawesome/css/solid.css" rel="stylesheet" />
+  
 
 
     <!-- reset css -->
@@ -110,10 +110,11 @@ if (isset($_POST['submit'])) {
     <script src="landing_js/inputColor.js" defer></script>
 
 
-    <!-- important css -->
-    <link rel="stylesheet" type="text/css" href="landing_css/header.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="landing_css/footer.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="landing_css/main.css?v=<?php echo time(); ?>">
+    <!-- important additional css -->
+    <?php 
+    include 'important.php'
+    ?>
+
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/reservationForm.css?v=<?php echo time(); ?>">
 
@@ -244,14 +245,6 @@ if (isset($_POST['submit'])) {
 
 
     </main>
-
-
-
-
-
-
-
-
 
 
 

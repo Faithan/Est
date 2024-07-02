@@ -5,12 +5,12 @@ include ('db_connect.php');
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // User is logged in, so the anchor tag is clickable
     // This is just an example, replace with the actual ID value
-    $href = "reservationForm.php?manage_id=" . $id;
-    $button_text = "Book Now";
+    $href = "reservationForm.php?manage_id=" . $reserve_id;
+    $button_text = "View Reservation";
 } else {
     // User is not logged in, anchor tag is disabled
     $href = "";
-    $button_text = "Login to Book";
+    $button_text = "Login to View";
 }
 
 ?>
@@ -30,6 +30,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <p><?php echo $roomNumber ?></p>
             </div>
         </div>
+
+        <div class="label-container">
+            <div class="title-text"><label><b>user id:</b></label></div>
+            <div class="detail">
+                <p><?php echo $user_id ?></p>
+            </div>
+        </div>
+
 
         <div class="label-container">
             <div class="title-text"><label><b>Room Type:</b></label></div>
@@ -56,7 +64,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <div class="label-container">
             <div class="title-text"><label><b>Number of Persons:</b></label></div>
             <div class="detail">
-                <p><?php echo $noPersons ?></p>
+                <p><?php echo $number_of_person ?></p>
             </div>
         </div>
 

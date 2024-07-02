@@ -49,6 +49,9 @@
   gap: 10px;
 }
 
+
+
+
 .header-nav ul li {
   display: inline;
   float: left;
@@ -63,8 +66,8 @@
   font-weight: bold;
   color: var(--seventh-color);
   font-size: 15px;
-  
 }
+
 .header-nav ul li a i{
   padding-right: 10px;
 }
@@ -339,6 +342,10 @@ For larger desktops and laptops:
 }
 
 
+.header-btn{
+  display: none;
+}
+
 
 
 
@@ -410,6 +417,8 @@ For larger desktops and laptops:
     margin-left: 10px;
     font-size: 10px;
   }
+
+
 
 
 }
