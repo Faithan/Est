@@ -5,7 +5,7 @@ include ('db_connect.php');
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // User is logged in, so the anchor tag is clickable
     // This is just an example, replace with the actual ID value
-    $href = "reservationForm.php?manage_id=" . $reserve_id;
+    $href = "viewReservation.php?manage_id=" . $reserve_id;
     $button_text = "View Reservation";
 } else {
     // User is not logged in, anchor tag is disabled
