@@ -185,9 +185,17 @@ For larger desktops and laptops:
         color: var(--seventh-color);
     }
 
+    .reserveForm-contents input[name="status"]{
+        text-align: center;
+        text-transform: uppercase;
+        padding: 0;
+        font-weight: bold;
+    }
+
     .reserveForm-contents .fixed-value-input{
         background-color: var(--after-input);
     }
+
 
 
 
@@ -219,6 +227,10 @@ For larger desktops and laptops:
     .reserveForm-contents textarea.has-value {
         background-color: var(--after-input);
         color: var(--seventh-color);
+    }
+
+    .reserveForm-contents .fixed-value-textarea{
+        background-color: var(--after-input);
     }
 
 
@@ -268,6 +280,24 @@ For larger desktops and laptops:
         background-color: #410000;
 
     }
+
+    .reservationForm-buttons .back-btn {
+        padding: 10px 30px;
+        border-radius: 5px;
+        color: white;
+        background-color: var(--gray-button);
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: bold;
+        border: 1px solid;
+    }
+
+    .reservationForm-buttons .back-btn:hover {
+        color: white;
+        background-color: var(--gray-button) ;
+
+    }
+
 
 
 

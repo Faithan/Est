@@ -5,6 +5,7 @@ session_start();
 
 $user_id = ''; // Initialize user_id
 
+
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
     $manage_query = "SELECT * FROM reserve_room_tbl WHERE reserve_id = $manage_id";
@@ -17,71 +18,7 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id']; // Assuming you store the user ID in the session
 }
 
-//when form is submitted
-if (isset($_POST['submit'])) {
-    $fname = $_POST['first_name'];
-    $mname = $_POST['middle_name'];
-    $lname = $_POST['last_name'];
-    $address = $_POST['address'];
-    $phone_number = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $date_of_arrival = $_POST['date_of_arrival'];
-    $time_of_arrival = $_POST['time_of_arrival'];
-    $room_number = $_POST['room_number'];
-    $room_type = $_POST['room_type'];
-    $bed_type = $_POST['bed_type'];
-    $bed_quantity = $_POST['bed_quantity'];
-    $number_of_person = $_POST['number_of_person'];
-    $amenities = $_POST['amenities'];
-    $rate_per_hour = $_POST['rate_per_hour'];
-    $special_request = $_POST['special_request'];
-    $room_photo = $manage_data['photo'];
-    $savedata = "INSERT INTO reserve_room_tbl  VALUES (
-    '',
-    '$user_id', 
-    'pending',
-    'online',
-    '$fname',
-    '$mname',
-    '$lname',
-    '$address',
-    '$phone_number',
-    '$email',
-    '$date_of_arrival',
-    '$time_of_arrival',
-    '$room_number',
-    '$room_type',
-    '$bed_type',
-    '$bed_quantity',
-    '$number_of_person',
-    '$amenities',
-    '$rate_per_hour',
-    '$special_request',
-    '$room_photo',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '')";
 
-    $query = (mysqli_query($con, $savedata));
-
-
-
-
-    if ($query) { // Replace this condition with your actual success condition
-        $message = "Reservation Sent Successfully! please wait for confirmation";
-        $isSuccess = true;
-    } else {
-        $message = "Form Submission Failed!";
-        $isSuccess = false;
-    }
-
-}
 
 
 ?>
@@ -135,6 +72,54 @@ if (isset($_POST['submit'])) {
         </script>
     <?php endif; ?>
 
+
+
+
+    <!-- for cancel button -->
+    <script>
+        function confirmCancel() {
+            Swal.fire({
+                title: 'Cancel Confirmation',
+                text: 'Are you sure you want to cancel this reservation?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Cancel',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    cancelItem();
+                }
+            });
+        }
+
+        function cancelItem() {
+            var id = document.querySelector('input[name="reserve_id"]').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'cancel_reservation.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        Swal.fire({
+                            title: 'Cancelled Successfully',
+                            text: 'The reservation has been cancelled.',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = 'myReservation.php'; // Replace with your desired page after deletion
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Cancellation Error',
+                            text: 'Failed to cancel this reservation.',
+                            icon: 'error'
+                        });
+                    }
+                }
+            };
+            xhr.send('reserve_id=' + id);
+        }
+    </script>
+
     <!-- for header -->
     <?php include 'header.php' ?>
 
@@ -163,6 +148,23 @@ if (isset($_POST['submit'])) {
 
 
         <form action="" method="post" class="reserveForm-contents">
+            <input type="hidden" name="reserve_id" id="" value="<?php echo $manage_data['reserve_id']; ?>">
+
+            <label class="bold-text">Reservation Status</label>
+
+
+            <input class="fixed-value-input" name="status" onkeyup="changeColor(this)" placeholder="status"
+                value="<?php echo $manage_data['status']; ?>" readonly>
+
+
+            <p id="note">
+                This section displays the status of your reservation, including pending, checked in, extended, checked
+                out, rejected, or cancelled.
+            </p>
+
+
+            <label class="bold-text">Customer Details</label>
+
 
             <label>Full Name</label>
 
@@ -189,10 +191,11 @@ if (isset($_POST['submit'])) {
 
             <label>Email (optional)</label>
             <input class="fixed-value-input" class="input4" name="email" onkeyup="changeColor(this)"
-                placeholder="Ex: Name@gmail.com"  value="<?php echo $manage_data['email']; ?>" readonly>
+                placeholder="Ex: Name@gmail.com" value="<?php echo $manage_data['email']; ?>" readonly>
 
             <label>Arrival Date</label>
-            <input class="fixed-value-input" type="date" name="date_of_arrival" onkeyup="changeColor(this)"  value="<?php echo $manage_data['date_of_arrival']; ?>" readonly>
+            <input class="fixed-value-input" type="date" name="date_of_arrival" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['date_of_arrival']; ?>" readonly>
 
             <label>Check-in Time </label>
 
@@ -220,7 +223,7 @@ if (isset($_POST['submit'])) {
 
             <label>Number of Persons:</label>
             <input class="fixed-value-input" name="number_of_person" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['no_persons']; ?>" readonly>
+                value="<?php echo $manage_data['number_of_person']; ?>" readonly>
 
             <label>Amenities</label>
             <input class="fixed-value-input" name="amenities" onkeyup="changeColor(this)"
@@ -232,20 +235,30 @@ if (isset($_POST['submit'])) {
 
             <p id="comment"> (fixed) Good for 22 hours</p>
 
-            <label>Do you have any special request?</label>
-            <textarea name="special_request" onkeyup="changeColor(this)"></textarea>
+            <label>Special Request</label>
+            <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
+                readonly></textarea>
 
             <p id="note">
-                <b>Note:</b> Please kindly provide all the necessary information required for your reservation.
+                <b>Note:</b>
                 Once you have submitted your reservation, please await confirmation. During the review of your
                 submitted data, we will be in contact with you.
             </p>
 
 
             <div class="reservationForm-buttons">
-                <button class="submit-btn" name="submit" type="submit">Submit</button>
+                <?php
+                // Assuming $manage_data['status'] contains 'pending' as the value
+                $status = $manage_data['status'];
 
-                <a href="reservationRoom.php" class="cancel-btn">Cancel</a>
+                // Check if the $status variable is set and is equal to 'pending'
+                if (isset($status) && strtolower($status) === 'pending') {
+                    // Display the first anchor tag if the status is 'pending'
+                    echo '<a class="cancel-btn" name="cancel" onclick="confirmCancel()">Cancel Reservation</a>';
+                }
+                ?>
+
+                <a href="myReservation.php" class="back-btn">Back</a>
             </div>
         </form>
 

@@ -11,7 +11,12 @@ session_destroy();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logged Out</title>
     <script src="sweetalert/sweetalert.js"></script>
-    <link rel="stylesheet" href="logout.css">
+   
+    <style>
+    body{
+            background-color: var(--first-color);
+        }
+    </style>
 </head>
 <body>
     <script>

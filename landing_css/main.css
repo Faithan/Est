@@ -37,10 +37,14 @@ a{
     --seventh-color3: #e0e0e0;
     --seventh-color4: #757575;
 
+    --select-color: #F77F00;
+    --select-color2:#cd6a00;
+
+    --booknow-text: #ffffff;
+    --booknow-text2: #242526;
+    --booknow-border: #F77F00;
 
 
-    --select-color: #757575;
-    --select-color2: #8a8a8a;
 
 
     --box-shadow:#b4b4b4;
@@ -49,6 +53,9 @@ a{
 
     --water-border:#EAE2B7;
     --water-color:#0d2cc5;
+
+    --gray-button: rgb(70, 70, 70);
+
     font-size: 62.5%;    /* 10px on default */
   
 
@@ -56,9 +63,16 @@ a{
 }
 
 
+
 .dark-mode {
     --first-color2: #18191A;
     --first-color: #242526;
+
+    --booknow-text: #F77F00;
+    --booknow-text2: #F77F00;
+    --booknow-border: #F77F00;
+    --fourth-color:  #242526;
+
     --seventh-color: #e4e4e4;
     --seventh-color2: #101010;
     --seventh-color3: #545454;

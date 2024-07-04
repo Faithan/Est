@@ -104,14 +104,7 @@ if (isset($_GET['manage_id'])) {
 
 
 
-            <!-- <select id="category-bar" onchange="scrollToCategory(this.value)">
-                <option disabled selected value="">Select a Room Type</option>
-                <option value="standard">Standard</option>
-                <option value="superior">Superior</option>
-                <option value="family">Family</option>
-                <option value="barkadahan">Barkadahan</option>
-                <option value="exclusive">Exclusive Suites</option>
-            </select> -->
+      
         </div>
 
         <div class="search-bar-container">
