@@ -24,12 +24,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
     <div class="container-of-labels">
 
+
         <div class="label-container">
-            <div class="title-text"><label><b>Room Number:</b></label></div>
-            <div class="detail">
-                <p><?php echo $roomNumber ?></p>
+            <div class="title-text-bold"><label><b>Price (Good for 22hrs):</b></label></div>
+            <div class="detail-bold">
+                <p>₱<?php echo $price ?></p>
             </div>
         </div>
+
 
         <div class="label-container">
             <div class="title-text"><label><b>Room Type:</b></label></div>
@@ -45,6 +47,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <p><?php echo $bedType ?></p>
             </div>
         </div>
+
+        <div class="label-container">
+            <div class="title-text"><label><b>Room Number:</b></label></div>
+            <div class="detail">
+                <p><?php echo $roomNumber ?></p>
+            </div>
+        </div>
+
+
+
+       
 
         <div class="label-container">
             <div class="title-text"><label><b>No. of Beds:</b></label></div>

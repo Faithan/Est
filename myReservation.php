@@ -124,16 +124,9 @@ if (isset($_SESSION['user_id'])) {
                             <div class="container-of-labels">
 
                                 <div class="label-container">
-                                    <div class="title-text"><label><b>Room Number:</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $roomNumber ?></p>
-                                    </div>
-                                </div>
-
-                                <div class="label-container">
-                                    <div class="title-text"><label><b>user id:</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $user_id ?></p>
+                                    <div class="title-text-bold"><label><b>Price (Good for 22hrs):</b></label></div>
+                                    <div class="detail-bold">
+                                        <p>₱<?php echo $price ?></p>
                                     </div>
                                 </div>
 
@@ -152,6 +145,18 @@ if (isset($_SESSION['user_id'])) {
                                         <p><?php echo $bedType ?></p>
                                     </div>
                                 </div>
+
+
+                                <div class="label-container">
+                                    <div class="title-text"><label><b>Room Number:</b></label></div>
+                                    <div class="detail">
+                                        <p><?php echo $roomNumber ?></p>
+                                    </div>
+                                </div>
+
+
+
+
 
                                 <div class="label-container">
                                     <div class="title-text"><label><b>No. of Beds:</b></label></div>
@@ -174,12 +179,7 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
 
-                                <div class="label-container">
-                                    <div class="title-text"><label><b>Price (Good for 22hrs):</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $price ?></p>
-                                    </div>
-                                </div>
+
 
                             </div>
 

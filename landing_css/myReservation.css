@@ -314,12 +314,18 @@ input:hover {
     color: var(--seventh-color);
 }
 
+.label-container .title-text-bold {
+    color: var(--seventh-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
 
 .label-container .detail {
     display: flex;
     justify-content: flex-end;
     max-width: 90px;
-
 }
 
 .label-container .detail p {
@@ -330,6 +336,17 @@ input:hover {
     font-size: 1rem;
 
 }
+
+.label-container .detail-bold p {
+    color: var(--seventh-color);
+    text-justify: flex-end;
+    text-align: right;
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+}
+
 
 
 .label-container label {
