@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
     <!-- current page css -->
-    <link rel="stylesheet" href="landing_css/myReservation.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="landing_css/myReservationRoom.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>Room Reservation</title>
 
@@ -184,7 +184,7 @@ if (isset($_SESSION['user_id'])) {
                             </div>
 
                             <div class="button-container">
-                                <a href="viewReservation.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                <a href="viewReservationRoom.php?manage_id=<?php echo $reserve_id; ?>"><i
                                         class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         </div>

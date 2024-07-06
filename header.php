@@ -78,6 +78,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <script src="landing_js/switchMode.js" defer></script>
 <script src="landing_js/burgerMenu.js" defer></script>
 <script src="landing_js/subMenu.js" defer></script>
+<script src="landing_js/subMenu2.js" defer></script>
 
 
 <!-- header -->
@@ -164,16 +165,20 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <nav class="burger-menu" id="mySidenav">
 
     <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
+
     <a id="submenu1"><i class="fa-solid fa-calendar"></i> Reservation <i class="fa-solid fa-caret-down"></i></a>
     <div class="submenu" id="subMenuContent1">
         <a href="#"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
         <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
     </div>
 
-    <a href="myReservation.php" onclick="checkLoggedIn(event)">
-        <i class="fa-solid fa-calendar-day"></i> My Reservation
-    </a>
+    <a  id="submenu2"> <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i></a>
+    <div class="submenu" id="subMenuContent2">
+        <a href="#" onclick="checkLoggedIn(event)" ><i class="fa-solid fa-umbrella-beach"></i>My Reserved Cottages</a>
+        <a href="myReservationRoom.php"  onclick="checkLoggedIn(event)"><i class="fa-solid fa-bed"></i>My Reserved Rooms</a>
+    </div>
 
+    
     <a href="#" onclick="checkLoggedIn(event)">
         <i class="fa-solid fa-address-card"></i> Profile
     </a>
