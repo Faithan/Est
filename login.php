@@ -7,6 +7,12 @@ if (!$con) {
     die("connection failed;" . mysqli_connect_error());
 }
 
+// Check if the user is already logged in
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    header('Location: index.php');
+    exit();
+}
+    
 // for user
 
 if (isset($_POST['login'])) {

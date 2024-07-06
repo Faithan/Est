@@ -179,7 +179,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     </div>
 
     
-    <a href="#" onclick="checkLoggedIn(event)">
+    <a href="profile.php" onclick="checkLoggedIn(event)">
         <i class="fa-solid fa-address-card"></i> Profile
     </a>
 

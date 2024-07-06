@@ -2,9 +2,47 @@
 include ('db_connect.php');
 session_start();
 
+// Check if the user is already logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    header('Location: index.php');
+    exit();
+}
+
+
+$message = "";
+$isSuccess = false;
+
+if (isset($_POST['signup'])) {
+    $full_name = $_POST['full_name'];
+    $contact_number = $_POST['contact_number'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Check if the email already exists in the database
+    $check_email_query = "SELECT * FROM user_tbl WHERE email='$email'";
+    $check_result = mysqli_query($con, $check_email_query);
+
+    if (mysqli_num_rows($check_result) > 0) {
+        $message = "Email is already taken";
+        $isSuccess = false;
+    } else {
+        // Email is unique, proceed with registration
+        $savedata = "INSERT INTO user_tbl VALUES ('','$full_name','$contact_number','$email','$password')";
+        $query = (mysqli_query($con, $savedata));
+
+        if ($query) {
+            $message = "Registered Successfully!";
+            $isSuccess = true;
+        } else {
+            $message = "Form Submission Failed!";
+            $isSuccess = false;
+        }
+    }
+
+}
+
 
 ?>
-
 
 
 
@@ -35,6 +73,18 @@ session_start();
 
 <body>
 
+    <!-- sweetalert success -->
+    <?php if (!empty($message)): ?>
+        <script>
+            Swal.fire({
+                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+                text: '<?php echo $message; ?>',
+                icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
+            });
+        </script>
+    <?php endif; ?>
+
+
     <!-- for header -->
     <?php include 'header.php' ?>
 
@@ -45,7 +95,7 @@ session_start();
 
         <main class="main-login">
 
-            <form method="post" action="" class="login-container">
+            <form method="post" action="" class="login-container" onsubmit="return validateForm()">
 
 
                 <div class="logo-container">
@@ -62,22 +112,29 @@ session_start();
                 <label for="">Name</label>
 
                 <div class="input-container">
-                    <span class="input-icon3">&#128100;</span>
-                    <input type="text" placeholder="Enter your name">
+                    <span class="input-icon-name">&#128100;</span>
+                    <input type="text" name="full_name" id="full_name"  placeholder="Enter your full name">
+                </div>
+
+                <label for="">Contact Number</label>
+
+                <div class="input-container">
+                    <span class="input-icon-phone">&phone;</span>
+                    <input type="number" name="contact_number" id="contact_number" placeholder="Enter your contact number">
                 </div>
 
                 <label for="">Email</label>
 
                 <div class="input-container">
-                    <span class="input-icon">&#9993;</span>
-                    <input type="email" placeholder="Enter your email">
+                    <span class="input-icon-email">&#9993;</span>
+                    <input type="email" name="email" id="email" placeholder="Enter your email">
                 </div>
 
 
                 <label for="">Password</label>
                 <div class="input-container">
-                    <span class="input-icon2">&#128274;</span>
-                    <input type="password" placeholder="Enter your password">
+                    <span class="input-icon-password">&#128274;</span>
+                    <input type="password" name="password" id="password" placeholder="Enter your password">
                 </div>
 
                 <?php
@@ -86,7 +143,7 @@ session_start();
                 }
                 ?>
 
-                <button name="login" class="btn-grad">Sign up</button>
+                <button name="signup" class="btn-grad">Sign up</button>
 
                 <div class="signup-btn">
                     <p>Already have an account?</p>
@@ -95,7 +152,7 @@ session_start();
 
             </form>
         </main>
-
+c
     </div>
 
     <!-- footer -->
@@ -104,6 +161,25 @@ session_start();
         ?>
 
 
+    <script>
+        function validateForm() {
+            let fullName = document.getElementById('full_name').value;
+            let contactNumber = document.getElementById('contact_number').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            if (fullName === '' || contactNumber === '' || email === '' || password === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'All fields are required'
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 
 
 </body>

@@ -281,7 +281,11 @@ For larger desktops and laptops:
         background-color: var(--seventh-color3);
     }
 
-    .input-icon {
+    .input-container input[name="full_name"]{
+        text-transform: capitalize;
+    }
+
+    .input-icon-email {
         color: var(--seventh-color);
         font-size: 20px;
         position: absolute;
@@ -290,7 +294,7 @@ For larger desktops and laptops:
         transform: translateY(-50%);
     }
 
-    .input-icon2 {
+    .input-icon-password {
         color: var(--seventh-color);
         font-size: 20px;
         position: absolute;
@@ -299,7 +303,7 @@ For larger desktops and laptops:
         transform: translateY(-50%);
     }
 
-    .input-icon3 {
+    .input-icon-name {
         color: var(--seventh-color);
         font-size: 20px;
         position: absolute;
@@ -307,6 +311,18 @@ For larger desktops and laptops:
         top: 45%;
         transform: translateY(-50%);
     }
+
+
+
+    .input-icon-phone {
+        color: var(--seventh-color);
+        font-size: 20px;
+        position: absolute;
+        left: 10px;
+        top: 45%;
+        transform: translateY(-50%);
+    }
+
 
 
     /* end */
@@ -342,10 +358,10 @@ For larger desktops and laptops:
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin-top: 15vh;
+        margin-top: 4vh;
         font-size: 1.3rem;
         gap: 5px;
-        padding-bottom: 5vh;
+       
     }
 
 

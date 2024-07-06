@@ -4,7 +4,6 @@ session_start();
 
 
 
-
 // Retrieve the user ID of the logged-in user from the session if the user is logged in
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id']; // Assuming you store the user ID in the session
