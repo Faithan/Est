@@ -694,6 +694,8 @@ For larger desktops and laptops:
     .rooms-main-container .content-sub-header {
         display: flex;
         padding: 10px 0;
+        justify-content: flex-start;
+
     }
 
     .rooms-main-container .content-sub-header label {

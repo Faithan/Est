@@ -17,6 +17,7 @@ if (isset($_POST['signup'])) {
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $current_date_time = date('Y-m-d'); // Get the current date and time
 
     // Check if the email already exists in the database
     $check_email_query = "SELECT * FROM user_tbl WHERE email='$email'";
@@ -27,8 +28,9 @@ if (isset($_POST['signup'])) {
         $isSuccess = false;
     } else {
         // Email is unique, proceed with registration
-        $savedata = "INSERT INTO user_tbl VALUES ('','$full_name','$contact_number','$email','$password')";
-        $query = (mysqli_query($con, $savedata));
+        $savedata = "INSERT INTO user_tbl (id ,full_name, contact_number, email, password, gender, birthdate, address,  date_created) 
+                     VALUES ('','$full_name', '$contact_number', '$email', '$password','','','', '$current_date_time')";
+        $query = mysqli_query($con, $savedata);
 
         if ($query) {
             $message = "Registered Successfully!";
@@ -40,7 +42,6 @@ if (isset($_POST['signup'])) {
     }
 
 }
-
 
 ?>
 
@@ -152,7 +153,7 @@ if (isset($_POST['signup'])) {
 
             </form>
         </main>
-c
+
     </div>
 
     <!-- footer -->

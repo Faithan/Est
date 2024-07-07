@@ -175,7 +175,7 @@ if (isset($_GET['manage_id'])) {
 
             <!-- for Superior room-->
             <div class="content-sub-header" id="superior">
-                <label>Siuperior Rooms</label>
+                <label>Superior Rooms</label>
             </div> <!-- for content sub header -->
 
             <div class="content-center">

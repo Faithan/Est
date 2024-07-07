@@ -220,7 +220,7 @@ body {
     font-weight: bold;
     color: var(--seventh-color);
     margin-bottom: 20px;
-    font-family: estregan;
+    
 }
 
 
@@ -514,6 +514,7 @@ For larger desktops and laptops:
 
     .about-page-content h1 {
         font-size: 2rem;
+        
     }
 
     .about-page-content p {

@@ -58,9 +58,106 @@ For larger desktops and laptops:
         width: 100%;
     }
 
-    .profile-main{
-        
+
+    .profile-main {
+        width: 100%;
+        background-color: var(--first-color2);
+        height: calc(100vh - 40px);
     }
+
+    .profile-main-flex {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .profile-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .profile-icon img {
+        border: 2px solid #D62828;
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #D62828;
+        margin-bottom: 20px;
+    }
+
+    .profile-icon h1 {
+        text-transform: capitalize;
+
+        font-size: 2rem;
+    }
+
+    .profile-icon p {
+        font-size: 1.3rem;
+    }
+
+
+
+
+    .personal-info-container {
+      
+    }
+
+    .personal-info-container .header-label {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-label h1 {
+        text-transform: capitalize;
+        font-size: 1.3rem;
+
+    }
+
+    .header-label a {
+        font-size: 1.2rem;
+        color: #D62828;
+    }
+
+
+    .personal-info {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 0;
+        gap: 2px;
+    }
+
+    .personal-info .info {
+        display: flex;
+        flex-direction: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: var(--first-color);
+        border-radius: 5px;
+    }
+
+    .personal-info .info p {
+        font-size: 1.2rem;
+    }
+    .personal-info a {
+        display: flex;
+        flex-direction: flex;
+        justify-content: flex-end;
+        padding: 10px;
+        background-color: var(--first-color);
+        border-radius: 5px;
+    }
+
+    .personal-info a p {
+        font-size: 1.2rem;
+        color: #D62828;
+    }
+
 }
 
 
@@ -95,206 +192,25 @@ For larger desktops and laptops:
 
     /* home content */
 
-    .main-home {
-        background-size: 40vh, cover;
-        background-position: bottom 15% center, center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-    }
 
-    .home-content {
-        color: white;
-        display: flex;
-        padding-bottom: 20vh;
-        width: 100%;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-
+    /* For tablets: */
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+        .wrapper-main {
+            width: 100%;
+        }
     }
 
 
+    /* For small desktops and laptops: */
 
-
-
-    .wave-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        bottom: 3vh;
-    }
-
-    .wave-text h2 {
-        position: absolute;
-        font-size: 2.5rem;
-        transform: translate(0, -50%);
-        font-weight: bold;
-        line-height: 2;
+    @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+        .wrapper-main {
+            width: 100%;
+        }
     }
 
 
 
-    .intro-content {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 10%;
-    }
-
-    .home-content p {
-
-        font-size: 1.5rem;
-        line-height: 1.5;
-
-    }
-
-
-    /* learn more button */
-
-
-    /*Container styles*/
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        margin-top: 25px;
-    }
-
-    .btn {
-        font-size: 1.2rem;
-        text-indent: 40px;
-    }
-
-
-    .btn::after {
-        width: 6px;
-        height: 6px;
-    }
-
-    /* end */
-
-
-    /* reservation page */
-
-    .reservation-page {
-        width: 100%;
-        background-color: var(--first-color2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 80px;
-        column-gap: 50px;
-        flex-wrap: wrap;
-        background-color: var(--first-color);
-        margin-top: 150px;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-
-
-    .reservation-page h1 {
-        font-size: 2rem;
-    }
-
-    .reservation-page p {
-        font-size: 1.3rem;
-    }
-
-    .reservation-page .category-box {
-        width: 100%;
-    }
-
-
-    .category-box h2 {
-        font-size: 1.5rem;
-    }
-
-
-    /* end */
-
-
-
-    /* about page */
-
-    .about-page {
-        padding: 50px 30px;
-    }
-
-
-
-
-    .about-page-content h1 {
-        font-size: 2rem;
-    }
-
-    .about-page-content p {
-        font-size: 1.3rem;
-    }
-
-    /* end */
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* For tablets: */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .wrapper-main {
-        width: 100%;
-    }
-}
-
-
-/* For small desktops and laptops: */
-
-@media only screen and (min-width: 1024px) and (max-width: 1199px) {
-    .wrapper-main {
-        width: 100%;
-    }
-}
-
-
-
-/* For larger desktops and laptops: */
-@media only screen and (min-width: 1200px) {}
+    /* For larger desktops and laptops: */
+    @media only screen and (min-width: 1200px) {}
