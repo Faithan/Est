@@ -11,23 +11,22 @@ $message = "";
 $isSuccess = false;
 
 
-if (isset($_POST['addroom'])) {
-  $roomNumber = $_POST['room_number'];
-  $roomType = $_POST['room_type'];
-  $bed_type = $_POST['bed_type'];
-  $bed_quantity = $_POST['bed_quantity'];
-  $noPersons = $_POST['no_persons'];
-  $amenities = $_POST['amenities'];
-  $price = $_POST['price'];
-  $status = $_POST['status'];
+if (isset($_POST['addcottage'])) {
 
-  $photo = $_FILES['photo'];
+  $cottageNumber = $_POST['cottage_number'];
+  $cottageType = $_POST['cottage_type'];
+  $noPersons = $_POST['number_of_person'];
+  $dayPrice = $_POST['day_price'];
+  $nightPrice = $_POST['night_price'];
+  $cottageStatus = $_POST['cottage_status'];
+ 
+  $photo = $_FILES['cottage_photo'];
 
-  $filename = $_FILES['photo']['name'];
-  $filetempname = $_FILES['photo']['tmp_name'];
-  $filsize = $_FILES['photo']['size'];
-  $fileerror = $_FILES['photo']['error'];
-  $filetype = $_FILES['photo']['type'];
+  $filename = $_FILES['cottage_photo']['name'];
+  $filetempname = $_FILES['cottage_photo']['tmp_name'];
+  $filsize = $_FILES['cottage_photo']['size'];
+  $fileerror = $_FILES['cottage_photo']['error'];
+  $filetype = $_FILES['cottage_photo']['type'];
 
   $fileext = explode('.', $filename);
   $filetrueext = strtolower(end($fileext));
@@ -44,7 +43,7 @@ if (isset($_POST['addroom'])) {
         }
 
 
-        $savedata = "INSERT INTO room_tbl  VALUES ('',' $roomNumber','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','$filedestination')";
+        $savedata = "INSERT INTO cottage_tbl  VALUES ('', '$cottageStatus','$cottageNumber', '$cottageType', '$noPersons', '$dayPrice', '$nightPrice', '$filedestination')";
 
         $query = (mysqli_query($con, $savedata));
 
@@ -70,6 +69,8 @@ if (isset($_POST['addroom'])) {
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +88,7 @@ if (isset($_POST['addroom'])) {
 
   <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
 
-  <link rel="stylesheet" type="text/css" href="css/add_room.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" type="text/css" href="css/add_cottage.css?v=<?php echo time(); ?>">
   <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
   <title>Add Room</title>
@@ -113,7 +114,7 @@ if (isset($_POST['addroom'])) {
     <div>
       <form action="" method="POST" enctype="multipart/form-data" class="create-room-form">
         <div class="head-label">
-          <label class="header_text">ADD ROOM</label><br>
+          <label class="header_text">ADD COTTAGE</label><br>
         </div>
 
 
@@ -125,13 +126,13 @@ if (isset($_POST['addroom'])) {
           <div class="input_field_holder">
 
 
-            <label for="room_type">Room Number:</label><br>
-            <input type="number" name="room_number" id="room_number" class="input_fields" onkeyup="changeColor(this)"
+            <label>Cottage Number:</label><br>
+            <input type="number" name="cottage_number"  class="input_fields" onkeyup="changeColor(this)"
               required>
             <br>
 
-            <label for="room_type">Room Type:</label><br>
-            <select name="room_type" id="room_type" class="select_fields" onchange="changeColorSelect(this)" required>
+            <label>Cottage Type:</label><br>
+            <select name="cottage_type" id="room_type" class="select_fields" onchange="changeColorSelect(this)" required>
               <option disabled selected value="">Choose an Option</option>
               <option value="Standard">Standard</option>
               <option value="Superior">Superior</option>
@@ -141,41 +142,27 @@ if (isset($_POST['addroom'])) {
             </select>
             <br>
 
-            <label for="bed_type">Bed Type:</label><br>
-            <select name="bed_type" id="bed_type" class="select_fields" onchange="changeColorSelect(this)" required>
-              <option disabled selected value="">Choose an Option</option>
-              <option value="Single bed">Single Bed</option>
-              <option value="Double bed">Double Bed</option>
-              <option value="Queen bed">Queen Bed</option>
-              <option value="King bed">King Bed</option>
-              <option value="California king bed">California King Bed</option>
-              <option value="Sofa bed">Sofa Bed</option>
-              <option value="Murphy bed">Murphy Bed</option>
-              <option value="Bunk bed">Bunk Bed</option>
-            </select>
+         
+
+            <label >Number of Person:</label><br>
+            <input type="number" name="number_of_person" id="bed_quantity" class="input_fields" onkeyup="changeColor(this)"
+              required><br>
+
+              
+            <label >Day Price (₱):</label><br>
+            <input type="number" name="day_price" id="price" class="input_fields" onkeyup="changeColor(this)"
+              required>
             <br>
 
-            <label for="room_type">Number of Bed:</label><br>
-            <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields" onkeyup="changeColor(this)"
-              required><br>
 
-            <label for="room_type">Number of Persons:</label><br>
-            <input type="number" name="no_persons" id="no_persons" class="input_fields" onkeyup="changeColor(this)"
-              required><br>
-
-            <label for="room_type">Amenities:</label><br>
-            <input type="text" name="amenities" id="amenities" class="input_fields" onkeyup="changeColor(this)"
-              required><br>
-
-
-
-            <label for="room_type">Good for 22 hours:</label><br>
-            <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)"
-              placeholder="₱" required>
+            <label >Night Price (₱):</label><br>
+            <input type="number" name="night_price" id="price" class="input_fields" onkeyup="changeColor(this)"
+               required>
             <br>
 
-            <label for="room_type">Status:</label><br>
-            <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)" required>
+
+            <label >Cottage Status:</label><br>
+            <select name="cottage_status" id="status" class="select_fields" onchange="changeColorSelect(this)" required>
               <option disabled selected value="">Choose an Option</option>
               <option value="Available">Available</option>
               <option value="Occupied">Occupied</option>
@@ -217,7 +204,7 @@ if (isset($_POST['addroom'])) {
 
         <div class="line-b">
           <div class="center-label">
-            <label for="room_type">Photo:</label><br>
+            <label for="room_type">Cottage Photo:</label><br>
           </div>
 
           <div class="center-label-image">
@@ -225,11 +212,11 @@ if (isset($_POST['addroom'])) {
           </div>
 
           <div class="center-label">
-            <input type="file" id="photo_input" name="photo" accept="image/*" required><br>
+            <input type="file" id="photo_input" name="cottage_photo" accept="image/*" required><br>
           </div>
 
           <div class="center-label">
-            <button type="submit" name="addroom" class="button1"><i class="fa-solid fa-download"></i> Save</button>
+            <button type="submit" name="addcottage" class="button1"><i class="fa-solid fa-download"></i> Save</button>
           </div>
         </div>
       </form>

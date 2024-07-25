@@ -73,6 +73,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- for header -->
     <?php include 'header.php' ?>
+    
 
     <!-- home page -->
     <main class="profile-main">

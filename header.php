@@ -168,7 +168,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
     <a id="submenu1"><i class="fa-solid fa-calendar"></i> Reservation <i class="fa-solid fa-caret-down"></i></a>
     <div class="submenu" id="subMenuContent1">
-        <a href="#"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
+        <a href="reservationCottage.php"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
         <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
     </div>
 

@@ -1,0 +1,217 @@
+
+
+/* body */
+
+
+.image-holder{
+    height: 300px;
+    min-width: 300px;
+    border: 1px  rgb(74, 74, 74);
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    box-shadow:  0 1px 1px rgb(224, 224, 224);
+    padding: 5px;
+}
+
+.image-holder img{
+border-radius: 2px;
+}
+
+
+.form-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 93.5vh;
+    background-color: #002334;
+}
+
+.create-room-form {
+    height: 80vh;
+    width: 180vh;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    border: 1px solid rgb(156, 156, 156);
+    display: grid;
+    grid-template-columns: .1fr 1fr .1fr .01fr  .1fr 1fr .1fr;
+    grid-template-rows: .05fr .2fr .05fr 2fr .2fr ;
+}
+
+.head-label{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    grid-column-start: 3;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.line-a{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+
+.return-btn{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.return-btn a{
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid ;
+    background-color:#5a5a5a ;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgb(138, 138, 138);
+    text-decoration: none;
+}
+
+.return-btn a:hover{
+    background-color:#363636 ;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.line-b{
+    grid-column-start: 5;
+    grid-column-end: 7;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+.create-room-form label{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+
+.input_fields{
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(80, 80, 80);
+
+}
+
+.input_fields.has-value{
+    background-color: #effaff;
+}
+
+.input_fields:hover{
+    box-shadow: 0 0 4px rgb(100, 100, 255);
+    transition: 0.3s;
+}
+
+.select_fields{
+    width: 304px;
+    height: 34px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(80, 80, 80);
+}
+
+
+.select_fields.has-value{
+    background-color: #effaff;
+}
+
+.select_fields:hover{
+    box-shadow: 0 0 4px rgb(100, 100, 255);
+    transition: 0.3s;
+}
+
+
+.center-label{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.center-label-image{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.header_text{
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 0 1px 1px;
+}
+
+.button1{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color:#005ea6;
+    border: 2px solid #00518f;
+    font-size: 15px;
+}
+
+.button1:hover{
+    color: white;
+    background-color: #004377;
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+
+
+/* peso sign */
+
+.price {
+    position: relative;
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+  }
+  
+  .currency {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }

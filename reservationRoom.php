@@ -63,8 +63,8 @@ if (isset($_GET['manage_id'])) {
             <div class="home-content">
                 <div>
                     <div class="wave-text">
-                        <h2>Make a Reservation</h2>
-                        <h2>Make a Reservation</h2>
+                        <h2>Room Reservation</h2>
+                        <h2>Room Reservation</h2>
                     </div>
                 </div>
             </div>
