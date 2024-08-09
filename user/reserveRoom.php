@@ -2,14 +2,7 @@
 include ('db_connect.php');
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location:../login.php');
-    exit();
-}
 
-if (isset($_POST['logout'])) {
-    header('location: ../logout.php');
-}
 
 
 if (isset($_GET['manage_id'])) {
@@ -90,336 +83,90 @@ if (isset($_GET['manage_id'])) {
 
 
 
-                <!-- for standard room                            -->
+                <?php
+
+                // Define a function to display rooms based on room type
+                function displayRooms($con, $roomType, $slideNum, $slideClass)
+                {
+                    // Construct SQL query to fetch rooms of a specific type from the database
+                    $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$roomType'";
+                    $result = mysqli_query($con, $fetchdata);
+
+                    // Output the HTML structure for displaying rooms
+                    echo '
+    <div class="content-center">
+        <div class="container">
+            <div class="slide-wrapper' . $slideNum . '">
+                <button id="prev-slide" class="' . $slideClass . '"></button>
+                <div class="list-container">';
+
+                    // Loop through the fetched room data
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        // Store room details in variables
+                        $id = $row['id'];
+                        $roomNumber = $row['room_number'];
+                        $roomType = $row['room_type'];
+                        $bedType = $row['bed_type'];
+                        $bed_quantity = $row['bed_quantity'];
+                        $noPersons = $row['no_persons'];
+                        $amenities = $row['amenities'];
+                        $price = $row['price'];
+                        $status = $row['status'];
+                        $photo = $row['photo'];
+
+                        // Include file to display room details
+                        include 'roomDetails.php';
+                    }
+
+                    // Output the rest of the HTML structure for room display
+                    echo '
+                </div>
+                <button id="next-slide" class="' . $slideClass . '"></button>
+            </div>
+            <div class="slider-scrollbar' . $slideNum . '">
+                <div class="scrollbar-track' . $slideNum . '">
+                    <div class="scrollbar-thumb' . $slideNum . '"></div>
+                </div>
+            </div>
+        </div>
+    </div>';
+                }
+
+                ?>
 
                 <div class="content-sub-header" id="standard">
                     <label>STANDARD ROOMS</label>
                 </div> <!-- for content sub header -->
 
+                <?php displayRooms($con, 'Standard', 1, 'slide-button1'); // Display Standard Rooms ?>
 
-
-                <div class="content-center">
-                    <div class="container">
-                        <div class="slide-wrapper1">
-                            <button id="prev-slide" class="slide-button1"></button>
-
-                            <div class="list-container">
-                                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Standard'";
-                                $result = mysqli_query($con, $fetchdata);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $roomNumber = $row['room_number'];
-                                    $roomType = $row['room_type'];
-                                    $bedType = $row['bed_type'];
-                                    $bed_quantity = $row['bed_quantity'];
-                                    $noPersons = $row['no_persons'];
-                                    $amenities = $row['amenities'];
-                                    $price = $row['price'];
-                                    $status = $row['status'];
-                                    $photo = $row['photo'];
-                                    ?>
-
-                                    <?php
-                                    include 'roomDetails.php'
-                                        ?>
-
-                                <?php } ?>
-
-                            </div>
-                            <button id="next-slide" class="slide-button1"></button>
-                        </div>
-
-                        <div class="slider-scrollbar1">
-                            <div class="scrollbar-track1">
-                                <div class="scrollbar-thumb1"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> <!-- for content center -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- for superior room   -->
                 <div class="content-sub-header" id="superior">
                     <label>SUPERIOR ROOMS</label>
-                </div> <!-- for content sub header -->
+                </div>
 
+                <?php displayRooms($con, 'Superior', 2, 'slide-button2'); // Display Superior Rooms ?>
 
-
-                <div class="content-center">
-                    <div class="container">
-                        <div class="slide-wrapper2">
-                            <button id="prev-slide" class="slide-button2"></button>
-
-                            <div class="list-container">
-                                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Superior'";
-                                $result = mysqli_query($con, $fetchdata);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $roomNumber = $row['room_number'];
-                                    $roomType = $row['room_type'];
-                                    $bedType = $row['bed_type'];
-                                    $bed_quantity = $row['bed_quantity'];
-                                    $noPersons = $row['no_persons'];
-                                    $amenities = $row['amenities'];
-                                    $price = $row['price'];
-                                    $status = $row['status'];
-                                    $photo = $row['photo'];
-                                    ?>
-                                    <?php
-                                    include 'roomDetails.php'
-                                        ?>
-                                <?php } ?>
-
-                            </div>
-                            <button id="next-slide" class="slide-button2"></button>
-                        </div>
-
-                        <div class="slider-scrollbar2">
-                            <div class="scrollbar-track2">
-                                <div class="scrollbar-thumb2"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> <!-- for content center -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- for family room   -->
                 <div class="content-sub-header" id="family">
                     <label>FAMILY ROOMS</label>
-                </div> <!-- for content sub header -->
+                </div>
 
+                <?php displayRooms($con, 'Family', 3, 'slide-button3'); // Display Family Rooms ?>
 
-
-                <div class="content-center">
-                    <div class="container">
-                        <div class="slide-wrapper3">
-                            <button id="prev-slide" class="slide-button3"></button>
-
-                            <div class="list-container">
-                                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Family'";
-                                $result = mysqli_query($con, $fetchdata);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $roomNumber = $row['room_number'];
-                                    $roomType = $row['room_type'];
-                                    $bedType = $row['bed_type'];
-                                    $bed_quantity = $row['bed_quantity'];
-                                    $noPersons = $row['no_persons'];
-                                    $amenities = $row['amenities'];
-                                    $price = $row['price'];
-                                    $status = $row['status'];
-                                    $photo = $row['photo'];
-                                    ?>
-                                    <?php
-                                    include 'roomDetails.php'
-                                        ?>
-                                <?php } ?>
-
-                            </div>
-                            <button id="next-slide" class="slide-button3"></button>
-                        </div>
-
-                        <div class="slider-scrollbar3">
-                            <div class="scrollbar-track3">
-                                <div class="scrollbar-thumb3"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> <!-- for content center -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- for barkadahan room   -->
                 <div class="content-sub-header" id="barkadahan">
                     <label>BARKADAHAN ROOMS</label>
-                </div> <!-- for content sub header -->
+                </div>
 
+                <?php displayRooms($con, 'Barkadahan', 4, 'slide-button4'); // Display Barkadahan Rooms ?>
 
-
-                <div class="content-center">
-                    <div class="container">
-                        <div class="slide-wrapper4">
-                            <button id="prev-slide" class="slide-button4"></button>
-
-                            <div class="list-container">
-                                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Barkadahan'";
-                                $result = mysqli_query($con, $fetchdata);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $roomNumber = $row['room_number'];
-                                    $roomType = $row['room_type'];
-                                    $bedType = $row['bed_type'];
-                                    $bed_quantity = $row['bed_quantity'];
-                                    $noPersons = $row['no_persons'];
-                                    $amenities = $row['amenities'];
-                                    $price = $row['price'];
-                                    $status = $row['status'];
-                                    $photo = $row['photo'];
-                                    ?>
-
-                                    <?php
-                                    include 'roomDetails.php'
-                                        ?>
-
-                                <?php } ?>
-
-                            </div>
-                            <button id="next-slide" class="slide-button4"></button>
-                        </div>
-
-                        <div class="slider-scrollbar4">
-                            <div class="scrollbar-track4">
-                                <div class="scrollbar-thumb4"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> <!-- for content center -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- for Exclusive suite room   -->
                 <div class="content-sub-header" id="exclusive">
                     <label>EXCLUSIVE SUITES</label>
-                </div> <!-- for content sub header -->
+                </div>
 
-
-
-                <div class="content-center">
-                    <div class="container">
-                        <div class="slide-wrapper5">
-                            <button id="prev-slide" class="slide-button5"></button>
-
-                            <div class="list-container">
-                                <?php $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Exclusive Suite'";
-                                $result = mysqli_query($con, $fetchdata);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $roomNumber = $row['room_number'];
-                                    $roomType = $row['room_type'];
-                                    $bedType = $row['bed_type'];
-                                    $bed_quantity = $row['bed_quantity'];
-                                    $noPersons = $row['no_persons'];
-                                    $amenities = $row['amenities'];
-                                    $price = $row['price'];
-                                    $status = $row['status'];
-                                    $photo = $row['photo'];
-                                    ?>
-
-                                    <?php
-                                    include 'roomDetails.php'
-                                        ?>
-
-                                <?php } ?>
-
-                            </div>
-                            <button id="next-slide" class="slide-button5"></button>
-                        </div>
-
-                        <div class="slider-scrollbar5">
-                            <div class="scrollbar-track5">
-                                <div class="scrollbar-thumb5"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> <!-- for content center -->
-
-
+                <?php displayRooms($con, 'Exclusive Suite', 5, 'slide-button5'); // Display Exclusive Suites ?>
 
             </div> <!-- for real sub container -->
         </div>
     </div> <!-- for real container -->
-
-
-
 
 </body>
 

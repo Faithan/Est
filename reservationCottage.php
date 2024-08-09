@@ -25,7 +25,7 @@ if (isset($_GET['manage_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
 
     <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
@@ -38,13 +38,13 @@ if (isset($_GET['manage_id'])) {
     <script src="landing_js/scroll.js" defer></script>
 
     <!-- important additional css -->
-    <?php 
+    <?php
     include 'important.php'
-    ?>
+        ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/reservationCottage.css?v=<?php echo time(); ?>">
-    
+
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>Cottage Reservation</title>
 
@@ -89,11 +89,11 @@ if (isset($_GET['manage_id'])) {
                 </select>
             </div>
 
-        
 
 
 
-      
+
+
         </div>
 
         <div class="search-bar-container">
@@ -115,28 +115,22 @@ if (isset($_GET['manage_id'])) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     <main class="rooms-main-container">
         <div class="wrapper-main">
 
-            <!-- for standard room-->
-            <div class="content-sub-header" id="standard">
-                <label>Standard Cottages</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = 'Standard'";
+            <?php
+            // Function to display cottages of a specific type
+            function displayCottageType($con, $cottageType, $headerLabel)
+            {
+                $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = '$cottageType'";
                 $result = mysqli_query($con, $fetchdata);
+
+                echo '<div class="content-sub-header" id="' . strtolower($cottageType) . '">
+                    <label>' . $headerLabel . '</label>
+                 </div>'; // Header for the cottage type
+            
+                echo '<div class="content-center">';
+
                 while ($row = mysqli_fetch_assoc($result)) {
                     $cottage_id = $row['cottage_id'];
                     $cottageNumber = $row['cottage_number'];
@@ -145,142 +139,22 @@ if (isset($_GET['manage_id'])) {
                     $dayPrice = $row['day_price'];
                     $nightPrice = $row['night_price'];
                     $photo = $row['cottage_photo'];
-                    
-                    ?>
 
-                    <?php
-                    include 'cottageDetails.php'
-                        ?>
+                    include 'cottageDetails.php'; // Include cottage details template
+                }
+                echo '</div>'; // Close content-center
+            }
 
-                <?php } ?>
-            </div> <!-- for content center -->
+            // Display different types of cottages
+            displayCottageType($con, 'Standard', 'Standard Cottages');
+            displayCottageType($con, 'Superior', 'Superior Cottages');
+            displayCottageType($con, 'Family', 'Family Cottages');
+            displayCottageType($con, 'Barkadahan', 'Barkadahan Cottages');
+            displayCottageType($con, 'Exclusive', 'Exclusive Cottages');
+            ?>
 
-
-
-
-
-
-             <!-- for superior cottages-->
-             <div class="content-sub-header" id="superior">
-                <label>Superior Cottages</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = 'Superior'";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $cottage_id = $row['cottage_id'];
-                    $cottageNumber = $row['cottage_number'];
-                    $cottageType = $row['cottage_type'];
-                    $noPersons = $row['number_of_person'];
-                    $dayPrice = $row['day_price'];
-                    $nightPrice = $row['night_price'];
-                    $photo = $row['cottage_photo'];
-                    
-                    ?>
-
-                    <?php
-                    include 'cottageDetails.php'
-                        ?>
-
-                <?php } ?>
-            </div> <!-- for content center -->
-
-
-
-            <!-- for Family cottages-->
-            <div class="content-sub-header" id="family">
-                <label>Family Cottages</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = 'Family'";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $cottage_id = $row['cottage_id'];
-                    $cottageNumber = $row['cottage_number'];
-                    $cottageType = $row['cottage_type'];
-                    $noPersons = $row['number_of_person'];
-                    $dayPrice = $row['day_price'];
-                    $nightPrice = $row['night_price'];
-                    $photo = $row['cottage_photo'];
-                    
-                    ?>
-
-                    <?php
-                    include 'cottageDetails.php'
-                        ?>
-
-                <?php } ?>
-            </div> <!-- for content center -->
-
-
-
-
-          
-            <!-- for barkadahan cottages-->
-            <div class="content-sub-header" id="barkadahan">
-                <label>Barkadahan Cottages</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = 'Barkadahan'";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $cottage_id = $row['cottage_id'];
-                    $cottageNumber = $row['cottage_number'];
-                    $cottageType = $row['cottage_type'];
-                    $noPersons = $row['number_of_person'];
-                    $dayPrice = $row['day_price'];
-                    $nightPrice = $row['night_price'];
-                    $photo = $row['cottage_photo'];
-                    
-                    ?>
-
-                    <?php
-                    include 'cottageDetails.php'
-                        ?>
-
-                <?php } ?>
-            </div> <!-- for content center -->
-
-
-              <!-- for exclusive cottages-->
-              <div class="content-sub-header" id="exclusive">
-                <label>Exclusive Cottages</label>
-            </div> <!-- for content sub header -->
-
-            <div class="content-center">
-                <?php $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = 'Exclusive'";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $cottage_id = $row['cottage_id'];
-                    $cottageNumber = $row['cottage_number'];
-                    $cottageType = $row['cottage_type'];
-                    $noPersons = $row['number_of_person'];
-                    $dayPrice = $row['day_price'];
-                    $nightPrice = $row['night_price'];
-                    $photo = $row['cottage_photo'];
-                    
-                    ?>
-
-                    <?php
-                    include 'cottageDetails.php'
-                        ?>
-
-                <?php } ?>
-            </div> <!-- for content center -->
-
-
-
-
-
-
-
-        </div>
+        </div> <!-- Close wrapper-main -->
     </main>
-
-
 
 
 
