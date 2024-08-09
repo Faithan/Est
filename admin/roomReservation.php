@@ -185,7 +185,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 
@@ -296,7 +296,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 
@@ -409,7 +409,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 
@@ -522,7 +522,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 
@@ -634,7 +634,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 
@@ -744,7 +744,7 @@ include 'header.php'
                     $bed_quantity = $row['bed_quantity'];
                     $number_of_person = $row['number_of_person'];
                     $amenities = $row['amenities'];
-                    $rate_per_hour = $row['rate_per_hour'];
+                    $rate_per_hour = $row['price'];
                     $photo = $row['photo'];
                     $special_request = $row['special_request'];
 

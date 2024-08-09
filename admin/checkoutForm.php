@@ -20,7 +20,7 @@ $manage_data = [
     'room_type' => '',
     'number_of_person' => '',
     'amenities' => '',
-    'rate_per_hour' => '',
+    'price' => '',
     'special_request' => '',
     'reservation_type' => '',
     'photo' => ''
@@ -144,8 +144,8 @@ if (isset($_GET['manage_id'])) {
 
                                 <div>
                                     <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                    <input type="number" name="rate_per_hour"
-                                        value="<?php echo $manage_data['rate_per_hour']; ?>" disabled>
+                                    <input type="number" name="price"
+                                        value="<?php echo $manage_data['price']; ?>" disabled>
                                 </div>
 
 

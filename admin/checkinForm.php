@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
-$manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'rate_per_hour' => '', 'special_request' => '', 'photo' => ''];
+$manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'price' => '', 'special_request' => '', 'photo' => ''];
 
 
 $message = "";
@@ -39,7 +39,7 @@ if (isset($_POST['checkedin'])) {
     $bed_quantity = $_POST['bed_quantity'];
     $number_of_person = $_POST['number_of_person'];
     $amenities = $_POST['amenities'];
-    $rate_per_hour = $_POST['rate_per_hour'];
+    $price = $_POST['price'];
     $special_request = $_POST['special_request'];
     $reservation_fee = $_POST['reservation_fee'];
     $extraBed = $_POST['extra_bed'];
@@ -47,7 +47,7 @@ if (isset($_POST['checkedin'])) {
     $totalFee = $_POST['total_fee'];
 
     $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
-    room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
+    room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , price='$price', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
         'reserve_id' => '',
@@ -65,7 +65,7 @@ if (isset($_POST['checkedin'])) {
         'bed_quantity' => '',
         'number_of_person' => '',
         'amenities' => '',
-        'rate_per_hour' => '',
+        'price' => '',
         'special_request' => '',
         'reservation_fee' => '',
         'reservation_type' => '',
@@ -271,8 +271,8 @@ if (isset($_POST['checkedin'])) {
 
                             <div>
                                 <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" readonly>
+                                <input type="number" name="price"
+                                    value="<?php echo $manage_data['price']; ?>" readonly>
                             </div>
 
 

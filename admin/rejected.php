@@ -20,7 +20,7 @@ $manage_data = [
     'room_type' => '',
     'number_of_person' => '',
     'amenities' => '',
-    'rate_per_hour' => '',
+    'price' => '',
     'special_request' => '',
     'reservation_type' => '',
     'photo' => ''
@@ -47,7 +47,7 @@ if (isset($_POST['confirm'])) {
     $room_type = $_POST['room_type'];
     $number_of_person = $_POST['number_of_person'];
     $amenities = $_POST['amenities'];
-    $rate_per_hour = $_POST['rate_per_hour'];
+    $rate_per_hour = $_POST['price'];
     $special_request = $_POST['special_request'];
     $reservation_fee = $_POST['reservation_fee'];
     $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', room_type='$room_type', number_of_person='$number_of_person', amenities='$amenities' , rate_per_hour='$rate_per_hour', special_request='$special_request', reservation_fee='$reservation_fee'  WHERE reserve_id='$reserve_id'";
@@ -166,8 +166,8 @@ if (isset($_POST['confirm'])) {
 
                             <div>
                                 <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                <input type="number" name="rate_per_hour"
-                                    value="<?php echo $manage_data['rate_per_hour']; ?>" disabled>
+                                <input type="number" name="price"
+                                    value="<?php echo $manage_data['price']; ?>" disabled>
                             </div>
 
 
