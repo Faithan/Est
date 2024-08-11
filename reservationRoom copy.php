@@ -156,26 +156,35 @@ if (isset($_GET['manage_id'])) {
 
 
 
-            <!-- start of room container -->
+                        <!-- start of room container -->
             <div class="rooms-container">
 
 
                 <!-- start of room holder -->
                 <div class="rooms-holder">
-                    <?php
-                    $roomTypesQuery = "SELECT DISTINCT room_type_name FROM room_type_tbl";
-                    $roomTypesResult = mysqli_query($con, $roomTypesQuery);
-                    while ($typeRow = mysqli_fetch_assoc($roomTypesResult)) {
+                    <div class="title-head">
+                        <label>Standard</label>
+                    </div>
 
-                        $room_type = $typeRow['room_type_name'];
-                        echo '<div class="title-head">';
-                        echo "<label>$room_type</label>";
-                        echo '</div>';
+                    <div class="room-first-container">
+                        <?php
 
-                        
-                        echo '<div class="room-first-container">';
 
-                        $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$room_type'";
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                            // User is logged in, so the anchor tag is clickable
+                            // This is just an example, replace with the actual ID value
+                            $href = "reservationForm.php?manage_id=" . $id;
+                            $button_text = "Book Now";
+                        } else {
+                            // User is not logged in, anchor tag is disabled
+                            $href = "";
+                            $button_text = "Login to Book";
+                        }
+
+
+
+
+                        $fetchdata = "SELECT * FROM room_tbl WHERE room_type = 'Standard'";
                         $result = mysqli_query($con, $fetchdata);
                         while ($row = mysqli_fetch_assoc($result)) {
                             $id = $row['id'];
@@ -194,11 +203,13 @@ if (isset($_GET['manage_id'])) {
 
                                 <img src="<?php echo $photo ?>" alt="">
 
+
                                 <div class="info-container">
                                     <div class="room-details"><label for="bold-text">Price: </label> <label for="bold-text">
                                             <p>₱ <?php echo $price ?></p>
                                         </label></div>
-                                    <div class="room-details"><label for="bold-text">Room Type: </label> <label for="bold-text">
+                                    <div class="room-details"><label for="bold-text">Room Type: </label> <label
+                                            for="bold-text">
                                             <p><?php echo $roomType ?></p>
                                         </label></div>
                                     <div class="room-details"><label for="">Bed Type: </label> <label for="">
@@ -216,20 +227,12 @@ if (isset($_GET['manage_id'])) {
                                 </div>
 
                                 <div class="button-container">
-                                    <?php
-                                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                                        $href = "reservationForm.php?manage_id=" . $id;
-                                        $button_text = "Book Now";
-                                    } else {
-                                        $href = "";
-                                        $button_text = "Login to Book";
-                                    }
-                                    ?>
+
                                     <a href="<?php echo $href; ?>" name="book_now">
                                         <button class="button" <?php if (empty($href))
                                             echo 'disabled'; ?>>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
-                                                fill="none" class="svg-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
+                                                height="24" fill="none" class="svg-icon">
                                                 <g stroke-width="2" stroke-linecap="round" stroke="#fff">
                                                     <rect y="5" x="4" width="16" rx="2" height="16"></rect>
                                                     <path d="m8 3v4"></path>
@@ -241,12 +244,17 @@ if (isset($_GET['manage_id'])) {
                                         </button>
                                     </a>
                                 </div>
+
+
+
                             </div>
+
                         <?php } ?>
-                        </div>d
-                    <?php } ?>
+
+                    </div>
+
                 </div>
-                <!-- end of room holder -->
+                <!-- end of room holder-->
 
             </div>
             <!-- end of room container -->

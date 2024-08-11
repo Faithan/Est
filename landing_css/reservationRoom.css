@@ -79,16 +79,6 @@ body {
 }
 
 
-/* rooms container */
-
-.rooms-container{
-
-    flex-grow: 1;
-    margin: 20px;
-    background-color: var(--first-color);
-    overflow-x: scroll;
-}
-
 
 
 /* mobile header */
@@ -161,7 +151,6 @@ body {
 
 /* select category */
 
-/*the container must be positioned relative:*/
 .custom-select-pc{
     position: relative;
 }
@@ -174,12 +163,6 @@ body {
     color: var(--seventh-color);
 }
 
-.custom-select-pc select option{
-  
-   
-}
-
-
 
 
 
@@ -187,7 +170,97 @@ body {
 
 
 
+/* rooms container */
 
+.rooms-container{
+
+    flex-grow: 1;
+    margin: 20px;
+    background-color: var(--first-color);
+    overflow-x: scroll;
+    flex-wrap: wrap;
+    justify-content: space-between;  /* Distribute items evenly */
+}
+
+
+/* rooms-holder */
+.rooms-holder{
+    padding: 20px;
+}
+
+
+.title-head{
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.title-head label {
+    font-size: 2rem;
+    font-weight: bold;     /* Make the text bold */
+    color: var(--seventh-color);/* Add more styling properties as needed */
+}
+
+
+/* rooms */
+
+.room-first-container{
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+}
+
+.rooms{
+    flex: 1 0 20%;  /* Ensure 4 items per row by setting each item to 20% width */
+    max-width: 250px;  /* Set maximum width per item */
+    box-sizing: border-box;  /* Include padding and borders in the box's total width and height */
+    margin-bottom: 10px; /* Add margin at the bottom for spacing */
+    display: flex;
+    flex-direction: column;
+    height: 330px;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    box-shadow: 0 0 4px var(--box-shadow);
+}
+
+
+.rooms label{
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: var(--seventh-color);
+}
+
+.rooms img{
+    height: 150px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+.rooms .info-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px ;
+    height: 120px;
+    overflow-y: scroll;
+}
+
+.info-container .room-details{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.room-details label{
+    font-size: 1.2rem;
+}
+
+.room-details p{
+    font-size: 1.2rem;
+}
+
+.room-details label[for="bold-text"]{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
 
 
 
@@ -277,6 +350,122 @@ input:hover {
 
 
 
+
+
+/* for button  must not touch*/
+
+
+
+.items button:hover {
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 9px 12px;
+    gap: 8px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
+    font-size: 1.5rem;
+    border: 1px solid var(--booknow-border);
+}
+
+
+.button:hover {
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+.lable {
+    line-height: 22px;
+    font-size: 12px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+
+.button:hover .svg-icon {
+    animation: slope 1s linear infinite;
+
+}
+
+/* CSS to change the color of the SVG icon */
+.svg-icon path,
+.svg-icon rect {
+    stroke: var(--booknow-text);
+    /* Change "red" to the desired color */
+}
+
+@keyframes slope {
+    0% {}
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% {}
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    justify-content: center;
+}
+
+
+.button-container a {
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* might be deleted below. but must not touch first */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* rooms box */
 .items {
     padding-bottom: 10px;
@@ -358,6 +547,10 @@ input:hover {
     justify-content: space-between;
 
 }
+
+
+
+
 
 
 
