@@ -33,7 +33,7 @@ if (isset($_GET['manage_id'])) {
     <!-- javascript -->
     <script src="landing_js/wavingtext.js" defer></script>
     <script src="landing_js/mobileMenu.js" defer></script>
-    <!-- <script src="landing_js/selectCategory.js" defer></script> -->
+    <!-- <script src="landing_js/selectCategory2.js" defer></script> -->
     <!-- <script src="landing_js/reserveRoom.js" defer></script> -->
     <script src="landing_js/scroll.js" defer></script>
 
@@ -78,7 +78,9 @@ if (isset($_GET['manage_id'])) {
             <div class="category-container">
                 <div class="select-container">
 
-                    <div class="custom-select-pc">
+                   
+
+                    <div class=" custom-select-pc">
 
 
 
@@ -89,7 +91,7 @@ if (isset($_GET['manage_id'])) {
                         $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
                         $result = $con->query($sql);
 
-                        $selectBox = "<select name='room_type' id='roomTypeSelect' onchange='scrollToDiv()'>";
+                        $selectBox = "<select name='room_type' id='roomTypeSelect' onchange='filterRooms()'>";
                         $selectBox .= "<option disabled selected value=''>Select a Room Type</option>";
 
                         if ($result->num_rows > 0) {
@@ -165,18 +167,20 @@ if (isset($_GET['manage_id'])) {
                     <?php
                     $roomTypesQuery = "SELECT DISTINCT room_type_name FROM room_type_tbl";
                     $roomTypesResult = mysqli_query($con, $roomTypesQuery);
-                    while ($typeRow = mysqli_fetch_assoc($roomTypesResult)) {
+                    $roomTypeCount = 1;
 
+                    while ($typeRow = mysqli_fetch_assoc($roomTypesResult)) {
                         $room_type = $typeRow['room_type_name'];
-                        echo '<div class="title-head">';
+                        $room_type_id = 'roomType' . $roomTypeCount; // Creating a unique ID for each room type
+                        echo "<div class='title-head' id='$room_type_id'>";
                         echo "<label>$room_type</label>";
                         echo '</div>';
 
-                        
                         echo '<div class="room-first-container">';
 
                         $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$room_type'";
                         $result = mysqli_query($con, $fetchdata);
+
                         while ($row = mysqli_fetch_assoc($result)) {
                             $id = $row['id'];
                             $roomNumber = $row['room_number'];
@@ -195,24 +199,27 @@ if (isset($_GET['manage_id'])) {
                                 <img src="<?php echo $photo ?>" alt="">
 
                                 <div class="info-container">
-                                    <div class="room-details"><label for="bold-text">Price: </label> <label for="bold-text">
-                                            <p>₱ <?php echo $price ?></p>
-                                        </label></div>
-                                    <div class="room-details"><label for="bold-text">Room Type: </label> <label for="bold-text">
-                                            <p><?php echo $roomType ?></p>
-                                        </label></div>
-                                    <div class="room-details"><label for="">Bed Type: </label> <label for="">
-                                            <p><?php echo $bedType ?></p>
-                                        </label></div>
-                                    <div class="room-details"><label for="">Room Number: </label> <label for="">
-                                            <p> <?php echo $roomNumber ?></p>
-                                        </label></div>
-                                    <div class="room-details"><label for="">No. of Beds: </label> <label for="">
-                                            <p> <?php echo $bed_quantity ?></p>
-                                        </label></div>
-                                    <div class="room-details"><label for="">No. of Persons: </label> <label for="">
-                                            <p><?php echo $noPersons ?></p>
-                                        </label></div>
+                                    <div class="room-details"><label for="bold-text">Price : </label>
+                                        <p for="bold-text">₱ <?php echo $price ?></p>
+                                    </div>
+                                    <div class="room-details" id="good-for">
+                                        <p><em>Good For 22hours</em></p>
+                                    </div>
+                                    <div class="room-details"><label for="">Room Type: </label>
+                                        <p><?php echo $roomType ?></p>
+                                    </div>
+                                    <div class="room-details"><label for="">Bed Type: </label>
+                                        <p><?php echo $bedType ?></p>
+                                    </div>
+                                    <div class="room-details"><label for="">Room Number: </label>
+                                        <p> <?php echo $roomNumber ?></p>
+                                    </div>
+                                    <div class="room-details"><label for="">No. of Beds: </label>
+                                        <p> <?php echo $bed_quantity ?></p>
+                                    </div>
+                                    <div class="room-details"><label for="">No. of Persons: </label>
+                                        <p><?php echo $noPersons ?></p>
+                                    </div>
                                 </div>
 
                                 <div class="button-container">
@@ -242,15 +249,29 @@ if (isset($_GET['manage_id'])) {
                                     </a>
                                 </div>
                             </div>
-                        <?php } ?>
-                        </div>d
-                    <?php } ?>
+                            <?php
+                        }
+
+                        echo '</div>'; // Close room-first-container
+                        $roomTypeCount++;
+                    }
+
+                    ?>
                 </div>
                 <!-- end of room holder -->
 
             </div>
             <!-- end of room container -->
         </div>
+
+
+
+
+
+
+
+
+
 
 
 

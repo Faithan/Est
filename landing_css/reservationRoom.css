@@ -173,7 +173,7 @@ body {
 /* rooms container */
 
 .rooms-container{
-
+    border-radius: 3px;
     flex-grow: 1;
     margin: 20px;
     background-color: var(--first-color);
@@ -257,9 +257,24 @@ body {
     font-size: 1.2rem;
 }
 
-.room-details label[for="bold-text"]{
+.room-details label[for="bold-text"],
+.room-details p[for="bold-text"]{
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+}
+
+#good-for{
+    justify-content: flex-end;
+    padding-bottom: 5px;
+   
+}
+
+#good-for p{
+    font-size: 1rem;
+}
+ 
+em{
+    font-style: italic;
 }
 
 
@@ -938,7 +953,7 @@ For larger desktops and laptops:
         background-color: var(--first-color);
         display: flex;
         flex-direction: column;
-        gap: 10px;
+       
     }
 
 
@@ -951,7 +966,7 @@ For larger desktops and laptops:
     .items {
         padding-bottom: 10px;
         background-color: var(--first-color);
-
+        margin-bottom: 10px;
         justify-content: center;
         text-align: center;
         border-radius: 5px;

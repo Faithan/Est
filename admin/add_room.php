@@ -137,7 +137,7 @@ if (isset($_POST['addroom'])) {
               <option value="Superior">Superior</option>
               <option value="Family">Family</option>
               <option value="Barkadahan">Barkadahan</option>
-              <option value="Exclusive Suite">Exclusive Suite</option>
+              <option value="Exclusive">Exclusive Suite</option>
             </select>
             <br>
 
