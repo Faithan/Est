@@ -64,9 +64,13 @@ body {
 .category-container{
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 2px 10px 10px 2px;
     top: 0;
     z-index: 900;
+    background-color: var(--first-color2);
+    position: -webkit-sticky;
+    position: sticky;
+    box-shadow: 0 1px 5px var(--box-shadow);
 }
 
 .select-container{
@@ -77,6 +81,17 @@ body {
 .search-bar-container{
     float: right;
 }
+
+
+/* no room message */
+.no-rooms-message {
+    text-align: center;
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
 
 
 
@@ -173,11 +188,14 @@ body {
 /* rooms container */
 
 .rooms-container{
+    max-height: 80vh; /* Adjust the height as needed */
+    position: relative;
     border-radius: 3px;
     flex-grow: 1;
-    margin: 20px;
+    margin: 0 20px 20px 20px;
     background-color: var(--first-color);
     overflow-x: scroll;
+    overflow-y: none;
     flex-wrap: wrap;
     justify-content: space-between;  /* Distribute items evenly */
 }
@@ -231,6 +249,7 @@ body {
 
 .rooms img{
     height: 150px;
+    width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }

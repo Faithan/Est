@@ -33,7 +33,7 @@ if (isset($_GET['manage_id'])) {
     <!-- javascript -->
     <script src="landing_js/wavingtext.js" defer></script>
     <script src="landing_js/mobileMenu.js" defer></script>
-    <!-- <script src="landing_js/selectCategory2.js" defer></script> -->
+
     <!-- <script src="landing_js/reserveRoom.js" defer></script> -->
     <script src="landing_js/scroll.js" defer></script>
 
@@ -75,91 +75,179 @@ if (isset($_GET['manage_id'])) {
                 <label for=""> room reservation</label>
             </div>
 
-            <div class="category-container">
-                <div class="select-container">
-
-                   
-
-                    <div class=" custom-select-pc">
-
-
-
-                        <?php
-                        // Assuming you've included the necessary database connection file
-                        
-                        // Query to select distinct room type names
-                        $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
-                        $result = $con->query($sql);
-
-                        $selectBox = "<select name='room_type' id='roomTypeSelect' onchange='filterRooms()'>";
-                        $selectBox .= "<option disabled selected value=''>Select a Room Type</option>";
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
-                                $selectBox .= "<option value='" . $roomType . "'>" . $roomType . "</option>";
-                            }
-                        } else {
-                            $selectBox .= "<option value=''>No room types found.</option>";
-                        }
-
-                        $selectBox .= "</select>";
-
-                        echo $selectBox;
-                        ?>
-                    </div>
-
-
-
-                    <div class="custom-select-pc">
-                        <?php
-                        // Assuming you've included the necessary database connection file
-                        
-                        // Query to select distinct bed type names
-                        $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
-                        $result = $con->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            echo "<select name='bed_type' id='bedTypeSelect'>";
-                            echo "<option disabled selected value=''>Select a Bed Type</option>";
-
-                            while ($row = $result->fetch_assoc()) {
-                                $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
-                                echo "<option value='" . $bedType . "'>" . $bedType . "</option>";
-                            }
-                            echo "</select>";
-                        } else {
-                            echo "<select name='bed_type' id='bedTypeSelect'>";
-                            echo "<option disabled selected value=''>Select a Bed Type</option>";
-                            echo "<option value=''>No bed types found.</option>";
-                            echo "</select>";
-                        }
-                        ?>
-
-                    </div>
-
-                </div>
-
-                <div class="search-bar-container">
-                    <div>
-                        <div class="group">
-                            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <g>
-                                    <path
-                                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                                    </path>
-                                </g>
-                            </svg>
-                            <input placeholder="Search" type="search" class="search-input">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 
             <!-- start of room container -->
             <div class="rooms-container">
+
+                <div class="category-container">
+                    <div class="select-container">
+
+
+                        <div class=" custom-select-pc">
+
+
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct room type names
+                            $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
+                            $result = $con->query($sql);
+
+                            $selectBox = "<select name='room_type' id='roomTypeSelect' onchange='filterRooms()'>";
+                            $selectBox .= "<option disabled selected value=''>Select a Room Type</option>";
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
+                                    $selectBox .= "<option value='" . $roomType . "'>" . $roomType . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No room types found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
+                        </div>
+
+                        <!-- room type script -->
+                        <script>
+                            function filterRooms() {
+                                const select = document.getElementById('roomTypeSelect');
+                                const selectedRoomType = select.value.toLowerCase().replace(/ /g, '-');
+
+                                // Get the target element and the container
+                                const targetElement = document.getElementById(selectedRoomType);
+                                const container = document.querySelector('.rooms-container');
+
+                                if (targetElement && container) {
+                                    // Calculate the position of the target element relative to the container
+                                    const offsetTop = targetElement.offsetTop - container.offsetTop;
+
+                                    // Scroll the container to the target element
+                                    container.scrollTo({
+                                        top: offsetTop,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }
+
+                        </script>
+
+
+
+
+
+
+                        <div class="custom-select-pc">
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct bed type names
+                            $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
+                            $result = $con->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                echo "<select name='bed_type' id='bedTypeSelect' onchange='filterByBedType()'>";
+
+                                echo "<option disabled selected value=''>Select a Bed Type</option>";
+                                echo "<option value='all'>All</option>";  // Add "All" option
+                            
+                                while ($row = $result->fetch_assoc()) {
+                                    $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
+                                    echo "<option value='" . $bedType . "'>" . $bedType . "</option>";
+                                }
+                                echo "</select>";
+                            } else {
+                                echo "<select name='bed_type' id='bedTypeSelect'>";
+                                echo "<option disabled selected value=''>Select a Bed Type</option>";
+                                echo "<option value=''>No bed types found.</option>";
+                                echo "</select>";
+                            }
+                            ?>
+                        </div>
+
+
+
+
+                        <!-- bed type script -->
+                        <script>
+                            function filterByBedType() {
+                                const bedTypeSelect = document.getElementById('bedTypeSelect');
+                                const selectedBedType = bedTypeSelect.value.toLowerCase();
+
+                                // Get all rooms and title-head elements
+                                const rooms = document.querySelectorAll('.rooms');
+                                const titleHeads = document.querySelectorAll('.title-head');
+                                let hasMatchingRoom = false;
+
+                                // Track room types that have visible rooms
+                                const visibleRoomTypes = new Set();
+
+                                rooms.forEach(room => {
+                                    // Find the bed type within each room
+                                    const bedType = room.querySelector('.room-details:nth-child(4) p').textContent.toLowerCase();
+
+                                    // Show or hide the room based on the selected bed type
+                                    if (selectedBedType === 'all' || bedType === selectedBedType || selectedBedType === '') {
+                                        room.style.display = 'block'; // Show matching rooms
+                                        hasMatchingRoom = true;
+                                        visibleRoomTypes.add(room.closest('.room-first-container').previousElementSibling.id); // Add to visible room types
+                                    } else {
+                                        room.style.display = 'none'; // Hide non-matching rooms
+                                    }
+                                });
+
+                                // Show or hide title-heads based on visible room types
+                                titleHeads.forEach(titleHead => {
+                                    const roomTypeId = titleHead.id;
+                                    if (visibleRoomTypes.has(roomTypeId)) {
+                                        titleHead.style.display = 'block';
+                                    } else {
+                                        titleHead.style.display = 'none';
+                                    }
+                                });
+
+                                // Get or create the message container
+                                let messageContainer = document.getElementById('noRoomsMessage');
+                                if (!messageContainer) {
+                                    messageContainer = document.createElement('div');
+                                    messageContainer.id = 'noRoomsMessage';
+                                    messageContainer.classList.add('no-rooms-message');
+                                    // Append to rooms-container or rooms-holder, depending on where you want the message
+                                    document.querySelector('.rooms-container').appendChild(messageContainer);
+                                }
+
+                                // Show the message if no matching rooms are found
+                                if (!hasMatchingRoom && selectedBedType !== 'all') {
+                                    messageContainer.textContent = "There's no room for that type of bed.";
+                                    messageContainer.style.display = 'block';
+                                } else {
+                                    messageContainer.style.display = 'none'; // Hide the message if there are matching rooms or "All" is selected
+                                }
+                            }
+                        </script>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
 
 
                 <!-- start of room holder -->
@@ -171,8 +259,9 @@ if (isset($_GET['manage_id'])) {
 
                     while ($typeRow = mysqli_fetch_assoc($roomTypesResult)) {
                         $room_type = $typeRow['room_type_name'];
-                        $room_type_id = 'roomType' . $roomTypeCount; // Creating a unique ID for each room type
-                        echo "<div class='title-head' id='$room_type_id'>";
+                        $room_type_id = strtolower(str_replace(' ', '-', $room_type)); // Convert room type to a valid ID
+                    
+                        echo "<div class='title-head' id='{$room_type_id}'>";
                         echo "<label>$room_type</label>";
                         echo '</div>';
 
@@ -249,6 +338,9 @@ if (isset($_GET['manage_id'])) {
                                     </a>
                                 </div>
                             </div>
+
+
+
                             <?php
                         }
 
@@ -262,6 +354,9 @@ if (isset($_GET['manage_id'])) {
 
             </div>
             <!-- end of room container -->
+
+
+
         </div>
 
 
@@ -448,20 +543,7 @@ if (isset($_GET['manage_id'])) {
 
         </div>
 
-        <div class="search-bar-container">
-            <div>
-                <div class="group">
-                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                        <g>
-                            <path
-                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                            </path>
-                        </g>
-                    </svg>
-                    <input placeholder="Search" type="search" class="search-input">
-                </div>
-            </div>
-        </div>
+        
     </section>
 
 
