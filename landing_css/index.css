@@ -746,6 +746,29 @@ For larger desktops and laptops:
     .wrapper-main {
         width: 100%;
     }
+
+    .wave-text h2 {
+    
+    
+        font-size:3.5rem;
+        transform: translate(0, -50%);
+      
+    }
+
+   
+    .welcome-container{
+        margin-left: 50px;
+       }
+        
+
+       .main-home {
+        background-size: 40vh, cover;
+        background-position: bottom 15% center, center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
 }
 
 
@@ -755,9 +778,62 @@ For larger desktops and laptops:
     .wrapper-main {
         width: 100%;
     }
+
+    .wave-text h2 {
+    
+    
+        font-size:3.5rem;
+        transform: translate(0, -50%);
+      
+    }
+
+   
+    .welcome-container{
+        margin-left: 50px;
+       }
+        
 }
 
 
 
 /* For larger desktops and laptops: */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) and (max-width: 1299px) {
+    .wave-text h2 {
+    
+    
+        font-size:3.5rem;
+        transform: translate(0, -50%);
+      
+    }
+
+   
+    .welcome-container{
+        margin-left: 50px;
+       }
+        
+    
+    
+
+}
+
+
+
+/* For larger desktops and laptops: */
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+    .wave-text h2 {
+    
+    
+        font-size: 4rem;
+        transform: translate(0, -50%);
+      
+    }
+
+   
+    .welcome-container{
+        margin-left: 10px;
+       }
+        
+    
+    
+
+}

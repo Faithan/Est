@@ -41,7 +41,7 @@ session_start();
     <main class="main-home">
         <div class="wrapper-main">
             <div class="home-content">
-                <div>
+                <div class="welcome-container">
                     <div class="wave-text">
                         <h2>Welcome to Estregan Beach Resort</h2>
                         <h2>Welcome to Estregan Beach Resort</h2>

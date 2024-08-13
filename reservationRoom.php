@@ -58,7 +58,20 @@ if (isset($_GET['manage_id'])) {
     <?php include 'header.php' ?>
 
 
+ <!-- mobile version -->
 
+ <section class="main-home">
+        <div class="wrapper-main">
+            <div class="home-content">
+                <div>
+                    <div class="wave-text">
+                        <h2>Room Reservation</h2>
+                        <h2>Room Reservation</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="page-structure">
 
@@ -285,7 +298,7 @@ if (isset($_GET['manage_id'])) {
 
                             <div class="rooms">
 
-                                <img src="<?php echo $photo ?>" alt="">
+                                <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
 
                                 <div class="info-container">
                                     <div class="room-details"><label for="bold-text">Price : </label>
@@ -463,137 +476,11 @@ if (isset($_GET['manage_id'])) {
 
 
 
-    <!-- mobile version -->
+   
 
+  
 
-
-    <section class="main-home">
-        <div class="wrapper-main">
-            <div class="home-content">
-                <div>
-                    <div class="wave-text">
-                        <h2>Room Reservation</h2>
-                        <h2>Room Reservation</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="category-main-container">
-
-        <h2>Categories✨</h2>
-
-        <div class="category-bar-container">
-            <div class="custom-select">
-                <?php
-                // Assuming you've included the necessary database connection file
-                
-                // Query to select distinct room type names
-                $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
-                $result = $con->query($sql);
-
-                if ($result->num_rows > 0) {
-                    echo "<select name='room_type' id='roomTypeSelect' onchange='scrollToDiv()'>";
-                    echo "<option disabled selected value=''>Select a Room Type</option>";
-
-                    while ($row = $result->fetch_assoc()) {
-                        $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
-                        echo "<option value='" . $roomType . "'>" . $roomType . "</option>";
-                    }
-                    echo "</select>";
-                } else {
-                    echo "<select name='room_type' id='roomTypeSelect' onchange='scrollToDiv()'>";
-                    echo "<option disabled selected value=''>Select a Room Type</option>";
-                    echo "<option value=''>No room types found.</option>";
-                    echo "</select>";
-                }
-                ?>
-            </div>
-
-            <div class="custom-select">
-                <?php
-                // Assuming you've included the necessary database connection file
-                
-                // Query to select distinct bed type names
-                $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
-                $result = $con->query($sql);
-
-                if ($result->num_rows > 0) {
-                    echo "<select name='bed_type' id='bedTypeSelect'>";
-                    echo "<option value=''>Select a Bed Type</option>";
-
-                    while ($row = $result->fetch_assoc()) {
-                        $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
-                        echo "<option value='" . $bedType . "'>" . $bedType . "</option>";
-                    }
-                    echo "</select>";
-                } else {
-                    echo "<select name='bed_type' id='bedTypeSelect'>";
-                    echo "<option disabled selected value=''>Select a Bed Type</option>";
-                    echo "<option value=''>No bed types found.</option>";
-                    echo "</select>";
-                }
-                ?>
-
-            </div>
-
-
-
-
-        </div>
-
-        
-    </section>
-
-
-
-    <main class="rooms-main-container">
-        <div class="wrapper-main">
-
-            <?php
-            // Function to fetch and display rooms for a specific room type
-            function displayRoomType($con, $roomType, $headerLabel)
-            {
-                $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$roomType'";
-                $result = mysqli_query($con, $fetchdata);
-
-                echo '<div class="content-sub-header" id="' . strtolower($roomType) . '">
-                    <label>' . $headerLabel . '</label>
-                 </div>'; // Header for the room type
-            
-                echo '<div class="content-center">';
-                echo '<div class="list-container">';
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
-                    $roomNumber = $row['room_number'];
-                    $bedType = $row['bed_type'];
-                    $bed_quantity = $row['bed_quantity'];
-                    $noPersons = $row['no_persons'];
-                    $amenities = $row['amenities'];
-                    $price = $row['price'];
-                    $status = $row['status'];
-                    $photo = $row['photo'];
-
-                    include 'roomDetails.php'; // Include room details template
-                }
-
-                echo '</div>'; // Close list-container
-                echo '</div>'; // Close content-center
-            }
-
-            // Display rooms for different room types
-            displayRoomType($con, 'Standard', 'Standard Rooms');
-            displayRoomType($con, 'Superior', 'Superior Rooms');
-            displayRoomType($con, 'Family', 'Family Rooms');
-            displayRoomType($con, 'Barkadahan', 'Barkadahan Rooms');
-            displayRoomType($con, 'Exclusive Suite', 'Exclusive Suite');
-            ?>
-
-        </div> <!-- Close wrapper-main -->
-    </main>
-
+ 
     <!-- end of mobile version -->
 
 

@@ -232,6 +232,69 @@ For larger desktops and laptops:
 
 
 
+   /* for alignment */
+   .wrapper-main {
+    width: 100%;
+}
+
+.main-footer {
+    padding: 40px 30px 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-footer-flex {
+    gap: 2rem;
+}
+
+
+
+.footer-content-info p {
+    font-size: 1.3rem;
+}
+
+
+.footer-content-info a {
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.social-media-section {
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-media-section p {
+    font-size: 1.3rem;
+}
+
+.social-media-section .email-sub input {
+    line-height: 2;
+    font-size: 1.3rem;
+}
+
+
+.social-media-section .email-sub button {
+  
+    line-height: 2;
+    font-size: 1.3rem;
+}
+
+
+.social-media-section .icon-sm a {
+    font-size: 2rem;
+}
 
 
 
@@ -251,6 +314,71 @@ For larger desktops and laptops:
     .header-nav ul {
         display: none;
     }
+
+       /* for alignment */
+       .wrapper-main {
+        width: 100%;
+    }
+
+    .main-footer {
+        padding: 40px 30px 300px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .main-footer-flex {
+        gap: 2rem;
+    }
+
+
+
+    .footer-content-info p {
+        font-size: 1.3rem;
+    }
+
+
+    .footer-content-info a {
+        font-size: 1.2rem;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .social-media-section {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-media-section p {
+        font-size: 1.3rem;
+    }
+
+    .social-media-section .email-sub input {
+        line-height: 2;
+        font-size: 1.3rem;
+    }
+
+
+    .social-media-section .email-sub button {
+      
+        line-height: 2;
+        font-size: 1.3rem;
+    }
+
+
+    .social-media-section .icon-sm a {
+        font-size: 2rem;
+    }
+
 
 }
 

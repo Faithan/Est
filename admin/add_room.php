@@ -6,67 +6,48 @@ session_start();
 //   header('Location:../login.php');
 //   exit();
 // }
-
 $message = "";
 $isSuccess = false;
-
-
 if (isset($_POST['addroom'])) {
   $roomNumber = $_POST['room_number'];
   $roomType = $_POST['room_type'];
-  $bed_type = $_POST['bed_type'];
-  $bed_quantity = $_POST['bed_quantity'];
+  $bedType = $_POST['bed_type'];
+  $bedQuantity = $_POST['bed_quantity'];
   $noPersons = $_POST['no_persons'];
   $amenities = $_POST['amenities'];
   $price = $_POST['price'];
   $status = $_POST['status'];
 
+  // Handle file upload
   $photo = $_FILES['photo'];
+  $allowedExts = ['jpg', 'png', 'jpeg'];
+  $fileExt = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+  $uploadDir = '../images/';
 
-  $filename = $_FILES['photo']['name'];
-  $filetempname = $_FILES['photo']['tmp_name'];
-  $filsize = $_FILES['photo']['size'];
-  $fileerror = $_FILES['photo']['error'];
-  $filetype = $_FILES['photo']['type'];
+  // Generate a unique file name to prevent overwriting
+  $uniqueFileName = uniqid('', true) . '.' . $fileExt;
+  $fileDestination = $uploadDir . $uniqueFileName;
 
-  $fileext = explode('.', $filename);
-  $filetrueext = strtolower(end($fileext));
-  $array = ['jpg', 'png', 'jpeg'];
+  if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
+    if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
+      // Insert data into database
+      $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
+                       VALUES ('$roomNumber', '$roomType', '$bedType', '$bedQuantity', '$noPersons', '$amenities', '$price', '$status', '$fileDestination')";
 
-
-  if (in_array($filetrueext, $array)) {
-    if ($fileerror === 0) {
-      if ($filsize < 10000000) {
-        $filenewname = $filename;
-        $filedestination = 'images/' . $filenewname;
-        if ($filename) {
-          move_uploaded_file($filetempname, $filedestination);
-        }
-
-
-        $savedata = "INSERT INTO room_tbl  VALUES ('',' $roomNumber','$roomType','$bed_type','$bed_quantity','$noPersons','$amenities','$price','$status','$filedestination')";
-
-        $query = (mysqli_query($con, $savedata));
-
-        if ($query) {
-          $message = "Saved Successfully!";
-          $isSuccess = true;
-
-        } else {
-          $message = "Failed!";
-          $isSuccess = false;
-
-        }
+      if (mysqli_query($con, $saveData)) {
+        $message = "Saved Successfully!";
+        $isSuccess = true;
       } else {
-        $message = "Failed!";
-        $isSuccess = false;
+        $message = "Failed to save data!";
       }
+    } else {
+      $message = "Failed to move uploaded file!";
     }
   } else {
-    $message = "Failed!";
-    $isSuccess = false;
+    $message = "Failed to upload file!";
   }
 }
+
 
 ?>
 
@@ -181,7 +162,7 @@ if (isset($_POST['addroom'])) {
               <option value="Occupied">Occupied</option>
               <option value="Coming soon">Coming Soon</option>
               <option value="Under Management">Under Management</option>
-              <option value="Unavailable">Unavailable</option> 
+              <option value="Unavailable">Unavailable</option>
             </select>
             <br>
 
