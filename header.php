@@ -1,41 +1,32 @@
 <?php
-
 include ('db_connect.php');
 
-
+// Default values for logged-out state
+$icon_class = "fa-solid fa-arrow-right-to-bracket"; // Default login icon
+$link_text = "Log in";
+$link_url = "login.php"; // Default to login page
+$logout_script = ''; // No logout script for logged-out state
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-
-    if (!isset($_SESSION['user_id'])) { // Check if user ID is not already set
-        // Retrieve the user's ID from the database based on login credentials
-        // Assuming the query retrieves the user ID based on the logged-in username/email
-        $user_id = ''; // Initialize user_id
-
-        // Example query to get the user ID from the database using the username/email
-        $email = $_SESSION['email']; // Assuming username is stored in the session
+    // User is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Get the user's ID if not already stored in session
+        $email = $_SESSION['email'];
         $sql = "SELECT id FROM user_tbl WHERE email= '$email'";
         $result = mysqli_query($con, $sql);
-
         if ($row = mysqli_fetch_assoc($result)) {
-            $user_id = $row['id']; // Store the user ID in user_id variable
+            $_SESSION['user_id'] = $row['id'];
         }
-
-        // Store the user ID in the session
-        $_SESSION['user_id'] = $user_id; // Store the user ID in the session
     }
 
-
-    $icon_class = "fa-right-from-bracket"; // Change the icon to a user icon
-    $link_text = "Log out"; // Change the text to "My Account"
-    $link_url = ''; // Update the URL to the logout page
-
-    // Get the user ID from the session
-    $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in 'user_id' session variable
-
+    // Update values for logged-in state
+    $icon_class = "fa-solid fa-right-from-bracket"; // Logout icon class
+    $link_text = "Log out";
+    $link_url = "#"; // Prevent default action, handled by JS
     $logout_script = '
     <script>
-        document.getElementById("logoutBtn").addEventListener("click", function (e) {
-          e.preventDefault(); // Prevent the default link action
+        function handleLogout(event) {
+            event.preventDefault();
             Swal.fire({
                 title: "Log Out",
                 text: "Are you sure you want to log out?",
@@ -44,30 +35,26 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 confirmButtonText: "Yes, Log Out",
                 cancelButtonText: "Cancel"
             }).then((result) => {
-                if (result.isConfirmed) {   
-                    // Perform log out action here
+                if (result.isConfirmed) {
                     window.location.href = "logout.php";
                     Swal.fire("Logged Out", "You have been logged out successfully!", "success");
                 }
             });
-        });
+        }
+
+        // Update icon class and link behavior
+        var loginIcon = document.getElementById("loginIcon");
+        loginIcon.className = "fa-solid fa-right-from-bracket";
+        loginIcon.onclick = handleLogout;
+
+        // Disable hover effect if logged in
+        loginIcon.onmouseover = null;
+        loginIcon.onmouseout = null;
+        document.querySelector(".tooltip").innerText = "Log out";
     </script>';
-
-
-
-
-} else {
-    $icon_class = "fa-solid fa-right-to-bracket"; // Original icon class
-    $link_text = "Log in"; // Original link text
-    $link_url = "login.php"; // Original login page URL
-    $logout_script = ''; // No logout script needed if not logged in
 }
-
-
-
-
-
 ?>
+
 
 
 
@@ -82,8 +69,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
 
 <!-- header -->
-
-
 <header class="header-main">
 
 
@@ -127,21 +112,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
         </ul>
 
-
-
     </nav>
 
 
-
-
-    <!-- icons -->
+    <!-- Icons Container -->
     <div class="icons-container">
 
+        <!-- First Login Button (Outside Burger Menu) -->
         <div class="header-btn">
-            <div class="login-icon" onmouseover="changeIcon(this)" onmouseout="resetIcon(this)">
-                <i id="loginIcon" class="fa-solid fa-arrow-right-to-bracket"
-                    onclick="window.location.href = 'login.php';"></i>
-                <span class="tooltip">Login</span>
+            <div class="login-icon">
+                <i id="loginIcon" class="<?php echo $icon_class; ?>"></i>
+                <span class="tooltip"><?php echo $link_text; ?></span>
             </div>
         </div>
 
@@ -155,6 +136,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
     </div>
 
+    <!-- Include the logout script -->
+    <?php echo $logout_script; ?>
 
 
 </header>
@@ -172,13 +155,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
     </div>
 
-    <a  id="submenu2"> <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i></a>
+    <a id="submenu2"> <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i></a>
     <div class="submenu" id="subMenuContent2">
-        <a href="#" onclick="checkLoggedIn(event)" ><i class="fa-solid fa-umbrella-beach"></i>My Reserved Cottages</a>
-        <a href="myReservationRoom.php"  onclick="checkLoggedIn(event)"><i class="fa-solid fa-bed"></i>My Reserved Rooms</a>
+        <a href="#" onclick="checkLoggedIn(event)"><i class="fa-solid fa-umbrella-beach"></i>My Reserved Cottages</a>
+        <a href="myReservationRoom.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-bed"></i>My Reserved
+            Rooms</a>
     </div>
 
-    
+
     <a href="profile.php" onclick="checkLoggedIn(event)">
         <i class="fa-solid fa-address-card"></i> Profile
     </a>
@@ -188,16 +172,18 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     </a>
 
     <a href="#"><i class="fa-solid fa-headset"></i> Customer Support</a>
-    <a href="<?php echo $link_url; ?>" id="logoutBtn"><i class="fa-solid <?php echo $icon_class; ?>"></i>
-        <?php echo $link_text; ?></a>
 
+    <a href="<?php echo $link_url; ?>" id="logoutBtn">
+        <i class="fa-solid <?php echo $icon_class; ?>"></i> <?php echo $link_text; ?>
+    </a>
+
+    <!-- Include the logout script for burger menu -->
     <?php echo $logout_script; ?>
 </nav>
 
 
 <script>
     function checkLoggedIn(event) {
-        // Check if the user is not logged in
         if (!<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>) {
             event.preventDefault(); // Prevent the default link action
             SweetAlertNotLoggedIn();
