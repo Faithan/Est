@@ -20,85 +20,12 @@ body {
 }
 
 
-
-
-/* home content */
-
-
-.main-home {
-    width: 100%;
-    background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 10vh;
-    background-size: 15vh, cover;
-    background-position: right 10% center, center;
-
-}
-
-.home-content {
-    color: white;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: flex-start;
-    padding-bottom: 10vh;
-
-
+.main-home{
+    display: none;
 }
 
 
 
-
-
-.wave-text {
-    width: 35vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: 8vh;
-    text-transform: uppercase;
-}
-
-.wave-text h2 {
-    position: absolute;
-    font-size: 2.5rem;
-    transform: translate(0, -50%);
-    font-weight: bold;
-    line-height: 2;
-}
-
-
-.wave-text h2:nth-child(1) {
-    color: transparent;
-    background-color: none;
-    -webkit-text-stroke: 1px var(--water-border);
-}
-
-.wave-text h2:nth-child(2) {
-    color: var(--water-color);
-    animation: animate 4s ease-in-out infinite;
-}
-
-@keyframes animate {
-
-    0%,
-    100% {
-        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
-    }
-
-    50% {
-        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
-    }
-}
-
-
-
-
-/* learn more button */
 
 
 /*Container styles*/
@@ -106,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 25px;
 }
 
 .btn {
@@ -127,14 +54,14 @@ body {
 /* catergory container */
 .category-main-container {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     background-color: var(--first-color2);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    padding: 5px 0;
+    padding: 10px 0;
 
 }
 
@@ -143,7 +70,6 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-top: 20px;
 }
 
 .category-bar-container {
@@ -287,14 +213,19 @@ input:hover {
 }
 
 
+
+
+
+
+
+
+
+
 .rooms-main-container {
     width: 100%;
     padding: 10px 20px 20px 20px;
     display: flex;
-    flex-direction: row;    
-    height: 80vh;
-    overflow-y: scroll;
-
+    flex-direction: column;
 }
 
 .rooms-main-container .content-sub-header {
@@ -304,24 +235,19 @@ input:hover {
 
 .rooms-main-container .content-sub-header label {
     font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: estregan;
     font-size: 1.2rem;
-
     color: var(--seventh-color);
-    padding-top: 20px ;
-
 
 }
 
 .rooms-main-container .content-center {
-    width: 100%;
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
     background-color: var(--first-color);
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 
@@ -334,7 +260,7 @@ input:hover {
 .items {
     padding-bottom: 10px;
     background-color: var(--first-color);
-    width: 270px;
+
     justify-content: center;
     text-align: center;
     border-radius: 5px;
@@ -382,18 +308,11 @@ input:hover {
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
-    align-items: center;
 }
 
 .label-container .title-text {
     color: var(--seventh-color);
 }
-.label-container .title-text-bold label{
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: var(--seventh-color);
-}
-
 
 
 .label-container .detail {
@@ -421,74 +340,6 @@ input:hover {
 
 
 
-
-/* end */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* for button  must not touch*/
-
-.button-container {
-    width: 100%;
-    padding: 10px 0 0 0;
-    display: flex;
-    justify-content: center;
-}
-
-
-.button-container a {
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-   color: var(--booknow-text2);
-   font-size: 1.3rem;
-}
-
-
-
-
-/* no reservation */
-.no-reservation-message {
-height: 60vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-gap: 20px;
-
-}
-
-.no-reservation-message .house-icon i{
-font-size: 2.5rem; 
-color: var(--seventh-color);
-}
-
-.no-reservation-message .browse-btns{
-display: flex;
-gap: 20px;
-color: var(--seventh-color);
-font-size: 1.3rem;
-font-weight: bold;
-}
-
-.no-reservation-message label{
-font-style: italic;
-width: 90%;
-text-align: center;
-font-size: 1.3rem;
-color: var(--seventh-color);
-}
 
 
 
@@ -679,6 +530,7 @@ For larger desktops and laptops:
         color: var(--seventh-color);
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 1.3rem;
+ 
         font-weight: bold;
         margin-top: 20px;
     }
@@ -688,10 +540,8 @@ For larger desktops and laptops:
         gap: 1rem;
     }
 
-    .category-bar-container select {
-        color: var(--seventh-color);
-        padding: 1rem;
-        background-color: var(--first-color);
+    .category-bar-container select {    
+        padding:1rem;
     }
 
 
@@ -707,13 +557,15 @@ For larger desktops and laptops:
     .custom-select {
         position: relative;
         width: 15rem;
+        border: 1px solid var(--booknow-border);
+    
     }
 
     .custom-select select {
         display: none;
-        color: var(--seventh-color);
+       
         padding: 1rem;
-        background-color: var(--first-color);
+       
         font-size: 1rem;
         font-weight: bold;
         /*hide original SELECT element:*/
@@ -732,19 +584,19 @@ For larger desktops and laptops:
         width: 0;
         height: 0;
         border: 6px solid transparent;
-        border-color: #fff transparent transparent transparent;
+        border-color: var(--booknow-text) transparent transparent transparent;
     }
 
     /*point the arrow upwards when the select box is open (active):*/
     .select-selected.select-arrow-active:after {
-        border-color: transparent transparent #fff transparent;
+        border-color: transparent transparent var(--booknow-text) transparent;
         top: 7px;
     }
 
     /*style the items (options), including the selected item:*/
     .select-items div,
     .select-selected {
-        color: #ffffff;
+        color: var(--booknow-text);
         padding: 8px 16px;
         border: 1px solid transparent;
         border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -842,6 +694,8 @@ For larger desktops and laptops:
     .rooms-main-container .content-sub-header {
         display: flex;
         padding: 10px 0;
+        justify-content: flex-start;
+
     }
 
     .rooms-main-container .content-sub-header label {
@@ -862,7 +716,6 @@ For larger desktops and laptops:
         display: flex;
         flex-direction: column;
         gap: 10px;
-        align-items: center;
     }
 
 
@@ -885,6 +738,7 @@ For larger desktops and laptops:
     .items img {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+
     }
 
     .items button {
@@ -893,14 +747,15 @@ For larger desktops and laptops:
         padding-left: 10px;
         padding-right: 10px;
         border-radius: 5px;
-        color: white;
-        background-color: #FA7C0D;
+        color: var(--booknow-text);
+        background-color: var(--fourth-color);
         font-size: 1.5rem;
+        border: 1px solid var(--booknow-border);
     }
 
     .items button:hover {
-        color: white;
-        background-color: #bd600e;
+        color: var(--booknow-text);
+        background-color: var(--fourth-color);
         transition: 0.3s;
         transform-style: inherit;
     }
@@ -929,6 +784,14 @@ For larger desktops and laptops:
         color: var(--seventh-color);
     }
 
+    .label-container .title-text-bold {
+        color: var(--seventh-color);
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    
+    
+
 
     .label-container .detail {
         display: flex;
@@ -945,6 +808,19 @@ For larger desktops and laptops:
         font-size: 1rem;
 
     }
+
+    .label-container .detail-bold p {
+        color: var(--seventh-color);
+        text-justify: flex-end;
+        text-align: right;
+        padding: 0;
+        font-size: 1.3rem;
+        font-weight: bold;
+    
+    }
+    
+
+    
 
 
     .label-container label {
@@ -973,6 +849,48 @@ For larger desktops and laptops:
 
     /* for button  must not touch*/
 
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 9px 12px;
+        gap: 8px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .lable {
+        line-height: 22px;
+        font-size: 12px;
+        color: #fff;
+        font-family: sans-serif;
+        letter-spacing: 1px;
+    }
+
+
+    .button:hover .svg-icon {
+        animation: slope 1s linear infinite;
+       
+    }
+
+      /* CSS to change the color of the SVG icon */
+      .svg-icon path,
+      .svg-icon rect {
+          stroke: var(--booknow-text); /* Change "red" to the desired color */
+      }
+
+    @keyframes slope {
+        0% {}
+
+        50% {
+            transform: rotate(10deg);
+        }
+
+        100% {}
+    }
+
     .button-container {
         width: 100%;
         padding: 10px 0 0 0;
@@ -983,46 +901,16 @@ For larger desktops and laptops:
 
     .button-container a {
         text-decoration: none;
-        padding: 10px;
-        border-radius: 5px;
-       color: var(--booknow-text2);
-       font-size: 1.3rem;
     }
+  
 
 
 
 
-/* no reservation */
-.no-reservation-message {
-    height: 60vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    
-}
 
-.no-reservation-message .house-icon i{
-    font-size: 2.5rem; 
-    color: var(--seventh-color);
-}
 
-.no-reservation-message .browse-btns{
-    display: flex;
-    gap: 20px;
-    color: var(--seventh-color);
-    font-size: 1.3rem;
-    font-weight: bold;
-}
 
-.no-reservation-message label{
-    font-style: italic;
-    width: 90%;
-    text-align: center;
-    font-size: 1.3rem;
-    color: var(--seventh-color);
-}
+
 
 
 }

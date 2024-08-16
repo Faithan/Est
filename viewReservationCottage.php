@@ -8,7 +8,7 @@ $user_id = ''; // Initialize user_id
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
-    $manage_query = "SELECT * FROM reserve_room_tbl WHERE reserve_id = $manage_id";
+    $manage_query = "SELECT * FROM reserve_cottage_tbl WHERE reserve_id = $manage_id";
     $manage_result = mysqli_query($con, $manage_query);
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
@@ -53,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
     <!-- current page css -->
-    <link rel="stylesheet" href="landing_css/viewReservationRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="landing_css/viewReservationCottage.css?v=<?php echo time(); ?>">
 
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>View Reservation</title>
@@ -95,7 +95,7 @@ if (isset($_SESSION['user_id'])) {
         function cancelItem() {
             var id = document.querySelector('input[name="reserve_id"]').value;
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'cancel_reservationRoom.php', true);
+            xhr.open('POST', 'cancel_reservationCottage.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -143,7 +143,7 @@ if (isset($_SESSION['user_id'])) {
     <main>
 
         <div class="image-container">
-            <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
+            <img name="photo" src="<?php echo $manage_data['cottage_photo']; ?>" alt="">
         </div>
 
 
@@ -154,12 +154,12 @@ if (isset($_SESSION['user_id'])) {
 
             <?php
             // Check if the status is 'cancelled' or 'rejected'
-            $status = strtolower($manage_data['status']);
+            $status = strtolower($manage_data['reserve_status']);
             $status_class = ($status === 'cancelled' || $status === 'rejected') ? 'status-error' : '';
             ?>
 
             <input class="fixed-value-input <?php echo $status_class; ?>" name="status"
-                value="<?php echo $manage_data['status']; ?>" readonly>
+                value="<?php echo $manage_data['reserve_status']; ?>" readonly>
 
 
 
@@ -178,19 +178,19 @@ if (isset($_SESSION['user_id'])) {
 
 
             <input class="fixed-value-input" name="first_name" onkeyup="changeColor(this)" placeholder="First Name"
-                value="<?php echo $manage_data['fname']; ?>" readonly>
+                value="<?php echo $manage_data['first_name']; ?>" readonly>
 
             <input class="fixed-value-input" name="middle_name" onkeyup="changeColor(this)" placeholder="Middle Name"
-                value="<?php echo $manage_data['mname']; ?>" readonly>
+                value="<?php echo $manage_data['middle_name']; ?>" readonly>
 
 
             <input class="fixed-value-input" name="last_name" onkeyup="changeColor(this)" placeholder="Last Name"
-                value="<?php echo $manage_data['lname']; ?>" readonly>
+                value="<?php echo $manage_data['last_name']; ?>" readonly>
 
 
             <label>Address</label>
-            <input class="fixed-value-input" name="address" onkeyup="changeColor(this)"
-                placeholder="Ex: Maranding, Lala, Lanao Del Norte" value="<?php echo $manage_data['address']; ?>"
+            <input class="fixed-value-input" name="reserve_address" onkeyup="changeColor(this)"
+                placeholder="Ex: Maranding, Lala, Lanao Del Norte" value="<?php echo $manage_data['reserve_address']; ?>"
                 readonly>
 
             <label>Phone Number</label>
@@ -209,39 +209,30 @@ if (isset($_SESSION['user_id'])) {
 
             <input class="fixed-value-input" type="time" name="time_of_arrival" onkeyup="changeColor(this)"
                 value="14:00" required readonly>
-            <p id="comment"> (fixed) Good for 22 hours, start time 2:00PM - 11:00AM</p>
+            <p id="comment"> (fixed)</p>
 
             <label class="bold-text">Room Details</label>
 
-            <label>Room Number</label>
+            <label>Cottage Number</label>
             <input class="fixed-value-input" name="room_number" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['room_number']; ?>" readonly>
+                value="<?php echo $manage_data['cottage_number']; ?>" readonly>
 
             <label>Room Type</label>
-            <input class="fixed-value-input" name="room_type" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['room_type']; ?>" readonly>
+            <input class="fixed-value-input" name="cottage_type" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['cottage_type']; ?>" readonly>
 
-            <label>Bed Type</label>
-            <input class="fixed-value-input" name="bed_type" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['bed_type']; ?>" readonly>
-
-            <label>Numbers of Bed</label>
-            <input class="fixed-value-input" name="bed_quantity" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
-
+    
             <label>Number of Persons:</label>
             <input class="fixed-value-input" name="number_of_person" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['number_of_person']; ?>" readonly>
 
-            <label>Amenities</label>
-            <input class="fixed-value-input" name="amenities" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['amenities']; ?>" readonly>
+           
 
             <label>Price (₱)</label>
-            <input class="fixed-value-input" name="rate_per_hour" onkeyup="changeColor(this)"
+            <input class="fixed-value-input" name="price" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['price']; ?>" readonly>
 
-            <p id="comment"> (fixed) Good for 22 hours</p>
+            <p id="comment">(fixed)</p>
 
             <label>Special Request</label>
             <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
@@ -257,7 +248,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="reservationForm-buttons">
                 <?php
                 // Assuming $manage_data['status'] contains 'pending' as the value
-                $status = $manage_data['status'];
+                $status = $manage_data['reserve_status'];
 
                 // Check if the $status variable is set and is equal to 'pending'
                 if (isset($status) && strtolower($status) === 'pending') {
@@ -266,7 +257,7 @@ if (isset($_SESSION['user_id'])) {
                 }
                 ?>
 
-                <a href="myReservationRoom.php" class="back-btn">Back</a>
+                <a href="myReservationCottage.php" class="back-btn">Back</a>
             </div>
         </form>
 

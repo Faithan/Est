@@ -1,30 +1,111 @@
 body {
     background-color: var(--first-color2);
-    
+
 }
 
 #scrollToTopBtn {
     display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 10px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: var(--seventh-color4);
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    opacity: 80%;
 }
 
 
-.main-home{
+/* page structure */
+
+.page-structure {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-background {
+    background: url(../system_images/bg7.jpg);
+    width: 30vh;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(70%);
+}
+
+
+.right-background {
+    background: url(../system_images/bg8.jpg);
+    width: 30vh;
+    filter: brightness(70%);
+    background-size: cover;
+    background-position: center;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.rooms-base-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.container-header {
+    width: 100%;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-header label {
+    background-color: var(--reservation-title);
+    width: 100%;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    color: var(--reservation-text);
+    border: 1px solid var(--reservation-titleborder);
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+
+    padding: 2px 10px 10px 2px;
+    top: 0;
+    z-index: 700;
+    background-color: var(--first-color2);
+    position: -webkit-sticky;
+    position: sticky;
+    box-shadow: 0 1px 4px var(--box-shadow);
+}
+
+.select-container {
+    display: flex;
+
+    width: 100%;
+    justify-content: space-between;
+}
+
+.search-bar-container {
+    float: right;
+}
+
+
+/* no room message */
+.no-rooms-message {
+    text-align: center;
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+
+
+
+
+/* mobile header */
+.main-home {
     display: none;
 }
-
-
 
 
 
@@ -56,13 +137,12 @@ body {
     width: 100%;
     margin-top: 20px;
     background-color: var(--first-color2);
-    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
     padding: 10px 0;
-
+    display: none;
 }
 
 .category-main-container h2 {
@@ -92,74 +172,33 @@ body {
 
 /* select category */
 
-/*the container must be positioned relative:*/
-.custom-select {
+.custom-select-pc {
     position: relative;
-    width: 15rem;
 }
 
-.custom-select select {
-    display: none;
-    color: var(--seventh-color);
-    padding: 1rem;
+.custom-select-pc select {
+    all: revert;
+    padding: 5px;
     background-color: var(--first-color);
-    font-size: 1rem;
-    font-weight: bold;
-    /*hide original SELECT element:*/
+    border-color: var(--first-color2);
+    color: var(--booknow-border);
+
+
+    border: 1px solid var(--booknow-border);
+  
+   
 }
 
-.select-selected {
-    background-color: var(--select-color);
+
+/* Style the option elements */
+select option {
+    background-color: var(--first-color2);
+    /* Dropdown options background color */
+    color: var(--booknow-border);
+
+    /* Dropdown options text color */
 }
 
-/*style the arrow inside the select element:*/
-.select-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-}
-
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 7px;
-}
-
-/*style the items (options), including the selected item:*/
-.select-items div,
-.select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    cursor: pointer;
-    user-select: none;
-}
-
-/*style items (options):*/
-.select-items {
-    position: absolute;
-    background-color: var(--select-color2);
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-}
-
-/*hide the items when the select box is closed:*/
-.select-hide {
-    display: none;
-}
-
-.select-items div:hover,
-.same-as-selected {
-    background-color: rgba(0, 0, 0, 0.1);
-}
 
 
 
@@ -167,176 +206,255 @@ body {
 
 
 
+/* rooms container */
 
-
-
-
-/* search bar section */
-.group {
-    display: flex;
-    align-items: center;
+.rooms-container {
+    max-height: 80vh;
+    /* Adjust the height as needed */
     position: relative;
-    max-width: 250px;
-}
-
-.search-input {
-    width: 100%;
-    line-height: 22px;
-    padding: 0 1rem;
-    padding-left: 2.5rem;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    outline: none;
-    background-color: #fff;
-    color: #0d0c22;
-    transition: .3s ease;
-}
-
-.input::placeholder {
-    color: #9e9ea7;
-}
-
-.search-input:focus,
-input:hover {
-    outline: none;
-    border-color: rgba(76, 89, 234, 0.4);
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(130, 135, 186, 0.1);
-}
-
-.icon {
-    position: absolute;
-    left: 1rem;
-    fill: #9e9ea7;
-    width: 1rem;
-    height: 1rem;
-}
-
-
-
-
-
-
-
-
-
-
-.rooms-main-container {
-    width: 100%;
-    padding: 10px 20px 20px 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.rooms-main-container .content-sub-header {
-    display: flex;
-    padding: 10px 0;
-}
-
-.rooms-main-container .content-sub-header label {
-    font-weight: bold;
-    font-family: estregan;
-    font-size: 1.2rem;
-    color: var(--seventh-color);
-
-}
-
-.rooms-main-container .content-center {
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
+    flex-grow: 1;
+    margin: 0 20px 20px 20px;
     background-color: var(--first-color);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    overflow-x: none;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Distribute items evenly */
 }
 
 
+/* rooms-holder */
+.rooms-holder {
+    padding: 20px;
+}
 
 
-
-
-
-/* rooms box */
-.items {
+.title-head {
     padding-bottom: 10px;
-    background-color: var(--first-color);
+    text-transform: uppercase;
+}
 
-    justify-content: center;
-    text-align: center;
+.title-head label {
+    font-size: 2rem;
+    font-weight: bold;
+    /* Make the text bold */
+    color: var(--seventh-color);
+    /* Add more styling properties as needed */
+}
+
+
+/* rooms */
+
+.room-first-container {
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.rooms {
+
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 330px;
+    background-color: var(--first-color);
     border-radius: 5px;
     box-shadow: 0 0 4px var(--box-shadow);
 }
 
-.items img {
+
+.rooms label {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: var(--seventh-color);
+}
+
+.rooms img {
+    height: 150px;
+    width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.items button {
+
+.rooms .info-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 120px;
+    overflow-y: scroll;
+}
+
+.info-container .room-details {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.room-details label {
+    font-size: 1.2rem;
+}
+
+.room-details p {
+    font-size: 1.2rem;
+}
+
+.room-details label[for="bold-text"],
+.room-details p[for="bold-text"] {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+#good-for {
+    justify-content: flex-end;
+    padding-bottom: 5px;
+
+}
+
+#good-for p {
+    font-size: 1rem;
+}
+
+em {
+    font-style: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* for button  must not touch*/
+
+
+
+.items button:hover {
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
+    transition: 0.3s;
+    transform-style: inherit;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 9px 12px;
+    gap: 8px;
+    cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
-    color: white;
-    background-color: #FA7C0D;
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
     font-size: 1.5rem;
+    border: 1px solid var(--booknow-border);
 }
 
-.items button:hover {
-    color: white;
-    background-color: #bd600e;
+
+.button:hover {
+    color: var(--booknow-text);
+    background-color: var(--fourth-color);
     transition: 0.3s;
     transform-style: inherit;
 }
 
-.items label {
-    text-transform: capitalize;
+.lable {
+    line-height: 22px;
+    font-size: 12px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 }
 
 
-.container-of-labels {
-    max-height: 120px;
-    overflow-y: scroll;
+.button:hover .svg-icon {
+    animation: slope 1s linear infinite;
+
 }
 
+/* CSS to change the color of the SVG icon */
+.svg-icon path,
+.svg-icon rect {
+    stroke: var(--booknow-text);
+    /* Change "red" to the desired color */
+}
 
-.label-container {
-    padding-top: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
+@keyframes slope {
+    0% {}
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% {}
+}
+
+.button-container {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    font-size: 1rem;
-}
-
-.label-container .title-text {
-    color: var(--seventh-color);
+    padding-top: 10px;
+    justify-content: center;
 }
 
 
-.label-container .detail {
-    display: flex;
-    justify-content: flex-end;
-    max-width: 90px;
-
-}
-
-.label-container .detail p {
-    color: var(--seventh-color);
-    text-justify: flex-end;
-    text-align: right;
-    padding: 0;
-    font-size: 1rem;
-
+.button-container a {
+    text-decoration: none;
 }
 
 
-.label-container label {
-    display: flex;
-    justify-content: space-between;
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* might be deleted below. but must not touch first */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -391,28 +509,94 @@ For larger desktops and laptops:
         width: 100%;
     }
 
-    #scrollToTopBtn {
+    .container-header {
         display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 10px;
-        z-index: 99;
-        border: none;
-        outline: none;
-        background-color: var(--seventh-color4);
-        color: white;
-        cursor: pointer;
-        padding: 15px;
-        border-radius: 50%;
-        opacity: 80%;
     }
+
+
+    .rooms-base-container {
+        padding: 0;
+        margin: 0;
+    }
+
+    .left-background,
+    .right-background {
+        display: none;
+    }
+
+
+    .rooms-container {
+        max-height: 80vh;
+        /* Adjust the height as needed */
+        position: relative;
+        border-radius: 3px;
+        flex-grow: 1;
+        margin: 0;
+        background-color: var(--first-color);
+        overflow-x: none;
+        overflow-y: scroll;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        /* Distribute items evenly */
+    }
+
+    .category-container {
+        display: flex;
+        justify-content: space-between;
+
+        align-items: center;
+        padding: 10px;
+        top: 0;
+       
+        background-color: var(--first-color2);
+        position: -webkit-sticky;
+        position: sticky;
+        box-shadow: 0 1px 5px var(--box-shadow);
+    }
+
+
+
+
+    .select-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+
+
+
+
+    /* rooms-holder */
+    .rooms-holder {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+
+    .room-first-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 5px 5px 20px 5px;
+        flex-wrap: wrap;
+    }
+
+
+    .rooms-main-container {
+        display: contents;
+    }
+
 
 
 
 
     /* home content */
 
-    
+
     .main-home {
         width: 100%;
         background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
@@ -433,7 +617,7 @@ For larger desktops and laptops:
         align-items: center;
         justify-content: flex-start;
         padding-bottom: 10vh;
-    
+
 
     }
 
@@ -484,425 +668,6 @@ For larger desktops and laptops:
     }
 
 
-    
-
-    /* learn more button */
-
-
-    /*Container styles*/
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .btn {
-        font-size: 1rem;
-        text-indent: 40px;
-    }
-
-
-    .btn::after {
-        width: 5px;
-        height: 5px;
-    }
-
-    /* end */
-
-
-
-    /* catergory container */
-    .category-main-container {
-        width: 100%;
-        margin-top: 10px;
-        background-color: var(--first-color2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 5px 0;
-
-    }
-
-    .category-main-container h2 {
-        color: var(--seventh-color);
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: 1.3rem;
- 
-        font-weight: bold;
-        margin-top: 20px;
-    }
-
-    .category-bar-container {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .category-bar-container select {    
-        padding:1rem;
-    }
-
-
-
-
-
-
-
-
-    /* select category */
-
-    /*the container must be positioned relative:*/
-    .custom-select {
-        position: relative;
-        width: 15rem;
-        border: 1px solid var(--booknow-border);
-    
-    }
-
-    .custom-select select {
-        display: none;
-       
-        padding: 1rem;
-       
-        font-size: 1rem;
-        font-weight: bold;
-        /*hide original SELECT element:*/
-    }
-
-    .select-selected {
-        background-color: var(--select-color);
-    }
-
-    /*style the arrow inside the select element:*/
-    .select-selected:after {
-        position: absolute;
-        content: "";
-        top: 14px;
-        right: 10px;
-        width: 0;
-        height: 0;
-        border: 6px solid transparent;
-        border-color: var(--booknow-text) transparent transparent transparent;
-    }
-
-    /*point the arrow upwards when the select box is open (active):*/
-    .select-selected.select-arrow-active:after {
-        border-color: transparent transparent var(--booknow-text) transparent;
-        top: 7px;
-    }
-
-    /*style the items (options), including the selected item:*/
-    .select-items div,
-    .select-selected {
-        color: var(--booknow-text);
-        padding: 8px 16px;
-        border: 1px solid transparent;
-        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-        cursor: pointer;
-        user-select: none;
-    }
-
-    /*style items (options):*/
-    .select-items {
-        position: absolute;
-        background-color: var(--select-color2);
-        top: 100%;
-        left: 0;
-        right: 0;
-        z-index: 99;
-    }
-
-    /*hide the items when the select box is closed:*/
-    .select-hide {
-        display: none;
-    }
-
-    .select-items div:hover,
-    .same-as-selected {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-
-
-    /* end */
-
-
-
-
-
-
-
-    /* search bar section */
-    .group {
-        display: flex;
-        align-items: center;
-        position: relative;
-        max-width: 250px;
-    }
-
-    .search-input {
-        width: 100%;
-        line-height: 22px;
-        padding: 0 1rem;
-        padding-left: 2.5rem;
-        border: 2px solid transparent;
-        border-radius: 8px;
-        outline: none;
-        background-color: #fff;
-        color: #0d0c22;
-        transition: .3s ease;
-    }
-
-    .input::placeholder {
-        color: #9e9ea7;
-    }
-
-    .search-input:focus,
-    input:hover {
-        outline: none;
-        border-color: rgba(76, 89, 234, 0.4);
-        background-color: #fff;
-        box-shadow: 0 0 0 4px rgba(130, 135, 186, 0.1);
-    }
-
-    .icon {
-        position: absolute;
-        left: 1rem;
-        fill: #9e9ea7;
-        width: 1rem;
-        height: 1rem;
-    }
-
-
-
-
-
-
-
-
-
-
-    .rooms-main-container {
-        width: 100%;
-        padding: 10px 20px 20px 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .rooms-main-container .content-sub-header {
-        display: flex;
-        padding: 10px 0;
-        justify-content: flex-start;
-
-    }
-
-    .rooms-main-container .content-sub-header label {
-        font-weight: bold;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: 1.2rem;
-
-        color: var(--seventh-color);
-        padding-top: 20px ;
-
-
-    }
-
-    .rooms-main-container .content-center {
-        padding: 10px;
-        border-radius: 5px;
-        background-color: var(--first-color);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-
-
-
-
-
-
-    /* rooms box */
-    .items {
-        padding-bottom: 10px;
-        background-color: var(--first-color);
-
-        justify-content: center;
-        text-align: center;
-        border-radius: 5px;
-        box-shadow: 0 0 4px var(--box-shadow);
-    }
-
-    .items img {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-
-    }
-
-    .items button {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 5px;
-        color: var(--booknow-text);
-        background-color: var(--fourth-color);
-        font-size: 1.5rem;
-        border: 1px solid var(--booknow-border);
-    }
-
-    .items button:hover {
-        color: var(--booknow-text);
-        background-color: var(--fourth-color);
-        transition: 0.3s;
-        transform-style: inherit;
-    }
-
-    .items label {
-        text-transform: capitalize;
-    }
-
-
-    .container-of-labels {
-        max-height: 120px;
-        overflow-y: scroll;
-    }
-
-
-    .label-container {
-        padding-top: 5px;
-        padding-left: 20px;
-        padding-right: 20px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 1rem;
-    }
-
-    .label-container .title-text {
-        color: var(--seventh-color);
-    }
-
-    .label-container .title-text-bold {
-        color: var(--seventh-color);
-        font-size: 1.3rem;
-        font-weight: bold;
-    }
-    
-    
-
-
-    .label-container .detail {
-        display: flex;
-        justify-content: flex-end;
-        max-width: 90px;
-
-    }
-
-    .label-container .detail p {
-        color: var(--seventh-color);
-        text-justify: flex-end;
-        text-align: right;
-        padding: 0;
-        font-size: 1rem;
-
-    }
-
-    .label-container .detail-bold p {
-        color: var(--seventh-color);
-        text-justify: flex-end;
-        text-align: right;
-        padding: 0;
-        font-size: 1.3rem;
-        font-weight: bold;
-    
-    }
-    
-
-    
-
-
-    .label-container label {
-        display: flex;
-        justify-content: space-between;
-
-    }
-
-
-
-
-    /* end */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* for button  must not touch*/
-
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 9px 12px;
-        gap: 8px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .lable {
-        line-height: 22px;
-        font-size: 12px;
-        color: #fff;
-        font-family: sans-serif;
-        letter-spacing: 1px;
-    }
-
-
-    .button:hover .svg-icon {
-        animation: slope 1s linear infinite;
-       
-    }
-
-      /* CSS to change the color of the SVG icon */
-      .svg-icon path,
-      .svg-icon rect {
-          stroke: var(--booknow-text); /* Change "red" to the desired color */
-      }
-
-    @keyframes slope {
-        0% {}
-
-        50% {
-            transform: rotate(10deg);
-        }
-
-        100% {}
-    }
-
-    .button-container {
-        width: 100%;
-        padding: 10px 0 0 0;
-        display: flex;
-        justify-content: center;
-    }
-
-
-    .button-container a {
-        text-decoration: none;
-    }
-  
 
 
 
@@ -941,194 +706,7 @@ For larger desktops and laptops:
 
 
 /* For standard mobile devices: */
-@media only screen and (min-width: 481px) and (max-width: 767px) {
-
-    .wrapper-main {
-        width: 100%;
-    }
-
-    /* home content */
-
-    .main-home {
-        background-size: 40vh, cover;
-        background-position: bottom 15% center, center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-
-    .home-content {
-        color: white;
-        display: flex;
-        padding-bottom: 20vh;
-        width: 100%;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-
-    }
-
-
-
-
-
-    .wave-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        bottom: 3vh;
-    }
-
-    .wave-text h2 {
-        position: absolute;
-        font-size: 2.5rem;
-        transform: translate(0, -50%);
-        font-weight: bold;
-        line-height: 2;
-    }
-
-
-
-    .intro-content {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 10%;
-    }
-
-    .home-content p {
-
-        font-size: 1.5rem;
-        line-height: 1.5;
-
-    }
-
-
-    /* learn more button */
-
-
-    /*Container styles*/
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        margin-top: 25px;
-    }
-
-    .btn {
-        font-size: 1.2rem;
-        text-indent: 40px;
-    }
-
-
-    .btn::after {
-        width: 6px;
-        height: 6px;
-    }
-
-    /* end */
-
-
-    /* reservation page */
-
-    .reservation-page {
-        width: 100%;
-        background-color: var(--first-color2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 80px;
-        column-gap: 50px;
-        flex-wrap: wrap;
-        background-color: var(--first-color);
-        margin-top: 150px;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-
-
-    .reservation-page h1 {
-        font-size: 2rem;
-    }
-
-    .reservation-page p {
-        font-size: 1.3rem;
-    }
-
-    .reservation-page .category-box {
-        width: 100%;
-    }
-
-
-    .category-box h2 {
-        font-size: 1.5rem;
-    }
-
-
-    /* end */
-
-
-
-    /* about page */
-
-    .about-page {
-        padding: 50px 30px;
-    }
-
-
-
-
-    .about-page-content h1 {
-        font-size: 2rem;
-    }
-
-    .about-page-content p {
-        font-size: 1.3rem;
-    }
-
-    /* end */
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media only screen and (min-width: 481px) and (max-width: 767px) {}
 
 
 

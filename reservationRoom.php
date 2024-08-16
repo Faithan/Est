@@ -313,9 +313,7 @@ if (isset($_GET['manage_id'])) {
                                     <div class="room-details"><label for="">Bed Type: </label>
                                         <p><?php echo $bedType ?></p>
                                     </div>
-                                    <div class="room-details"><label for="">Room Number: </label>
-                                        <p> <?php echo $roomNumber ?></p>
-                                    </div>
+                                   
                                     <div class="room-details"><label for="">No. of Beds: </label>
                                         <p> <?php echo $bed_quantity ?></p>
                                     </div>
@@ -327,7 +325,7 @@ if (isset($_GET['manage_id'])) {
                                 <div class="button-container">
                                     <?php
                                     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                                        $href = "reservationForm.php?manage_id=" . $id;
+                                        $href = "reservationFormRoom.php?manage_id=" . $id;
                                         $button_text = "Book Now";
                                     } else {
                                         $href = "";
@@ -389,6 +387,7 @@ if (isset($_GET['manage_id'])) {
 
         </div>
     </div>
+
 
 
 

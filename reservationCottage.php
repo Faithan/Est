@@ -5,7 +5,7 @@ session_start();
 
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
-    $manage_query = "SELECT * FROM room_tbl WHERE id = $manage_id";
+    $manage_query = "SELECT * FROM cottage_tbl WHERE cottage_id = $manage_id";
     $manage_result = mysqli_query($con, $manage_query);
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
@@ -33,7 +33,7 @@ if (isset($_GET['manage_id'])) {
     <!-- javascript -->
     <script src="landing_js/wavingtext.js" defer></script>
     <script src="landing_js/mobileMenu.js" defer></script>
-    <!-- <script src="landing_js/selectCategory.js" defer></script> -->
+
     <!-- <script src="landing_js/reserveRoom.js" defer></script> -->
     <script src="landing_js/scroll.js" defer></script>
 
@@ -50,7 +50,6 @@ if (isset($_GET['manage_id'])) {
 
 </head>
 
-
 <body>
 
     <button onclick="scrollToTop()" id="scrollToTopBtn"><i class="fa-solid fa-arrow-up"></i></button>
@@ -58,8 +57,10 @@ if (isset($_GET['manage_id'])) {
     <!-- for header -->
     <?php include 'header.php' ?>
 
-    <!-- home page -->
-    <section class="main-home">
+
+ <!-- mobile version -->
+
+ <section class="main-home">
         <div class="wrapper-main">
             <div class="home-content">
                 <div>
@@ -70,91 +71,332 @@ if (isset($_GET['manage_id'])) {
                 </div>
             </div>
         </div>
-
     </section>
 
-    <section class="category-main-container">
+    <div class="page-structure">
 
-        <h2>Categories✨</h2>
+        <div class="left-background">
 
-        <div class="category-bar-container">
-            <div class="custom-select">
-                <select onchange="scrollToDiv()">
-                    <option disabled selected value="">Select a Cottage Type</option>
-                    <option value="standard">Standard</option>
-                    <option value="superior">Superior</option>
-                    <option value="family">Family</option>
-                    <option value="barkadahan">Barkadahan</option>
-                    <option value="exclusive">Exclusive</option>
-                </select>
+        </div>
+
+
+
+
+        <!-- home page -->
+        <div class="rooms-base-container">
+            <div class="container-header">
+                <label for="">Cottage reservation</label>
             </div>
 
 
 
 
+            <!-- start of room container -->
+            <div class="rooms-container">
+
+                <div class="category-container">
+                    <div class="select-container">
 
 
-        </div>
+                        <div class=" custom-select-pc">
 
-        <div class="search-bar-container">
-            <div>
-                <div class="group">
-                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                        <g>
-                            <path
-                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                            </path>
-                        </g>
-                    </svg>
-                    <input placeholder="Search" type="search" class="search-input">
+
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct cottage type names
+                            $sql = "SELECT DISTINCT cottage_type_name FROM cottage_type_tbl";
+                            $result = $con->query($sql);
+
+                            $selectBox = "<select name='cottage_type' id='cottageTypeSelect' onchange='filterCottages()'>";
+                            $selectBox .= "<option disabled selected value=''>Select a Cottage Type</option>";
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $cottageType = ucwords(strtolower($row["cottage_type_name"])); // Capitalize and format the room type
+                                    $selectBox .= "<option value='" . $cottageType . "'>" . $cottageType . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No cottage types found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
+                        </div>
+
+                        <!-- cottage type script -->
+                        <script>
+                            function filterCottages() {
+                                const select = document.getElementById('cottageTypeSelect');
+                                const selectedCottageType = select.value.toLowerCase().replace(/ /g, '-');
+
+                                // Get the target element and the container
+                                const targetElement = document.getElementById(selectedCottageType);
+                                const container = document.querySelector('.rooms-container');
+
+                                if (targetElement && container) {
+                                    // Calculate the position of the target element relative to the container
+                                    const offsetTop = targetElement.offsetTop - container.offsetTop;
+
+                                    // Scroll the container to the target element
+                                    container.scrollTo({
+                                        top: offsetTop,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }
+
+                        </script>
+
+
+
+
+
+
+                       
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
                 </div>
+
+
+
+
+
+
+                <!-- start of room holder -->
+                <div class="rooms-holder">
+                    <?php
+                    $cottageTypesQuery = "SELECT DISTINCT cottage_type_name FROM cottage_type_tbl";
+                    $cottageTypesResult = mysqli_query($con, $cottageTypesQuery);
+                    $cottageTypeCount = 1;
+
+                    while ($typeRow = mysqli_fetch_assoc($cottageTypesResult)) {
+                        $cottage_type = $typeRow['cottage_type_name'];
+                        $cottage_type_id = strtolower(str_replace(' ', '-', $cottage_type)); // Convert room type to a valid ID
+                    
+                        echo "<div class='title-head' id='{$cottage_type_id}'>";
+                        echo "<label>$cottage_type</label>";
+                        echo '</div>';
+
+                        echo '<div class="room-first-container">';
+
+                        $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = '$cottage_type'";
+                        $result = mysqli_query($con, $fetchdata);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $id = $row['cottage_id'];
+                            $cottageNumber = $row['cottage_number'];
+                            $cottageType = $row['cottage_type'];
+                            $day_price= $row['day_price'];
+                            $night_price= $row['night_price'];
+                            $status = $row['cottage_status'];
+                            $noPersons = $row['number_of_person'];
+                            $photo = $row['cottage_photo'];
+                            ?>
+
+                            <div class="rooms">
+
+                                <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
+
+                                <div class="info-container">
+                                    <div class="room-details"><label for="bold-text">Day Price : </label>
+                                        <p for="bold-text">₱ <?php echo $day_price ?></p>
+                                    </div>
+                                    <div class="room-details"><label for="bold-text">Night Price : </label>
+                                        <p for="bold-text">₱ <?php echo $night_price ?></p>
+                                    </div>
+                                    <div class="room-details" id="good-for">
+                                        <p><em>Good For 10 hours</em></p>
+                                    </div>
+                                    <div class="room-details"><label for="">Cottage Type: </label>
+                                        <p><?php echo $cottageType ?></p>
+                                    </div>
+                                   
+                                 
+                                    <div class="room-details"><label for="">Number of persons: </label>
+                                        <p> <?php echo $noPersons ?></p>
+                                    </div>
+                                  
+                                  
+                                </div>
+
+                                <div class="button-container">
+                                    <?php
+                                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                                        $href = "reservationFormCottage.php?manage_id=" . $id;
+                                        $button_text = "Book Now";
+                                    } else {
+                                        $href = "";
+                                        $button_text = "Login to Book";
+                                    }
+                                    ?>
+                                    <a href="<?php echo $href; ?>" name="book_now">
+                                        <button class="button" <?php if (empty($href))
+                                            echo 'disabled'; ?>>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                                fill="none" class="svg-icon">
+                                                <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                    <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                    <path d="m8 3v4"></path>
+                                                    <path d="m16 3v4"></path>
+                                                    <path d="m4 11h16"></path>
+                                                </g>
+                                            </svg>
+                                            <span class="label"><?php echo $button_text; ?></span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+
+
+                            <?php
+                        }
+
+                        echo '</div>'; // Close room-first-container
+                        $cottageTypeCount++;
+                    }
+
+                    ?>
+                </div>
+                <!-- end of room holder -->
+
             </div>
+            <!-- end of room container -->
+
+
+
         </div>
-    </section>
 
 
 
 
-    <main class="rooms-main-container">
-        <div class="wrapper-main">
 
-            <?php
-            // Function to display cottages of a specific type
-            function displayCottageType($con, $cottageType, $headerLabel)
-            {
-                $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = '$cottageType'";
-                $result = mysqli_query($con, $fetchdata);
 
-                echo '<div class="content-sub-header" id="' . strtolower($cottageType) . '">
-                    <label>' . $headerLabel . '</label>
-                 </div>'; // Header for the cottage type
-            
-                echo '<div class="content-center">';
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $cottage_id = $row['cottage_id'];
-                    $cottageNumber = $row['cottage_number'];
-                    $cottageType = $row['cottage_type'];
-                    $noPersons = $row['number_of_person'];
-                    $dayPrice = $row['day_price'];
-                    $nightPrice = $row['night_price'];
-                    $photo = $row['cottage_photo'];
 
-                    include 'cottageDetails.php'; // Include cottage details template
-                }
-                echo '</div>'; // Close content-center
-            }
 
-            // Display different types of cottages
-            displayCottageType($con, 'Standard', 'Standard Cottages');
-            displayCottageType($con, 'Superior', 'Superior Cottages');
-            displayCottageType($con, 'Family', 'Family Cottages');
-            displayCottageType($con, 'Barkadahan', 'Barkadahan Cottages');
-            displayCottageType($con, 'Exclusive', 'Exclusive Cottages');
-            ?>
 
-        </div> <!-- Close wrapper-main -->
-    </main>
+
+
+
+
+        <div class="right-background">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+  
+
+ 
+    <!-- end of mobile version -->
+
 
 
 

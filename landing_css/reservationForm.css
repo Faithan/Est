@@ -3,6 +3,221 @@ body {
 
 }
 
+.main-home {
+    width: 100%;
+    background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 15vh;
+    background-size: 25vh, cover;
+    background-position: right 20% center, center;
+
+}
+
+.home-content {
+    color: white;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 10vh;
+
+
+}
+
+
+
+
+
+.wave-text {
+    width: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 8vh;
+    text-transform: uppercase;
+}
+
+.wave-text h2 {
+    position: absolute;
+    font-size: 2.5rem;
+    transform: translate(50%, -50%);
+    font-weight: bold;
+    line-height: 2;
+}
+
+
+.wave-text h2:nth-child(1) {
+    color: transparent;
+    background-color: none;
+    -webkit-text-stroke: 1px var(--water-border);
+}
+
+.wave-text h2:nth-child(2) {
+    color: var(--water-color);
+    animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+
+    50% {
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+}
+
+
+
+
+
+/* end */
+
+
+/* reserve-form image */
+.image-container {
+    width: 100%;
+    height: 400px;
+    background-color: var(--first-color2);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.image-container img {
+    height: 300px;
+    border-radius: 5px;
+    border: 5px solid var(--first-color);
+}
+
+
+
+/* reserveform contents */
+
+.reserveForm-contents {
+    padding: 20px 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--first-color);
+    gap: 10px;
+}
+
+.reserveForm-contents label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--seventh-color);
+}
+
+ .reserveForm-contents .bold-text{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--seventh-color);
+    text-align: center;
+}
+
+
+.reserveForm-contents input {
+    font-size: 1.4rem;
+    border: 1px solid var(--seventh-color);
+    line-height: 2;
+    border-radius: 5px;
+    padding-left: 5px;
+    color: var(--seventh-color);
+}
+
+.reserveForm-contents .fixed-value-input{
+    background-color: var(--after-input);
+}
+
+
+
+
+
+.reserveForm-contents textarea {
+    font-size: 1.4rem;
+    border: 1px solid var(--seventh-color);
+    height: 100px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.reserveForm-contents p {
+    font-size: 1.3rem;
+    color: var(--seventh-color);
+    font-style: italic;
+
+}
+
+
+
+
+.reserveForm-contents input.has-value {
+    background-color: var(--after-input);
+    color: var(--seventh-color);
+}
+
+.reserveForm-contents textarea.has-value {
+    background-color: var(--after-input);
+    color: var(--seventh-color);
+}
+
+
+
+
+/* buttons container */
+
+.reservationForm-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+.reservationForm-buttons .submit-btn {
+    color: white;
+    background-color: var(--sixth-color);
+    padding: 10px 30px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.reservationForm-buttons .submit-btn:hover {
+    color: white;
+    background-color: #003d5b;
+    box-shadow: 0 0 3px #003d5b;
+    transition: 0.5s;
+}
+
+.reservationForm-buttons .cancel-btn {
+    padding: 10px 30px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--fifth-color);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.reservationForm-buttons .cancel-btn:hover {
+    color: white;
+    background-color: #410000;
+
+}
+
+
 
 
 
@@ -64,7 +279,7 @@ For larger desktops and laptops:
         align-items: center;
         height: 15vh;
         background-size: 15vh, cover;
-        background-position: right, center;
+        background-position: right , center;
 
     }
 
@@ -310,10 +525,13 @@ For larger desktops and laptops:
 /* For standard mobile devices: */
 @media only screen and (min-width: 481px) and (max-width: 767px) {
 
-    .wrapper-main {
-        width: 100%;
+    .reserveForm-contents {
+        padding: 10px 100px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color);
+        gap: 10px;
     }
-
 
 
 }
@@ -357,21 +575,72 @@ For larger desktops and laptops:
 
 /* For tablets: */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .wrapper-main {
-        width: 100%;
+    .reserveForm-contents {
+        padding: 10px 200px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color);
+        gap: 10px;
     }
+    
+
 }
 
 
 /* For small desktops and laptops: */
 
 @media only screen and (min-width: 1024px) and (max-width: 1199px) {
-    .wrapper-main {
-        width: 100%;
+    .reserveForm-contents {
+        padding: 10px 200px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color);
+        gap: 10px;
     }
+    
+
 }
 
 
 
-/* For larger desktops and laptops: */
-@media only screen and (min-width: 1200px) {}
+
+
+/* For larger desktops and laptops:  */
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {
+
+ 
+
+    .reserveForm-contents {
+        padding: 10px 300px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color);
+        gap: 10px;
+    }
+        
+    
+    
+  
+  }
+  
+  /* not recommended */
+
+
+
+  
+/* For larger desktops and laptops:  */
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+
+ 
+  
+    .reserveForm-contents {
+        padding: 10px 300px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color);
+        gap: 10px;
+    }
+      
+      }
+      
+      /* not recommended */

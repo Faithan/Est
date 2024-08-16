@@ -52,7 +52,7 @@ body {
 }
 
 .container-header label {
-    background-color: var(--seventh-color);
+    background-color: var(--reservation-title);
     width: 100%;
     padding: 10px 10px;
     text-align: center;
@@ -60,7 +60,8 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     border-radius: 5px;
-    color: var(--first-color);
+    color: var(--reservation-text);
+    border: 1px solid var(--reservation-titleborder);
 }
 
 .category-container {
@@ -73,7 +74,7 @@ body {
     background-color: var(--first-color2);
     position: -webkit-sticky;
     position: sticky;
-    box-shadow: 0 1px 5px var(--box-shadow);
+    box-shadow: 0 1px 4px var(--box-shadow);
 }
 
 .select-container {
@@ -250,6 +251,7 @@ select option {
     gap: 20px;
     padding: 5px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .rooms {

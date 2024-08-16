@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 
@@ -42,9 +42,9 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
     <!-- current page css -->
-    <link rel="stylesheet" href="landing_css/myReservationRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="landing_css/myReservationCottage.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
-    <title>My Room Reservation</title>
+    <title>My Cottage Reservation</title>
 
 </head>
 
@@ -61,8 +61,8 @@ if (isset($_SESSION['user_id'])) {
             <div class="home-content">
                 <div>
                     <div class="wave-text">
-                        <h2>My Reserved Room</h2>
-                        <h2>My Reserved Room</h2>
+                        <h2>My Reserved Cottage</h2>
+                        <h2>My Reserved Cottage</h2>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="wrapper-main">
 
             <?php
-            $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id";
+            $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id";
             $result = mysqli_query($con, $fetchdata);
             $reservation_count = mysqli_num_rows($result);
 
@@ -91,24 +91,23 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             <?php } else { ?>
 
-            
+
 
 
 
                 <div class="content-center">
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id";
+                    <?php $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
-                        $roomNumber = $row['room_number'];
-                        $roomType = $row['room_type'];
-                        $bedType = $row['bed_type'];
-                        $bed_quantity = $row['bed_quantity'];
+                        $roomNumber = $row['cottage_number'];
+                        $roomType = $row['cottage_type'];
                         $number_of_person = $row['number_of_person'];
-                        $amenities = $row['amenities'];
                         $price = $row['price'];
-                        $status = $row['status'];
-                        $photo = $row['photo'];
+                        $date = $row['date_of_arrival'];
+                        $time = $row['time_of_arrival'];
+                        $status = $row['reserve_status'];
+                        $photo = $row['cottage_photo'];
                         ?>
 
 
@@ -120,44 +119,36 @@ if (isset($_SESSION['user_id'])) {
                             <div class="container-of-labels">
 
                                 <div class="label-container">
-                                    <div class="title-text-bold"><label>Price (Good for 22hrs):</label></div>
+                                    <div class="title-text-bold"><label>Price :</label></div>
                                     <div class="detail-bold">
                                         <p>₱<?php echo $price ?></p>
                                     </div>
                                 </div>
 
+                                <div class="label-container-time">
+                                    <div class="detail-time"><p><?php echo $time ?></p>
+                                    </div>
+                                </div>
 
+                                <div class="label-container-time">
+                                    <div class="detail-time"><p><?php echo $date ?></p>
+                                    </div>
+                                </div>
+
+                             
                                 <div class="label-container">
-                                    <div class="title-text"><label><b>Room Type:</b></label></div>
+                                    <div class="title-text"><label><b>Cottage Type:</b></label></div>
                                     <div class="detail">
                                         <p><?php echo $roomType ?></p>
                                     </div>
                                 </div>
 
 
-                                <div class="label-container">
-                                    <div class="title-text"><label><b>Bed Type:</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $bedType ?></p>
-                                    </div>
-                                </div>
-
 
                                 <div class="label-container">
-                                    <div class="title-text"><label><b>Room Number:</b></label></div>
+                                    <div class="title-text"><label><b>Cottage Number:</b></label></div>
                                     <div class="detail">
                                         <p><?php echo $roomNumber ?></p>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <div class="label-container">
-                                    <div class="title-text"><label><b>No. of Beds:</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $bed_quantity ?></p>
                                     </div>
                                 </div>
 
@@ -168,19 +159,12 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
 
-                                <div class="label-container">
-                                    <div class="title-text"><label><b>Amenities:</b></label></div>
-                                    <div class="detail">
-                                        <p><?php echo $amenities ?></p>
-                                    </div>
-                                </div>
-
 
 
                             </div>
 
                             <div class="button-container">
-                                <a href="viewReservationRoom.php?manage_id=<?php echo $reserve_id; ?>"><i
+                                <a href="viewReservationCottage.php?manage_id=<?php echo $reserve_id; ?>"><i
                                         class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         </div>

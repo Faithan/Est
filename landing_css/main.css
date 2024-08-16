@@ -42,10 +42,13 @@ a{
 
     --booknow-text: #ffffff;
     --booknow-text2: #242526;
+
+
     --booknow-border: #F77F00;
 
-
-
+    --reservation-titleborder:#18191A ;
+    --reservation-title:#18191A; 
+    --reservation-text: white;
 
     --box-shadow:#b4b4b4;
 
@@ -86,6 +89,9 @@ a{
 
     --water-border: #dddcdb;
     --water-color:#030c38;
+
+
+    --reservation-titleborder: #F77F00;
 }
 
 .invert-color {

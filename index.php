@@ -85,7 +85,7 @@ session_start();
         </div>
 
 
-        <a href="#" class="category-box">
+        <a href="reservationCottage.php" class="category-box">
             <div class="dark-overlay"></div>
             <h2>Cottages</h2>
         </a>
