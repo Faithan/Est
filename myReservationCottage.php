@@ -85,7 +85,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="no-reservation-message">
                     <div class="house-icon"><i class="fa-solid fa-house-circle-exclamation"></i></div>
                     <label>There are no reservations yet. Browse rooms and cottages to reserve.</label>
-                    <div class="browse-btns"><a href="#"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
+                    <div class="browse-btns"><a href="reservationCottage.php"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
                         <a href="reservationRoom.php"><i class="fas fa-bed"></i> Rooms</a>
                     </div>
                 </div>

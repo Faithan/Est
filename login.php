@@ -1,41 +1,47 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
-
 if (!$con) {
-    die("connection failed;" . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 
 // Check if the user is already logged in
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     header('Location: index.php');
     exit();
 }
-    
-// for user
 
+// For user login
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $login_query = "SELECT * FROM user_tbl WHERE email='$email' AND password='$password' ";
+    // Prepare a statement to prevent SQL injection
+    $stmt = $con->prepare("SELECT * FROM user_tbl WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $result = mysqli_query($con, $login_query);
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
 
-    if (mysqli_num_rows($result) == 1) {
-        $_SESSION['loggedin'] = true;
-        $_SESSION['email'] = $email;
-        header('Location:index.php');
-        exit();
-
+        // Check account status
+        if ($user['account_status'] == 'active') {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email;
+            header('Location: index.php');
+            exit();
+        } else {
+            $error_message = "Your account is not active.";
+        }
     } else {
-        $error_message = "Invalid username or password;";
+        $error_message = "Invalid email or password.";
     }
 
+    $stmt->close();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +58,7 @@ if (isset($_POST['login'])) {
     <script src="landing_js/mobileMenu.js" defer></script>
 
     <!-- important additional css -->
-    <?php
-    include 'important.php'
-        ?>
+    <?php include 'important.php'; ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/login.css?v=<?php echo time(); ?>">
@@ -65,21 +69,17 @@ if (isset($_POST['login'])) {
 <body>
 
     <!-- for header -->
-    <?php include 'header.php' ?>
+    <?php include 'header.php'; ?>
 
     <div class="alignment-container">
 
         <!-- login page -->
-
         <main class="main-login">
-
             <form method="post" action="" class="login-container">
-
 
                 <div class="logo-container">
                     <img class="picture2" src="system_images/Picture4.png" alt="">
                     <hr>
-
                 </div>
 
                 <div>
@@ -88,12 +88,10 @@ if (isset($_POST['login'])) {
                 </div>
 
                 <label for="">Email</label>
-
                 <div class="input-container">
                     <span class="input-icon">&#9993;</span>
                     <input type="email" name="email" placeholder="Enter your email">
                 </div>
-
 
                 <label for="">Password</label>
                 <div class="input-container">
@@ -119,17 +117,9 @@ if (isset($_POST['login'])) {
 
     </div>
 
-
     <!-- footer -->
-    <?php
-    include 'footer.php'
-        ?>
-
-
-
+    <?php include 'footer.php'; ?>
 
 </body>
-
-
 
 </html>

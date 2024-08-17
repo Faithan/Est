@@ -140,6 +140,7 @@ body {
     align-items: center;
     border-radius: 5px;
     padding-left: 5px;
+    background-color: var(--first-color);
     color: var(--seventh-color);
     appearance: auto;
 }
@@ -429,6 +430,7 @@ For larger desktops and laptops:
         align-items: center;
         border-radius: 5px;
         padding-left: 5px;
+ 
         color: var(--seventh-color);
         appearance: auto;
     }

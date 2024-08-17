@@ -1,4 +1,4 @@
-<!-- javascripts -->
+<!-- JavaScript Files -->
 <script src="landing_js/mobileMenu.js" defer></script>
 <script src="landing_js/loginButton.js" defer></script>
 <script src="landing_js/autowidth.js" defer></script>
@@ -7,23 +7,20 @@
 <script src="landing_js/subMenu.js" defer></script>
 <script src="landing_js/subMenu2.js" defer></script>
 
-
-
 <?php
 include('db_connect.php');
 
 // Default values for logged-out state
-$icon_class = "fa-solid fa-arrow-right-to-bracket"; // Default login icon
+$icon_class = "fa-solid fa-arrow-right-to-bracket";
 $link_text = "Log in";
-$link_url = "login.php"; // Default to login page
-$logout_script = ''; // No logout script for logged-out state
+$link_url = "login.php";
+$logout_script = '';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // User is logged in
     if (!isset($_SESSION['user_id'])) {
-        // Get the user's ID if not already stored in session
         $email = $_SESSION['email'];
-        $sql = "SELECT id FROM user_tbl WHERE email= '$email'";
+        $sql = "SELECT id FROM user_tbl WHERE email = '$email'";
         $result = mysqli_query($con, $sql);
         if ($row = mysqli_fetch_assoc($result)) {
             $_SESSION['user_id'] = $row['id'];
@@ -31,9 +28,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     }
 
     // Update values for logged-in state
-    $icon_class = "fa-solid fa-right-from-bracket"; // Logout icon class
+    $icon_class = "fa-solid fa-right-from-bracket";
     $link_text = "Log out";
-    $link_url = "#"; // Prevent default action, handled by JS
+    $link_url = "#";
     $logout_script = '
     <script>
         function handleLogout(event) {
@@ -52,22 +49,29 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             });
         }
 
-        // Update icon class and link behavior
-        var loginIcon = document.getElementById("loginIcon");
-        loginIcon.className = "fa-solid fa-right-from-bracket";
-        loginIcon.onclick = handleLogout;
+        window.addEventListener("load", function() {
+            var loginIcon = document.getElementById("loginIcon");
+            var burgerLoginIcon = document.getElementById("burgerLoginIcon");
 
-        // Disable hover effect if logged in
-        loginIcon.onmouseover = null;
-        loginIcon.onmouseout = null;
-        document.querySelector(".tooltip").innerText = "Log out";
+            if (loginIcon) {
+                loginIcon.className = "'.$icon_class.'";
+                loginIcon.onclick = handleLogout;
+                document.querySelector(".tooltip").innerText = "Log out";
+            }
+
+            if (burgerLoginIcon) {
+                burgerLoginIcon.className = "'.$icon_class.'";
+                burgerLoginIcon.onclick = handleLogout;
+                document.querySelector(".burger-tooltip").innerText = "Log out";
+            }
+        });
     </script>';
 }
 ?>
 
-<!-- header -->
+<!-- Header -->
 <header class="header-main">
-    <!-- for web menu -->
+    <!-- Web Menu -->
     <nav class="header-nav">
         <div class="header-logo">
             <img src="system_images/Picture1.png" id="logoImg">
@@ -78,33 +82,25 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
 
             <li class="dropdown">
-                <a class="reservation"><i class="fa-solid fa-calendar"></i>Reservation <i class="fa-solid fa-caret-down"
-                        id="down-arrow"></i></a>
+                <a class="reservation"><i class="fa-solid fa-calendar"></i>Reservation <i class="fa-solid fa-caret-down" id="down-arrow"></i></a>
                 <div class="dropdown-content">
                     <a href="reservationCottage.php"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
                     <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i>Rooms</a>
                 </div>
             </li>
 
-
-
             <li class="dropdown">
                 <a class="myReservation.php"><i class="fa-solid fa-calendar-day"></i> My Reservation</a>
                 <div class="dropdown-content">
                     <a href="myReservationCottage.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-umbrella-beach"></i>For Cottages</a>
                     <a href="myReservationRoom.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-bed"></i>For Rooms</a>
-
                 </div>
             </li>
 
             <li class="dropdown">
-                <a class="reservation"><i class="fa-solid fa-gear"></i>Settings <i class="fa-solid fa-caret-down"
-                        id="down-arrow"></i></a>
+                <a class="reservation"><i class="fa-solid fa-gear"></i>Settings <i class="fa-solid fa-caret-down" id="down-arrow"></i></a>
                 <div class="dropdown-content">
-                    <a href="profile.php" onclick="checkLoggedIn(event)">
-                        <i class="fa-solid fa-address-card"></i> Profile
-                    </a>
-
+                    <a href="profile.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-address-card"></i> Profile</a>
                     <a href="#"><i class="fa-solid fa-book"></i>History</a>
                     <a href="#"><i class="fa-solid fa-lock"></i>Password and Security</a>
                     <a href="#"><i class="fa-solid fa-headset"></i>Customer Support</a>
@@ -115,7 +111,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
     <!-- Icons Container -->
     <div class="icons-container">
-        <!-- First Login Button (Outside Burger Menu) -->
+        <!-- Login Button -->
         <div class="header-btn">
             <a href="<?php echo $link_url; ?>" class="login-icon">
                 <i id="loginIcon" class="<?php echo $icon_class; ?>"></i>
@@ -136,7 +132,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <?php echo $logout_script; ?>
 </header>
 
-<!-- burger menu -->
+<!-- Burger Menu -->
 <nav class="burger-menu" id="mySidenav">
     <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
 
@@ -146,7 +142,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <a href="reservationRoom.php"><i class="fa-solid fa-bed"></i> Rooms</a>
     </div>
 
-    <a id="submenu2"> <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i></a>
+    <a id="submenu2"><i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i></a>
     <div class="submenu" id="subMenuContent2">
         <a href="myReservationCottage.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-umbrella-beach"></i>For Cottages</a>
         <a href="myReservationRoom.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-bed"></i>For Rooms</a>
@@ -162,10 +158,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
     <a href="#"><i class="fa-solid fa-headset"></i> Customer Support</a>
 
-    <a href="<?php echo $link_url; ?>" id="logoutBtn">
-        <i class="fa-solid <?php echo $icon_class; ?>"></i> <?php echo $link_text; ?>
-    </a>
-
     <!-- Include the logout script for burger menu -->
     <?php echo $logout_script; ?>
 </nav>
@@ -173,11 +165,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <script>
     function checkLoggedIn(event) {
         if (!<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>) {
-            event.preventDefault(); // Prevent the default link action
+            event.preventDefault();
             SweetAlertNotLoggedIn();
         }
     }
-
+    
     function SweetAlertNotLoggedIn() {
         Swal.fire({
             icon: "error",

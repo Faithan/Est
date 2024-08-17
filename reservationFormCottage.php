@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
     '$fname',
     '$mname',
     '$lname',
+    '$address',
     '$phone_number',
     '$email',
     '$date_of_arrival',

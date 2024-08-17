@@ -3,11 +3,10 @@ body {
 }
 
 
-
 .profile-main {
     width: 100%;
     background-color: var(--first-color2);
-  
+    height: calc(100vh - 40px);
 }
 
 .profile-main-flex {
@@ -45,6 +44,7 @@ body {
 }
 
 
+
 .personal-info-container .header-label {
     margin-top: 20px;
     display: flex;
@@ -57,12 +57,6 @@ body {
     font-size: 1.3rem;
 
 }
-
-.header-label a {
-    font-size: 1.2rem;
-    color: #D62828;
-}
-
 
 .personal-info {
     display: flex;
@@ -106,14 +100,106 @@ body {
     border-radius: 5px;
 }
 
-.personal-info a p {
-    font-size: 1.2rem;
-    color: #D62828;
+
+.new-personal-info{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.new-personal-info  .new-info{
+  
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 
 
 
+.new-info label{
+    font-size: 1.3rem;
+    color: var(--seventh-color);
+}
+
+.new-info input{
+    all: revert;
+    width: 200px;
+    height: 20px;
+    background-color: var(--first-color2);
+    border: 1px solid var(--seventh-color);
+    color: var(--seventh-color);
+    border-radius: 2px;
+}
+
+
+.new-info select{
+    all: revert;
+    width: 205px;
+    height: 24px;
+    background-color: var(--first-color2);
+    border: 1px solid var(--seventh-color);
+    color: var(--seventh-color);
+    border-radius: 2px;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.button-container #save{
+    color: white;
+    background-color: var(--sixth-color);
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.button-container #save:hover{
+    color: white;
+    background-color: #003d5b;
+    box-shadow: 0 0 3px #003d5b;
+    transition: 0.5s;
+}
+
+.button-container #cancel{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--fifth-color);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+
+
+.button-container #cancel:hover{
+    color: white;
+    background-color: #410000;
+
+}
+
+
+.button-container button{
+    all: revert;
+    cursor: pointer;
+}
 
 
 
@@ -165,7 +251,12 @@ For larger desktops and laptops:
     }
 
 
-  
+    .profile-main {
+        width: 100%;
+        background-color: var(--first-color2);
+        height: calc(100vh - 40px);
+    }
+
     .profile-main-flex {
         padding: 20px;
         display: flex;
@@ -254,11 +345,7 @@ For larger desktops and laptops:
         border-radius: 5px;
     }
 
-    .personal-info a p {
-        font-size: 1.2rem;
-        color: #D62828;
-    }
-
+  
 }
 
 

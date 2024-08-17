@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 $gender = 'N/A';
@@ -29,6 +29,7 @@ if (isset($_SESSION['user_id'])) {
             $gender = $row['gender'];
             $birthdate = $row['birthdate'];
             $address = $row['address'];
+            $password = $row['password'];
 
         }
     } else {
@@ -51,9 +52,7 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
 
     <!-- javascript -->
-    <script src="landing_js/wavingtext.js" defer></script>
-    <script src="landing_js/mobileMenu.js" defer></script>
-    <script src="landing_js/scroll.js" defer></script>
+
 
     <!-- important additional css -->
     <?php
@@ -73,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- for header -->
     <?php include 'header.php' ?>
-    
+
 
     <!-- home page -->
     <main class="profile-main">
@@ -90,25 +89,206 @@ if (isset($_SESSION['user_id'])) {
             <div class="personal-info-container">
                 <div class="header-label">
                     <h1>Personal information</h1>
-                    <a href=""><i class="fa-solid fa-user-pen"></i> Edit</a>
+
                 </div>
 
                 <div class="personal-info">
-                    <div class="info"><p><i class="fa-solid fa-envelope"></i> Email</p> <p><?php echo $email; ?></p></div>
-                    <div class="info"><p><i class="fa-solid fa-phone"></i> Phone Number</p> <p><?php echo $contact_number; ?></p></div>
-                    <div class="info"><p><i class="fa-solid fa-venus-mars"></i> Gender</p> <p><?php echo $gender; ?></p></div>
-                    <div class="info"><p><i class="fa-solid fa-cake-candles"></i> Birthdate</p> <p><?php echo $birthdate; ?></p></div>
-                    <div class="info"><p><i class="fa-solid fa-map-location-dot"></i> Address</p> <p><?php echo $address; ?></p></div>
+                    <div class="info">
+                        <p><i class="fa-solid fa-envelope"></i> Email</p>
+                        <div class="info-content">
+                            <p><?php echo $email; ?></p><a href="editEmail.php"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p><i class="fa-solid fa-phone"></i> Phone Number</p>
+                        <div class="info-content">
+                            <p><?php echo $contact_number; ?></p><a href="editContactNumber.php"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p><i class="fa-solid fa-venus-mars"></i> Gender</p>
+                        <div class="info-content">
+                            <p><?php echo $gender; ?></p><a href="editGender.php"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p><i class="fa-solid fa-cake-candles"></i> Birthdate</p>
+                        <div class="info-content">
+                            <p><?php echo $birthdate; ?></p><a href="editBirthdate.php"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <p><i class="fa-solid fa-map-marker-alt"></i> Address</p>
+                        <div class="info-content">
+                            <p><?php echo $address; ?></p><a href="editAddress.php"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
                 </div>
+
+
+                <div class="header-label">
+                    <h1>Password And Security</h1>
+                </div>
+
+
+                <div class="personal-info">
+                    <div class="info">
+                        <p><i class="fa-solid fa-lock"></i> Password</p>
+                        <div class="info-content">
+                            <p><?php echo str_repeat('•', strlen($password)); ?></p>
+                            <a href="#" id="editPasswordLink"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.getElementById('editPasswordLink').addEventListener('click', function (event) {
+                        event.preventDefault();
+
+                        Swal.fire({
+                            title: 'Enter your password',
+                            input: 'password',
+                            inputPlaceholder: 'Enter your password',
+                            showCancelButton: true,
+                            confirmButtonText: 'Proceed',
+                            preConfirm: (password) => {
+                                return fetch('validate_password.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    body: 'password=' + encodeURIComponent(password)
+                                })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error(response.statusText);
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        if (!data.success) {
+                                            Swal.showValidationMessage(data.message || 'Incorrect password');
+                                            return false;
+                                        }
+                                        return true;
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        Swal.showValidationMessage('An unexpected error occurred: ' + error.message);
+                                    });
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Set a session variable to indicate the user has been authenticated
+                                fetch('set_authenticated.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    body: 'authenticated=true'
+                                }).then(() => {
+                                    window.location.href = 'editPassword.php';
+                                });
+                            }
+                        });
+                    });
+
+                </script>
 
                 <div class="header-label">
                     <h1>Account Control</h1>
                 </div>
 
                 <div class="personal-info">
-                    <a ><p><i class="fa-solid fa-trash-can"></i> Delete Account?</p></a>
-                   
+                    <a id="deleteAccountLink" href="javascript:void(0);">
+                        <p><i class="fa-solid fa-trash-can"></i> Delete Account?</p>
+                    </a>
+
                 </div>
+
+
+
+
+
+                <script>
+                    document.getElementById('deleteAccountLink').addEventListener('click', function () {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "This action will permanently delete your account!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Show a prompt to enter password
+                                Swal.fire({
+                                    title: 'Enter your password',
+                                    input: 'password',
+                                    inputLabel: 'Your password',
+                                    inputPlaceholder: 'Enter your password',
+                                    inputAttributes: {
+                                        autocapitalize: 'off'
+                                    },
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Submit',
+                                    cancelButtonText: 'Cancel',
+                                    inputValidator: (value) => {
+                                        if (!value) {
+                                            return 'You need to enter your password!';
+                                        }
+                                    }
+                                }).then((passwordResult) => {
+                                    if (passwordResult.isConfirmed) {
+                                        const password = passwordResult.value;
+
+                                        // Send the password to the server for verification
+                                        fetch('delete_account.php', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ password: password })
+                                        })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.success) {
+                                                    Swal.fire(
+                                                        'Deleted!',
+                                                        'Your account has been deleted.',
+                                                        'success'
+                                                    ).then(() => {
+                                                        window.location.href = 'logout.php'; // Redirect or handle post-delete action
+                                                    });
+                                                } else {
+                                                    Swal.fire(
+                                                        'Error!',
+                                                        'Incorrect password. Please try again.',
+                                                        'error'
+                                                    );
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                                Swal.fire(
+                                                    'Error!',
+                                                    'An unexpected error occurred.',
+                                                    'error'
+                                                );
+                                            });
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+
 
             </div>
         </div>

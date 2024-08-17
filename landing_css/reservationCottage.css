@@ -194,7 +194,7 @@ body {
 select option {
     background-color: var(--first-color2);
     /* Dropdown options background color */
-    color: var(--booknow-border);
+    color: var(--seventh-color);
 
     /* Dropdown options text color */
 }

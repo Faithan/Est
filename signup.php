@@ -28,8 +28,8 @@ if (isset($_POST['signup'])) {
         $isSuccess = false;
     } else {
         // Email is unique, proceed with registration
-        $savedata = "INSERT INTO user_tbl (id ,full_name, contact_number, email, password, gender, birthdate, address,  date_created) 
-                     VALUES ('','$full_name', '$contact_number', '$email', '$password','','','', '$current_date_time')";
+        $savedata = "INSERT INTO user_tbl (id ,full_name, contact_number, email, password, gender, birthdate, address,  date_created, account_status) 
+                     VALUES ('','$full_name', '$contact_number', '$email', '$password','','','', '$current_date_time','active')";
         $query = mysqli_query($con, $savedata);
 
         if ($query) {
