@@ -1,0 +1,158 @@
+@font-face {
+    font-family: estregan;
+    src: url(../../fonts/Playwrite_MX/PlaywriteMX-VariableFont_wght.ttf);
+}
+
+
+
+
+* {
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--first-color2);
+}
+
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+:root {
+    --pure-white: white;
+    --first-color: white;
+    --first-color2: #E7E7E7;
+    --second-color: #EAE2B7;
+    --third-color: #FCBF49;
+    --fourth-color: #F77F00;
+    --fifth-color: #D62828;
+    --sixth-color: #00527e;
+    --seventh-color: #18191A;
+    --seventh-color2: #e0e0e0;
+    --seventh-color3: #e0e0e0;
+    --seventh-color4: #757575;
+    --eight-color: #002334;
+    --eight-color2: #001b29;
+
+
+    --select-color: #F77F00;
+    --select-color2: #cd6a00;
+
+    --booknow-text: #ffffff;
+    --booknow-text2: #242526;
+
+
+    --booknow-border: #F77F00;
+
+    --reservation-titleborder: #18191A;
+    --reservation-title: #18191A;
+    --reservation-text: white;
+
+    --box-shadow: #b4b4b4;
+
+    --after-input: #effaff;
+
+    --water-border: #EAE2B7;
+    --water-color: #0d2cc5;
+
+    --gray-button: rgb(70, 70, 70);
+
+    font-size: 62.5%;
+    /* 10px on default */
+
+
+    --tdeven-color:  #0023340b;
+
+
+}
+
+
+
+.dark-mode {
+    --first-color2: #18191A;
+    --first-color: #242526;
+
+    --booknow-text: #F77F00;
+    --booknow-text2: #F77F00;
+    --booknow-border: #F77F00;
+    --fourth-color: #242526;
+
+    --seventh-color: #e4e4e4;
+    --seventh-color2: #101010;
+    --seventh-color3: #545454;
+
+    --select-color: #242526;
+    --select-color2: #353738;
+
+    --box-shadow: #4d4d4d;
+
+    --after-input: #545454;
+
+    --water-border: #dddcdb;
+    --water-color: #030c38;
+
+
+    --reservation-titleborder: #F77F00;
+}
+
+.invert-color {
+    filter: invert(100%);
+}
+
+
+/* scroll bar settings */
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--first-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--first-color2);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--seventh-color);
+}
+
+
+p {
+    color: var(--seventh-color);
+    font-size: 1.5rem;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: bold;
+    color: var(--seventh-color);
+
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 1.5;
+}
+
+
+/* for alignment */
+.wrapper-main {
+    width: 1200px;
+    margin: 0 auto;
+}
