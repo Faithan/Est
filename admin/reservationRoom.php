@@ -13,10 +13,6 @@ if (isset($_GET['manage_id'])) {
 
 // Include necessary styles and scripts
 ?>
-<link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-<link rel="stylesheet" type="text/css" href="css/reservationRoom.css?v=<?php echo time(); ?>">
-<link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
-<link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
 
 <?php if (!empty($message)): ?>
@@ -87,7 +83,7 @@ if (isset($_GET['manage_id'])) {
         $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='$status' ORDER BY reserve_id DESC";
         $result = mysqli_query($con, $fetchdata);
 
-        echo '<form method="post" action="" class="table-container" id="table-container-' . $status . '">';
+        echo '<form method="post" action=""  id="table-container-' . $status . '">';
         echo '<table><tr>
             <th>Reserve ID</th>
             <th>First Name</th>
@@ -193,3 +189,5 @@ if (isset($_GET['manage_id'])) {
     document.getElementById("checkedOut-btn").onclick = () => showTable(4, 4);
     document.getElementById("rejected-btn").onclick = () => showTable(5, 5);
 </script>
+
+

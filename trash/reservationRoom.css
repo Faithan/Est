@@ -18,6 +18,7 @@
 .header-label label {
     font-weight: bold;
     font-size: 1.8rem;
+
     color: var(--seventh-color);
 }
 

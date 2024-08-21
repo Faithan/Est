@@ -2,10 +2,6 @@
 include ('db_connect.php');
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location:../login.php');
-    exit();
-}
 
 
 $manage_data = ['id' => '', 'room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'price' => '', 'photo' => ''];

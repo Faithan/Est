@@ -46,24 +46,27 @@ session_start();
                     <div class="item"><a href="" id="selected"><i class="fa-solid fa-chart-simple"></i> Overview</a>
                     </div>
 
-                    <div class="item"><a href=""><i class="fa-solid fa-calendar"></i> Reservations <i
+                    <div class="item"><a><i class="fa-solid fa-calendar"></i> Reservations <i
                                 class="fa-solid fa-caret-down dropdown"></i>
                         </a>
                         <!-- dropdown -->
 
                         <div class="sub-menu">
-                            <a href="" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> For Cottages</a>
-                            <a href="" class="sub-menu-item"><i class="fa-solid fa-bed"></i> For Rooms</a>
+                            <a href="#" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> For
+                                Cottages</a>
+                            <a href="#" class="sub-menu-item" id="forRooms"><i class="fa-solid fa-bed"></i> For
+                                Rooms</a>
                         </div>
                     </div>
 
-                    <div class="item"><a href=""><i class="fa-solid fa-toolbox"></i> Manage <i
+                    <div class="item"><a><i class="fa-solid fa-toolbox"></i> Manage <i
                                 class="fa-solid fa-caret-down dropdown"></i></a>
                         <!-- dropdown -->
 
                         <div class="sub-menu">
-                            <a href="" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i>Cottages</a>
-                            <a href="" class="sub-menu-item"><i class="fa-solid fa-bed"></i>Rooms</a>
+                            <a href="#" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i>Cottages</a>
+                            <a href="#" class="sub-menu-item" id="manageRoomsLink"><i
+                                    class="fa-solid fa-bed"></i>Rooms</a>
                         </div>
                     </div>
                     <div class="item"><a href=""><i class="fa-solid fa-gear"></i> Settings</a></div>
@@ -111,8 +114,7 @@ session_start();
 
             <div class="header-container">
                 <div class="title-head">
-                    <img src="../system_images/Picture1.png" alt="">
-                    <label for="">Dashboard</label>
+                    <label for=""><i class="fa-solid fa-table-cells-large"></i> Dashboard</label>
                 </div>
 
                 <div class="title-head-right">
@@ -187,13 +189,38 @@ session_start();
 
             <div class="center-container">
 
-                <?php
-                include 'reservationRoom.php';
-                ?>
+                <div id="reservationRoom" style="display: none;">
+                    <?php include 'reservationRoom.php'; ?>
+                </div>
+                <div id="manageRooms" style="display: none;">
+                    <?php include 'manageRooms.php'; ?>
+                </div>
+
+
+
+
 
             </div>
 
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Hide all sections initially
+                    document.getElementById('reservationRoom').style.display = 'none';
+                    document.getElementById('manageRooms').style.display = 'none';
 
+                    // Event listener for "For Rooms"
+                    document.getElementById('forRooms').addEventListener('click', function () {
+                        document.getElementById('reservationRoom').style.display = 'block';
+                        document.getElementById('manageRooms').style.display = 'none';
+                    });
+
+                    // Event listener for "Rooms"
+                    document.getElementById('manageRoomsLink').addEventListener('click', function () {
+                        document.getElementById('manageRooms').style.display = 'block';
+                        document.getElementById('reservationRoom').style.display = 'none';
+                    });
+                });
+            </script>
 
 
 

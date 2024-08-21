@@ -3,13 +3,9 @@ include ('db_connect.php');
 session_start();
 
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location:../login.php');
-    exit();
-}
 
+$manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'price' => '', 'special_request' => '', 'photo' => ''];
 
-$manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'price' => '', 'special_request' => '', 'reservation_type' => '', 'photo' => ''];
 
 $message = "";
 $isSuccess = false;
@@ -22,7 +18,7 @@ if (isset($_GET['manage_id'])) {
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
 
-if (isset($_POST['confirm'])) {
+if (isset($_POST['checkedin'])) {
     $reserve_id = $_POST['reserve_id'];
     $fname = $_POST['first_name'];
     $mname = $_POST['middle_name'];
@@ -33,7 +29,6 @@ if (isset($_POST['confirm'])) {
     $date_of_arrival = $_POST['date_of_arrival'];
     $time_of_arrival = $_POST['time_of_arrival'];
     $checkOutTime = $_POST['time_out'];
-    $room_number = $_POST['room_number'];
     $room_type = $_POST['room_type'];
     $bed_type = $_POST['bed_type'];
     $bed_quantity = $_POST['bed_quantity'];
@@ -46,11 +41,8 @@ if (isset($_POST['confirm'])) {
     $extraPerson = $_POST['extra_person'];
     $totalFee = $_POST['total_fee'];
 
-    $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
-     room_number='$room_number', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',
-      number_of_person='$number_of_person', amenities='$amenities' , price='$price', 
-      special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , 
-      extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
+    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
+    room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , price='$price', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
         'reserve_id' => '',
@@ -70,9 +62,12 @@ if (isset($_POST['confirm'])) {
         'amenities' => '',
         'price' => '',
         'special_request' => '',
+        'reservation_fee' => '',
         'reservation_type' => '',
         'photo' => ''
     ];
+
+
 
 
     $query = (mysqli_query($con, $update_query));
@@ -88,7 +83,10 @@ if (isset($_POST['confirm'])) {
 }
 
 
+
+
 ?>
+
 
 
 
@@ -100,30 +98,26 @@ if (isset($_POST['confirm'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <!-- important files -->
     <?php
     include 'assets.php'
         ?>
 
     <script src="javascripts/logout.js" defer></script>
-    <!-- <script src="javascripts/calculation.js" defer></script> -->
-    <script src="javascripts/totalFee.js" defer></script>
-
-
+    <script src="javascripts/totalFee2.js" defer></script>
 
 
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
 
-    <link rel="stylesheet" type="text/css" href="css/confirmation.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/checkinForm.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <title>Confirmation</title>
+    <title>Check In</title>
 </head>
 
 <body>
 
-    <!-- for confirm -->
+    <!-- for checkin -->
     <?php if (!empty($message)): ?>
         <script>
             Swal.fire({
@@ -141,7 +135,7 @@ if (isset($_POST['confirm'])) {
     <?php endif; ?>
 
 
-    <!-- for reject -->
+    <!-- for cancel -->
     <script>
         function confirmReject() {
             Swal.fire({
@@ -162,7 +156,7 @@ if (isset($_POST['confirm'])) {
         function rejectItem(rejection_reason) {
             var reserve_id = document.querySelector('input[name="reserve_id"]').value;
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'reject.php', true);
+            xhr.open('POST', 'cancel.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -196,11 +190,10 @@ if (isset($_POST['confirm'])) {
         ?>
 
 
-
     <div class="container">
         <div class="container2">
             <div class="header-label">
-                <label for="">PENDING</label>
+                <label for="">CONFIRMED</label>
             </div>
 
 
@@ -211,42 +204,46 @@ if (isset($_POST['confirm'])) {
                         <label>CUSTOMER AND RESERVATION INFO</label>
                     </div>
 
-
                     <div>
+                        <!-- hidden id -->
+                        <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
+
                         <div class="line">
                             <div>
                                 <label>First Name</label><br>
-                                <input name="first_name" value="<?php echo $manage_data['fname']; ?>">
+                                <input name="first_name" value="<?php echo $manage_data['fname']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Middle Name</label><br>
-                                <input name="middle_name" value="<?php echo $manage_data['mname']; ?>">
+                                <input name="middle_name" value="<?php echo $manage_data['mname']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Last Name</label><br>
-                                <input name="last_name" value="<?php echo $manage_data['lname']; ?>">
+                                <input name="last_name" value="<?php echo $manage_data['lname']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Address</label><br>
-                                <input name="address" value="<?php echo $manage_data['address']; ?>">
+                                <input name="address" value="<?php echo $manage_data['address']; ?>" readonly>
                             </div>
                         </div>
                         <div class="line">
                             <div>
                                 <label>Phone Number</label><br>
-                                <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>">
+                                <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Email</label><br>
-                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>">
+                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>"
+                                    readonly>
                             </div>
                             <div>
                                 <label>Room Type</label><br>
-                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>">
+                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Bed Type</label><br>
-                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>">
+                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>"
+                                    readonly>
                             </div>
 
                         </div>
@@ -254,23 +251,23 @@ if (isset($_POST['confirm'])) {
                             <div>
                                 <label>No. Bed</label><br>
                                 <input type="number" name="bed_quantity"
-                                    value="<?php echo $manage_data['bed_quantity']; ?>">
+                                    value="<?php echo $manage_data['bed_quantity']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Number of Persons</label><br>
                                 <input type="number" name="number_of_person"
-                                    value="<?php echo $manage_data['number_of_person']; ?>">
+                                    value="<?php echo $manage_data['number_of_person']; ?>" readonly>
                             </div>
 
                             <div>
                                 <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>">
+                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" readonly>
                             </div>
 
                             <div>
                                 <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
                                 <input type="number" name="price"
-                                    value="<?php echo $manage_data['price']; ?>">
+                                    value="<?php echo $manage_data['price']; ?>" readonly>
                             </div>
 
 
@@ -281,22 +278,22 @@ if (isset($_POST['confirm'])) {
                             <div>
                                 <label>Room Number</label><br>
                                 <input type="number" class="notransform" name="room_number"
-                                    value="<?php echo $manage_data['room_number']; ?>">
+                                    value="<?php echo $manage_data['room_number']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Arrival Date</label><br>
                                 <input type="date" class="notransform" name="date_of_arrival"
-                                    value="<?php echo $manage_data['date_of_arrival']; ?>">
+                                    value="<?php echo $manage_data['date_of_arrival']; ?>" readonly>
                             </div>
                             <div>
                                 <label>Check-in Time</label><br>
                                 <input type="time" name="time_of_arrival"
-                                    value="<?php echo $manage_data['time_of_arrival']; ?>">
+                                    value="<?php echo $manage_data['time_of_arrival']; ?>" readonly>
                             </div>
 
                             <div>
                                 <label>Check-out Time</label><br>
-                                <input type="time" name="time_out" value="11:00" required>
+                                <input type="time" name="time_out" value="11:00" required readonly>
                             </div>
 
                         </div>
@@ -310,99 +307,73 @@ if (isset($_POST['confirm'])) {
                         </div>
 
 
-
                         <div class="line">
                             <div>
                                 <label>Special Request</label><br>
-                                <textarea name="special_request"
-                                    id=""><?php echo $manage_data['special_request']; ?></textarea>
+                                <textarea name="special_request" id=""
+                                    readonly><?php echo $manage_data['special_request']; ?></textarea>
                             </div>
                         </div>
 
-
-
-
-                        <!-- <div class="edit-button-container">
-                            <button class="edit-button">
-                                <svg class="edit-svgIcon" viewBox="0 0 512 512">
-                                    <path
-                                        d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div> -->
 
                     </div>
 
                     <div class="note">
                         <p>
-                            <b>Note:</b> Please note that the input fields are intentionally left open for any
-                            necessary modifications or changes to customer and reservation information. We
-                            understand that there may be updates or adjustments to be provided by the customer
-                            during the confirmation of their reservation. Rest assured, we are committed to
-                            accommodating any necessary revisions to ensure a seamless and satisfactory
-                            experience.
+                            <b>Note:</b> Once the customer has arrived at the hotel, this form will be marked as
+                            "checked in." Please note that any modifications to the customer's information above are no
+                            longer allowed. However, the customer is welcome to request additional beds or accommodate
+                            more people, provided that the required additional amount is paid. We strive to ensure a
+                            seamless and comfortable experience for our guests throughout their stay.
 
                         </p>
                     </div>
 
-
-                    <div class="line">
-                        <div>
-                            <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                            <input type="number" class="notransform" name="extra_bed" value="0">
-                        </div>
-
-                        <div>
-                            <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
-                            <input type="number" name="extra_person" value="0">
-                        </div>
-
-
-
-                        <div>
-                            <label>Total Fee (₱)</label><br>
-                            <input type="number" name="total_fee" value="" readonly>
-                        </div>
-
-                    </div>
-
-
-
                     <div class="header-label3">
-                        <label>RESERVATION ADVANCE PAYMENT</label>
+                        <label>PAYMENT</label>
                     </div>
-
                     <div class="payment-container">
 
                         <div class="line">
+
                             <div>
-                                <label>Reservation Fee</label><br>
-                                <input type="number" name="reservation_fee" required>
+                                <label>Reservation Payment (Paid)</label><br>
+                                <input type="number" class="notransform" name="reservation_fee"
+                                    value="<?php echo $manage_data['reservation_fee']; ?>" readonly>
+                            </div>
+
+                            <div>
+                                <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
+                                <input type="number" class="notransform" name="extra_bed" value="0">
+                            </div>
+
+                            <div>
+                                <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
+                                <input type="number" name="extra_person" value="0">
+                            </div>
+
+                            <div>
+                                <label>New Total Fee (₱)</label><br>
+                                <input type="number" name="total_fee" value="" required>
                             </div>
 
                         </div>
 
-                        <div class="invisible-id">
-                            <div>
-                                <label>id</label><br>
-                                <input type="number" name="reserve_id"
-                                    value="<?php echo $manage_data['reserve_id']; ?>">
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- reason for rejection -->
                     <br>
                     <div>
                         <div class="line">
                             <div>
-                                <label style="color: red;">Reason for Rejection <em id="goodfor">*If
-                                        rejected*</em></label><br>
+                                <label style="color: red;">Reason for Cancellation <em id="goodfor">*If
+                                        cancelled*</em></label><br>
                                 <textarea name="rejection_reason" id=""></textarea>
                             </div>
                         </div>
                     </div>
+
+
+
 
                 </div>
 
@@ -416,18 +387,24 @@ if (isset($_POST['confirm'])) {
 
                 <div class="button-container">
                     <div class="button-holder">
-                        <button class="check-btn" type="submit" name="confirm"><i class="fa-solid fa-check-to-slot"></i>
-                            Confirm</button>
+                        <button class="check-btn" type="submit" name="checkedin"><i
+                                class="fa-solid fa-check-to-slot"></i> Checked In</button>
+
                         <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
                                 class="fa-solid fa-trash"></i>
-                            Reject</a>
+                            Cancel</a>
+
                         <a href="roomReservation.php" class="back-btn"><i
                                 class="fa-solid fa-arrow-right-from-bracket"></i>
                             Back</a>
-                    </div>
+                        <div>
+
+                        </div>
             </form>
         </div>
 
+        <script src="javascripts/calculation.js"></script>
+        <script src="javascripts/subtract.js"></script>
 
 </body>
 
