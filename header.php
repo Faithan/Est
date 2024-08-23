@@ -102,8 +102,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <div class="dropdown-content">
                     <a href="profile.php" onclick="checkLoggedIn(event)"><i class="fa-solid fa-address-card"></i> Profile</a>
                     <a href="#"><i class="fa-solid fa-book"></i>History</a>
-                    <a href="#"><i class="fa-solid fa-lock"></i>Password and Security</a>
-                    <a href="#"><i class="fa-solid fa-headset"></i>Customer Support</a>
+
                 </div>
             </li>
         </ul>
@@ -152,11 +151,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <i class="fa-solid fa-address-card"></i> Profile
     </a>
 
-    <a href="#" onclick="checkLoggedIn(event)">
-        <i class="fa-solid fa-lock"></i> Password and Security
-    </a>
-
-    <a href="#"><i class="fa-solid fa-headset"></i> Customer Support</a>
 
     <!-- Include the logout script for burger menu -->
     <?php echo $logout_script; ?>

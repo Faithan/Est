@@ -1,17 +1,21 @@
-
 <?php
-include ('dbconnect.php');
-
+include('db_connect.php');
+session_start();
 
 if (isset($_POST['reserve_id'])) {
     $reserve_id = $_POST['reserve_id'];
 
-    $update_query = "UPDATE reserve_room_tbl SET status='cancelled' WHERE reserve_id='$reserve_id'";
+    // Update the status to 'cancelled' in the database
+    $cancel_query = "UPDATE reserve_room_tbl SET status = 'cancelled' WHERE reserve_id = ?";
+    $stmt = $con->prepare($cancel_query);
+    $stmt->bind_param('i', $reserve_id);
 
-    if (mysqli_query($con, $update_query)) {
-        exit('success');
+    if ($stmt->execute()) {
+        echo "success";
     } else {
-        exit('error');
+        echo "error";
     }
+
+    $stmt->close();
 }
 ?>

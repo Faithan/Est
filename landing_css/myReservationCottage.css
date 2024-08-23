@@ -368,8 +368,7 @@ input:hover {
 
 
 .container-of-labels {
-    max-height: 120px;
-    overflow-y: scroll;
+   height: fit-content;
 }
 
 

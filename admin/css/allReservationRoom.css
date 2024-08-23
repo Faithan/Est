@@ -229,162 +229,282 @@ main {
 
 
 
-/* edit room */
 
 
-.input-fields-container {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* pending css */
+
+
+
+/* body */
+
+
+
+
+.container {
+    background-color: var(--first-color2);
+}
+
+.header-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.header-label label {
+    width: 100%;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--seventh-color);
+    border: 1px solid var(--seventh-color3);
+}
+
+
+/* for info container */
+
+.info-container {
+    background-color: var(--first-color);
+}
+
+.info-container .header-label2 {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    background-color: var(--first-color);
-    padding: 50px 0;
-    gap: 10px;
-    margin-top: 10px;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
 }
 
-.input-fields-subcontainer {
+
+.info-container .header-label2 label {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--seventh-color);
+}
+
+
+.line {
     display: flex;
-    flex-direction: column;
-
+    justify-content: space-evenly;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
 }
 
-.input-fields-subcontainer label {
+
+
+.line input {
+    width: 200px;
+    height: 20px;
+    border: 1px solid var(--seventh-color3);
+    font-size: 1.3rem;
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--seventh-color);
+    text-align: center;
+    text-transform: capitalize;
+    background-color: var(--first-color);
+}
+
+.line label {
     font-size: 1.4rem;
     color: var(--seventh-color);
 }
 
-.input-fields-subcontainer input {
-    width: 250px;
-    height: 30px;
-    color: var(--seventh-color);
-    background-color: var(--first-color);
+#goodfor {
+    font-size: 1.2rem;
+    color: #949494;
+}
+
+.note {
+    margin: 0 100px;
+    text-align: justify;
+    padding: 20px 0;
+}
+
+.note p {
+    font-size: 1.3rem;
+}
+
+.line textarea {
+    width: 100vh;
     border: 1px solid var(--seventh-color3);
+    font-size: 1.3rem;
+    padding: 5px;
     border-radius: 5px;
-    padding: 0 5px;
-}
-
-input:hover {
-    box-shadow: 0 0 2px var(--sixth-color);
-
-}
-
-input:hover[name="photo"] {
-    box-shadow: none;
-}
-
-select:hover {
-    box-shadow: 0 0 2px var(--sixth-color);
-
-}
-
-.input-fields-subcontainer select {
-    width: 260px;
-    height: 35px;
-    color: var(--seventh-color);
+    color: rgb(114, 114, 114);
+    margin-top: 5px;
     background-color: var(--first-color);
-    border: 1px solid var(--seventh-color3);
-    border-radius: 5px;
-    padding: 0 5px;
+    color: var(--seventh-color);
 }
+
+
+.line .notransform {
+    text-transform: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.info-container .header-label3 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 10px;
+
+}
+
+.info-container .header-label3 label {
+    font-weight: bold;
+}
+
+.payment-container {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.invisible-id {
+    display: none;
+}
+
+
+
+
+
+/* end */
+
+
+
+
+/* image container */
+
 
 .image-container {
+    background-color: var(--first-color2);
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    background-color: var(--first-color);
-    margin-top: 10px;
-    justify-content: space-evenly;
-    padding-top: 20px;
-}
-
-.prev-image-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: var(--first-color);
-    padding: 10px;
-    gap: 10px;
+    justify-content: center;
+
+    padding: 10px 0 20px 0;
 }
 
-.prev-image-container label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--seventh-color);
 
-}
-
-.prev-image-container img {
+.image-container img {
     height: 300px;
-    padding: 10px;
-    background-color: var(--first-color2);
     border-radius: 5px;
-}
-
-
-
-.new-image-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 10px;
     background-color: var(--first-color);
-    padding: 10px;
-    gap: 10px;
+    border: 1px solid var(--seventh-color3);
 }
 
-.new-image-container label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--seventh-color);
 
-}
+/* end */
 
-.new-image-container .image-holder {
-    height: auto;
-    max-width: 350px;
-    padding: 10px;
-    background-color: var(--first-color2);
-    border-radius: 5px;
-}
+/* button container */
 
-.button-container {
+
+.button-holder {
     width: 100%;
-    background-color: var(--first-color);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: var(--first-color);
+    padding-bottom: 100px;
+}
+
+.check-btn {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid;
+    cursor: pointer;
+    color: var(--proceed-color);
+    border-radius: 5px;
+    background-color: var(--proceed-bgcolor);
+    border: 1px solid var(--seventh-color3);
+}
+
+.check-btn:hover {
+    box-shadow: 0 0 0 2px var(--sixth-color) ;
+    transition: 0.3s;
+}
+
+.reject-btn {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid;
+    color: var(--cancel-color);
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--cancel-bgcolor);
+}
+
+.reject-btn:hover {
+    box-shadow: 0 0 0 2px var(--fifth-color) ;
+    transition: 0.3s;
+}
+
+
+.status-red{
+    width: 100%;
+    display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     padding: 50px 0;
 }
 
-
-
-.button-container .save-btn {
-    color: var(--proceed-color);
-    background-color: var(--proceed-bgcolor);
-    padding: 10px;
-    border: 1px solid var(--seventh-color3);
-    border-radius: 5px;
-}
-
-.button-container .save-btn:hover {
-    box-shadow: 0 0  4px var(--proceed-bgcolor);
-}
-
-
-
-.button-container .delete-btn {
-    color: var(--cancel-color);
-    background-color: var(--cancel-bgcolor);
-    padding: 10px;
-    border: 1px solid var(--seventh-color3);
-    border-radius: 5px;
-}
-
-
-.button-container .delete-btn:hover {
-    box-shadow: 0 0  4px var(--cancel-bgcolor);
+.status-red label{
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: estregan;
+    color: red;
+    text-shadow: 4px 3px 0px var(--first-color), 9px 8px 0px rgba(0,0,0,0.15);
 }

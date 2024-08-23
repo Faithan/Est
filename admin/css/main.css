@@ -67,9 +67,16 @@ a {
     /* 10px on default */
 
 
-    --tdeven-color:  #0023340b;
+    --tdeven-color: #0023340b;
 
 
+    /* for proceed */
+    --proceed-color: white;
+    --proceed-bgcolor: #00527e;
+
+    /* for cancel */
+    --cancel-color: white;
+    --cancel-bgcolor: #D62828;
 }
 
 
@@ -99,6 +106,15 @@ a {
 
 
     --reservation-titleborder: #F77F00;
+
+
+      /* for proceed */
+      --proceed-color: white;
+      --proceed-bgcolor:  #242526;
+  
+      /* for cancel */
+      --cancel-color: white;
+      --cancel-bgcolor: #242526;
 }
 
 .invert-color {

@@ -1,47 +1,47 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 $message = "";
 $isSuccess = false;
 if (isset($_POST['addroom'])) {
-  $roomNumber = $_POST['room_number'];
-  $roomType = $_POST['room_type'];
-  $bedType = $_POST['bed_type'];
-  $bedQuantity = $_POST['bed_quantity'];
-  $noPersons = $_POST['no_persons'];
-  $amenities = $_POST['amenities'];
-  $price = $_POST['price'];
-  $status = $_POST['status'];
+    $roomNumber = $_POST['room_number'];
+    $roomType = $_POST['room_type'];
+    $bedType = $_POST['bed_type'];
+    $bedQuantity = $_POST['bed_quantity'];
+    $noPersons = $_POST['no_persons'];
+    $amenities = $_POST['amenities'];
+    $price = $_POST['price'];
+    $status = $_POST['status'];
 
-  // Handle file upload
-  $photo = $_FILES['photo'];
-  $allowedExts = ['jpg', 'png', 'jpeg'];
-  $fileExt = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
-  $uploadDir = '../images/';
+    // Handle file upload
+    $photo = $_FILES['photo'];
+    $allowedExts = ['jpg', 'png', 'jpeg'];
+    $fileExt = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+    $uploadDir = '../images/';
 
-  // Generate a unique file name to prevent overwriting
-  $uniqueFileName = uniqid('', true) . '.' . $fileExt;
-  $fileDestination = $uploadDir . $uniqueFileName;
+    // Generate a unique file name to prevent overwriting
+    $uniqueFileName = uniqid('', true) . '.' . $fileExt;
+    $fileDestination = $uploadDir . $uniqueFileName;
 
-  if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
-    if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
-      // Insert data into database
-      $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
+    if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
+        if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
+            // Insert data into database
+            $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
                        VALUES ('$roomNumber', '$roomType', '$bedType', '$bedQuantity', '$noPersons', '$amenities', '$price', '$status', '$fileDestination')";
 
-      if (mysqli_query($con, $saveData)) {
-        $message = "Saved Successfully!";
-        $isSuccess = true;
-      } else {
-        $message = "Failed to save data!";
-      }
+            if (mysqli_query($con, $saveData)) {
+                $message = "Saved Successfully!";
+                $isSuccess = true;
+            } else {
+                $message = "Failed to save data!";
+            }
+        } else {
+            $message = "Failed to move uploaded file!";
+        }
     } else {
-      $message = "Failed to move uploaded file!";
+        $message = "Failed to upload file!";
     }
-  } else {
-    $message = "Failed to upload file!";
-  }
 }
 
 
@@ -83,7 +83,7 @@ if (isset($_POST['addroom'])) {
 
                 <div class="menu">
 
-                    <div class="item"><a href="dashboard.php"><i class="fa-regular fa-circle-left"></i> Return</a>
+                    <div class="item"><a href="dashboardRooms.php"><i class="fa-regular fa-circle-left"></i> Return</a>
                     </div>
 
 
@@ -193,85 +193,113 @@ if (isset($_POST['addroom'])) {
 
                     <div class="input-fields-container">
 
-                   
-
-                    <div class="input-fields">
-                        <label for="room_type">Room Number:</label>
-                        <input type="number" name="room_number" id="room_number" class="input_fields"
-                            onkeyup="changeColor(this)" required>
-                    </div>
-
-                    <div class="input-fields">
-                        <label for="room_type">Room Type:</label>
-                        <select name="room_type" id="room_type" class="select_fields" onchange="changeColorSelect(this)"
-                            required>
-                            <option disabled selected value="">Choose an Option</option>
-                            <option value="Standard">Standard</option>
-                            <option value="Superior">Superior</option>
-                            <option value="Family">Family</option>
-                            <option value="Barkadahan">Barkadahan</option>
-                            <option value="Exclusive">Exclusive Suite</option>
-                        </select>
-
-                    </div>
-                     
-                    <div class="input-fields">
-                        <label for="bed_type">Bed Type:</label>
-                        <select name="bed_type" id="bed_type" class="select_fields" onchange="changeColorSelect(this)"
-                            required>
-                            <option disabled selected value="">Choose an Option</option>
-                            <option value="Single bed">Single Bed</option>
-                            <option value="Double bed">Double Bed</option>
-                            <option value="Queen bed">Queen Bed</option>
-                            <option value="King bed">King Bed</option>
-                            <option value="California king bed">California King Bed</option>
-                            <option value="Sofa bed">Sofa Bed</option>
-                            <option value="Murphy bed">Murphy Bed</option>
-                            <option value="Bunk bed">Bunk Bed</option>
-                        </select>
-
-                    </div>
-
-                    <div class="input-fields">
-                        <label for="room_type">Number of Bed:</label>
-                        <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields"
-                            onkeyup="changeColor(this)" required>
-                    </div>
-
-                     
-                    <div class="input-fields">
-                        <label for="room_type">Number of Persons:</label>
-                        <input type="number" name="no_persons" id="no_persons" class="input_fields"
-                            onkeyup="changeColor(this)" required>
-                    </div>
-
-                    <div class="input-fields">
-                        <label for="room_type">Amenities:</label>
-                        <input type="text" name="amenities" id="amenities" class="input_fields"
-                            onkeyup="changeColor(this)" required>
-                    </div>
-
-                    <div class="input-fields">
-                        <label for="room_type">Good for 22 hours:</label>
-                        <input type="number" name="price" id="price" class="input_fields" onkeyup="changeColor(this)"
-                            placeholder="₱" required>
-
-                    </div>
 
 
-                    <div class="input-fields">
-                        <label for="room_type">Status:</label>
-                        <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)"
-                            required>
-                            <option disabled selected value="">Choose an Option</option>
-                            <option value="Available">Available</option>
-                            <option value="Occupied">Occupied</option>
-                            <option value="Coming soon">Coming Soon</option>
-                            <option value="Under Management">Under Management</option>
-                            <option value="Unavailable">Unavailable</option>
-                        </select>
+                        <div class="input-fields">
+                            <label for="room_type">Room Number:</label>
+                            <input type="number" name="room_number" id="room_number" class="input_fields"
+                                onkeyup="changeColor(this)" required>
+                        </div>
 
-                    </div>
+                        <div class="input-fields">
+                            <label for="room_type">Room Type:</label>
+                            
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct room type names
+                            $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
+                            $result = $con->query($sql);
+
+                            $selectBox = "<select name='room_type' class='select_fields' id='roomTypeSelect' onchange='filterRooms()'>";
+                            $selectBox .= "<option disabled selected value=''>Select a Room Type</option>";
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
+                                    $selectBox .= "<option value='" . $roomType . "'>" . $roomType . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No room types found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
+
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="bed_type">Bed Type:</label>
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct bed type names
+                            $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
+                            $result = $con->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                echo "<select name='bed_type' class='select_fields' id='bedTypeSelect' onchange='filterByBedType()'>";
+
+                                echo "<option disabled selected value=''>Select a Bed Type</option>";
+
+
+                                while ($row = $result->fetch_assoc()) {
+                                    $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
+                                    echo "<option value='" . $bedType . "'>" . $bedType . "</option>";
+                                }
+                                echo "</select>";
+                            } else {
+                                echo "<select name='bed_type' id='bedTypeSelect'>";
+                                echo "<option disabled selected value=''>Select a Bed Type</option>";
+                                echo "<option value=''>No bed types found.</option>";
+                                echo "</select>";
+                            }
+                            ?>
+
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="room_type">Number of Bed:</label>
+                            <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields"
+                                onkeyup="changeColor(this)" required>
+                        </div>
+
+
+                        <div class="input-fields">
+                            <label for="room_type">Number of Persons:</label>
+                            <input type="number" name="no_persons" id="no_persons" class="input_fields"
+                                onkeyup="changeColor(this)" required>
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="room_type">Amenities:</label>
+                            <input type="text" name="amenities" id="amenities" class="input_fields"
+                                onkeyup="changeColor(this)" required>
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="room_type">Good for 22 hours:</label>
+                            <input type="number" name="price" id="price" class="input_fields"
+                                onkeyup="changeColor(this)" placeholder="₱" required>
+
+                        </div>
+
+
+                        <div class="input-fields">
+                            <label for="room_type">Status:</label>
+                            <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)"
+                                required>
+                                <option disabled selected value="">Choose an Option</option>
+                                <option value="Available">Available</option>
+                                <option value="Occupied">Occupied</option>
+                                <option value="Coming soon">Coming Soon</option>
+                                <option value="Under Management">Under Management</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+
+                        </div>
 
 
 

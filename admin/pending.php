@@ -1,7 +1,6 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
-
 
 
 
@@ -84,10 +83,8 @@ if (isset($_POST['confirm'])) {
 }
 
 
+
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,335 +93,466 @@ if (isset($_POST['confirm'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <!-- important files -->
     <?php
     include 'assets.php'
         ?>
 
-    <script src="javascripts/logout.js" defer></script>
-    <!-- <script src="javascripts/calculation.js" defer></script> -->
+
+    <title>Pendings</title>
+
     <script src="javascripts/totalFee.js" defer></script>
 
 
-
-
-
-    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-
-    <link rel="stylesheet" type="text/css" href="css/confirmation.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <title>Confirmation</title>
+
 </head>
 
 <body>
 
-    <!-- for confirm -->
-    <?php if (!empty($message)): ?>
-        <script>
-            Swal.fire({
-                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
-                text: '<?php echo $message; ?>',
-                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
-                showConfirmButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.querySelector('.form-container').reset();
-                }
-            });
+    <main>
 
-        </script>
-    <?php endif; ?>
+        <section class="side-nav">
+            <div class="menu-container">
+                <div class="logo-container">
+                    <img src="../system_images/suntree.png" alt="">
+                    <label for="">Estregan Beach Resort</label>
+                </div>
 
+                <div class="menu">
 
-    <!-- for reject -->
-    <script>
-        function confirmReject() {
-            Swal.fire({
-                title: 'Reject Confirmation',
-                text: 'Are you sure you want to reject this reservation?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, reject',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var rejection_reason = document.querySelector('textarea[name="rejection_reason"]').value;
-                    rejectItem(rejection_reason);
-                }
-            });
-        }
+                    <div class="item"><a href="dashboardRoomReservation.php"><i class="fa-regular fa-circle-left"></i> Return</a>
+                    </div>
+                </div>
+            </div>
 
-        function rejectItem(rejection_reason) {
-            var reserve_id = document.querySelector('input[name="reserve_id"]').value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'reject.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        if (xhr.responseText === 'success') {
-                            Swal.fire({
-                                title: 'Rejected Successfully',
-                                text: 'Reservation rejected successfully.',
-                                icon: 'success'
-                            }).then(() => {
-                                window.location.href = 'roomReservation.php'; // Replace with your desired page after rejection
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Failed to reject this reservation.',
-                                icon: 'error'
-                            });
-                        }
-                    }
-                }
-            };
-            xhr.send('reserve_id=' + reserve_id + '&rejection_reason=' + rejection_reason);
-        }
-    </script>
+            <div class="logout-container">
+                <a><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Log out</a>
+            </div>
+        </section>
 
+        <section class="middle-container">
 
-    <!-- for header -->
-    <?php
-    include 'header.php'
-        ?>
+            <div class="header-container">
+                <div class="title-head">
+
+                    <label for=""><i class="fa-solid fa-gear"></i> Pending Reservation</label>
+                </div>
+
+                <div class="title-head-right">
+                    <div class="switch-mode">
+                        <i class="fa-regular fa-moon" id="icon"></i>
+                    </div>
 
 
 
-    <div class="container">
-        <div class="container2">
-            <div class="header-label">
-                <label for="">PENDING</label>
+                    <!-- switchmode -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Check localStorage for dark mode status
+                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+                            const body = document.body;
+                            const icon = document.getElementById('icon');
+                            const logoImg = document.getElementById('logoImg');
+
+                            // If dark mode is enabled, apply the relevant classes
+                            if (darkMode) {
+                                body.classList.add('dark-mode');
+                                if (icon) {
+                                    icon.classList.remove('fa-moon');
+                                    icon.classList.add('fa-sun');
+                                }
+                                if (logoImg) {
+                                    logoImg.classList.add('invert-color');
+                                }
+                            }
+
+                            // Add event listener to toggle dark mode
+                            if (icon) {
+                                icon.addEventListener('click', function () {
+                                    body.classList.toggle('dark-mode');
+
+                                    if (body.classList.contains('dark-mode')) {
+                                        icon.classList.remove('fa-moon');
+                                        icon.classList.add('fa-sun');
+                                        if (logoImg) {
+                                            logoImg.classList.add('invert-color');
+                                        }
+                                        localStorage.setItem('darkMode', 'enabled');
+                                    } else {
+                                        icon.classList.remove('fa-sun');
+                                        icon.classList.add('fa-moon');
+                                        if (logoImg) {
+                                            logoImg.classList.remove('invert-color');
+                                        }
+                                        localStorage.removeItem('darkMode');
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
+
+                    <img src="../system_images/administrator.png" alt="" id="logoImg">
+                </div>
             </div>
 
 
-            <form method="post" action="" class="form-container">
 
-                <div class="info-container">
-                    <div class="header-label2">
-                        <label>CUSTOMER AND RESERVATION INFO</label>
+
+
+
+
+
+
+
+
+            <!-- dynamic content -->
+
+            <div class="center-container">
+
+
+
+
+
+                <div class="container">
+                    <div class="header-label">
+                        <label for="">PENDING</label>
                     </div>
 
 
-                    <div>
-                        <div class="line">
-                            <div>
-                                <label>First Name</label><br>
-                                <input name="first_name" value="<?php echo $manage_data['fname']; ?>">
+                    <form method="post" action="" class="form-container">
+
+                        <div class="info-container">
+
+
+                            <div class="image-container">
+
+                                <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
+
                             </div>
-                            <div>
-                                <label>Middle Name</label><br>
-                                <input name="middle_name" value="<?php echo $manage_data['mname']; ?>">
+
+                            <div class="header-label2">
+                                <label>CUSTOMER AND RESERVATION INFO</label>
                             </div>
-                            <div>
-                                <label>Last Name</label><br>
-                                <input name="last_name" value="<?php echo $manage_data['lname']; ?>">
+
+
+                            <div class="line">
+                                <div>
+                                    <label>First Name</label><br>
+                                    <input name="first_name" value="<?php echo $manage_data['fname']; ?>">
+                                </div>
+                                <div>
+                                    <label>Middle Name</label><br>
+                                    <input name="middle_name" value="<?php echo $manage_data['mname']; ?>">
+                                </div>
+                                <div>
+                                    <label>Last Name</label><br>
+                                    <input name="last_name" value="<?php echo $manage_data['lname']; ?>">
+                                </div>
+                                <div>
+                                    <label>Address</label><br>
+                                    <input name="address" value="<?php echo $manage_data['address']; ?>">
+                                </div>
                             </div>
-                            <div>
-                                <label>Address</label><br>
-                                <input name="address" value="<?php echo $manage_data['address']; ?>">
+                            <div class="line">
+                                <div>
+                                    <label>Phone Number</label><br>
+                                    <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>">
+                                </div>
+                                <div>
+                                    <label>Email</label><br>
+                                    <input class="notransform" name="email"
+                                        value="<?php echo $manage_data['email']; ?>">
+                                </div>
+                                <div>
+                                    <label>Room Type</label><br>
+                                    <input name="room_type" value="<?php echo $manage_data['room_type']; ?>">
+                                </div>
+                                <div>
+                                    <label>Bed Type</label><br>
+                                    <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>">
+                                </div>
+
                             </div>
+                            <div class="line">
+                                <div>
+                                    <label>No. Bed</label><br>
+                                    <input type="number" name="bed_quantity"
+                                        value="<?php echo $manage_data['bed_quantity']; ?>">
+                                </div>
+                                <div>
+                                    <label>Number of Persons</label><br>
+                                    <input type="number" name="number_of_person"
+                                        value="<?php echo $manage_data['number_of_person']; ?>">
+                                </div>
+
+                                <div>
+                                    <label>Amenities</label><br>
+                                    <input name="amenities" value="<?php echo $manage_data['amenities']; ?>">
+                                </div>
+
+                                <div>
+                                    <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
+                                    <input type="number" name="price" value="<?php echo $manage_data['price']; ?>">
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="line">
+                                <div>
+                                    <label>Room Number</label><br>
+                                    <input type="number" class="notransform" name="room_number"
+                                        value="<?php echo $manage_data['room_number']; ?>">
+                                </div>
+                                <div>
+                                    <label>Arrival Date</label><br>
+                                    <input type="date" class="notransform" name="date_of_arrival"
+                                        value="<?php echo $manage_data['date_of_arrival']; ?>">
+                                </div>
+                                <div>
+                                    <label>Check-in Time</label><br>
+                                    <input type="time" name="time_of_arrival"
+                                        value="<?php echo $manage_data['time_of_arrival']; ?>">
+                                </div>
+
+                                <div>
+                                    <label>Check-out Time</label><br>
+                                    <input type="time" name="time_out" value="11:00" required>
+                                </div>
+
+                            </div>
+
+                            <div class="line">
+                                <div>
+                                    <label>Type of Reservation</label><br>
+                                    <input type="text" class="notransform" name="reservation_type"
+                                        value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                                </div>
+                            </div>
+
+
+
+                            <div class="line">
+                                <div>
+                                    <label>Special Request</label><br>
+                                    <textarea name="special_request"
+                                        id=""><?php echo $manage_data['special_request']; ?></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="note">
+                                <p>
+                                    <b>Note:</b> Please note that the input fields are intentionally left open for any
+                                    necessary modifications or changes to customer and reservation information. We
+                                    understand that there may be updates or adjustments to be provided by the customer
+                                    during the confirmation of their reservation. Rest assured, we are committed to
+                                    accommodating any necessary revisions to ensure a seamless and satisfactory
+                                    experience.
+
+                                </p>
+                            </div>
+
+
+                            <div class="line">
+                                <div>
+                                    <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
+                                    <input type="number" class="notransform" name="extra_bed" value="0">
+                                </div>
+
+                                <div>
+                                    <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
+                                    <input type="number" name="extra_person" value="0">
+                                </div>
+
+
+
+                                <div>
+                                    <label>Total Fee (₱)</label><br>
+                                    <input type="number" name="total_fee" value="" readonly>
+                                </div>
+
+                            </div>
+
+
+                            <script>
+                                function calculateTotalFee() {
+                                    // Get the input values
+                                    const extraBed = parseInt(document.querySelector('input[name="extra_bed"]').value);
+                                    const extraPerson = parseInt(document.querySelector('input[name="extra_person"]').value);
+                                    const price = parseInt(document.querySelector('input[name="price"]').value);
+
+                                    // Calculate the additional charges
+                                    const extraBedCharge = extraBed * 600;
+                                    const extraPersonCharge = extraPerson * 600;
+
+                                    // Calculate the total fee
+                                    const totalFee = price + extraBedCharge + extraPersonCharge;
+
+                                    // Set the value of the "Total Fee" input field
+                                    document.querySelector('input[name="total_fee"]').value = totalFee;
+                                }
+
+                                // Call calculateTotalFee once when the page loads to display the initial total fee
+                                calculateTotalFee();
+
+                                // Listen for input and change events on Extra Bed, Extra Person, and Price fields
+                                document.querySelectorAll('input[name="extra_bed"], input[name="extra_person"], input[name="rate_per_hour"]').forEach(input => {
+                                    input.addEventListener('input', calculateTotalFee);
+                                    input.addEventListener('change', calculateTotalFee);
+                                });
+                            </script>
+
+
+
+                            <div class="header-label2">
+                                <label>RESERVATION ADVANCE PAYMENT</label>
+                            </div>
+
+                            <div class="payment-container">
+
+                                <div class="line">
+                                    <div>
+                                        <label>Reservation Fee</label><br>
+                                        <input type="number" name="reservation_fee" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="invisible-id">
+                                    <div>
+                                        <label>id</label><br>
+                                        <input type="number" name="reserve_id"
+                                            value="<?php echo $manage_data['reserve_id']; ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- reason for rejection -->
+                            <br>
+                            <div>
+                                <div class="line">
+                                    <div>
+                                        <label style="color: red;">Reason for Rejection <em id="goodfor">*If
+                                                rejected*</em></label><br>
+                                        <textarea name="rejection_reason" id=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="line">
-                            <div>
-                                <label>Phone Number</label><br>
-                                <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>">
-                            </div>
-                            <div>
-                                <label>Email</label><br>
-                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>">
-                            </div>
-                            <div>
-                                <label>Room Type</label><br>
-                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>">
-                            </div>
-                            <div>
-                                <label>Bed Type</label><br>
-                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>">
-                            </div>
 
+
+
+
+
+
+                        <div class="button-holder">
+                            <button class="check-btn" type="submit" name="confirm"><i
+                                    class="fa-solid fa-check-to-slot"></i>
+                                Confirm</button>
+                            <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
+                                    class="fa-solid fa-trash"></i>
+                                Reject</a>
                         </div>
-                        <div class="line">
-                            <div>
-                                <label>No. Bed</label><br>
-                                <input type="number" name="bed_quantity"
-                                    value="<?php echo $manage_data['bed_quantity']; ?>">
-                            </div>
-                            <div>
-                                <label>Number of Persons</label><br>
-                                <input type="number" name="number_of_person"
-                                    value="<?php echo $manage_data['number_of_person']; ?>">
-                            </div>
-
-                            <div>
-                                <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>">
-                            </div>
-
-                            <div>
-                                <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                <input type="number" name="price"
-                                    value="<?php echo $manage_data['price']; ?>">
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="line">
-                            <div>
-                                <label>Room Number</label><br>
-                                <input type="number" class="notransform" name="room_number"
-                                    value="<?php echo $manage_data['room_number']; ?>">
-                            </div>
-                            <div>
-                                <label>Arrival Date</label><br>
-                                <input type="date" class="notransform" name="date_of_arrival"
-                                    value="<?php echo $manage_data['date_of_arrival']; ?>">
-                            </div>
-                            <div>
-                                <label>Check-in Time</label><br>
-                                <input type="time" name="time_of_arrival"
-                                    value="<?php echo $manage_data['time_of_arrival']; ?>">
-                            </div>
-
-                            <div>
-                                <label>Check-out Time</label><br>
-                                <input type="time" name="time_out" value="11:00" required>
-                            </div>
-
-                        </div>
-
-                        <div class="line">
-                            <div>
-                                <label>Type of Reservation</label><br>
-                                <input type="text" class="notransform" name="reservation_type"
-                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
-                            </div>
-                        </div>
-
-
-
-                        <div class="line">
-                            <div>
-                                <label>Special Request</label><br>
-                                <textarea name="special_request"
-                                    id=""><?php echo $manage_data['special_request']; ?></textarea>
-                            </div>
-                        </div>
-
-
-
-
-                        <!-- <div class="edit-button-container">
-                            <button class="edit-button">
-                                <svg class="edit-svgIcon" viewBox="0 0 512 512">
-                                    <path
-                                        d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div> -->
-
-                    </div>
-
-                    <div class="note">
-                        <p>
-                            <b>Note:</b> Please note that the input fields are intentionally left open for any
-                            necessary modifications or changes to customer and reservation information. We
-                            understand that there may be updates or adjustments to be provided by the customer
-                            during the confirmation of their reservation. Rest assured, we are committed to
-                            accommodating any necessary revisions to ensure a seamless and satisfactory
-                            experience.
-
-                        </p>
-                    </div>
-
-
-                    <div class="line">
-                        <div>
-                            <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                            <input type="number" class="notransform" name="extra_bed" value="0">
-                        </div>
-
-                        <div>
-                            <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
-                            <input type="number" name="extra_person" value="0">
-                        </div>
-
-
-
-                        <div>
-                            <label>Total Fee (₱)</label><br>
-                            <input type="number" name="total_fee" value="" readonly>
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="header-label3">
-                        <label>RESERVATION ADVANCE PAYMENT</label>
-                    </div>
-
-                    <div class="payment-container">
-
-                        <div class="line">
-                            <div>
-                                <label>Reservation Fee</label><br>
-                                <input type="number" name="reservation_fee" required>
-                            </div>
-
-                        </div>
-
-                        <div class="invisible-id">
-                            <div>
-                                <label>id</label><br>
-                                <input type="number" name="reserve_id"
-                                    value="<?php echo $manage_data['reserve_id']; ?>">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- reason for rejection -->
-                    <br>
-                    <div>
-                        <div class="line">
-                            <div>
-                                <label style="color: red;">Reason for Rejection <em id="goodfor">*If
-                                        rejected*</em></label><br>
-                                <textarea name="rejection_reason" id=""></textarea>
-                            </div>
-                        </div>
-                    </div>
-
+                    </form>
                 </div>
 
 
 
-                <div class="image-container">
-                    <div class="image-holder">
-                        <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
-                    </div>
-                </div>
 
-                <div class="button-container">
-                    <div class="button-holder">
-                        <button class="check-btn" type="submit" name="confirm"><i class="fa-solid fa-check-to-slot"></i>
-                            Confirm</button>
-                        <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
-                                class="fa-solid fa-trash"></i>
-                            Reject</a>
-                        <a href="roomReservation.php" class="back-btn"><i
-                                class="fa-solid fa-arrow-right-from-bracket"></i>
-                            Back</a>
-                    </div>
-            </form>
-        </div>
+
+
+
+            </div>
+            <!-- end of center content -->
+
+
+
+
+        </section>
+
+    </main>
+
 
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+<!-- for confirm -->
+<?php if (!empty($message)): ?>
+    <script>
+        Swal.fire({
+            title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+            text: '<?php echo $message; ?>',
+            icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+            showConfirmButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('.form-container').reset();
+            }
+        });
+
+    </script>
+<?php endif; ?>
+
+
+<!-- for reject -->
+<script>
+    function confirmReject() {
+        Swal.fire({
+            title: 'Reject Confirmation',
+            text: 'Are you sure you want to reject this reservation?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, reject',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var rejection_reason = document.querySelector('textarea[name="rejection_reason"]').value;
+                rejectItem(rejection_reason);
+            }
+        });
+    }
+
+    function rejectItem(rejection_reason) {
+        var reserve_id = document.querySelector('input[name="reserve_id"]').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'reject.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    if (xhr.responseText === 'success') {
+                        Swal.fire({
+                            title: 'Rejected Successfully',
+                            text: 'Reservation rejected successfully.',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = 'dashboardRoomReservation.php'; // Replace with your desired page after rejection
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Failed to reject this reservation.',
+                            icon: 'error'
+                        });
+                    }
+                }
+            }
+        };
+        xhr.send('reserve_id=' + reserve_id + '&rejection_reason=' + rejection_reason);
+    }
+</script>

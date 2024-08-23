@@ -1,8 +1,6 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
-
-
 
 
 
@@ -35,10 +33,6 @@ if (isset($_POST['checkOut'])) {
 }
 
 
-
-?>
-
-<?php
 if (isset($_POST['extended'])) {
 
     $reserve_id = $_POST['reserve_id'];
@@ -94,9 +88,6 @@ if (isset($_POST['extended'])) {
 
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,275 +101,485 @@ if (isset($_POST['extended'])) {
         ?>
 
 
-    <script src="javascripts/logout.js" defer></script>
-    <script src="javascripts/totalFee3.js" defer></script>
+    <title>Confirmed</title>
 
+    <script src="javascripts/add_room.js" defer></script>
 
-
-    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-
-    <link rel="stylesheet" type="text/css" href="css/checkedInForm.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-    <title>Checked In</title>
+
 </head>
 
 <body>
 
-    <!-- for confirm -->
-    <?php if (!empty($message)): ?>
-        <script>
-            Swal.fire({
-                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
-                text: '<?php echo $message; ?>',
-                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
-                showConfirmButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.querySelector('.create-room-form').reset();
-                }
-            });
-        </script>
-    <?php endif; ?>
+    <main>
 
-    <?php
-    include 'header.php'
-        ?>
+        <section class="side-nav">
+            <div class="menu-container">
+                <div class="logo-container">
+                    <img src="../system_images/suntree.png" alt="">
+                    <label for="">Estregan Beach Resort</label>
+                </div>
+
+                <div class="menu">
+
+                    <div class="item"><a href="dashboardRoomReservation.php"><i class="fa-regular fa-circle-left"></i>
+                            Return</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logout-container">
+                <a><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Log out</a>
+            </div>
+        </section>
+
+
+        <section class="middle-container">
+
+            <div class="header-container">
+                <div class="title-head">
+
+                    <label for=""><i class="fa-solid fa-gear"></i> Checked-In Reservation</label>
+                </div>
+
+                <div class="title-head-right">
+                    <div class="switch-mode">
+                        <i class="fa-regular fa-moon" id="icon"></i>
+                    </div>
 
 
 
-    <div class="container">
-        <div class="container2">
-            <div class="header-label">
-                <label for="">CHECKED IN</label>
+                    <!-- switchmode -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Check localStorage for dark mode status
+                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+                            const body = document.body;
+                            const icon = document.getElementById('icon');
+                            const logoImg = document.getElementById('logoImg');
+
+                            // If dark mode is enabled, apply the relevant classes
+                            if (darkMode) {
+                                body.classList.add('dark-mode');
+                                if (icon) {
+                                    icon.classList.remove('fa-moon');
+                                    icon.classList.add('fa-sun');
+                                }
+                                if (logoImg) {
+                                    logoImg.classList.add('invert-color');
+                                }
+                            }
+
+                            // Add event listener to toggle dark mode
+                            if (icon) {
+                                icon.addEventListener('click', function () {
+                                    body.classList.toggle('dark-mode');
+
+                                    if (body.classList.contains('dark-mode')) {
+                                        icon.classList.remove('fa-moon');
+                                        icon.classList.add('fa-sun');
+                                        if (logoImg) {
+                                            logoImg.classList.add('invert-color');
+                                        }
+                                        localStorage.setItem('darkMode', 'enabled');
+                                    } else {
+                                        icon.classList.remove('fa-sun');
+                                        icon.classList.add('fa-moon');
+                                        if (logoImg) {
+                                            logoImg.classList.remove('invert-color');
+                                        }
+                                        localStorage.removeItem('darkMode');
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
+
+                    <img src="../system_images/administrator.png" alt="" id="logoImg">
+                </div>
             </div>
 
 
-            <form method="post" action="" class="form-container">
-
-                <div class="info-container">
-                    <div class="header-label2">
-                        <label>CUSTOMER AND RESERVATION INFO</label>
-                    </div>
-                    <div>
-                        <div class="line">
-                            <div>
-                                <label>First Name</label><br>
-                                <input name="first_name" value="<?php echo $manage_data['fname']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Middle Name</label><br>
-                                <input name="middle_name" value="<?php echo $manage_data['mname']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Last Name</label><br>
-                                <input name="last_name" value="<?php echo $manage_data['lname']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Address</label><br>
-                                <input name="address" value="<?php echo $manage_data['address']; ?>" disabled>
-                            </div>
-                        </div>
-                        <div class="line">
-                            <div>
-                                <label>Phone Number</label><br>
-                                <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Email</label><br>
-                                <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>"
-                                    disabled>
-                            </div>
-                            <div>
-                                <label>Room Type</label><br>
-                                <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Bed Type</label><br>
-                                <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>"
-                                    disabled>
-                            </div>
-
-                        </div>
-                        <div class="line">
-                            <div>
-                                <label>No. Bed</label><br>
-                                <input type="number" name="bed_quantity"
-                                    value="<?php echo $manage_data['bed_quantity']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Number of Persons</label><br>
-                                <input type="number" name="number_of_person"
-                                    value="<?php echo $manage_data['number_of_person']; ?>" disabled>
-                            </div>
-
-                            <div>
-                                <label>Amenities</label><br>
-                                <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" disabled>
-                            </div>
-
-                            <div>
-                                <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                <input type="number" name="price"
-                                    value="<?php echo $manage_data['price']; ?>" disabled>
-                            </div>
 
 
-                        </div>
 
 
-                        <div class="line">
-                            <div>
-                                <label>Room Number</label><br>
-                                <input type="number" class="notransform" name="room_number"
-                                    value="<?php echo $manage_data['room_number']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Arrival Date</label><br>
-                                <input type="date" class="notransform" name="date_of_arrival"
-                                    value="<?php echo $manage_data['date_of_arrival']; ?>" disabled>
-                            </div>
-                            <div>
-                                <label>Check-in Time</label><br>
-                                <input type="time" name="time_of_arrival"
-                                    value="<?php echo $manage_data['time_of_arrival']; ?>" disabled>
-                            </div>
-
-                            <div>
-                                <label>Check-out Time</label><br>
-                                <input type="time" name="time_out" value="<?php echo $manage_data['time_out']; ?>">
-                            </div>
-
-                        </div>
-
-                        <div class="line">
-                            <div>
-                                <label>Type of Reservation</label><br>
-                                <input type="text" class="notransform" name="reservation_type"
-                                    value="<?php echo $manage_data['reservation_type']; ?>" disabled>
-                            </div>
-                        </div>
-
-                        <div class="line">
-                            <div>
-                                <label>Special Request</label><br>
-                                <textarea name="special_request" id=""
-                                    disabled><?php echo $manage_data['special_request']; ?></textarea>
-                            </div>
-                        </div>
 
 
-                    </div>
-                    <div class="line">
 
-                        <div>
-                            <label>Reservation Payment (Paid)</label><br>
-                            <input type="number" class="notransform" name="reservation_fee"
-                                value="<?php echo $manage_data['reservation_fee']; ?>" disabled>
-                        </div>
 
-                        <div>
-                            <label>Extra Bed (+₱600) <em id="goodfor">*records only*</em></label><br>
-                            <input type="number" class="notransform" name="extra_bed"
-                                value="<?php echo $manage_data['extra_bed']; ?>" disabled>
-                        </div>
 
-                        <div>
-                            <label>Extra Person (+₱600) <em id="goodfor">*records only*</em></label><br>
-                            <input type="number" name="extra_person" value="<?php echo $manage_data['extra_person']; ?>"
-                                disabled>
-                        </div>
+            <!-- dynamic content -->
 
-                        <div>
-                            <label>New Total Fee (₱) <em id="goodfor">*Paid*</em></label><br>
-                            <input type="number" name="total_fee" value="<?php echo $manage_data['total_fee']; ?>"
-                                disabled>
-                        </div>
+            <div class="center-container">
 
-                    </div>
-                    <div class="note">
-                        <p>
-                            <b>Note:</b> Once the customer is checked in, they have the option to extend their stay by
-                            paying an additional fee. Please use the input fields below to record the transaction for
-                            their extended stay. We appreciate your cooperation and look forward to providing an
-                            exceptional experience throughout their extended stay.
-                        </p>
+
+
+
+                <div class="container">
+                    <div class="header-label">
+                        <label for="">CHECKED IN</label>
                     </div>
 
-                    <div class="header-label3">
-                        <label>EXTEND SECTION</label>
-                    </div>
-                    <div class="payment-container">
+
+                    <form method="post" action="" class="form-container">
+
+                        <div class="info-container">
 
 
+                            <div class="image-container">
+                                <div class="image-holder">
+                                    <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
+                                </div>
+                            </div>
+
+                            <div class="header-label2">
+                                <label>CUSTOMER AND RESERVATION INFO</label>
+                            </div>
+
+
+
+                            <div class="line">
+                                <div>
+                                    <label>First Name</label><br>
+                                    <input name="first_name" value="<?php echo $manage_data['fname']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Middle Name</label><br>
+                                    <input name="middle_name" value="<?php echo $manage_data['mname']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Last Name</label><br>
+                                    <input name="last_name" value="<?php echo $manage_data['lname']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Address</label><br>
+                                    <input name="address" value="<?php echo $manage_data['address']; ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div>
+                                    <label>Phone Number</label><br>
+                                    <input name="phone_number" value="<?php echo $manage_data['phone_number']; ?>"
+                                        disabled>
+                                </div>
+                                <div>
+                                    <label>Email</label><br>
+                                    <input class="notransform" name="email" value="<?php echo $manage_data['email']; ?>"
+                                        disabled>
+                                </div>
+                                <div>
+                                    <label>Room Type</label><br>
+                                    <input name="room_type" value="<?php echo $manage_data['room_type']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Bed Type</label><br>
+                                    <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>"
+                                        disabled>
+                                </div>
+
+                            </div>
+                            <div class="line">
+                                <div>
+                                    <label>No. Bed</label><br>
+                                    <input type="number" name="bed_quantity"
+                                        value="<?php echo $manage_data['bed_quantity']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Number of Persons</label><br>
+                                    <input type="number" name="number_of_person"
+                                        value="<?php echo $manage_data['number_of_person']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>Amenities</label><br>
+                                    <input name="amenities" value="<?php echo $manage_data['amenities']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
+                                    <input type="number" name="price" value="<?php echo $manage_data['price']; ?>"
+                                        disabled>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="line">
+                                <div>
+                                    <label>Room Number</label><br>
+                                    <input type="number" class="notransform" name="room_number"
+                                        value="<?php echo $manage_data['room_number']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Arrival Date</label><br>
+                                    <input type="date" class="notransform" name="date_of_arrival"
+                                        value="<?php echo $manage_data['date_of_arrival']; ?>" disabled>
+                                </div>
+                                <div>
+                                    <label>Check-in Time</label><br>
+                                    <input type="time" name="time_of_arrival"
+                                        value="<?php echo $manage_data['time_of_arrival']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>Check-out Time</label><br>
+                                    <input type="time" name="time_out" value="<?php echo $manage_data['time_out']; ?>">
+                                </div>
+
+                            </div>
+
+                            <div class="line">
+                                <div>
+                                    <label>Type of Reservation</label><br>
+                                    <input type="text" class="notransform" name="reservation_type"
+                                        value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                                </div>
+                            </div>
+
+                            <div class="line">
+                                <div>
+                                    <label>Special Request</label><br>
+                                    <textarea name="special_request" id=""
+                                        disabled><?php echo $manage_data['special_request']; ?></textarea>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="line">
+
+                                <div>
+                                    <label>Reservation Payment (Paid)</label><br>
+                                    <input type="number" class="notransform" name="reservation_fee"
+                                        value="<?php echo $manage_data['reservation_fee']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>Extra Bed (+₱600) <em id="goodfor">*records only*</em></label><br>
+                                    <input type="number" class="notransform" name="extra_bed"
+                                        value="<?php echo $manage_data['extra_bed']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>Extra Person (+₱600) <em id="goodfor">*records only*</em></label><br>
+                                    <input type="number" name="extra_person"
+                                        value="<?php echo $manage_data['extra_person']; ?>" disabled>
+                                </div>
+
+                                <div>
+                                    <label>New Total Fee (₱) <em id="goodfor">*Paid*</em></label><br>
+                                    <input type="number" name="total_fee"
+                                        value="<?php echo $manage_data['total_fee']; ?>" disabled>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="note">
+                                <p>
+                                    <b>Note:</b> Once the customer is checked in, they have the option to extend their
+                                    stay by
+                                    paying an additional fee. Please use the input fields below to record the
+                                    transaction for
+                                    their extended stay. We appreciate your cooperation and look forward to providing an
+                                    exceptional experience throughout their extended stay.
+                                </p>
+                            </div>
+
+                        </div>
 
                         <div class="line">
-
-                            <div>
-                                <label>Extended Time (hrs) <em id="goodfor">*if applicable*</em></label><br>
-                                <input type="number" class="notransform" name="extended_time" value="0">
-                            </div>
-
-                            <div>
-                                <label>Price per Hour (₱) <em id="goodfor">*by management*</em></label><br>
-                                <input type="number" class="notransform" name="extended_price" value="0">
-                            </div>
-
-                            <div>
-                                <label>Additional Payment (₱) <em id="goodfor">*if applicable*</em></label><br>
-                                <input type="number" class="notransform" name="additional_payment" value="0">
-                            </div>
-
-
-                        </div>
-
-
-
-                        <div class="invisible-id">
-                            <div>
-                                <label>id</label><br>
-                                <input type="number" name="reserve_id"
-                                    value="<?php echo $manage_data['reserve_id']; ?>">
+                            <div class="header-label2">
+                                <label>EXTEND SECTION</label>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="note">
-                        <p>
-                            <b>Tips:</b> If there is an error in the calculation, please refresh the page and try
-                            again. We apologize for any inconvenience caused and appreciate your patience.
+                        <div class="payment-container">
 
 
-                        </p>
-                    </div>
+
+                            <div class="line">
+
+                                <div>
+                                    <label>Extended Time (hrs) <em id="goodfor">*if applicable*</em></label><br>
+                                    <input type="number" class="notransform" name="extended_time" value="0">
+                                </div>
+
+                                <div>
+                                    <label>Price per Hour (₱) <em id="goodfor">*by management*</em></label><br>
+                                    <input type="number" class="notransform" name="extended_price" value="0">
+                                </div>
+
+                                <div>
+                                    <label>Additional Payment (₱) <em id="goodfor">*if applicable*</em></label><br>
+                                    <input type="number" class="notransform" name="additional_payment" value="0">
+                                </div>
+
+
+                                <script>
+                                    // Function to debounce the input
+                                    function debounce(func, wait) {
+                                        let timeout;
+                                        return function executedFunction(...args) {
+                                            const later = () => {
+                                                clearTimeout(timeout);
+                                                func(...args);
+                                            };
+                                            clearTimeout(timeout);
+                                            timeout = setTimeout(later, wait);
+                                        };
+                                    }
+
+                                    // Function to calculate additional payment based on extended time and price per hour
+                                    function calculateAdditionalPayment() {
+                                        // Get the input values
+                                        const extendedTime = parseInt(document.querySelector('input[name="extended_time"]').value);
+                                        const extendedPrice = parseInt(document.querySelector('input[name="extended_price"]').value);
+
+                                        // Calculate the additional payment
+                                        const additionalPayment = extendedTime * extendedPrice;
+
+                                        // Set the value of the "Additional Payment" input field
+                                        document.querySelector('input[name="additional_payment"]').value = additionalPayment;
+                                    }
+
+                                    // Function to update check-out time based on extended time
+                                    function updateCheckOutTime() {
+                                        // Get the input values
+                                        const extendedTime = parseInt(document.querySelector('input[name="extended_time"]').value);
+                                        const timeOutInput = document.querySelector('input[name="time_out"]');
+
+                                        // Get the current time out value
+                                        let currentTimeOut = timeOutInput.value;
+
+                                        // Calculate the new check-out time
+                                        let timeOutHours = parseInt(currentTimeOut.split(":")[0]);
+                                        let timeOutMinutes = parseInt(currentTimeOut.split(":")[1]);
+                                        let newTimeOutHours = timeOutHours + extendedTime;
+
+                                        // Adjust hours and minutes
+                                        if (newTimeOutHours >= 24) {
+                                            newTimeOutHours -= 24;
+                                        }
+
+                                        // Format new check-out time
+                                        let newTimeOutFormatted = (newTimeOutHours < 10 ? "0" : "") + newTimeOutHours + ":" + (timeOutMinutes < 10 ? "0" : "") + timeOutMinutes;
+
+                                        // Update the check-out time input field
+                                        timeOutInput.value = newTimeOutFormatted;
+                                    }
+
+                                    // Debounce the functions for calculating additional payment and updating check-out time
+                                    const debouncedCalculateAdditionalPayment = debounce(calculateAdditionalPayment, 300);
+                                    const debouncedUpdateCheckOutTime = debounce(updateCheckOutTime, 300);
+
+                                    // Listen for input events on Extended Time field with debounce
+                                    document.querySelector('input[name="extended_time"]').addEventListener('input', () => {
+                                        debouncedCalculateAdditionalPayment();
+                                        debouncedUpdateCheckOutTime();
+                                    });
+
+                                    // Listen for input events on Extended Price field with debounce
+                                    document.querySelector('input[name="extended_price"]').addEventListener('input', () => {
+                                        debouncedCalculateAdditionalPayment();
+                                    });
+                                </script>
+
+
+                            </div>
+
+
+
+                            <div class="invisible-id">
+                                <div>
+                                    <label>id</label><br>
+                                    <input type="number" name="reserve_id"
+                                        value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="note">
+                            <p>
+                                <b>Tips:</b> If there is an error in the calculation, please refresh the page and
+                                try
+                                again. We apologize for any inconvenience caused and appreciate your patience.
+
+
+                            </p>
+                        </div>
                 </div>
 
 
 
-                <div class="image-container">
-                    <div class="image-holder">
-                        <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
-                    </div>
+
+
+
+                <div class="button-holder">
+                    <button class="check-btn" type="submit" name="extended"><i class="fa-solid fa-check-to-slot"></i>
+                        Extend</button>
+
+                    <button class="reject-btn" type="submit" name="checkOut"><i class="fa-solid fa-check-to-slot"></i>
+                        Check Out</button>
+
                 </div>
 
-                <div class="button-container">
-                    <div class="button-holder">
-                        <button class="extend-btn" type="submit" name="extended"><i
-                                class="fa-solid fa-check-to-slot"></i> Extend</button>
+                </form>
+            </div>
 
-                        <button class="check-btn" type="submit" name="checkOut"><i
-                                class="fa-solid fa-check-to-slot"></i> Check Out</button>
 
-                        <a href="roomReservation.php" class="back-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            Back</a>
-                        <div>
 
-                        </div>
-            </form>
-        </div>
 
-        <script src="javascripts/extendedHours.js"></script>
+
+
+            </div>
+            <!-- end of content-container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+
+    </main>
+
 
 
 </body>
 
 </html>
+
+
+
+<!-- for confirm -->
+<?php if (!empty($message)): ?>
+    <script>
+        Swal.fire({
+            title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
+            text: '<?php echo $message; ?>',
+            icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
+            showConfirmButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('.create-room-form').reset();
+            }
+        });
+    </script>
+<?php endif; ?>

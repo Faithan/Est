@@ -143,7 +143,12 @@ if (isset($_SESSION['user_id'])) {
     <main>
 
         <div class="image-container">
-            <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
+
+            <?php
+            $photo = str_replace('../', '', $manage_data['photo']);
+            ?>
+            <img name="photo" src="<?php echo $photo; ?>" alt="">
+
         </div>
 
 
@@ -163,7 +168,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-       
+
 
             <p id="note">
                 This section displays the status of your reservation, including pending, checked in, extended, checked

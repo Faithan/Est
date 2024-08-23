@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 
@@ -13,8 +13,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
+
+
     <!-- reset css -->
     <link rel="stylesheet" type="text/css" href="landing_css/reset.css?v=<?php echo time(); ?>">
 
@@ -22,13 +22,13 @@ session_start();
     <script src="landing_js/wavingtext.js" defer></script>
     <script src="landing_js/mobileMenu.js" defer></script>
 
-    <?php 
+    <?php
     include 'important.php'
-    ?>
+        ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
-    
+
     <title>Estregan Beach Resort</title>
 </head>
 
@@ -57,6 +57,15 @@ session_start();
                         <button class="btn">LEARN MORE</button>
 
                     </div>
+
+                    <script>
+                        document.querySelector('.btn').addEventListener('click', function () {
+                            document.getElementById('about-page').scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        });
+
+                    </script>
 
                 </div>
             </div>
@@ -97,7 +106,7 @@ session_start();
 
 
     <!-- about page -->
-    <section class="about-page">
+    <section class="about-page" id="about-page">
 
         <div class="about-page-content">
             <div class="wrapper-main">

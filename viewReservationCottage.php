@@ -105,7 +105,7 @@ if (isset($_SESSION['user_id'])) {
                             text: 'The reservation has been cancelled.',
                             icon: 'success'
                         }).then(() => {
-                            window.location.href = 'myReservationRoom.php'; // Replace with your desired page after deletion
+                            window.location.href = 'myReservationCottage.php'; // Replace with your desired page after deletion
                         });
                     } else {
                         Swal.fire({
@@ -143,7 +143,11 @@ if (isset($_SESSION['user_id'])) {
     <main>
 
         <div class="image-container">
-            <img name="photo" src="<?php echo $manage_data['cottage_photo']; ?>" alt="">
+           
+            <?php
+            $photo = str_replace('../', '', $manage_data['cottage_photo']);
+            ?>
+            <img name="photo" src="<?php echo $photo; ?>" alt="">
         </div>
 
 

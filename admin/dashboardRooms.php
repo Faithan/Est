@@ -21,7 +21,7 @@ session_start();
         ?>
 
 
-    <title>Dashboard</title>
+    <title>Room Reservations</title>
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
@@ -34,15 +34,14 @@ session_start();
 
     <main>
 
-        <?php
-        include 'sidenav.php'
-            ?>
+     <?php include 'sidenav.php'
+      ?>
 
         <section class="middle-container">
 
             <div class="header-container">
                 <div class="title-head">
-                    <label for=""><i class="fa-solid fa-table-cells-large"></i> Dashboard</label>
+                    <label for=""><i class="fa-solid fa-table-cells-large"></i> Room Reservations</label>
                 </div>
 
                 <div class="title-head-right">
@@ -117,8 +116,19 @@ session_start();
 
             <div class="center-container">
 
-
+                    <?php include 'manageRooms.php'; ?>
+            
+      
             </div>
+
+         
+
+
+
+
+
+
+
 
 
 

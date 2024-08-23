@@ -114,7 +114,7 @@ if (isset($_SESSION['user_id'])) {
 
                         <div class="items">
 
-                            <img src="<?php echo $photo ?>" alt="">
+                        <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
 
 
                             <div class="container-of-labels">

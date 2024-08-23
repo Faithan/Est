@@ -1,83 +1,30 @@
 <?php
-include ('db_connect.php');
+include 'db_connect.php';
 session_start();
 
+$response = ['success' => false, 'message' => ''];
 
-
-$manage_data = ['id' => '', 'room_number' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'no_persons' => '', 'amenities' => '', 'status' => '', 'price' => '', 'photo' => ''];
-
+// Validate manage_id
 if (isset($_GET['manage_id'])) {
-    $manage_id = $_GET['manage_id'];
-    $manage_query = "SELECT * FROM room_tbl WHERE id = $manage_id";
-    $manage_result = mysqli_query($con, $manage_query);
-    $manage_data = mysqli_fetch_assoc($manage_result);
-}
-
-
-
-$message = "";
-$isSuccess = false;
-
-
-if (isset($_POST['save'])) {
-    $id = $_POST['id'];
-    $roomNumber = $_POST['room_number'];
-    $room_type = $_POST['room_type'];
-    $bed_type = $_POST['bed_type'];
-    $bed_quantity = $_POST['bed_quantity'];
-    $noPersons = $_POST['no_persons'];
-    $amenities = $_POST['amenities'];
-    $price = $_POST['price'];
-    $status = $_POST['status'];
-
-    $photo = $_FILES['photo'];
-
-    $filename = $_FILES['photo']['name'];
-    $filetempname = $_FILES['photo']['tmp_name'];
-    $filesize = $_FILES['photo']['size'];
-    $fileerror = $_FILES['photo']['error'];
-    $filetype = $_FILES['photo']['type'];
-
-    $fileext = explode('.', $filename);
-    $filetrueext = strtolower(end($fileext));
-    $allowedExtensions = ['jpg', 'png', 'jpeg'];
-
-    if (in_array($filetrueext, $allowedExtensions)) {
-        if ($fileerror === 0) {
-            if ($filesize < 10000000) {
-                $filenewname = $filename;
-                $filedestination = '../images/' . $filenewname;
-                if ($filename) {
-                    move_uploaded_file($filetempname, $filedestination);
-                }
-
-                $update_query = "UPDATE room_tbl SET room_number='$roomNumber', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', no_persons='$noPersons', amenities='$amenities',price='$price', status='$status', photo='../images/$filenewname'  WHERE id='$id'";
-
-                $query = (mysqli_query($con, $update_query));
-
-                if ($query) {
-                    $message = "Changes Saved Successfully!";
-                    $isSuccess = true;
-
-                } else {
-
-                    $message = "Failed!";
-                    $isSuccess = false;
-
-                }
-            } else {
-                $message = "Failed!";
-                $isSuccess = false;
-            }
-        }
+    $manage_id = intval($_GET['manage_id']);
+    $manage_query = "SELECT * FROM room_tbl WHERE id = ?";
+    if ($stmt = $con->prepare($manage_query)) {
+        $stmt->bind_param('i', $manage_id);
+        $stmt->execute();
+        $manage_result = $stmt->get_result();
+        $manage_data = $manage_result->fetch_assoc();
+        $stmt->close();
     } else {
-        $message = "Failed!";
-        $isSuccess = false;
+        $response['message'] = 'Failed to prepare SQL statement for fetching room details.';
+        echo json_encode($response);
+        exit;
     }
 }
 
-
 ?>
+
+
+
 
 
 
@@ -95,111 +42,303 @@ if (isset($_POST['save'])) {
         ?>
 
 
-    <script src="javascripts/deleteRoom.js" defer></script>
-    <script src="javascripts/logout.js" defer></script>
-
-
-    <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
-
-    <link rel="stylesheet" type="text/css" href="css/edit_room.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
-    <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-
     <title>Edit Room</title>
 
-    <script src="javascripts/fullscreen.js" defer></script>
-    <script src="javascripts/edit_room.js" defer></script>
-    <script src="javascripts/inputColor.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/edit_room.css?v=<?php echo time(); ?>">
+    <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
 </head>
 
 <body>
 
-    <?php
-    include 'header.php'
-        ?>
+    <main>
 
-
-
-    <div class="form-holder">
-
-
-        <div>
-            <form action="" method="POST" enctype="multipart/form-data" class="create-room-form">
-                <div class="head-label">
-                    <label class="header_text">EDIT ROOM</label><br>
+        <section class="side-nav">
+            <div class="menu-container">
+                <div class="logo-container">
+                    <img src="../system_images/suntree.png" alt="">
+                    <label for="">Estregan Beach Resort</label>
                 </div>
 
-                <div class="line-a">
-                    <div class="input_field_holder">
-                        <div>
+                <div class="menu">
 
-                            <label>Room Number:</label><br>
+                    <div class="item"><a href="dashboardRooms.php"><i class="fa-regular fa-circle-left"></i>
+                            Return</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logout-container">
+                <a><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Log out</a>
+            </div>
+        </section>
+
+
+        <section class="middle-container">
+
+            <div class="header-container">
+                <div class="title-head">
+
+                    <label for=""><i class="fa-solid fa-gear"></i> Edit Room</label>
+                </div>
+
+                <div class="title-head-right">
+                    <div class="switch-mode">
+                        <i class="fa-regular fa-moon" id="icon"></i>
+                    </div>
+
+
+
+                    <!-- switchmode -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Check localStorage for dark mode status
+                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+                            const body = document.body;
+                            const icon = document.getElementById('icon');
+                            const logoImg = document.getElementById('logoImg');
+
+                            // If dark mode is enabled, apply the relevant classes
+                            if (darkMode) {
+                                body.classList.add('dark-mode');
+                                if (icon) {
+                                    icon.classList.remove('fa-moon');
+                                    icon.classList.add('fa-sun');
+                                }
+                                if (logoImg) {
+                                    logoImg.classList.add('invert-color');
+                                }
+                            }
+
+                            // Add event listener to toggle dark mode
+                            if (icon) {
+                                icon.addEventListener('click', function () {
+                                    body.classList.toggle('dark-mode');
+
+                                    if (body.classList.contains('dark-mode')) {
+                                        icon.classList.remove('fa-moon');
+                                        icon.classList.add('fa-sun');
+                                        if (logoImg) {
+                                            logoImg.classList.add('invert-color');
+                                        }
+                                        localStorage.setItem('darkMode', 'enabled');
+                                    } else {
+                                        icon.classList.remove('fa-sun');
+                                        icon.classList.add('fa-moon');
+                                        if (logoImg) {
+                                            logoImg.classList.remove('invert-color');
+                                        }
+                                        localStorage.removeItem('darkMode');
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
+
+                    <img src="../system_images/administrator.png" alt="" id="logoImg">
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <!-- dynamic content -->
+
+            <div class="center-container">
+
+                <form id="update_form" action="update_photo.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
+                    <div class="image-container">
+                        <div class="prev-image-container">
+                            <label>Previous Photo:</label>
+                            <img class="prev-image" src="<?php echo $manage_data['photo']; ?>" alt="Previous photo">
+                        </div>
+
+                        <div class="new-image-container">
+                            <label>Upload New Photo:</label>
+                            <div class="image-holder" id="photo_preview"></div>
+                            <input type="file" id="photo" name="photo" accept="image/*">
+                            <button type="submit" name="update_photo">Update Photo</button>
+                        </div>
+                    </div>
+                </form>
+
+                <script>
+                    const photoInput = document.getElementById('photo');
+                    const photoPreview = document.getElementById('photo_preview');
+
+                    photoInput.addEventListener('change', function () {
+                        const file = this.files[0];
+
+                        if (file && file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                const image = document.createElement('img');
+                                image.src = e.target.result;
+                                image.style.maxWidth = '100%';
+                                image.style.maxHeight = '100%';
+
+                                photoPreview.innerHTML = '';
+                                photoPreview.appendChild(image);
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            photoPreview.innerHTML = 'Please select a valid image file.';
+                        }
+                    });
+
+                    document.getElementById('update_form').addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        const formData = new FormData(this);
+
+                        fetch('update_photo.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: data.message,
+                                        icon: 'success'
+                                    }).then(() => {
+                                        location.reload(); // Refresh the page or redirect as needed
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: data.message,
+                                        icon: 'error'
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'An error occurred while updating the photo.',
+                                    icon: 'error'
+                                });
+                            });
+                    });
+                </script>
+
+                <form action="update_room.php" method="POST" enctype="multipart/form-data" class="create-room-form">
+
+                    <div class="input-fields-container">
+
+                        <div class="input-fields-subcontainer">
+                            <label>Room Number:</label>
                             <input type="number" name="room_number" id="room_number" class="input_fields"
-                                onkeyup="changeColor(this)" value="<?php echo $manage_data['room_number']; ?>"
-                                required><br>
+                                onkeyup="changeColor(this)" value="<?php echo $manage_data['room_number']; ?>" required>
+                        </div>
 
-                            <label for="room_type">Room Type:</label><br>
-                            <select name="room_type" id="room_type" class="select_fields"
-                                onchange="changeColorSelect(this)" required>
-                                <option disabled selected value="">Choose an Option</option>
-                                <option value="Standard" <?php if ($manage_data['room_type'] == 'Standard')
-                                    echo 'selected'; ?>>Standard</option>
-                                <option value="Superior" <?php if ($manage_data['room_type'] == 'Superior')
-                                    echo 'selected'; ?>>Superior</option>
-                                <option value="Family" <?php if ($manage_data['room_type'] == 'Family')
-                                    echo 'selected'; ?>>
-                                    Family</option>
-                                <option value="Barkadahan" <?php if ($manage_data['room_type'] == 'Barkadahan')
-                                    echo 'selected'; ?>>Barkadahan</option>
-                                <option value="Exclusive Suite" <?php if ($manage_data['room_type'] == 'Exclusive Suite')
-                                    echo 'selected'; ?>>Exclusive Suite</option>
-                            </select>
-                            <br>
+                        <div class="input-fields-subcontainer">
+                            <label for="room_type">Room Type:</label>
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct room type names
+                            $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
+                            $result = $con->query($sql);
 
-                            <label for="bed_type">Bed Type:</label><br>
-                            <select name="bed_type" id="bed_type" class="select_fields"
-                                onchange="changeColorSelect(this)" required>
-                                <option disabled selected value="">Choose an Option</option>
-                                <option value="Single bed" <?php if ($manage_data['bed_type'] == 'Single bed')
-                                    echo 'selected'; ?>>Single Bed</option>
-                                <option value="Double bed" <?php if ($manage_data['bed_type'] == 'Double bed')
-                                    echo 'selected'; ?>>Double Bed</option>
-                                <option value="Queen bed" <?php if ($manage_data['bed_type'] == 'Queen bed')
-                                    echo 'selected'; ?>>Queen Bed</option>
-                                <option value="King bed" <?php if ($manage_data['bed_type'] == 'King bed')
-                                    echo 'selected'; ?>>King Bed</option>
-                                <option value="California king bed" <?php if ($manage_data['bed_type'] == 'California king bed')
-                                    echo 'selected'; ?>>California King Bed</option>
-                                <option value="Sofa bed" <?php if ($manage_data['bed_type'] == 'Sofa bed')
-                                    echo 'selected'; ?>>Sofa Bed</option>
-                                <option value="Murphy bed" <?php if ($manage_data['bed_type'] == 'Murphy bed')
-                                    echo 'selected'; ?>>Murphy Bed</option>
-                                <option value="Bunk bed" <?php if ($manage_data['bed_type'] == 'Bunk bed')
-                                    echo 'selected'; ?>>Bunk Bed</option>
-                            </select>
-                            <br>
+                            $selectBox = "<select name='room_type' id='room_type' class='select_fields' onchange='changeColorSelect(this)' required>";
+                            $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
 
-                            <label>Number of Bed:</label><br>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
+                            
+                                    // Check if the current room type matches the one in $manage_data and mark it as selected
+                                    $selected = ($manage_data['room_type'] == $roomType) ? 'selected' : '';
+
+                                    // Add the option to the select box
+                                    $selectBox .= "<option value='" . $roomType . "' " . $selected . ">" . $roomType . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No room types found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
+
+                        </div>
+
+                        <div class="input-fields-subcontainer">
+                            <label for="bed_type">Bed Type:</label>
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct bed type names
+                            $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
+                            $result = $con->query($sql);
+
+                            $selectBox = "<select name='bed_type' id='bed_type' class='select_fields' onchange='changeColorSelect(this)' required>";
+                            $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
+                            
+                                    // Ensure the manage_data bed type is trimmed and formatted the same way for comparison
+                                    $selected = (trim(ucwords(strtolower($manage_data['bed_type']))) == $bedType) ? 'selected' : '';
+
+                                    // Add the option to the select box
+                                    $selectBox .= "<option value='" . $bedType . "' " . $selected . ">" . $bedType . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No bed types found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
+                        </div>
+
+
+
+                        <div class="input-fields-subcontainer">
+                            <label>Number of Bed:</label>
                             <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields"
                                 onkeyup="changeColor(this)" value="<?php echo $manage_data['bed_quantity']; ?>"
-                                required><br>
+                                required>
+                        </div>
 
-                            <label>Number of Persons:</label><br>
+                        <div class="input-fields-subcontainer">
+                            <label>Number of Persons:</label>
                             <input type="number" name="no_persons" id="no_persons" class="input_fields"
-                                onkeyup="changeColor(this)" value="<?php echo $manage_data['no_persons']; ?>"
-                                required><br>
+                                onkeyup="changeColor(this)" value="<?php echo $manage_data['no_persons']; ?>" required>
+                        </div>
 
-                            <label>Amenities:</label><br>
+                        <div class="input-fields-subcontainer">
+                            <label for="amenities">Amenities:</label>
                             <input type="text" name="amenities" id="amenities" class="input_fields"
-                                onkeyup="changeColor(this)" value="<?php echo $manage_data['amenities']; ?>"
-                                required><br>
+                                onkeyup="changeColor(this)"
+                                value="<?php echo htmlspecialchars($manage_data['amenities']); ?>" required>
+                        </div>
 
-                            <label>Price (Good for 22hrs):</label><br>
+                        <div class="input-fields-subcontainer">
+                            <label>Price (Good for 22hrs):</label>
                             <input type="number" name="price" id="price" class="input_fields"
-                                onkeyup="changeColor(this)" value="<?php echo $manage_data['price']; ?>" required><br>
+                                onkeyup="changeColor(this)" value="<?php echo $manage_data['price']; ?>" required>
+                        </div>
 
-                            <label>Status:</label><br>
+                        <div class="input-fields-subcontainer">
+                            <label>Status:</label>
                             <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)"
                                 required>
                                 <option disabled selected value="">Choose an Option</option>
@@ -212,130 +351,200 @@ if (isset($_POST['save'])) {
                                 <option value="Unavailable" <?php if ($manage_data['status'] == 'Unavailable')
                                     echo 'selected'; ?>>Unavailable</option>
                             </select>
-                            <br>
 
-                            <div class="invisible-id">
-                                <div>
-                                    <label>id</label><br>
-                                    <input type="number" name="id" value="<?php echo $manage_data['id']; ?>">
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="return-holder">
-                        <a class="return-btn" href="rooms.php"><i
-                                class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i> Return</a>
-                    </div>
-                </div>
 
-                <div class="line-b">
-                    <div class="center-label">
-                        <label> Previous Photo:</label><br>
-                    </div>
-                    <div class="center-label-image">
-                        <div class="image-holder2">
-                            <img class="prev-image" onclick="openFullScreen()"
-                                src="<?php echo $manage_data['photo']; ?>">
-                        </div>
-                    </div>
-                    <div class="center-label">
-                        <label> Upload New Photo:</label><br>
-                    </div>
-                    <div class="center-label-image">
-                        <div class="image-holder" id="photo_preview"></div>
-                    </div>
-                    <div class="center-label">
-                        <input type="file" id="photo_input" name="photo" accept="image/*"><br>
+                        <!-- id -->
+                        <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
+
                     </div>
 
-                    <div class="center-label">
-                        <button type="submit" name="save" class="button1"><i class="fa-solid fa-download"></i>
-                            Save Changes</button>
+                    <div class="button-container">
+                        <button type="submit" name="save" class="save-btn"><i class="fa-solid fa-download"></i> Save
+                            Changes</button>
+                        <button type="button" name="delete" class="delete-btn" onclick="confirmDelete()"><i
+                                class="fa-solid fa-trash"></i> Delete</button>
                     </div>
-                    <div class="center-label">
-                        <button type="button" name="delete" class="button2" onclick="confirmDelete()"><i
-                                class="fa-solid fa-trash"></i>
-                            Delete</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </div>
-
-    <!-- for fullscreen -->
-    <div id="fullscreen-overlay">
-        <span class="close" onclick="closeFullScreen()">&times;</span>
-        <img id="fullscreen-image" src="" alt="">
-    </div>
-
-
-    <!-- for save changes -->
-    <?php if (!empty($message)): ?>
-        <script>
-            Swal.fire({
-                title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
-                text: '<?php echo $message; ?>',
-                icon: '<?php echo $isSuccess ? "success" : "error"; ?>',
-                showConfirmButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = window.location.href;
-                }
-            });
-        </script>
-    <?php endif; ?>
 
 
 
-    <!-- for delete button -->
-    <script>
-        function confirmDelete() {
-            Swal.fire({
-                title: 'Delete Confirmation',
-                text: 'Are you sure you want to delete this item?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    deleteItem();
-                }
-            });
-        }
 
-        function deleteItem() {
-            var id = document.querySelector('input[name="id"]').value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'delete_room.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        Swal.fire({
-                            title: 'Deleted Successfully',
-                            text: 'The item has been deleted.',
-                            icon: 'success'
-                        }).then(() => {
-                            window.location.href = 'edit_room.php'; // Replace with your desired page after deletion
+
+
+                </form>
+
+
+
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const form = document.querySelector('form.create-room-form');
+                        const roomNumberInput = document.getElementById('room_number');
+                        const roomTypeSelect = document.getElementById('room_type');
+                        const bedTypeSelect = document.getElementById('bed_type');
+                        const bedQuantityInput = document.getElementById('bed_quantity');
+                        const noPersonsInput = document.getElementById('no_persons');
+                        const amenitiesInput = document.getElementById('amenities');
+                        const priceInput = document.getElementById('price');
+                        const statusSelect = document.getElementById('status');
+
+                        let originalRoomNumber = roomNumberInput.value;
+                        let originalRoomType = roomTypeSelect.value;
+                        let originalBedType = bedTypeSelect.value;
+                        let originalBedQuantity = bedQuantityInput.value;
+                        let originalNoPersons = noPersonsInput.value;
+                        let originalAmenities = amenitiesInput.value;
+                        let originalPrice = priceInput.value;
+                        let originalStatus = statusSelect.value;
+
+                        form.addEventListener('submit', function (event) {
+                            event.preventDefault(); // Prevent the default form submission
+
+                            // Check if values have changed
+                            const isRoomNumberChanged = roomNumberInput.value !== originalRoomNumber;
+                            const isRoomTypeChanged = roomTypeSelect.value !== originalRoomType;
+                            const isBedTypeChanged = bedTypeSelect.value !== originalBedType;
+                            const isBedQuantityChanged = bedQuantityInput.value !== originalBedQuantity;
+                            const isNoPersonsChanged = noPersonsInput.value !== originalNoPersons;
+                            const isAmenitiesChanged = amenitiesInput.value !== originalAmenities;
+                            const isPriceChanged = priceInput.value !== originalPrice;
+                            const isStatusChanged = statusSelect.value !== originalStatus;
+
+                            if (isRoomNumberChanged || isRoomTypeChanged || isBedTypeChanged || isBedQuantityChanged ||
+                                isNoPersonsChanged || isAmenitiesChanged || isPriceChanged || isStatusChanged) {
+                                Swal.fire({
+                                    title: 'Save Changes?',
+                                    text: 'Are you sure you want to save the changes?',
+                                    icon: 'question',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Yes, save',
+                                    cancelButtonText: 'No, cancel'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Create a FormData object and submit the form via AJAX
+                                        const formData = new FormData(form);
+
+                                        fetch('update_room.php', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.success) {
+                                                    Swal.fire({
+                                                        title: 'Success!',
+                                                        text: data.message,
+                                                        icon: 'success'
+                                                    }).then(() => {
+                                                        window.location.href = 'dashboardRooms.php'; // Redirect after success
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        title: 'Error!',
+                                                        text: data.message,
+                                                        icon: 'error'
+                                                    });
+                                                }
+                                            })
+                                            .catch(error => {
+                                                Swal.fire({
+                                                    title: 'Error!',
+                                                    text: 'An error occurred while saving changes.',
+                                                    icon: 'error'
+                                                });
+                                            });
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'No Changes Detected',
+                                    text: 'No changes were detected. Please modify the values before saving.',
+                                    icon: 'info'
+                                });
+                            }
                         });
-                    } else {
-                        Swal.fire({
-                            title: 'Delete Error',
-                            text: 'Failed to delete the item.',
-                            icon: 'error'
-                        });
-                    }
-                }
-            };
-            xhr.send('id=' + id);
-        }
-    </script>
+                    });
+                </script>
 
+
+
+
+
+
+
+            </div>
+            <!-- end of content-container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+
+    </main>
 
 
 
 </body>
 
 </html>
+
+
+
+
+
+<!-- for delete button -->
+<script>
+    function confirmDelete() {
+        Swal.fire({
+            title: 'Delete Confirmation',
+            text: 'Are you sure you want to delete this item?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteItem();
+            }
+        });
+    }
+
+    function deleteItem() {
+        var id = document.querySelector('input[name="id"]').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'delete_room.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    Swal.fire({
+                        title: 'Deleted Successfully',
+                        text: 'The item has been deleted.',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = 'dashboardRooms.php'; // Replace with your desired page after deletion
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Delete Error',
+                        text: 'Failed to delete the item.',
+                        icon: 'error'
+                    });
+                }
+            }
+        };
+        xhr.send('id=' + id);
+    }
+</script>

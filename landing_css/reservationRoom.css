@@ -74,7 +74,7 @@ body {
     background-color: var(--first-color2);
     position: -webkit-sticky;
     position: sticky;
-    box-shadow: 0 1px 4px var(--box-shadow);
+   
 }
 
 .select-container {
@@ -551,7 +551,7 @@ For larger desktops and laptops:
         background-color: var(--first-color2);
         position: -webkit-sticky;
         position: sticky;
-        box-shadow: 0 1px 5px var(--box-shadow);
+        
     }
 
 

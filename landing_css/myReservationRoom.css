@@ -367,11 +367,10 @@ input:hover {
     text-transform: capitalize;
 }
 
-
 .container-of-labels {
-    max-height: 120px;
-    overflow-y: scroll;
-}
+    height: fit-content;
+ }
+ 
 
 
 .label-container {
