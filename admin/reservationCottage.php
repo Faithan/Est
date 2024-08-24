@@ -1,13 +1,10 @@
 <?php
 require('db_connect.php');
-
-
 ?>
-
 
 <div class="container">
     <div class="header-label">
-        <label><i class="fa-solid fa-bed"></i> Reservation For Rooms</label>
+        <label><i class="fa-solid fa-umbrella-beach"></i> Reservation For Cottages</label>
     </div>
 
     <div class="buttons-container">
@@ -17,11 +14,9 @@ require('db_connect.php');
             Confirmed</button>
         <button onclick="showTable(2, 2)" id="checkedIn-btn"><i class="fa-solid fa-check-to-slot"></i> Checked
             In</button>
-        <button onclick="showTable(3, 3)" id="extended-btn"><i class="fa-solid fa-hourglass-start"></i> Extended
-            Stay</button>
-        <button onclick="showTable(4, 4)" id="checkedOut-btn"><i class="fa-solid fa-user-check"></i> Checked
+        <button onclick="showTable(3, 3)" id="checkedOut-btn"><i class="fa-solid fa-user-check"></i> Checked
             Out</button>
-        <button onclick="showTable(5, 5)" id="rejected-btn" class="rejected-btn"><i class="fa-solid fa-user-xmark"></i>
+        <button onclick="showTable(4, 4)" id="rejected-btn" class="rejected-btn"><i class="fa-solid fa-user-xmark"></i>
             Rejected</button>
     </div>
 
@@ -55,10 +50,10 @@ require('db_connect.php');
     <?php
     function renderTable($con, $status)
     {
-        $fetchdata = "SELECT * FROM reserve_room_tbl WHERE status='$status' ORDER BY reserve_id DESC";
+        $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE reserve_status='$status' ORDER BY reserve_id DESC";
         $result = mysqli_query($con, $fetchdata);
 
-        echo '<form method="post" action=""  id="table-container-' . $status . '">';
+        echo '<form method="post" action="" id="table-container-' . $status . '">';
         echo '<table><tr>
             <th>Reserve ID</th>
             <th>First Name</th>
@@ -67,12 +62,10 @@ require('db_connect.php');
             <th>Phone Number</th>
             <th>Email</th>
             <th>Date of Arrival</th>
-            <th>Room Type</th>
-            <th>Bed Type</th>
-            <th>Bed Quantity</th>
+            <th>Time</th>
+            <th>Price</th>
+            <th>Cottage Type</th>
             <th>Number of Person</th>
-            <th>Amenities</th>
-            <th>Price (Good for 22 hours)</th>
             <th>Photo</th>
             <th>Action</th>
         </tr>';
@@ -80,20 +73,18 @@ require('db_connect.php');
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>
                 <td>' . $row['reserve_id'] . '</td>
-                <td>' . $row['fname'] . '</td>
-                <td>' . $row['lname'] . '</td>
-                <td>' . $row['address'] . '</td>
+                <td>' . $row['first_name'] . '</td>
+                <td>' . $row['last_name'] . '</td>
+                <td>' . $row['reserve_address'] . '</td>
                 <td>' . $row['phone_number'] . '</td>
                 <td class="email">' . $row['email'] . '</td>
                 <td>' . $row['date_of_arrival'] . '</td>
-                <td>' . $row['room_type'] . '</td>
-                <td>' . $row['bed_type'] . '</td>
-                <td>' . $row['bed_quantity'] . '</td>
-                <td>' . $row['number_of_person'] . '</td>
-                <td>' . $row['amenities'] . '</td>
+                <td>' . $row['time'] . '</td>
                 <td>' . $row['price'] . '</td>
-                <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['photo'] . '"></td>
-                <td><div class="edit-btn"><a href="room_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i>Open</a></div></td>
+                <td>' . $row['cottage_type'] . '</td>
+                <td>' . $row['number_of_person'] . '</td>
+                <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['cottage_photo'] . '"></td>
+                <td><div class="edit-btn"><a href="cottage_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></div></td>
             </tr>';
         }
 
@@ -103,19 +94,17 @@ require('db_connect.php');
     renderTable($con, 'pending');
     renderTable($con, 'confirmed');
     renderTable($con, 'checkedIn');
-    renderTable($con, 'extended');
     renderTable($con, 'checkedOut');
     renderTable($con, 'rejected');
     ?>
 
 </div>
 
-
 <script>
     function showTable(tableIndex, buttonIndex) {
         // Array of table and button IDs
-        const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-extended", "table-container-checkedOut", "table-container-rejected"];
-        const buttons = ["pending-btn", "confirmed-btn", "checkedIn-btn", "extended-btn", "checkedOut-btn", "rejected-btn"];
+        const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
+        const buttons = ["pending-btn", "confirmed-btn", "checkedIn-btn", "checkedOut-btn", "rejected-btn"];
         const colors = { active: 'white', inactive: '#002334', rejectedActive: '#650000', rejectedInactive: 'white' };
 
         // Set table display
@@ -144,13 +133,11 @@ require('db_connect.php');
             "table-container-pending": 0,
             "table-container-confirmed": 1,
             "table-container-checkedIn": 2,
-            "table-container-extended": 3,
-            "table-container-checkedOut": 4,
-            "table-container-rejected": 5
+            "table-container-checkedOut": 3,
+            "table-container-rejected": 4
         };
 
         const activeTable = localStorage.getItem('activeTable');
-        console.log('Active Table from LocalStorage:', activeTable);  // Debugging line
         if (activeTable && activeTableMap.hasOwnProperty(activeTable)) {
             showTable(activeTableMap[activeTable], activeTableMap[activeTable]);
         }
@@ -160,9 +147,6 @@ require('db_connect.php');
     document.getElementById("pending-btn").onclick = () => showTable(0, 0);
     document.getElementById("confirmed-btn").onclick = () => showTable(1, 1);
     document.getElementById("checkedIn-btn").onclick = () => showTable(2, 2);
-    document.getElementById("extended-btn").onclick = () => showTable(3, 3);
-    document.getElementById("checkedOut-btn").onclick = () => showTable(4, 4);
-    document.getElementById("rejected-btn").onclick = () => showTable(5, 5);
+    document.getElementById("checkedOut-btn").onclick = () => showTable(3, 3);
+    document.getElementById("rejected-btn").onclick = () => showTable(4, 4);
 </script>
-
-

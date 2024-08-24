@@ -41,7 +41,7 @@ session_start();
 
             <div class="header-container">
                 <div class="title-head">
-                    <label for=""><i class="fa-solid fa-table-cells-large"></i> Room Reservations</label>
+                    <label for=""><i class="fa-solid fa-water"></i> Room Reservations</label>
                 </div>
 
                 <div class="title-head-right">

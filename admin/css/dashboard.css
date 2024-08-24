@@ -66,6 +66,9 @@ main {
     padding: 5px 30px;
     line-height: 60px;
     color: var(--pure-white);
+    border: 1px solid var(--first-color2);
+    border-right: none;
+    border-left: none;
 }
 
 .menu .item i {
@@ -78,6 +81,7 @@ main {
     right: 10px;
     margin: 20px;
     transition: 0.3 ease;
+
 }
 
 .item .sub-menu {
@@ -87,18 +91,15 @@ main {
     /* For transition effect */
     transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
 }
-
 .sub-menu-item {
     display: block;
     padding: 5px 0;
+    border-top: none;
+    border-bottom: none;
+
 }
-
-.menu #selected {}
-
-
-
-
 
 /* logout button */
 
@@ -583,6 +584,7 @@ td input {
 /* Style for td elements within odd rows */
 tbody tr:nth-of-type(odd) td {
     background-color: var(--tdeven-color);
+
 }
 
 /* Style for td elements within even rows */

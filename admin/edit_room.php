@@ -45,6 +45,7 @@ if (isset($_GET['manage_id'])) {
     <title>Edit Room</title>
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/edit_room.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
@@ -156,7 +157,7 @@ if (isset($_GET['manage_id'])) {
             <div class="center-container">
 
                 <form id="update_form" action="update_photo.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
                     <div class="image-container">
                         <div class="prev-image-container">
                             <label>Previous Photo:</label>
@@ -167,7 +168,8 @@ if (isset($_GET['manage_id'])) {
                             <label>Upload New Photo:</label>
                             <div class="image-holder" id="photo_preview"></div>
                             <input type="file" id="photo" name="photo" accept="image/*">
-                            <button type="submit" name="update_photo">Update Photo</button>
+                            <button type="submit" name="update_photo"><i class="fa-solid fa-floppy-disk"></i> Update
+                                Photo</button>
                         </div>
                     </div>
                 </form>
@@ -232,7 +234,28 @@ if (isset($_GET['manage_id'])) {
                                 });
                             });
                     });
+
                 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <form action="update_room.php" method="POST" enctype="multipart/form-data" class="create-room-form">
 
@@ -338,21 +361,37 @@ if (isset($_GET['manage_id'])) {
                         </div>
 
                         <div class="input-fields-subcontainer">
-                            <label>Status:</label>
-                            <select name="status" id="status" class="select_fields" onchange="changeColorSelect(this)"
-                                required>
-                                <option disabled selected value="">Choose an Option</option>
-                                <option value="Available" <?php if ($manage_data['status'] == 'Available')
-                                    echo 'selected'; ?>>Available</option>
-                                <option value="Coming soon" <?php if ($manage_data['status'] == 'Coming soon')
-                                    echo 'selected'; ?>>Coming Soon</option>
-                                <option value="Under Management" <?php if ($manage_data['status'] == 'Under Management')
-                                    echo 'selected'; ?>>Under Management</option>
-                                <option value="Unavailable" <?php if ($manage_data['status'] == 'Unavailable')
-                                    echo 'selected'; ?>>Unavailable</option>
-                            </select>
+                            <label for="status">Status:</label>
+                            <?php
+                            // Assuming you've included the necessary database connection file
+                            
+                            // Query to select distinct status names from the room_status_table
+                            $sql = "SELECT DISTINCT room_status_name FROM room_status_tbl";
+                            $result = $con->query($sql);
 
+                            $selectBox = "<select name='status' id='status' class='select_fields' onchange='changeColorSelect(this)' required>";
+                            $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $status = ucwords(strtolower($row["room_status_name"])); // Capitalize and format the status name
+                            
+                                    // Check if the current status matches the one in $manage_data and mark it as selected
+                                    $selected = ($manage_data['status'] == $status) ? 'selected' : '';
+
+                                    // Add the option to the select box
+                                    $selectBox .= "<option value='" . $status . "' " . $selected . ">" . $status . "</option>";
+                                }
+                            } else {
+                                $selectBox .= "<option value=''>No statuses found.</option>";
+                            }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
+                            ?>
                         </div>
+
 
                         <!-- id -->
                         <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">

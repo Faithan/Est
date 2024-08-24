@@ -37,7 +37,7 @@ if (isset($_POST['addcottage'])) {
     if ($fileerror === 0) {
       if ($filsize < 10000000) {
         $filenewname = $filename;
-        $filedestination = 'images/' . $filenewname;
+        $filedestination = '../images/' . $filenewname;
         if ($filename) {
           move_uploaded_file($filetempname, $filedestination);
         }

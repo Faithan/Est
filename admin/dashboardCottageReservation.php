@@ -21,7 +21,7 @@ session_start();
         ?>
 
 
-    <title>Room Reservations</title>
+    <title>Cottage Reservations</title>
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
@@ -41,7 +41,7 @@ session_start();
 
             <div class="header-container">
                 <div class="title-head">
-                    <label for=""><i class="fa-solid fa-house-chimney"></i> Room Reservations</label>
+                    <label for=""><i class="fa-solid fa-water"></i> Cottage Reservations</label>
                 </div>
 
                 <div class="title-head-right">
@@ -116,7 +116,7 @@ session_start();
 
             <div class="center-container">
 
-                    <?php include 'manageRooms.php'; ?>
+                    <?php include 'reservationCottage.php'; ?>
             
       
             </div>

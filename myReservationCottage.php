@@ -105,7 +105,7 @@ if (isset($_SESSION['user_id'])) {
                         $number_of_person = $row['number_of_person'];
                         $price = $row['price'];
                         $date = $row['date_of_arrival'];
-                        $time = $row['time_of_arrival'];
+                        $time = $row['time'];
                         $status = $row['reserve_status'];
                         $photo = $row['cottage_photo'];
                         ?>

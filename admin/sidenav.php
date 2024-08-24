@@ -13,7 +13,7 @@
                         class="fa-solid fa-caret-down dropdown"></i></a>
                 <!-- dropdown -->
                 <div class="sub-menu">
-                    <a href="#" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> For Cottages</a>
+                    <a href="dashboardCottageReservation.php" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> For Cottages</a>
                     <a href="dashboardRoomReservation.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> For
                         Rooms</a>
                 </div>

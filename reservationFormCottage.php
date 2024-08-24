@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $date_of_arrival = $_POST['date_of_arrival'];
-    $check_in_time = $_POST['check_in_time'];
+    $time = $_POST['time'];
     $price = $_POST['price'];
     $cottage_number = $_POST['cottage_number'];
     $cottage_type = $_POST['cottage_type'];
@@ -47,13 +47,15 @@ if (isset($_POST['submit'])) {
     '$phone_number',
     '$email',
     '$date_of_arrival',
-    '$check_in_time',
+    '$time',
     '$price',
     '$cottage_number',
     '$cottage_type',
     '$number_of_person',
     '$special_request',
-    '$cottage_photo'
+    '$cottage_photo',
+    '',
+    ''
     )";
 
     $query = (mysqli_query($con, $savedata));
@@ -144,7 +146,12 @@ if (isset($_POST['submit'])) {
     <main>
 
         <div class="image-container">
-            <img name="cottage_photo" src="<?php echo $manage_data['cottage_photo']; ?>" alt="">
+            <?php
+            $photo = str_replace('../', '', $manage_data['cottage_photo']);
+            ?>
+            <img name="photo" src="<?php echo $photo; ?>" alt="">
+
+           
         </div>
 
 
@@ -176,8 +183,8 @@ if (isset($_POST['submit'])) {
 
 
 
-            <label>Check-in Time:</label>
-            <select name="check_in_time" id="check_in_time" onchange="updatePrice()" required>
+            <label>Time:</label>
+            <select name="time" id="check_in_time" onchange="updatePrice()" required>
                 <option disabled selected value="">Select Time</option>
                 <option value="Day (6:00 AM to 5:00 PM)">Day (6:00 AM to 5:00 PM)</option>
                 <option value="Night (6:00 PM to 5:00 AM)">Night (6:00 PM to 5:00 AM)</option>

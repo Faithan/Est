@@ -209,10 +209,10 @@ if (isset($_SESSION['user_id'])) {
             <input class="fixed-value-input" type="date" name="date_of_arrival" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['date_of_arrival']; ?>" readonly>
 
-            <label>Check-in Time </label>
+            <label>Time </label>
 
-            <input class="fixed-value-input" type="time" name="time_of_arrival" onkeyup="changeColor(this)"
-                value="14:00" required readonly>
+            <input class="fixed-value-input" type="text" name="time" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data["time"]?>" required readonly>
             <p id="comment"> (fixed)</p>
 
             <label class="bold-text">Room Details</label>

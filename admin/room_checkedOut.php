@@ -51,6 +51,7 @@ if (isset($_GET['manage_id'])) {
     <script src="javascripts/add_room.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 

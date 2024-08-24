@@ -151,4 +151,23 @@ h2{
 }   
 
 
+/* page animation */
 
+body{
+    animation: transitionIn 0.5s;
+}
+
+
+
+
+@keyframes transitionIn{
+    from{
+        opacity: 0;
+        transform: rotateY(-10px);
+    }
+
+    to{
+        opacity: 1;
+        transform: rotateY(0);
+    }
+}

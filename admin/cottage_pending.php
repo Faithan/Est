@@ -2,89 +2,98 @@
 include('db_connect.php');
 session_start();
 
-
-
-$manage_data = ['reserve_id' => '', 'fname' => '', 'mname' => '', 'lname' => '', 'address' => '', 'phone_number' => '', 'email' => '', 'date_of_arrival' => '', 'time_of_arrival' => '', 'room_type' => '', 'bed_type' => '', 'bed_quantity' => '', 'number_of_person' => '', 'amenities' => '', 'price' => '', 'special_request' => '', 'reservation_type' => '', 'photo' => ''];
+$manage_data = [
+    'reserve_id' => '',
+    'first_name' => '',
+    'middle_name' => '',
+    'last_name' => '',
+    'reserve_address' => '',
+    'phone_number' => '',
+    'email' => '',
+    'date_of_arrival' => '',
+    'time' => '',
+    'cottage_number' => '',
+    'cottage_type' => '',
+    'number_of_person' => '',
+    'price' => '',
+    'special_request' => '',
+    'reserve_type' => '',
+    'cottage_photo' => ''
+];
 
 $message = "";
 $isSuccess = false;
 
-
 if (isset($_GET['manage_id'])) {
     $manage_id = $_GET['manage_id'];
-    $manage_query = "SELECT * FROM reserve_room_tbl WHERE reserve_id = $manage_id";
+    $manage_query = "SELECT * FROM reserve_cottage_tbl WHERE reserve_id = $manage_id";
     $manage_result = mysqli_query($con, $manage_query);
     $manage_data = mysqli_fetch_assoc($manage_result);
 }
 
 if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
-    $fname = $_POST['first_name'];
-    $mname = $_POST['middle_name'];
-    $lname = $_POST['last_name'];
-    $address = $_POST['address'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $reserve_address = $_POST['reserve_address'];
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $date_of_arrival = $_POST['date_of_arrival'];
-    $time_of_arrival = $_POST['time_of_arrival'];
-    $checkOutTime = $_POST['time_out'];
-    $room_number = $_POST['room_number'];
-    $room_type = $_POST['room_type'];
-    $bed_type = $_POST['bed_type'];
-    $bed_quantity = $_POST['bed_quantity'];
+    $time = $_POST['time'];
+    $cottage_number = $_POST['cottage_number'];
+    $cottage_type = $_POST['cottage_type'];
     $number_of_person = $_POST['number_of_person'];
-    $amenities = $_POST['amenities'];
     $price = $_POST['price'];
     $special_request = $_POST['special_request'];
-    $reservation_fee = $_POST['reservation_fee'];
-    $extraBed = $_POST['extra_bed'];
-    $extraPerson = $_POST['extra_person'];
-    $totalFee = $_POST['total_fee'];
+    $cottage_reserve_fee = $_POST['cottage_reserve_fee'];
+    $rejection_reason = $_POST['rejection_reason'] ?? '';
 
-    $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
-     room_number='$room_number', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',
-      number_of_person='$number_of_person', amenities='$amenities' , price='$price', 
-      special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , 
-      extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
+    // Update query to match your data structure
+    $update_query = "UPDATE reserve_cottage_tbl 
+                     SET reserve_status='confirmed', first_name='$first_name', middle_name='$middle_name', last_name='$last_name', 
+                         reserve_address='$reserve_address', phone_number='$phone_number', email='$email', 
+                         date_of_arrival='$date_of_arrival', time='$time', 
+                         cottage_number='$cottage_number', cottage_type='$cottage_type', 
+                         number_of_person='$number_of_person', price='$price', 
+                         special_request='$special_request', cottage_reserve_fee='$cottage_reserve_fee', 
+                         rejection_reason='$rejection_reason'
+                     WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
         'reserve_id' => '',
-        'fname' => '',
-        'mname' => '',
-        'lname' => '',
-        'address' => '',
+        'first_name' => '',
+        'middle_name' => '',
+        'last_name' => '',
+        'reserve_address' => '',
         'phone_number' => '',
         'email' => '',
         'date_of_arrival' => '',
-        'time_of_arrival' => '',
-        'room_number' => '',
-        'room_type' => '',
-        'bed_type' => '',
-        'bed_quantity' => '',
+        'time' => '',
+        'cottage_number' => '',
+        'cottage_type' => '',
         'number_of_person' => '',
-        'amenities' => '',
         'price' => '',
         'special_request' => '',
-        'reservation_type' => '',
-        'photo' => ''
+        'reserve_type' => '',
+        'cottage_photo' => ''
     ];
 
 
-    $query = (mysqli_query($con, $update_query));
+    $query = mysqli_query($con, $update_query);
 
     if ($query) {
         $message = "Changes Saved Successfully!";
         $isSuccess = true;
-
     } else {
         $message = "Failed!";
         $isSuccess = false;
     }
 }
 
-
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,6 +114,7 @@ if (isset($_POST['confirm'])) {
 
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
@@ -123,7 +133,8 @@ if (isset($_POST['confirm'])) {
 
                 <div class="menu">
 
-                    <div class="item"><a href="dashboardRoomReservation.php"><i class="fa-regular fa-circle-left"></i> Return</a>
+                    <div class="item"><a href="dashboardCottageReservation.php"><i
+                                class="fa-regular fa-circle-left"></i> Return</a>
                     </div>
                 </div>
             </div>
@@ -138,7 +149,7 @@ if (isset($_POST['confirm'])) {
             <div class="header-container">
                 <div class="title-head">
 
-                    <label for=""><i class="fa-solid fa-gear"></i> Pending Reservation</label>
+                    <label for=""><i class="fa-solid fa-gear"></i> <?php echo $manage_data['reserve_status'] ?> Cottage Reservation</label>
                 </div>
 
                 <div class="title-head-right">
@@ -219,7 +230,7 @@ if (isset($_POST['confirm'])) {
 
                 <div class="container">
                     <div class="header-label">
-                        <label for="">PENDING</label>
+                        <label for=""><?php echo $manage_data['reserve_status'] ?></label>
                     </div>
 
 
@@ -230,7 +241,9 @@ if (isset($_POST['confirm'])) {
 
                             <div class="image-container">
 
-                                <img name="photo" src="<?php echo $manage_data['photo']; ?>" alt="">
+
+
+                                <img name="photo" src="<?php echo $manage_data['cottage_photo']; ?>" alt="">
 
                             </div>
 
@@ -242,19 +255,20 @@ if (isset($_POST['confirm'])) {
                             <div class="line">
                                 <div>
                                     <label>First Name</label><br>
-                                    <input name="first_name" value="<?php echo $manage_data['fname']; ?>">
+                                    <input name="first_name" value="<?php echo $manage_data['first_name']; ?>">
                                 </div>
                                 <div>
                                     <label>Middle Name</label><br>
-                                    <input name="middle_name" value="<?php echo $manage_data['mname']; ?>">
+                                    <input name="middle_name" value="<?php echo $manage_data['middle_name']; ?>">
                                 </div>
                                 <div>
                                     <label>Last Name</label><br>
-                                    <input name="last_name" value="<?php echo $manage_data['lname']; ?>">
+                                    <input name="last_name" value="<?php echo $manage_data['last_name']; ?>">
                                 </div>
                                 <div>
                                     <label>Address</label><br>
-                                    <input name="address" value="<?php echo $manage_data['address']; ?>">
+                                    <input name="reserve_address"
+                                        value="<?php echo $manage_data['reserve_address']; ?>">
                                 </div>
                             </div>
                             <div class="line">
@@ -268,70 +282,48 @@ if (isset($_POST['confirm'])) {
                                         value="<?php echo $manage_data['email']; ?>">
                                 </div>
                                 <div>
-                                    <label>Room Type</label><br>
-                                    <input name="room_type" value="<?php echo $manage_data['room_type']; ?>">
-                                </div>
-                                <div>
-                                    <label>Bed Type</label><br>
-                                    <input type="text" name="bed_type" value="<?php echo $manage_data['bed_type']; ?>">
-                                </div>
-
-                            </div>
-                            <div class="line">
-                                <div>
-                                    <label>No. Bed</label><br>
-                                    <input type="number" name="bed_quantity"
-                                        value="<?php echo $manage_data['bed_quantity']; ?>">
-                                </div>
-                                <div>
-                                    <label>Number of Persons</label><br>
-                                    <input type="number" name="number_of_person"
-                                        value="<?php echo $manage_data['number_of_person']; ?>">
-                                </div>
-
-                                <div>
-                                    <label>Amenities</label><br>
-                                    <input name="amenities" value="<?php echo $manage_data['amenities']; ?>">
-                                </div>
-
-                                <div>
-                                    <label>Price (₱) <em id="goodfor">*good for 22 hours*</em></label><br>
-                                    <input type="number" name="price" value="<?php echo $manage_data['price']; ?>">
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="line">
-                                <div>
-                                    <label>Room Number</label><br>
-                                    <input type="number" class="notransform" name="room_number"
-                                        value="<?php echo $manage_data['room_number']; ?>">
-                                </div>
-                                <div>
-                                    <label>Arrival Date</label><br>
-                                    <input type="date" class="notransform" name="date_of_arrival"
+                                    <label>Date of Arrival</label><br>
+                                    <input type="date" name="date_of_arrival"
                                         value="<?php echo $manage_data['date_of_arrival']; ?>">
                                 </div>
                                 <div>
-                                    <label>Check-in Time</label><br>
-                                    <input type="time" name="time_of_arrival"
-                                        value="<?php echo $manage_data['time_of_arrival']; ?>">
-                                </div>
-
-                                <div>
-                                    <label>Check-out Time</label><br>
-                                    <input type="time" name="time_out" value="11:00" required>
+                                    <label>Time</label><br>
+                                    <input type="text" name="time" value="<?php echo $manage_data['time']; ?>">
                                 </div>
 
                             </div>
+                            <div class="line">
+                                <div>
+                                    <label>Price (₱)</label><br>
+                                    <input type="number" name="price" value="<?php echo $manage_data['price']; ?>">
+                                </div>
+                                <div>
+                                    <label>Cottage Number</label><br>
+                                    <input type="number" name="cottage_number"
+                                        value="<?php echo $manage_data['cottage_number']; ?>">
+                                </div>
+
+                                <div>
+                                    <label>Cottage Type</label><br>
+                                    <input name="cottage_type" value="<?php echo $manage_data['cottage_type']; ?>">
+                                </div>
+
+                                <div>
+                                    <label>Number of Person</label><br>
+                                    <input name="number_of_person"
+                                        value="<?php echo $manage_data['number_of_person']; ?>">
+                                </div>
+
+
+                            </div>
+
+
 
                             <div class="line">
                                 <div>
                                     <label>Type of Reservation</label><br>
-                                    <input type="text" class="notransform" name="reservation_type"
-                                        value="<?php echo $manage_data['reservation_type']; ?>" disabled>
+                                    <input type="text" class="notransform" name="reserve_type"
+                                        value="<?php echo $manage_data['reserve_type']; ?>" disabled>
                                 </div>
                             </div>
 
@@ -359,56 +351,6 @@ if (isset($_POST['confirm'])) {
                             </div>
 
 
-                            <div class="line">
-                                <div>
-                                    <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                                    <input type="number" class="notransform" name="extra_bed" value="0">
-                                </div>
-
-                                <div>
-                                    <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
-                                    <input type="number" name="extra_person" value="0">
-                                </div>
-
-
-
-                                <div>
-                                    <label>Total Fee (₱)</label><br>
-                                    <input type="number" name="total_fee" value="" readonly>
-                                </div>
-
-                            </div>
-
-
-                            <script>
-                                function calculateTotalFee() {
-                                    // Get the input values
-                                    const extraBed = parseInt(document.querySelector('input[name="extra_bed"]').value);
-                                    const extraPerson = parseInt(document.querySelector('input[name="extra_person"]').value);
-                                    const price = parseInt(document.querySelector('input[name="price"]').value);
-
-                                    // Calculate the additional charges
-                                    const extraBedCharge = extraBed * 600;
-                                    const extraPersonCharge = extraPerson * 600;
-
-                                    // Calculate the total fee
-                                    const totalFee = price + extraBedCharge + extraPersonCharge;
-
-                                    // Set the value of the "Total Fee" input field
-                                    document.querySelector('input[name="total_fee"]').value = totalFee;
-                                }
-
-                                // Call calculateTotalFee once when the page loads to display the initial total fee
-                                calculateTotalFee();
-
-                                // Listen for input and change events on Extra Bed, Extra Person, and Price fields
-                                document.querySelectorAll('input[name="extra_bed"], input[name="extra_person"], input[name="rate_per_hour"]').forEach(input => {
-                                    input.addEventListener('input', calculateTotalFee);
-                                    input.addEventListener('change', calculateTotalFee);
-                                });
-                            </script>
-
-
 
                             <div class="header-label2">
                                 <label>RESERVATION ADVANCE PAYMENT</label>
@@ -419,7 +361,7 @@ if (isset($_POST['confirm'])) {
                                 <div class="line">
                                     <div>
                                         <label>Reservation Fee</label><br>
-                                        <input type="number" name="reservation_fee" required>
+                                        <input type="number" name="cottage_reserve_fee" required>
                                     </div>
 
                                 </div>
@@ -530,7 +472,7 @@ if (isset($_POST['confirm'])) {
     function rejectItem(rejection_reason) {
         var reserve_id = document.querySelector('input[name="reserve_id"]').value;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'reject.php', true);
+        xhr.open('POST', 'cottage_reject.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -541,7 +483,7 @@ if (isset($_POST['confirm'])) {
                             text: 'Reservation rejected successfully.',
                             icon: 'success'
                         }).then(() => {
-                            window.location.href = 'dashboardRoomReservation.php'; // Replace with your desired page after rejection
+                            window.location.href = 'dashboardCottageReservation.php'; // Replace with your desired page after rejection
                         });
                     } else {
                         Swal.fire({
