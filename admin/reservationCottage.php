@@ -84,7 +84,7 @@ require('db_connect.php');
                 <td>' . $row['cottage_type'] . '</td>
                 <td>' . $row['number_of_person'] . '</td>
                 <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['cottage_photo'] . '"></td>
-                <td><div class="edit-btn"><a href="cottage_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</a></div></td>
+                <td><div class="edit-btn"><a href="cottage_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></td>
             </tr>';
         }
 

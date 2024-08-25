@@ -430,17 +430,15 @@ input:hover {
 /* for walkin reservation button */
 
 .add-reservation button {
-    background-color: #003c80;
-    color: white;
-    border: 2px solid #003c80;
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+    border: 1px solid var(--seventh-color3);
     border-radius: 3px;
-    line-height: 20px;
+    height: 30px;
 }
 
 .add-reservation button:hover {
-    box-shadow: 0 0 4px rgb(146, 146, 146);
-    background-color: #003c80;
-    border: 2px solid #003c80;
+    box-shadow:  0 0 4px var(--sixth-color);
 }
 
 
@@ -488,28 +486,10 @@ input:hover {
     gap: 5px;
 }
 
-.edit-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
+.edit-btn a{
+    color: var(--seventh-color);
+   
 }
-
-.edit-btn a {
-    background-color: #003f88;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #003f88;
-    color: white;
-    text-decoration: none;
-
-}
-
-
-.edit-btn a:hover {
-    background-color: #002b5c;
-}
-
 
 
 

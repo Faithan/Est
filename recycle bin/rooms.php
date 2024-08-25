@@ -33,7 +33,7 @@ if (isset($_GET['manage_id'])) {
         ?>
 
 
-    <script src="javascripts/logout.js" defer></script>
+    
 
     <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">
 

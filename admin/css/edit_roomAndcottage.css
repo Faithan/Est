@@ -54,7 +54,8 @@ input:hover {
 
 }
 
-input:hover[name="photo"] {
+input:hover[name="photo"],
+input:hover[name="cottage_photo"] {
     box-shadow: none;
 }
 

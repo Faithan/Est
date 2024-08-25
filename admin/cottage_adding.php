@@ -4,46 +4,63 @@ session_start();
 
 $message = "";
 $isSuccess = false;
-if (isset($_POST['addroom'])) {
-    $roomNumber = $_POST['room_number'];
-    $roomType = $_POST['room_type'];
-    $bedType = $_POST['bed_type'];
-    $bedQuantity = $_POST['bed_quantity'];
-    $noPersons = $_POST['no_persons'];
-    $amenities = $_POST['amenities'];
-    $price = $_POST['price'];
-    $status = $_POST['status'];
 
-    // Handle file upload
-    $photo = $_FILES['photo'];
-    $allowedExts = ['jpg', 'png', 'jpeg'];
-    $fileExt = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
-    $uploadDir = '../images/';
 
-    // Generate a unique file name to prevent overwriting
-    $uniqueFileName = uniqid('', true) . '.' . $fileExt;
-    $fileDestination = $uploadDir . $uniqueFileName;
+if (isset($_POST['addcottage'])) {
 
-    if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
-        if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
-            // Insert data into database
-            $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
-                       VALUES ('$roomNumber', '$roomType', '$bedType', '$bedQuantity', '$noPersons', '$amenities', '$price', '$status', '$fileDestination')";
+    $cottageNumber = $_POST['cottage_number'];
+    $cottageType = $_POST['cottage_type'];
+    $noPersons = $_POST['number_of_person'];
+    $dayPrice = $_POST['day_price'];
+    $nightPrice = $_POST['night_price'];
+    $cottageStatus = $_POST['cottage_status'];
 
-            if (mysqli_query($con, $saveData)) {
-                $message = "Saved Successfully!";
-                $isSuccess = true;
+    $photo = $_FILES['cottage_photo'];
+
+    $filename = $_FILES['cottage_photo']['name'];
+    $filetempname = $_FILES['cottage_photo']['tmp_name'];
+    $filsize = $_FILES['cottage_photo']['size'];
+    $fileerror = $_FILES['cottage_photo']['error'];
+    $filetype = $_FILES['cottage_photo']['type'];
+
+    $fileext = explode('.', $filename);
+    $filetrueext = strtolower(end($fileext));
+    $array = ['jpg', 'png', 'jpeg'];
+
+
+    if (in_array($filetrueext, $array)) {
+        if ($fileerror === 0) {
+            if ($filsize < 10000000) {
+                $filenewname = $filename;
+                $filedestination = '../images/' . $filenewname;
+                if ($filename) {
+                    move_uploaded_file($filetempname, $filedestination);
+                }
+
+
+                $savedata = "INSERT INTO cottage_tbl  VALUES ('', '$cottageStatus','$cottageNumber', '$cottageType', '$noPersons', '$dayPrice', '$nightPrice', '$filedestination')";
+
+                $query = (mysqli_query($con, $savedata));
+
+                if ($query) {
+                    $message = "Saved Successfully!";
+                    $isSuccess = true;
+
+                } else {
+                    $message = "Failed!";
+                    $isSuccess = false;
+
+                }
             } else {
-                $message = "Failed to save data!";
+                $message = "Failed!";
+                $isSuccess = false;
             }
-        } else {
-            $message = "Failed to move uploaded file!";
         }
     } else {
-        $message = "Failed to upload file!";
+        $message = "Failed!";
+        $isSuccess = false;
     }
 }
-
 
 ?>
 
@@ -60,7 +77,7 @@ if (isset($_POST['addroom'])) {
         ?>
 
 
-    <title>Room Adding</title>
+    <title>Cottage Adding</title>
 
     <script src="javascripts/add_room.js" defer></script>
 
@@ -84,7 +101,8 @@ if (isset($_POST['addroom'])) {
 
                 <div class="menu">
 
-                    <div class="item"><a href="dashboardRooms.php"><i class="fa-regular fa-circle-left"></i> Return</a>
+                    <div class="item"><a href="dashboardCottages.php"><i class="fa-regular fa-circle-left"></i>
+                            Return</a>
                     </div>
 
 
@@ -106,7 +124,7 @@ if (isset($_POST['addroom'])) {
             <div class="header-container">
                 <div class="title-head">
 
-                    <label for=""><i class="fa-solid fa-gear"></i> Room Adding</label>
+                    <label for=""><i class="fa-solid fa-gear"></i> Cottage Adding</label>
                 </div>
 
                 <div class="title-head-right">
@@ -188,7 +206,7 @@ if (isset($_POST['addroom'])) {
 
                 <form action="" method="POST" enctype="multipart/form-data" class="create-room-form">
                     <div class="head-label">
-                        <label><i class="fa-solid fa-plus"></i> ADD ROOM</label>
+                        <label><i class="fa-solid fa-plus"></i> ADD COTTAGE</label>
                     </div>
 
 
@@ -197,31 +215,31 @@ if (isset($_POST['addroom'])) {
 
 
                         <div class="input-fields">
-                            <label for="room_type">Room Number:</label>
-                            <input type="number" name="room_number" id="room_number" class="input_fields"
-                                onkeyup="changeColor(this)" required>
+                            <label for="cottage_number">Cottage Number:</label>
+                            <input type="number" name="cottage_number" id="cottage_number" class="input_fields"
+                                required>
                         </div>
 
                         <div class="input-fields">
-                            <label for="room_type">Room Type:</label>
+                            <label for="cottage_type">Cottage Type:</label>
 
                             <?php
                             // Assuming you've included the necessary database connection file
                             
-                            // Query to select distinct room type names
-                            $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
+                            // Query to select distinct cottage type names
+                            $sql = "SELECT DISTINCT cottage_type_name FROM cottage_type_tbl";
                             $result = $con->query($sql);
 
-                            $selectBox = "<select name='room_type' class='select_fields' id='roomTypeSelect' onchange='filterRooms()'>";
-                            $selectBox .= "<option disabled selected value=''>Select a Room Type</option>";
+                            $selectBox = "<select name='cottage_type' class='select_fields' id='cottageTypeSelect' onchange='filterCottages()'>";
+                            $selectBox .= "<option disabled selected value=''>Select a Cottage Type</option>";
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
-                                    $selectBox .= "<option value='" . $roomType . "'>" . $roomType . "</option>";
+                                    $cottageType = ucwords(strtolower($row["cottage_type_name"])); // Capitalize and format the cottage type
+                                    $selectBox .= "<option value='" . $cottageType . "'>" . $cottageType . "</option>";
                                 }
                             } else {
-                                $selectBox .= "<option value=''>No room types found.</option>";
+                                $selectBox .= "<option value=''>No cottage types found.</option>";
                             }
 
                             $selectBox .= "</select>";
@@ -231,90 +249,58 @@ if (isset($_POST['addroom'])) {
 
                         </div>
 
+
+
+
+
+
                         <div class="input-fields">
-                            <label for="bed_type">Bed Type:</label>
+                            <label for="number_of_person">Number of Persons:</label>
+                            <input type="number" name="number_of_person" id="number_of_person" class="input_fields"
+                                required>
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="day_price">Day Price:</label>
+                            <input type="number" name="day_price" id="day_price" class="input_fields" required>
+                        </div>
+
+                        <div class="input-fields">
+                            <label for="day_price">Night Price:</label>
+                            <input type="number" name="night_price" id="night_price" class="input_fields" required>
+                        </div>
+
+
+                        <div class="input-fields">
+                            <label for="cottage_status">Cottage Status:</label>
+
                             <?php
                             // Assuming you've included the necessary database connection file
                             
-                            // Query to select distinct bed type names
-                            $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
+                            // Query to select distinct cottage status names
+                            $sql = "SELECT DISTINCT cottage_status_name FROM cottage_status_tbl";
                             $result = $con->query($sql);
 
+                            $selectBox = "<select name='cottage_status' class='select_fields' id='cottageStatusSelect' onchange='filterCottagesByStatus()'>";
+                            $selectBox .= "<option disabled selected value=''>Select a Cottage Status</option>";
+
                             if ($result->num_rows > 0) {
-                                echo "<select name='bed_type' class='select_fields' id='bedTypeSelect' onchange='filterByBedType()'>";
-
-                                echo "<option disabled selected value=''>Select a Bed Type</option>";
-
-
                                 while ($row = $result->fetch_assoc()) {
-                                    $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
-                                    echo "<option value='" . $bedType . "'>" . $bedType . "</option>";
+                                    $cottageStatus = ucwords(strtolower($row["cottage_status_name"])); // Capitalize and format the cottage status
+                                    $selectBox .= "<option value='" . $cottageStatus . "'>" . $cottageStatus . "</option>";
                                 }
-                                echo "</select>";
                             } else {
-                                echo "<select name='bed_type' id='bedTypeSelect'>";
-                                echo "<option disabled selected value=''>Select a Bed Type</option>";
-                                echo "<option value=''>No bed types found.</option>";
-                                echo "</select>";
+                                $selectBox .= "<option value=''>No cottage statuses found.</option>";
                             }
+
+                            $selectBox .= "</select>";
+
+                            echo $selectBox;
                             ?>
 
                         </div>
 
-                        <div class="input-fields">
-                            <label for="room_type">Number of Bed:</label>
-                            <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields"
-                                onkeyup="changeColor(this)" required>
-                        </div>
 
-
-                        <div class="input-fields">
-                            <label for="room_type">Number of Persons:</label>
-                            <input type="number" name="no_persons" id="no_persons" class="input_fields"
-                                onkeyup="changeColor(this)" required>
-                        </div>
-
-                        <div class="input-fields">
-                            <label for="room_type">Amenities:</label>
-                            <input type="text" name="amenities" id="amenities" class="input_fields"
-                                onkeyup="changeColor(this)" required>
-                        </div>
-
-                        <div class="input-fields">
-                            <label for="room_type">Good for 22 hours:</label>
-                            <input type="number" name="price" id="price" class="input_fields"
-                                onkeyup="changeColor(this)" placeholder="₱" required>
-
-                        </div>
-
-
-                        <div class="input-fields">
-                            <label for="status">Status:</label>
-                            <?php
-                            // Assuming you've included the necessary database connection file
-                            
-                            // Query to select distinct status names from the room_status_tbl
-                            $sql = "SELECT DISTINCT room_status_name FROM room_status_tbl";
-                            $result = $con->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                echo "<select name='status' class='select_fields' id='statusSelect' onchange='changeColorSelect(this)' required>";
-
-                                echo "<option disabled selected value=''>Choose an Option</option>";
-
-                                while ($row = $result->fetch_assoc()) {
-                                    $status = ucwords(strtolower($row["room_status_name"])); // Capitalize and format the status name
-                                    echo "<option value='" . $status . "'>" . $status . "</option>";
-                                }
-                                echo "</select>";
-                            } else {
-                                echo "<select name='status' id='statusSelect' class='select_fields' required>";
-                                echo "<option disabled selected value=''>Choose an Option</option>";
-                                echo "<option value=''>No options found.</option>";
-                                echo "</select>";
-                            }
-                            ?>
-                        </div>
 
 
 
@@ -330,7 +316,7 @@ if (isset($_POST['addroom'])) {
 
                     <div class="adding-photo-container">
                         <div class="center-label">
-                            <label for="room_type">Photo:</label><br>
+                            <label for="">Photo:</label><br>
                         </div>
 
                         <div class="center-label-image">
@@ -338,11 +324,11 @@ if (isset($_POST['addroom'])) {
                         </div>
 
                         <div class="center-label">
-                            <input type="file" id="photo_input" name="photo" accept="image/*" required><br>
+                            <input type="file" id="photo_input" name="cottage_photo" accept="image/*" required><br>
                         </div>
 
                         <div class="center-label">
-                            <button type="submit" name="addroom" class="button1"><i class="fa-solid fa-download"></i>
+                            <button type="submit" name="addcottage" class="button1"><i class="fa-solid fa-download"></i>
                                 Save</button>
                         </div>
                     </div>

@@ -24,7 +24,7 @@
                         class="fa-solid fa-caret-down dropdown"></i></a>
                 <!-- dropdown -->
                 <div class="sub-menu">
-                    <a href="#" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
+                    <a href="dashboardCottages.php" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i> Cottages</a>
                     <a href="dashboardRooms.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> Rooms</a>
                 </div>
             </div>

@@ -4,7 +4,6 @@ include('db_connect.php');
 
 
 
-
 ?>
 
 
@@ -20,7 +19,7 @@ include('db_connect.php');
 
 <div class="container">
     <div class="header-label">
-        <label><i class="fa-solid fa-bed"></i> Rooms</label>
+        <label><i class="fa-solid fa-umbrella-beach"></i> Cottages</label>
     </div>
 
     <div class="under-buttons-container">
@@ -47,8 +46,8 @@ include('db_connect.php');
         </div>
 
         <div class="add-reservation">
-            <button onclick="window.location.href = 'room_adding.php'" name="add-reservation"><i
-                    class="fa-solid fa-plus"></i> Add Room</button>
+            <button onclick="window.location.href = 'cottage_adding.php'" name="add-reservation"><i
+                    class="fa-solid fa-plus"></i> Add Cottage</button>
         </div>
     </div>
 
@@ -57,46 +56,41 @@ include('db_connect.php');
     <form method="post" action="">
         <table>
             <tr>
-                <th>Room Number</th>
-                <th>Room Type</th>
-                <th>Bed Type</th>
-                <th>Bed Quantity</th>
-                <th>No. Person</th>
-                <th>Amenities</th>
-                <th>Price (Good for 22hrs)</th>
+                <th>Cottage Number</th>
+                <th>Cottage Type</th>
+                <th>Number of Person</th>
+                <th>Day Price</th>
+                <th>Night Price</th>
                 <th>Status</th>
                 <th>Photo</th>
                 <th>Action</td>
             </tr>
 
-            <?php $fetchdata = "SELECT * FROM room_tbl ORDER BY id DESC";
+            <?php $fetchdata = "SELECT * FROM cottage_tbl ORDER BY cottage_id DESC";
             $result = mysqli_query($con, $fetchdata);
             while ($row = mysqli_fetch_assoc($result)) {
-                $id = $row['id'];
-                $roomNumber = $row['room_number'];
-                $roomType = $row['room_type'];
-                $bedType = $row['bed_type'];
-                $bed_quantity = $row['bed_quantity'];
-                $noPersons = $row['no_persons'];
-                $amenities = $row['amenities'];
-                $price = $row['price'];
-                $status = $row['status'];
-                $photo = $row['photo'];
+                $id = $row['cottage_id'];
+                $cottageNumber = $row['cottage_number'];
+                $cottageType = $row['cottage_type'];
+                $number_of_person = $row['number_of_person'];
+                $dayPrice = $row['day_price'];
+                $nightPrice = $row['night_price'];
+                $status = $row['cottage_status'];
+                $photo = $row['cottage_photo'];
                 ?>
                 <tr>
-                    <td><?php echo $roomNumber ?></td>
-                    <td><?php echo $roomType ?></td>
-                    <td><?php echo $bedType ?></td>
-                    <td><?php echo $bed_quantity ?></td>
-                    <td><?php echo $noPersons ?></td>
-                    <td><?php echo $amenities ?></td>
-                    <td><?php echo $price ?></td>
+                    <td><?php echo $cottageNumber ?></td>
+                    <td><?php echo $cottageType ?></td>
+                    <td><?php echo $number_of_person ?></td>
+                    <td><?php echo $dayPrice ?></td>
+                    <td><?php echo $nightPrice ?></td>
                     <td><?php echo $status ?></td>
+
                     <td><img class="room-image" onclick="openFullScreen()" src="<?php echo $photo ?>"></td>
 
                     <td class="edit-btn-holder">
                         <div class="edit-btn">
-                            <a name="manage" href="edit_room.php?manage_id=<?php echo $id; ?>"><i
+                            <a name="manage" href="edit_cottage.php?manage_id=<?php echo $id; ?>"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                         </div>
 

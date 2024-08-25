@@ -255,7 +255,7 @@ if (isset($_GET['manage_id'])) {
                                 </div>
                             </div>
 
-                         
+
 
                             <div class="payment-container">
 
@@ -269,7 +269,7 @@ if (isset($_GET['manage_id'])) {
                             </div>
 
 
-                           
+
 
 
 
@@ -290,15 +290,15 @@ if (isset($_GET['manage_id'])) {
                                 </div>
                             </div>
 
+                            <div class="note">
+                                <p>
+                                    <b>Note:</b> This form is for recorded data only.
+                                </p>
+                            </div>
 
 
                         </div>
 
-                        <div class="note">
-                            <p>
-                                <b>Note:</b> This form is for recorded data only.
-                            </p>
-                        </div>
 
 
 

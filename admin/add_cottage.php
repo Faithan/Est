@@ -83,7 +83,7 @@ if (isset($_POST['addcottage'])) {
   include 'assets.php'
     ?>
 
-  <script src="javascripts/logout.js" defer></script>
+  
   <script src="javascripts/add_room.js" defer></script>
 
   <link rel="stylesheet" type="text/css" href="css/backbtn.css?v=<?php echo time(); ?>">

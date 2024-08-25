@@ -7,7 +7,7 @@ $response = ['success' => false, 'message' => ''];
 // Validate manage_id
 if (isset($_GET['manage_id'])) {
     $manage_id = intval($_GET['manage_id']);
-    $manage_query = "SELECT * FROM room_tbl WHERE id = ?";
+    $manage_query = "SELECT * FROM cottage_tbl WHERE cottage_id = ?";
     if ($stmt = $con->prepare($manage_query)) {
         $stmt->bind_param('i', $manage_id);
         $stmt->execute();
@@ -15,7 +15,7 @@ if (isset($_GET['manage_id'])) {
         $manage_data = $manage_result->fetch_assoc();
         $stmt->close();
     } else {
-        $response['message'] = 'Failed to prepare SQL statement for fetching room details.';
+        $response['message'] = 'Failed to prepare SQL statement for fetching cottage details.';
         echo json_encode($response);
         exit;
     }
@@ -42,7 +42,7 @@ if (isset($_GET['manage_id'])) {
         ?>
 
 
-    <title>Edit Room</title>
+    <title>Edit Cottage</title>
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
@@ -64,7 +64,7 @@ if (isset($_GET['manage_id'])) {
 
                 <div class="menu">
 
-                    <div class="item"><a href="dashboardRooms.php"><i class="fa-regular fa-circle-left"></i>
+                    <div class="item"><a href="dashboardCottages.php"><i class="fa-regular fa-circle-left"></i>
                             Return</a>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ if (isset($_GET['manage_id'])) {
             <div class="header-container">
                 <div class="title-head">
 
-                    <label for=""><i class="fa-solid fa-gear"></i> Edit Room</label>
+                    <label for=""><i class="fa-solid fa-gear"></i> Edit Cottage</label>
                 </div>
 
                 <div class="title-head-right">
@@ -156,18 +156,19 @@ if (isset($_GET['manage_id'])) {
 
             <div class="center-container">
 
-                <form id="update_form" action="update_photo_room.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
+                <form id="update_form" action="update_photo_cottage.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="cottage_id" value="<?php echo $manage_data['cottage_id']; ?>">
                     <div class="image-container">
                         <div class="prev-image-container">
                             <label>Previous Photo:</label>
-                            <img class="prev-image" src="<?php echo $manage_data['photo']; ?>" alt="Previous photo">
+                            <img class="prev-image" src="<?php echo $manage_data['cottage_photo']; ?>"
+                                alt="Previous photo">
                         </div>
 
                         <div class="new-image-container">
                             <label>Upload New Photo:</label>
                             <div class="image-holder" id="photo_preview"></div>
-                            <input type="file" id="photo" name="photo" accept="image/*">
+                            <input type="file" id="photo" name="cottage_photo" accept="image/*">
                             <button type="submit" name="update_photo"><i class="fa-solid fa-floppy-disk"></i> Update
                                 Photo</button>
                         </div>
@@ -204,7 +205,7 @@ if (isset($_GET['manage_id'])) {
 
                         const formData = new FormData(this);
 
-                        fetch('update_photo_room.php', {
+                        fetch('update_photo_cottage.php', {
                             method: 'POST',
                             body: formData
                         })
@@ -257,37 +258,39 @@ if (isset($_GET['manage_id'])) {
 
 
 
-                <form action="update_room.php" method="POST" enctype="multipart/form-data" class="create-room-form">
+                <form action="update_cottage.php" method="POST" enctype="multipart/form-data" class="create-room-form">
 
                     <div class="input-fields-container">
 
                         <div class="input-fields-subcontainer">
-                            <label>Room Number:</label>
-                            <input type="number" name="room_number" id="room_number" class="input_fields"
-                                 value="<?php echo $manage_data['room_number']; ?>" required>
+                            <label>Cottage Number:</label>
+                            <input type="number" name="cottage_number" id="cottage_number" class="input_fields"
+                                 value="<?php echo $manage_data['cottage_number']; ?>"
+                                required>
                         </div>
 
+
                         <div class="input-fields-subcontainer">
-                            <label for="room_type">Room Type:</label>
+                            <label for="cottage_type">Cottage Type:</label>
                             <?php
                             // Assuming you've included the necessary database connection file
                             
-                            // Query to select distinct room type names
-                            $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
+                            // Query to select cottage room type names
+                            $sql = "SELECT DISTINCT cottage_type_name FROM cottage_type_tbl";
                             $result = $con->query($sql);
 
-                            $selectBox = "<select name='room_type' id='room_type' class='select_fields' onchange='changeColorSelect(this)' required>";
+                            $selectBox = "<select name='cottage_type' id='cottage_type' class='select_fields' onchange='changeColorSelect(this)' required>";
                             $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    $roomType = ucwords(strtolower($row["room_type_name"])); // Capitalize and format the room type
+                                    $cottageType = ucwords(strtolower($row["cottage_type_name"])); // Capitalize and format the room type
                             
                                     // Check if the current room type matches the one in $manage_data and mark it as selected
-                                    $selected = ($manage_data['room_type'] == $roomType) ? 'selected' : '';
+                                    $selected = ($manage_data['cottage_type'] == $cottageType) ? 'selected' : '';
 
                                     // Add the option to the select box
-                                    $selectBox .= "<option value='" . $roomType . "' " . $selected . ">" . $roomType . "</option>";
+                                    $selectBox .= "<option value='" . $cottageType . "' " . $selected . ">" . $cottageType . "</option>";
                                 }
                             } else {
                                 $selectBox .= "<option value=''>No room types found.</option>";
@@ -300,90 +303,47 @@ if (isset($_GET['manage_id'])) {
 
                         </div>
 
-                        <div class="input-fields-subcontainer">
-                            <label for="bed_type">Bed Type:</label>
-                            <?php
-                            // Assuming you've included the necessary database connection file
-                            
-                            // Query to select distinct bed type names
-                            $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
-                            $result = $con->query($sql);
-
-                            $selectBox = "<select name='bed_type' id='bed_type' class='select_fields' onchange='changeColorSelect(this)' required>";
-                            $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $bedType = ucwords(strtolower($row["bed_type_name"])); // Capitalize and format the bed type
-                            
-                                    // Ensure the manage_data bed type is trimmed and formatted the same way for comparison
-                                    $selected = (trim(ucwords(strtolower($manage_data['bed_type']))) == $bedType) ? 'selected' : '';
-
-                                    // Add the option to the select box
-                                    $selectBox .= "<option value='" . $bedType . "' " . $selected . ">" . $bedType . "</option>";
-                                }
-                            } else {
-                                $selectBox .= "<option value=''>No bed types found.</option>";
-                            }
-
-                            $selectBox .= "</select>";
-
-                            echo $selectBox;
-                            ?>
-                        </div>
-
 
 
                         <div class="input-fields-subcontainer">
-                            <label>Number of Bed:</label>
-                            <input type="number" name="bed_quantity" id="bed_quantity" class="input_fields"
-                                 value="<?php echo $manage_data['bed_quantity']; ?>"
+                            <label>Number of Persons:</label>
+                            <input type="number" name="number_of_person" id="number_of_person" class="input_fields"
+                                 value="<?php echo $manage_data['number_of_person']; ?>"
                                 required>
                         </div>
 
                         <div class="input-fields-subcontainer">
-                            <label>Number of Persons:</label>
-                            <input type="number" name="no_persons" id="no_persons" class="input_fields"
-                                 value="<?php echo $manage_data['no_persons']; ?>" required>
+                            <label>Day Price:</label>
+                            <input type="number" name="day_price" id="day_price" class="input_fields"
+                                 value="<?php echo $manage_data['day_price']; ?>" required>
                         </div>
 
                         <div class="input-fields-subcontainer">
-                            <label for="amenities">Amenities:</label>
-                            <input type="text" name="amenities" id="amenities" class="input_fields"
-                                
-                                value="<?php echo htmlspecialchars($manage_data['amenities']); ?>" required>
+                            <label>Night Price:</label>
+                            <input type="number" name="night_price" id="night_price" class="input_fields"
+                                 value="<?php echo $manage_data['night_price']; ?>" required>
                         </div>
 
                         <div class="input-fields-subcontainer">
-                            <label>Price (Good for 22hrs):</label>
-                            <input type="number" name="price" id="price" class="input_fields"
-                                 value="<?php echo $manage_data['price']; ?>" required>
-                        </div>
-
-                        <div class="input-fields-subcontainer">
-                            <label for="status">Status:</label>
+                            <label for="cottage_status">Cottage Status:</label>
                             <?php
-                            // Assuming you've included the necessary database connection file
-                            
-                            // Query to select distinct status names from the room_status_table
-                            $sql = "SELECT DISTINCT room_status_name FROM room_status_tbl";
+                            // Query to select distinct cottage status names from the cottage_status_tbl
+                            $sql = "SELECT DISTINCT cottage_status_name FROM cottage_status_tbl";
                             $result = $con->query($sql);
 
-                            $selectBox = "<select name='status' id='status' class='select_fields' onchange='changeColorSelect(this)' required>";
+                            $selectBox = "<select name='cottage_status' id='cottage_status' class='select_fields' onchange='changeColorSelect(this)' required>";
                             $selectBox .= "<option disabled selected value=''>Choose an Option</option>";
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    $status = ucwords(strtolower($row["room_status_name"])); // Capitalize and format the status name
+                                    $cottageStatus = ucwords(strtolower($row["cottage_status_name"])); // Capitalize and format the cottage status
                             
-                                    // Check if the current status matches the one in $manage_data and mark it as selected
-                                    $selected = ($manage_data['status'] == $status) ? 'selected' : '';
+                                    $selected = ($manage_data['cottage_status'] == $cottageStatus) ? 'selected' : '';
 
-                                    // Add the option to the select box
-                                    $selectBox .= "<option value='" . $status . "' " . $selected . ">" . $status . "</option>";
+                                    $selectBox .= "<option value='" . $cottageStatus . "' " . $selected . ">" . $cottageStatus . "</option>";
                                 }
                             } else {
-                                $selectBox .= "<option value=''>No statuses found.</option>";
+                                $selectBox .= "<option value=''>No cottage statuses found.</option>";
                             }
 
                             $selectBox .= "</select>";
@@ -392,9 +352,8 @@ if (isset($_GET['manage_id'])) {
                             ?>
                         </div>
 
-
                         <!-- id -->
-                        <input type="hidden" name="id" value="<?php echo $manage_data['id']; ?>">
+                        <input type="hidden" name="cottage_id" value="<?php echo $manage_data['cottage_id']; ?>">
 
                     </div>
 
@@ -405,53 +364,38 @@ if (isset($_GET['manage_id'])) {
                                 class="fa-solid fa-trash"></i> Delete</button>
                     </div>
 
-
-
-
-
-
                 </form>
-
-
-
-
 
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         const form = document.querySelector('form.create-room-form');
-                        const roomNumberInput = document.getElementById('room_number');
-                        const roomTypeSelect = document.getElementById('room_type');
-                        const bedTypeSelect = document.getElementById('bed_type');
-                        const bedQuantityInput = document.getElementById('bed_quantity');
-                        const noPersonsInput = document.getElementById('no_persons');
-                        const amenitiesInput = document.getElementById('amenities');
-                        const priceInput = document.getElementById('price');
-                        const statusSelect = document.getElementById('status');
+                        const cottageNumberInput = document.getElementById('cottage_number');
+                        const cottageTypeSelect = document.getElementById('cottage_type');
+                        const numberOfPersonsInput = document.getElementById('number_of_person');
+                        const dayPriceInput = document.getElementById('day_price');
+                        const nightPriceInput = document.getElementById('night_price');
+                        const cottageStatusSelect = document.getElementById('cottage_status');
 
-                        let originalRoomNumber = roomNumberInput.value;
-                        let originalRoomType = roomTypeSelect.value;
-                        let originalBedType = bedTypeSelect.value;
-                        let originalBedQuantity = bedQuantityInput.value;
-                        let originalNoPersons = noPersonsInput.value;
-                        let originalAmenities = amenitiesInput.value;
-                        let originalPrice = priceInput.value;
-                        let originalStatus = statusSelect.value;
+                        let originalCottageNumber = cottageNumberInput.value;
+                        let originalCottageType = cottageTypeSelect.value;
+                        let originalNumberOfPersons = numberOfPersonsInput.value;
+                        let originalDayPrice = dayPriceInput.value;
+                        let originalNightPrice = nightPriceInput.value;
+                        let originalCottageStatus = cottageStatusSelect.value;
 
                         form.addEventListener('submit', function (event) {
                             event.preventDefault(); // Prevent the default form submission
 
                             // Check if values have changed
-                            const isRoomNumberChanged = roomNumberInput.value !== originalRoomNumber;
-                            const isRoomTypeChanged = roomTypeSelect.value !== originalRoomType;
-                            const isBedTypeChanged = bedTypeSelect.value !== originalBedType;
-                            const isBedQuantityChanged = bedQuantityInput.value !== originalBedQuantity;
-                            const isNoPersonsChanged = noPersonsInput.value !== originalNoPersons;
-                            const isAmenitiesChanged = amenitiesInput.value !== originalAmenities;
-                            const isPriceChanged = priceInput.value !== originalPrice;
-                            const isStatusChanged = statusSelect.value !== originalStatus;
+                            const isCottageNumberChanged = cottageNumberInput.value !== originalCottageNumber;
+                            const isCottageTypeChanged = cottageTypeSelect.value !== originalCottageType;
+                            const isNumberOfPersonsChanged = numberOfPersonsInput.value !== originalNumberOfPersons;
+                            const isDayPriceChanged = dayPriceInput.value !== originalDayPrice;
+                            const isNightPriceChanged = nightPriceInput.value !== originalNightPrice;
+                            const isCottageStatusChanged = cottageStatusSelect.value !== originalCottageStatus;
 
-                            if (isRoomNumberChanged || isRoomTypeChanged || isBedTypeChanged || isBedQuantityChanged ||
-                                isNoPersonsChanged || isAmenitiesChanged || isPriceChanged || isStatusChanged) {
+                            if (isCottageNumberChanged || isCottageTypeChanged || isNumberOfPersonsChanged || isDayPriceChanged ||
+                                isNightPriceChanged || isCottageStatusChanged) {
                                 Swal.fire({
                                     title: 'Save Changes?',
                                     text: 'Are you sure you want to save the changes?',
@@ -464,7 +408,7 @@ if (isset($_GET['manage_id'])) {
                                         // Create a FormData object and submit the form via AJAX
                                         const formData = new FormData(form);
 
-                                        fetch('update_room.php', {
+                                        fetch('update_cottage.php', {
                                             method: 'POST',
                                             body: formData
                                         })
@@ -476,7 +420,7 @@ if (isset($_GET['manage_id'])) {
                                                         text: data.message,
                                                         icon: 'success'
                                                     }).then(() => {
-                                                        window.location.href = 'dashboardRooms.php'; // Redirect after success
+                                                        window.location.href = 'dashboardCottages.php'; // Redirect after success
                                                     });
                                                 } else {
                                                     Swal.fire({
@@ -561,9 +505,9 @@ if (isset($_GET['manage_id'])) {
     }
 
     function deleteItem() {
-        var id = document.querySelector('input[name="id"]').value;
+        var id = document.querySelector('input[name="cottage_id"]').value;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'delete_room.php', true);
+        xhr.open('POST', 'delete_cottage.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -573,7 +517,7 @@ if (isset($_GET['manage_id'])) {
                         text: 'The item has been deleted.',
                         icon: 'success'
                     }).then(() => {
-                        window.location.href = 'dashboardRooms.php'; // Replace with your desired page after deletion
+                        window.location.href = 'dashboardCottages.php'; // Replace with your desired page after deletion
                     });
                 } else {
                     Swal.fire({
@@ -584,6 +528,6 @@ if (isset($_GET['manage_id'])) {
                 }
             }
         };
-        xhr.send('id=' + id);
+        xhr.send('cottage_id=' + id);
     }
 </script>

@@ -93,7 +93,7 @@ require('db_connect.php');
                 <td>' . $row['amenities'] . '</td>
                 <td>' . $row['price'] . '</td>
                 <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['photo'] . '"></td>
-                <td><div class="edit-btn"><a href="room_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i>Open</a></div></td>
+                <td class="edit-btn" ><a href="room_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
             </tr>';
         }
 
