@@ -546,7 +546,7 @@ table td {
     text-align: center;
     padding: 5px;
     border: 1px solid var(--first-color2);
-    text-transform: capitalize;
+    
     background-color: var(--first-color);
     color: var(--seventh-color);
     border: 1px solid var(--seventh-color3);

@@ -129,9 +129,9 @@ if (isset($_POST['confirm'])) {
                 </div>
             </div>
 
-            <div class="logout-container">
-                <a><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Log out</a>
-            </div>
+            <?php 
+            include 'logoutbtn.php'
+            ?>
         </section>
 
         <section class="middle-container">

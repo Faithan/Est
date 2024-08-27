@@ -1,5 +1,5 @@
 <?php
-require('db_connect.php');
+require 'db_connect.php';
 ?>
 
 <div class="container">
@@ -30,6 +30,43 @@ require('db_connect.php');
             </select>
         </div>
 
+        <script>
+            // Function to filter data based on reservation type
+            function filterReservationType(type) {
+                // Get all table rows in each table
+                const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
+                tables.forEach(tableId => {
+                    const rows = document.querySelectorAll(`#${tableId} table tr:not(:first-child)`); // exclude the header row
+                    rows.forEach(row => {
+                        const reserveType = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase(); // Adjust the column index if necessary
+                        if (type === 'all') {
+                            row.style.display = ''; // Show all rows
+                        } else if (reserveType === type) {
+                            row.style.display = ''; // Show rows matching the selected type
+                        } else {
+                            row.style.display = 'none'; // Hide rows not matching the selected type
+                        }
+                    });
+                });
+            }
+
+            // Attach the filter function to the select element
+            document.querySelector('.select-type select').addEventListener('change', function () {
+                const selectedType = this.value.toLowerCase();
+                filterReservationType(selectedType);
+            });
+
+
+        </script>
+
+
+
+
+
+
+
+
+        <!-- search bar -->
         <div class="group">
             <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                 <g>
@@ -38,8 +75,46 @@ require('db_connect.php');
                     </path>
                 </g>
             </svg>
-            <input type="search" class="search-input" placeholder="Search">
+            <input type="search" id="search-input" class="search-input" placeholder="Search">
         </div>
+
+        <script>
+            function filterReservationType(type) {
+                // Existing code for filtering by reservation type
+            }
+
+            function searchTable(query) {
+                // Get all table rows in each table
+                const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
+                tables.forEach(tableId => {
+                    const rows = document.querySelectorAll(`#${tableId} table tr:not(:first-child)`); // Exclude the header row
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        let match = false;
+                        cells.forEach(cell => {
+                            if (cell.textContent.toLowerCase().includes(query)) {
+                                match = true;
+                            }
+                        });
+                        row.style.display = match ? '' : 'none'; // Show or hide rows based on match
+                    });
+                });
+            }
+
+            // Attach the search function to the input element
+            document.getElementById('search-input').addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                searchTable(query);
+            });
+        </script>
+        <!-- end -->
+
+
+
+
+
+
+        <!-- tables -->
 
         <div class="add-reservation">
             <label><em>For Walk-in <i class="fa-solid fa-hand-point-left fa-flip-horizontal"></i></em></label>
@@ -57,41 +132,44 @@ require('db_connect.php');
 
         echo '<form method="post" action="" id="table-container-' . $status . '">';
         echo '<table><tr>
-            <th>Reserve ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Date of Arrival</th>
-            <th>Time</th>
-            <th>Price</th>
-            <th>Cottage Type</th>
-            <th>Number of Person</th>
-            <th>Photo</th>
-            <th>Action</th>
-        </tr>';
+        <th>Reserve ID</th>
+          <th>Reservation Type</th> 
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Date of Arrival</th>
+        <th>Time</th>
+        <th>Price</th>
+        <th>Cottage Type</th>
+        <th>Number of Person</th>
+        <th>Photo</th>
+        <th>Action</th>
+    </tr>';
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>
-                <td>' . $row['reserve_id'] . '</td>
-                <td>' . $row['first_name'] . '</td>
-                <td>' . $row['last_name'] . '</td>
-                <td>' . $row['reserve_address'] . '</td>
-                <td>' . $row['phone_number'] . '</td>
-                <td class="email">' . $row['email'] . '</td>
-                <td>' . $row['date_of_arrival'] . '</td>
-                <td>' . $row['time'] . '</td>
-                <td>' . $row['price'] . '</td>
-                <td>' . $row['cottage_type'] . '</td>
-                <td>' . $row['number_of_person'] . '</td>
-                <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['cottage_photo'] . '"></td>
-                <td><div class="edit-btn"><a href="cottage_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></td>
-            </tr>';
+            <td>' . $row['reserve_id'] . '</td>
+            <td>' . $row['reserve_type'] . '</td> 
+            <td>' . $row['first_name'] . '</td>
+            <td>' . $row['last_name'] . '</td>
+            <td>' . $row['reserve_address'] . '</td>
+            <td>' . $row['phone_number'] . '</td>
+            <td class="email">' . $row['email'] . '</td>
+            <td>' . $row['date_of_arrival'] . '</td>
+            <td>' . $row['time'] . '</td>
+            <td>' . $row['price'] . '</td>
+            <td>' . $row['cottage_type'] . '</td>
+            <td>' . $row['number_of_person'] . '</td>
+            <td class="table-image-container"><img class="reservation-image" onclick="openFullScreen()" src="' . $row['cottage_photo'] . '"></td>
+            <td><div class="edit-btn"><a href="cottage_' . $status . '.php?manage_id=' . $row['reserve_id'] . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></td>
+        </tr>';
         }
 
         echo '</table></form>';
     }
+
 
     renderTable($con, 'pending');
     renderTable($con, 'confirmed');
@@ -152,3 +230,5 @@ require('db_connect.php');
     document.getElementById("checkedOut-btn").onclick = () => showTable(3, 3);
     document.getElementById("rejected-btn").onclick = () => showTable(4, 4);
 </script>
+
+<!-- end -->

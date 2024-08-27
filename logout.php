@@ -1,7 +1,18 @@
-<?php 
+<?php
 session_start();
-session_unset();
-session_destroy();
+
+// Check if the user is logged in and log them out
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    // Unset user-specific session variables
+    unset($_SESSION['loggedin']);
+    unset($_SESSION['email']);
+    session_write_close(); // Close the session without destroying other sessions
+
+    header("Location: login.php");
+    exit();
+}
+
+// You may also want to handle admin logout separately in another script
 ?>
 
 <!DOCTYPE html>
