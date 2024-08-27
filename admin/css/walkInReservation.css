@@ -1,40 +1,4 @@
-body {
-    background-color: var(--first-color2);
 
-}
-
-#scrollToTopBtn {
-    display: none;
-}
-
-
-/* page structure */
-
-.page-structure {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-}
-
-.left-background {
-    background: url(../system_images/bg7.jpg);
-    width: 30vh;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(70%);
-}
-
-
-.right-background {
-    background: url(../system_images/bg8.jpg);
-    width: 30vh;
-    filter: brightness(70%);
-    background-size: cover;
-    background-position: center;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
 
 .rooms-base-container {
     width: 100%;
@@ -44,22 +8,20 @@ body {
 }
 
 .container-header {
-    width: 100%;
-    padding: 20px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .container-header label {
     background-color: var(--reservation-title);
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     text-align: center;
     font-size: 2rem;
     text-transform: uppercase;
     font-weight: bold;
-    border-radius: 5px;
     color: var(--reservation-text);
     border: 1px solid var(--reservation-titleborder);
 }
@@ -74,7 +36,7 @@ body {
     background-color: var(--first-color2);
     position: -webkit-sticky;
     position: sticky;
-   
+
 }
 
 .select-container {
@@ -185,8 +147,8 @@ body {
 
 
     border: 1px solid var(--booknow-border);
-  
-   
+
+
 }
 
 
@@ -209,7 +171,7 @@ select option {
 /* rooms container */
 
 .rooms-container {
-    max-height: 80vh;
+    max-height: 82vh;
     /* Adjust the height as needed */
     position: relative;
     border-radius: 3px;
@@ -231,7 +193,10 @@ select option {
 
 
 .title-head {
-    padding-bottom: 10px;
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+
     text-transform: uppercase;
 }
 
@@ -255,11 +220,10 @@ select option {
 }
 
 .rooms {
-
     display: flex;
     flex-direction: column;
     width: 250px;
-    height: 330px;
+    height: 340px;
     background-color: var(--first-color);
     border-radius: 5px;
     box-shadow: 0 0 4px var(--box-shadow);
@@ -410,7 +374,6 @@ em {
 .button-container {
     width: 100%;
     display: flex;
-    padding-top: 10px;
     justify-content: center;
 }
 
@@ -423,3 +386,239 @@ em {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/* input fields */
+
+
+
+
+
+
+
+
+
+.adding-photo-container {
+    width: 100%;
+    background-color: var(--first-color2);
+    padding: 40px 0 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+.adding-photo-container img {
+    border-radius: 2px;
+    padding: 10px;
+    background-color: var(--first-color);
+    border: 1px solid var(--seventh-color3);
+    height: 300px;
+    border-radius: 5px;
+}
+
+.create-room-form {
+    border-radius: 5px;
+}
+
+
+.head-label {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.head-label label {
+    width: 100%;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--seventh-color);
+    border: 1px solid var(--seventh-color3);
+}
+
+.input-fields-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-color);
+
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-fields label {
+    color: var(--seventh-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+.create-room-form label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+.input_fields {
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+
+.input-fields textarea {
+    width: 600px;
+    height: 60px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+.input_fields_fixed {
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--fixed-color);
+    color: var(--seventh-color);
+}
+
+.input_fields.has-value {
+    background-color: #effaff;
+}
+
+.input_fields:hover {
+    box-shadow: 0 0 4px rgb(100, 100, 255);
+    transition: 0.3s;
+}
+
+.select_fields {
+    width: 304px;
+    height: 34px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+
+.select_fields.has-value {
+    background-color: #effaff;
+}
+
+.select_fields:hover {
+    box-shadow: 0 0 4px rgb(100, 100, 255);
+    transition: 0.3s;
+}
+
+
+.center-label {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: var(--seventh-color);
+}
+
+.center-label-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.center-label-image img {
+    width: 600px;
+    padding: 10px;
+    background-color: var(--first-color2);
+    border-radius: 5px;
+}
+
+.header_text {
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 0 1px 1px;
+}
+
+.button1 {
+    padding: 10px 40px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: var(--proceed-color);
+    background-color: var(--proceed-bgcolor);
+    border: 1px solid var(--seventh-color3);
+    font-size: 15px;
+}
+
+.button1:hover {
+    box-shadow: 0 0 4px var(--proceed-bgcolor);
+}
+
+
+
+/* peso sign */
+
+.price {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.currency {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.button-container2 {
+    display: flex;
+    background-color: var(--first-color);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 100px 0;
+}

@@ -119,7 +119,7 @@ if (isset($_POST['confirm'])) {
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/allReservationRoomAndCottage.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
 </head>
@@ -152,8 +152,7 @@ if (isset($_POST['confirm'])) {
 
             <div class="header-container">
                 <div class="title-head">
-                    <label for=""><i class="fa-solid fa-gear"></i> <?php echo $manage_data['reserve_status'] ?> Cottage
-                        Reservation</label>
+                    <label for=""><i class="fa-solid fa-gear"></i> Confirmed Cottage Reservation</label>
                 </div>
 
                 <div class="title-head-right">
@@ -234,7 +233,7 @@ if (isset($_POST['confirm'])) {
 
                 <div class="container">
                     <div class="header-label">
-                        <label for=""><?php echo $manage_data['reserve_status'] ?></label>
+                        <label for="">Confirmed</label>
                     </div>
 
 
@@ -350,7 +349,8 @@ if (isset($_POST['confirm'])) {
                                 <div class="line">
                                     <div>
                                         <label>Reservation Fee (Paid)</label><br>
-                                        <input type="number" name="cottage_reserve_fee" value="<?php echo $manage_data["cottage_reserve_fee"] ?>" required>
+                                        <input type="number" name="cottage_reserve_fee"
+                                            value="<?php echo $manage_data["cottage_reserve_fee"] ?>" required>
                                     </div>
 
                                 </div>
@@ -379,7 +379,7 @@ if (isset($_POST['confirm'])) {
 
 
 
-          
+
 
                             <!-- reason for rejection -->
                             <br>

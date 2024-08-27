@@ -48,7 +48,10 @@ require('db_connect.php');
 
         <div class="add-reservation">
             <label><em>For Walk-in <i class="fa-solid fa-hand-point-left fa-flip-horizontal"></i></em></label>
-            <button name="add-reservation"><i class="fa-solid fa-plus"></i> ADD RESERVATION</button>
+            <button name="add-reservation" onclick="window.location.href='add_reservation_room.php';">
+                <i class="fa-solid fa-plus"></i> ADD RESERVATION
+            </button>
+
         </div>
     </div>
 
@@ -164,5 +167,3 @@ require('db_connect.php');
     document.getElementById("checkedOut-btn").onclick = () => showTable(4, 4);
     document.getElementById("rejected-btn").onclick = () => showTable(5, 5);
 </script>
-
-

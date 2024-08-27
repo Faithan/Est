@@ -69,6 +69,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 ?>
 
+
+
+
 <!-- Header -->
 <header class="header-main">
     <!-- Web Menu -->
@@ -130,6 +133,27 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <!-- Include the logout script -->
     <?php echo $logout_script; ?>
 </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Burger Menu -->
 <nav class="burger-menu" id="mySidenav">

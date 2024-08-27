@@ -38,7 +38,7 @@ a {
     --seventh-color3: #e0e0e0;
     --seventh-color4: #757575;
     --eight-color: #002334;
-    --eight-color2: #001b29;
+    --eight-color2: #001824;
 
 
     --select-color: #F77F00;
@@ -77,6 +77,12 @@ a {
     /* for cancel */
     --cancel-color: white;
     --cancel-bgcolor: #D62828;
+
+
+
+
+
+    --fixed-color: #effaff;
 }
 
 
@@ -115,6 +121,9 @@ a {
       /* for cancel */
       --cancel-color: white;
       --cancel-bgcolor: #242526;
+
+
+      --fixed-color: #242526;
 }
 
 .invert-color {

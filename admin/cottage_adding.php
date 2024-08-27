@@ -206,7 +206,7 @@ if (isset($_POST['addcottage'])) {
 
                 <form action="" method="POST" enctype="multipart/form-data" class="create-room-form">
                     <div class="head-label">
-                        <label><i class="fa-solid fa-plus"></i> ADD COTTAGE</label>
+                        <label> ADD COTTAGE</label>
                     </div>
 
 

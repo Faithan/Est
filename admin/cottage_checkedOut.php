@@ -56,7 +56,7 @@ if (isset($_GET['manage_id'])) {
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="css/allReservationRoom.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="css/allReservationRoomAndCottage.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 
 </head>
@@ -89,7 +89,7 @@ if (isset($_GET['manage_id'])) {
 
             <div class="header-container">
                 <div class="title-head">
-                    <label for=""><i class="fa-solid fa-gear"></i> <?php echo $manage_data['reserve_status'] ?> Cottage
+                    <label for=""><i class="fa-solid fa-gear"></i> Checked-Out Cottage
                         Reservation</label>
                 </div>
 
@@ -171,7 +171,7 @@ if (isset($_GET['manage_id'])) {
 
                 <div class="container">
                     <div class="header-label">
-                        <label for=""><?php echo $manage_data['reserve_status'] ?></label>
+                        <label for="">Checked-Out</label>
                     </div>
 
 
