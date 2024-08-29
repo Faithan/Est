@@ -1,4 +1,3 @@
-
 <?php
 
 
@@ -21,7 +20,10 @@ if (!isset($_SESSION['admin'])) {
 <script src="../sweetalert/sweetalert.js"></script>
 
 
+<!-- chart js -->
+<script src="chartjs/chart.js"></script>
+<script src="chartjs/moment.js"></script>
+<script src="chartjs/adapter_moment.js"></script>
+
 <!-- header css -->
 <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
-
-

@@ -91,8 +91,9 @@ main {
     /* For transition effect */
     transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
+
 }
+
 .sub-menu-item {
     display: block;
     padding: 5px 0;
@@ -207,7 +208,76 @@ main {
 }
 
 
+/* second container */
 
+.second-container {
+    margin: 20px;
+}
+
+/* dashboard content */
+
+.smallbox-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.smallbox-container .sbox {
+    flex-grow: 1;
+    height: 130px;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sbox label {
+    font-size: 1.5rem;
+    color: var(--seventh-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.sbox label em {
+    font-size: 1.3rem;
+}
+
+.sbox p {
+    padding-top: 25px;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 4rem;
+    color: var(--seventh-color);
+}
+
+
+
+
+/* bigbox-container */
+
+.bigbox-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
+canvas {
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 20px;
+}
 
 
 
@@ -313,7 +383,7 @@ main {
     font-weight: bold;
     font-size: 1.5rem;
     color: var(--seventh-color);
-    
+
 }
 
 
@@ -367,7 +437,7 @@ main {
 .select-type label {
     font-size: 1.35rem;
     color: var(--seventh-color);
-  
+
 }
 
 .select-type {
@@ -400,7 +470,7 @@ main {
     padding: 0 1rem;
     padding-left: 2.5rem;
     border: 2px solid transparent;
-    border-radius: 8px;
+    border-radius: 5px;
     outline: none;
     background-color: #fff;
     color: #0d0c22;
@@ -438,7 +508,7 @@ input:hover {
 }
 
 .add-reservation button:hover {
-    box-shadow:  0 0 4px var(--sixth-color);
+    box-shadow: 0 0 4px var(--sixth-color);
 }
 
 
@@ -486,9 +556,9 @@ input:hover {
     gap: 5px;
 }
 
-.edit-btn a{
+.edit-btn a {
     color: var(--seventh-color);
-   
+
 }
 
 
@@ -536,7 +606,7 @@ table th {
     top: 0;
     position: -webkit-sticky;
     position: sticky;
-   
+
 
 }
 
@@ -546,7 +616,7 @@ table td {
     text-align: center;
     padding: 5px;
     border: 1px solid var(--first-color2);
-    
+
     background-color: var(--first-color);
     color: var(--seventh-color);
     border: 1px solid var(--seventh-color3);

@@ -21,51 +21,7 @@ require 'db_connect.php';
     </div>
 
     <div class="under-buttons-container">
-        <div class="select-type">
-            <label>Type of Reservation:</label>
-            <select>
-                <option value="all">All</option>
-                <option value="walk-in">Walk-in</option>
-                <option value="online">Online</option>
-            </select>
-        </div>
-
-        <script>
-            // Function to filter data based on reservation type
-            function filterReservationType(type) {
-                // Get all table rows in each table
-                const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
-                tables.forEach(tableId => {
-                    const rows = document.querySelectorAll(`#${tableId} table tr:not(:first-child)`); // exclude the header row
-                    rows.forEach(row => {
-                        const reserveType = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase(); // Adjust the column index if necessary
-                        if (type === 'all') {
-                            row.style.display = ''; // Show all rows
-                        } else if (reserveType === type) {
-                            row.style.display = ''; // Show rows matching the selected type
-                        } else {
-                            row.style.display = 'none'; // Hide rows not matching the selected type
-                        }
-                    });
-                });
-            }
-
-            // Attach the filter function to the select element
-            document.querySelector('.select-type select').addEventListener('change', function () {
-                const selectedType = this.value.toLowerCase();
-                filterReservationType(selectedType);
-            });
-
-
-        </script>
-
-
-
-
-
-
-
-
+     
         <!-- search bar -->
         <div class="group">
             <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
