@@ -1,5 +1,5 @@
-   // Check localStorage for dark mode status
-   if (localStorage.getItem('darkMode') === 'enabled') {
+// Check localStorage for dark mode status specific to user
+if (localStorage.getItem('userDarkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
     document.getElementById('icon').classList.remove('fa-moon');
     document.getElementById('icon').classList.add('fa-sun');
@@ -21,10 +21,10 @@ document.getElementById('icon').addEventListener('click', function() {
     var logoImg = document.getElementById('logoImg');
     logoImg.classList.toggle('invert-color', document.body.classList.contains('dark-mode'));
 
-    // Save dark mode status to localStorage
+    // Save dark mode status to localStorage specific to user
     if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('darkMode', 'enabled');
+        localStorage.setItem('userDarkMode', 'enabled');
     } else {
-        localStorage.removeItem('darkMode');
+        localStorage.removeItem('userDarkMode');
     }
 });

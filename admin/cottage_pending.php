@@ -112,6 +112,7 @@ if (isset($_POST['confirm'])) {
 
     <script src="javascripts/totalFee.js" defer></script>
 
+    <script src="javascripts/switch.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/sidenav2.css?v=<?php echo time(); ?>">
@@ -159,51 +160,7 @@ if (isset($_POST['confirm'])) {
 
 
 
-                    <!-- switchmode -->
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Check localStorage for dark mode status
-                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
-                            const body = document.body;
-                            const icon = document.getElementById('icon');
-                            const logoImg = document.getElementById('logoImg');
-
-                            // If dark mode is enabled, apply the relevant classes
-                            if (darkMode) {
-                                body.classList.add('dark-mode');
-                                if (icon) {
-                                    icon.classList.remove('fa-moon');
-                                    icon.classList.add('fa-sun');
-                                }
-                                if (logoImg) {
-                                    logoImg.classList.add('invert-color');
-                                }
-                            }
-
-                            // Add event listener to toggle dark mode
-                            if (icon) {
-                                icon.addEventListener('click', function () {
-                                    body.classList.toggle('dark-mode');
-
-                                    if (body.classList.contains('dark-mode')) {
-                                        icon.classList.remove('fa-moon');
-                                        icon.classList.add('fa-sun');
-                                        if (logoImg) {
-                                            logoImg.classList.add('invert-color');
-                                        }
-                                        localStorage.setItem('darkMode', 'enabled');
-                                    } else {
-                                        icon.classList.remove('fa-sun');
-                                        icon.classList.add('fa-moon');
-                                        if (logoImg) {
-                                            logoImg.classList.remove('invert-color');
-                                        }
-                                        localStorage.removeItem('darkMode');
-                                    }
-                                });
-                            }
-                        });
-                    </script>
+                   
 
 
                     <img src="../system_images/administrator.png" alt="" id="logoImg">

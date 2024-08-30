@@ -78,12 +78,21 @@ a {
     --cancel-color: white;
     --cancel-bgcolor: #D62828;
 
-
-
-
-
     --fixed-color: #effaff;
+
+
+
+
+
+    --graph-title-color: #777; /* Change to your desired title color */
+    --legend-text-color: #777; /* Change to your desired legend text color */
+    --tooltip-bg-color: #333333;  /* Change to your desired tooltip background color */
+    --tooltip-title-color: #ffffff; /* Change to your desired tooltip title color */
+    --tooltip-body-color: #ffffff;  /* Change to your desired tooltip body color */
+    --axis-title-color: #777;   /* Change to your desired axis title color */
+    --axis-ticks-color: #777;   /* Change to your desired axis ticks color */
 }
+
 
 
 
@@ -124,6 +133,7 @@ a {
 
 
       --fixed-color: #242526;
+   
 }
 
 .invert-color {

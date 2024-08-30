@@ -80,10 +80,10 @@ if (isset($_SESSION['user_id'])) {
                             <label for="new-gender">Select Gender:</label>
                             <select name="new-gender" id="new-gender" required>
                           
-                                <option value="Male" <?php echo ($gender === 'Male') ? 'selected' : ''; ?>>Male</option>
-                                <option value="Female" <?php echo ($gender === 'Female') ? 'selected' : ''; ?>>Female
+                                <option value="male" <?php echo ($gender === 'male') ? 'selected' : ''; ?>>Male</option>
+                                <option value="female" <?php echo ($gender === 'female') ? 'selected' : ''; ?>>Female
                                 </option>
-                                <option value="Other" <?php echo ($gender === 'Other') ? 'selected' : ''; ?>>Other
+                                <option value="other" <?php echo ($gender === 'other') ? 'selected' : ''; ?>>Other
                                 </option>
                             </select>
                             <label for="password">Enter Password:</label>

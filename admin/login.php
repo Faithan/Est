@@ -54,10 +54,7 @@ if (isset($_POST['login'])) {
     <!-- header css -->
     <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
 
-
-
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 </head>
 

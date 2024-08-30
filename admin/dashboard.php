@@ -24,6 +24,7 @@ session_start();
 
     <title>Dashboard</title>
 
+    <script src="javascripts/switch.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
@@ -47,57 +48,11 @@ session_start();
                 </div>
 
                 <div class="title-head-right">
+
+
                     <div class="switch-mode">
                         <i class="fa-regular fa-moon" id="icon"></i>
                     </div>
-
-
-
-                    <!-- switchmode -->
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Check localStorage for dark mode status
-                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
-                            const body = document.body;
-                            const icon = document.getElementById('icon');
-                            const logoImg = document.getElementById('logoImg');
-
-                            // If dark mode is enabled, apply the relevant classes
-                            if (darkMode) {
-                                body.classList.add('dark-mode');
-                                if (icon) {
-                                    icon.classList.remove('fa-moon');
-                                    icon.classList.add('fa-sun');
-                                }
-                                if (logoImg) {
-                                    logoImg.classList.add('invert-color');
-                                }
-                            }
-
-                            // Add event listener to toggle dark mode
-                            if (icon) {
-                                icon.addEventListener('click', function () {
-                                    body.classList.toggle('dark-mode');
-
-                                    if (body.classList.contains('dark-mode')) {
-                                        icon.classList.remove('fa-moon');
-                                        icon.classList.add('fa-sun');
-                                        if (logoImg) {
-                                            logoImg.classList.add('invert-color');
-                                        }
-                                        localStorage.setItem('darkMode', 'enabled');
-                                    } else {
-                                        icon.classList.remove('fa-sun');
-                                        icon.classList.add('fa-moon');
-                                        if (logoImg) {
-                                            logoImg.classList.remove('invert-color');
-                                        }
-                                        localStorage.removeItem('darkMode');
-                                    }
-                                });
-                            }
-                        });
-                    </script>
 
 
                     <img src="../system_images/administrator.png" alt="" id="logoImg">
@@ -121,7 +76,7 @@ session_start();
                     <div class="smallbox-container">
                         <!-- Total Revenue -->
                         <div class="sbox">
-                            <label for="">Total Revenue</label>
+                            <label for="">Total Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' room reservations
                             $room_revenue_query = "SELECT SUM(price) as total_room_revenue FROM reserve_room_tbl WHERE status = 'checkedOut'";
@@ -161,7 +116,7 @@ session_start();
 
 
                         <div class="sbox">
-                            <label for="">Total Cottage Revenue</label>
+                            <label for="">Total Cottage Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' reservations in cottages
                             $cottage_revenue_query = "SELECT SUM(price) as total_revenue FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
@@ -185,8 +140,10 @@ session_start();
 
 
 
+
+
                         <div class="sbox">
-                            <label for="">Total Room Revenue</label>
+                            <label for="">Total Room Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' reservations
                             $revenue_query = "SELECT SUM(price) as total_revenue FROM reserve_room_tbl WHERE status = 'checkedOut'";
@@ -205,30 +162,52 @@ session_start();
 
 
 
-                        <div class="sbox">
-                            <label for="">New User<em>(Today)</em></label>
-                            <?php
-                            // Query to count the number of new users registered today
-                            $new_user_query = "SELECT COUNT(*) as new_users FROM user_tbl WHERE DATE(date_created) = CURDATE()";
-                            $new_user_result = mysqli_query($con, $new_user_query);
 
-                            if ($new_user_result) {
-                                $row = mysqli_fetch_assoc($new_user_result);
-                                $new_users = $row['new_users'];
+
+
+                        <!-- Total Reservation (Cottages and Rooms) -->
+                        <div class="sbox">
+                            <label for="">Total Reservation<em>(Cottages and Rooms)</em></label>
+                            <?php
+                            // Query to count the total number of room reservations
+                            $room_reservation_query = "SELECT COUNT(*) as total_room_reservations FROM reserve_room_tbl";
+                            $room_reservation_result = mysqli_query($con, $room_reservation_query);
+
+                            // Query to count the total number of cottage reservations
+                            $cottage_reservation_query = "SELECT COUNT(*) as total_cottage_reservations FROM reserve_cottage_tbl";
+                            $cottage_reservation_result = mysqli_query($con, $cottage_reservation_query);
+
+                            // Initialize total reservations
+                            $total_reservations = 0;
+
+                            // Calculate total room reservations
+                            if ($room_reservation_result) {
+                                $row = mysqli_fetch_assoc($room_reservation_result);
+                                $total_room_reservations = $row['total_room_reservations'];
+                                $total_room_reservations = $total_room_reservations ? $total_room_reservations : 0; // Handle NULL values
                             } else {
-                                $new_users = 0; // Default value if query fails
+                                $total_room_reservations = 0; // Default value if query fails
                             }
+
+                            // Calculate total cottage reservations
+                            if ($cottage_reservation_result) {
+                                $row = mysqli_fetch_assoc($cottage_reservation_result);
+                                $total_cottage_reservations = $row['total_cottage_reservations'];
+                                $total_cottage_reservations = $total_cottage_reservations ? $total_cottage_reservations : 0; // Handle NULL values
+                            } else {
+                                $total_cottage_reservations = 0; // Default value if query fails
+                            }
+
+                            // Calculate combined total reservations
+                            $total_reservations = $total_room_reservations + $total_cottage_reservations;
                             ?>
-                            <p><?php echo $new_users; ?></p>
+                            <p><?php echo $total_reservations; ?></p>
                         </div>
 
 
-
-
-
-
-                        <div class="sbox">
-                            <label for="">Total User</label>
+                        <div class="sbox" onclick="window.location.href='dashboardUserSettings.php';"
+                            style="cursor: pointer;">
+                            <label for="">Total User <i class="fa-solid fa-users"></i></label>
                             <?php
                             // Query to count the total number of users
                             $total_user_query = "SELECT COUNT(*) as total_users FROM user_tbl";
@@ -244,12 +223,147 @@ session_start();
                             <p><?php echo $total_users; ?></p>
                         </div>
 
+
+                        <div class="sbox" onclick="window.location.href='dashboardCottageReservation.php';"
+                            style="cursor: pointer;">
+                            <label for="">Today's Cottage Reservation <i class="fa-solid fa-umbrella-beach"></i></label>
+                            <?php
+                            // Query to count the number of cottage reservations with today's arrival date
+                            $todays_cottage_reservation_query = "SELECT COUNT(*) as todays_cottage_reservations FROM reserve_cottage_tbl WHERE DATE(date_of_arrival) = CURDATE()";
+                            $todays_cottage_reservation_result = mysqli_query($con, $todays_cottage_reservation_query);
+
+                            if ($todays_cottage_reservation_result) {
+                                $row = mysqli_fetch_assoc($todays_cottage_reservation_result);
+                                $todays_cottage_reservations = $row['todays_cottage_reservations'];
+                            } else {
+                                $todays_cottage_reservations = 0; // Default value if query fails
+                            }
+                            ?>
+
+
+
+                            <p><?php echo $todays_cottage_reservations; ?></p>
+                            <?php if ($todays_cottage_reservations > 0): ?>
+                                <span class="red-dot"></span> <!-- Red dot notification -->
+                            <?php endif; ?>
+                        </div>
+
+
+
+
+
+                        <!-- Total Cottage Reservation -->
+                        <div class="sbox" onclick="window.location.href='dashboardCottageReservation.php';"
+                            style="cursor: pointer;">
+                            <label for="">Total Cottage Reservation <i class="fa-solid fa-umbrella-beach"></i></label>
+                            <?php
+                            // Query to count the total number of cottage reservations
+                            $cottage_reservation_query = "SELECT COUNT(*) as total_cottage_reservations FROM reserve_cottage_tbl";
+                            $cottage_reservation_result = mysqli_query($con, $cottage_reservation_query);
+
+                            if ($cottage_reservation_result) {
+                                $row = mysqli_fetch_assoc($cottage_reservation_result);
+                                $total_cottage_reservations = $row['total_cottage_reservations'];
+                                $total_cottage_reservations = $total_cottage_reservations ? $total_cottage_reservations : 0; // Handle NULL values
+                            } else {
+                                $total_cottage_reservations = 0; // Default value if query fails
+                            }
+                            ?>
+                            <p><?php echo $total_cottage_reservations; ?></p>
+                        </div>
+
+
+                        <div class="sbox" onclick="window.location.href='dashboardRoomReservation.php';"
+                            style="cursor: pointer;">
+                            <label for="">Today's Room Reservation <i class="fa-solid fa-bed"></i></label>
+                            <?php
+                            // Query to count the number of room reservations with today's arrival date
+                            $todays_room_reservation_query = "SELECT COUNT(*) as todays_room_reservations FROM reserve_room_tbl WHERE DATE(date_of_arrival) = CURDATE()";
+                            $todays_room_reservation_result = mysqli_query($con, $todays_room_reservation_query);
+
+                            if ($todays_room_reservation_result) {
+                                $row = mysqli_fetch_assoc($todays_room_reservation_result);
+                                $todays_room_reservations = $row['todays_room_reservations'];
+                            } else {
+                                $todays_room_reservations = 0; // Default value if query fails
+                            }
+                            ?>
+
+
+
+                            <p><?php echo $todays_room_reservations; ?></p>
+                            <?php if ($todays_room_reservations > 0): ?>
+                                <span class="red-dot"></span> <!-- Red dot notification -->
+                            <?php endif; ?>
+                        </div>
+
+
+
+
+
+
+                        <!-- Total Room Reservation -->
+                        <div class="sbox" onclick="window.location.href='dashboardRoomReservation.php';"
+                            style="cursor: pointer;">
+                            <label for="">Total Room Reservation <i class="fa-solid fa-bed"></i></label>
+                            <?php
+                            // Query to count the total number of room reservations
+                            $room_reservation_query = "SELECT COUNT(*) as total_room_reservations FROM reserve_room_tbl";
+                            $room_reservation_result = mysqli_query($con, $room_reservation_query);
+
+                            if ($room_reservation_result) {
+                                $row = mysqli_fetch_assoc($room_reservation_result);
+                                $total_room_reservations = $row['total_room_reservations'];
+                                $total_room_reservations = $total_room_reservations ? $total_room_reservations : 0; // Handle NULL values
+                            } else {
+                                $total_room_reservations = 0; // Default value if query fails
+                            }
+                            ?>
+                            <p><?php echo $total_room_reservations; ?></p>
+                        </div>
+
+
+
+
+
+
+
+                        <div class="sbox" onclick="window.location.href='dashboardUserSettings.php';"
+                            style="cursor: pointer;">
+                            <label for="">New User<em>(Today)</em></label>
+                            <?php
+                            // Query to count the number of new users registered today
+                            $new_user_query = "SELECT COUNT(*) as new_users FROM user_tbl WHERE DATE(date_created) = CURDATE()";
+                            $new_user_result = mysqli_query($con, $new_user_query);
+
+                            if ($new_user_result) {
+                                $row = mysqli_fetch_assoc($new_user_result);
+                                $new_users = $row['new_users'];
+                            } else {
+                                $new_users = 0; // Default value if query fails
+                            }
+                            ?>
+
+
+
+                            <p><?php echo $new_users; ?></p>
+                            <?php if ($new_users > 0): ?>
+                                <span class="red-dot"></span> <!-- Red dot notification -->
+                            <?php endif; ?>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                     <!-- end smallbox container -->
-
-
-
-
 
 
 
@@ -292,10 +406,8 @@ session_start();
                         }
                         ?>
 
-
                         <canvas id="roomReservationChart"></canvas>
                         <canvas id="cottageReservationChart"></canvas>
-
 
                         <script>
                             // Data passed from PHP for Room Reservations
@@ -306,7 +418,7 @@ session_start();
                             const datesCottages = <?php echo json_encode($datesCottages); ?>;
                             const reservationCountsCottages = <?php echo json_encode($reservationCountsCottages); ?>;
 
-                            // Define an array of colors for the bars
+                            // Define an array of colors for the lines
                             const colors = [
                                 'rgba(255, 99, 132, 0.6)', // Red
                                 'rgba(54, 162, 235, 0.6)', // Blue
@@ -316,22 +428,24 @@ session_start();
                                 'rgba(255, 159, 64, 0.6)'  // Orange
                             ];
 
-                            // Create Room Reservations chart
+                            // Utility function to get CSS variable
+                            function getCSSVariable(name) {
+                                return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+                            }
+
+                            // Create Room Reservations line chart
                             const ctxRooms = document.getElementById('roomReservationChart').getContext('2d');
                             const roomReservationChart = new Chart(ctxRooms, {
-                                type: 'bar',
+                                type: 'line',
                                 data: {
                                     labels: datesRooms,
                                     datasets: [{
                                         label: 'Number of Reservations',
                                         data: reservationCountsRooms,
-                                        backgroundColor: function (context) {
-                                            const index = context.dataIndex % colors.length;
-                                            return colors[index];
-                                        },
-                                        borderColor: 'rgba(0, 0, 0, 0.1)',
-                                        borderWidth: 1,
-                                        borderRadius: 10 // Rounded corners on bars
+                                        borderColor: colors[0], // Red
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)', // Light red
+                                        fill: true,
+                                        borderWidth: 2
                                     }]
                                 },
                                 options: {
@@ -342,17 +456,17 @@ session_start();
                                             font: {
                                                 size: 18
                                             },
-                                            color: 'var(--text-color)' // Editable via CSS
+                                            color: getCSSVariable('--graph-title-color')
                                         },
                                         legend: {
                                             labels: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--legend-text-color')
                                             }
                                         },
                                         tooltip: {
-                                            backgroundColor: '#333',
-                                            titleColor: '#fff',
-                                            bodyColor: '#fff'
+                                            backgroundColor: getCSSVariable('--tooltip-bg-color'),
+                                            titleColor: getCSSVariable('--tooltip-title-color'),
+                                            bodyColor: getCSSVariable('--tooltip-body-color')
                                         }
                                     },
                                     scales: {
@@ -360,10 +474,10 @@ session_start();
                                             title: {
                                                 display: true,
                                                 text: 'Date of Arrival',
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-title-color')
                                             },
                                             ticks: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-ticks-color')
                                             }
                                         },
                                         y: {
@@ -371,32 +485,29 @@ session_start();
                                             title: {
                                                 display: true,
                                                 text: 'Number of Reservations',
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-title-color')
                                             },
                                             ticks: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-ticks-color')
                                             }
                                         }
                                     }
                                 }
                             });
 
-                            // Create Cottage Reservations chart
+                            // Create Cottage Reservations line chart
                             const ctxCottages = document.getElementById('cottageReservationChart').getContext('2d');
                             const cottageReservationChart = new Chart(ctxCottages, {
-                                type: 'bar',
+                                type: 'line',
                                 data: {
                                     labels: datesCottages,
                                     datasets: [{
                                         label: 'Number of Reservations',
                                         data: reservationCountsCottages,
-                                        backgroundColor: function (context) {
-                                            const index = context.dataIndex % colors.length;
-                                            return colors[index];
-                                        },
-                                        borderColor: 'rgba(0, 0, 0, 0.1)',
-                                        borderWidth: 1,
-                                        borderRadius: 10 // Rounded corners on bars
+                                        borderColor: colors[1], // Blue
+                                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue
+                                        fill: true,
+                                        borderWidth: 2
                                     }]
                                 },
                                 options: {
@@ -407,17 +518,17 @@ session_start();
                                             font: {
                                                 size: 18
                                             },
-                                            color: 'var(--text-color)' // Editable via CSS
+                                            color: getCSSVariable('--graph-title-color')
                                         },
                                         legend: {
                                             labels: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--legend-text-color')
                                             }
                                         },
                                         tooltip: {
-                                            backgroundColor: '#333',
-                                            titleColor: '#fff',
-                                            bodyColor: '#fff'
+                                            backgroundColor: getCSSVariable('--tooltip-bg-color'),
+                                            titleColor: getCSSVariable('--tooltip-title-color'),
+                                            bodyColor: getCSSVariable('--tooltip-body-color')
                                         }
                                     },
                                     scales: {
@@ -425,10 +536,10 @@ session_start();
                                             title: {
                                                 display: true,
                                                 text: 'Date of Arrival',
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-title-color')
                                             },
                                             ticks: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-ticks-color')
                                             }
                                         },
                                         y: {
@@ -436,10 +547,10 @@ session_start();
                                             title: {
                                                 display: true,
                                                 text: 'Number of Reservations',
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-title-color')
                                             },
                                             ticks: {
-                                                color: 'var(--text-color)' // Editable via CSS
+                                                color: getCSSVariable('--axis-ticks-color')
                                             }
                                         }
                                     }
@@ -448,6 +559,7 @@ session_start();
                         </script>
                     </div>
                     <!-- end of bigbox container -->
+
 
 
 

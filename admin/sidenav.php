@@ -31,7 +31,14 @@
                 </div>
             </div>
 
-            <div class="item"><a href="settings.php"><i class="fa-solid fa-gear"></i> Settings</a></div>
+            <div class="item">
+                <a href="#" class="dropdown-link"><i class="fa-solid fa-gear"></i> Settings <i
+                        class="fa-solid fa-caret-down dropdown"></i></a>
+                <!-- dropdown -->
+                <div class="sub-menu">
+                    <a href="dashboardUserSettings.php" class="sub-menu-item"><i class="fa-solid fa-user"></i> User</a>
+                </div>
+            </div>
         </div>
 
         <script>

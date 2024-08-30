@@ -211,7 +211,9 @@ main {
 /* second container */
 
 .second-container {
-    margin: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* dashboard content */
@@ -262,13 +264,15 @@ main {
 /* bigbox-container */
 
 .bigbox-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
+    display: flex;
+    align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
     gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    height: 310px;
 }
 
 
@@ -277,8 +281,19 @@ canvas {
     background-color: var(--first-color);
     border-radius: 5px;
     padding: 20px;
+    color: var(--seventh-color);
 }
 
+
+.red-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: middle;
+}
 
 
 
@@ -472,7 +487,7 @@ canvas {
     border: 2px solid transparent;
     border-radius: 5px;
     outline: none;
-    background-color: #fff;
+    background-color: var(--first-color);
     color: #0d0c22;
     transition: .3s ease;
 }
@@ -545,8 +560,7 @@ input:hover {
     text-align: center;
     padding: 10px;
     border: 1px solid #dadada;
-    text-transform: capitalize;
-    background-color: #f8f8f8;
+    background-color: var(--first-color);
     max-width: 50px;
     overflow: scroll;
 }
@@ -649,4 +663,222 @@ tbody tr:last-of-type {
 table img {
     height: 50px;
     width: auto;
+}
+
+
+
+
+
+
+
+/* Settings Css */
+
+.stat-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+
+.stat-container .sbox{
+    flex-grow: 1;
+    height: 150px;
+    background-color: var(--first-color);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.user-table-container{
+    background-color: var(--first-color);
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container{
+    padding: 0 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: var(--first-color2);
+}
+
+#user-table td{
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+/* edit user */
+.head-label-container{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.head-label-container label{
+    padding: 10px;
+    background-color: var(--first-color);
+    width: 100%;
+    font-weight: bold;
+    color: var(--seventh-color);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.input-container{
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-container .input-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.input-fields label{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--seventh-color);
+}
+
+.input-fields input{
+    width: 300px;
+    height: 35px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+    padding: 0 0 0 5px;
+}
+
+.input-fields select{
+    width: 300px;
+    height: 37px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+.edituser-buttons-container{
+    padding-top: 40px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.edituser-buttons-container button{
+   padding: 10px 40px;
+   border-radius: 5px;
+   font-size: 1.3rem;
+   font-weight: bold;
+}
+
+
+.edituser-buttons-container a{
+    padding: 10px 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3rem;
+ } 
+
+.back-btn{
+    background-color: var(--cancel-bgcolor);
+    color: var(--cancel-color);
+    border: 1px solid var(--seventh-color3);
+}
+.back-btn:hover{
+    box-shadow: 0 0 4px var(--cancel-bgcolor);
+}
+
+.save-btn{
+    background-color: var(--proceed-bgcolor);
+    color: var(--proceed-color);
+    border: 1px solid var(--seventh-color3);
+}
+
+.save-btn:hover{
+    box-shadow: 0 0 4px var(--proceed-bgcolor);
+}
+
+
+
+/* paging */
+/* General pagination container styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Pagination links */
+.pagination a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: var(--seventh-color);
+    border: 1px solid var(--seventh-color3);
+    border-radius: 4px;
+    background-color: var(--first-color);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Hover effect for pagination links */
+.pagination a:hover {
+    background-color: var(--first-color);
+    color: var(--water-color);
+    border-color:var(--seventh-color3);
+}
+
+/* Active page link styles */
+.pagination a.active {
+    background-color: var(--seventh-color);
+    color: var(--first-color);
+    border-color: var(--water-color);
+}
+
+/* Disabled or hidden page link styles */
+.pagination a.disabled {
+    color: var(--seventh-color);
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: var(--first-color2);
+    border-color: var(--seventh-color3);
+}
+
+/* Previous and Next buttons */
+.pagination a.prev, .pagination a.next {
+    font-weight: bold;
+}
+
+/* Extra spacing between page numbers */
+.pagination a + a {
+    margin-left: 0;
 }
