@@ -833,8 +833,8 @@ table img {
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 0;
+    background-color: var(--first-color);
 }
 
 /* Pagination links */

@@ -1,10 +1,30 @@
 <?php
-include('db_connect.php');
-?>
+include 'db_connect.php';
 
-<link rel="stylesheet" type="text/css" href="css/fullscreen.css?v=<?php echo time(); ?>">
-<link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
-<script src="javascripts/fullscreen.js" defer></script>
+// Number of items per page
+$items_per_page = 6;
+
+// Get the current page from the query string, default to 1 if not set
+$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+
+// Get the search term from the query string
+$search_term = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
+
+// Calculate the starting item for the current page
+$start_item = ($current_page - 1) * $items_per_page;
+
+// Modify the query to include the search term
+$total_items_query = "SELECT COUNT(*) FROM room_tbl WHERE CONCAT(room_number, room_type, bed_type, amenities) LIKE '%$search_term%'";
+$total_items_result = mysqli_query($con, $total_items_query);
+$total_items = mysqli_fetch_array($total_items_result)[0];
+
+// Calculate the total number of pages
+$total_pages = ceil($total_items / $items_per_page);
+
+// Fetch the items for the current page with the search term
+$fetchdata = "SELECT * FROM room_tbl WHERE CONCAT(room_number, room_type, bed_type, amenities) LIKE '%$search_term%' ORDER BY id DESC LIMIT $start_item, $items_per_page";
+$result = mysqli_query($con, $fetchdata);
+?>
 
 <div class="container">
     <div class="header-label">
@@ -43,35 +63,21 @@ include('db_connect.php');
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                $fetchdata = "SELECT * FROM room_tbl ORDER BY id DESC";
-                $result = mysqli_query($con, $fetchdata);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
-                    $roomNumber = $row['room_number'];
-                    $roomType = $row['room_type'];
-                    $bedType = $row['bed_type'];
-                    $bed_quantity = $row['bed_quantity'];
-                    $noPersons = $row['no_persons'];
-                    $amenities = $row['amenities'];
-                    $price = $row['price'];
-                    $status = $row['status'];
-                    $photo = $row['photo'];
-                ?>
+            <tbody id="room-table-body">
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                    <td><?php echo $roomNumber ?></td>
-                    <td><?php echo $roomType ?></td>
-                    <td><?php echo $bedType ?></td>
-                    <td><?php echo $bed_quantity ?></td>
-                    <td><?php echo $noPersons ?></td>
-                    <td><?php echo $amenities ?></td>
-                    <td><?php echo $price ?></td>
-                    <td><?php echo $status ?></td>
-                    <td><img class="room-image" onclick="openFullScreen()" src="<?php echo $photo ?>"></td>
+                    <td><?php echo $row['room_number']; ?></td>
+                    <td><?php echo $row['room_type']; ?></td>
+                    <td><?php echo $row['bed_type']; ?></td>
+                    <td><?php echo $row['bed_quantity']; ?></td>
+                    <td><?php echo $row['no_persons']; ?></td>
+                    <td><?php echo $row['amenities']; ?></td>
+                    <td><?php echo $row['price']; ?></td>
+                    <td><?php echo $row['status']; ?></td>
+                    <td><img class="room-image" onclick="openFullScreen()" src="<?php echo $row['photo']; ?>"></td>
                     <td class="edit-btn-holder">
                         <div class="edit-btn">
-                            <a name="manage" href="edit_room.php?manage_id=<?php echo $id; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a name="manage" href="edit_room.php?manage_id=<?php echo $row['id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -79,33 +85,58 @@ include('db_connect.php');
             </tbody>
         </table>
     </form>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <?php if ($current_page > 1): ?>
+            <a href="?page=<?php echo $current_page - 1; ?>&search=<?php echo urlencode($search_term); ?>" class="prev">Previous</a>
+        <?php else: ?>
+            <a href="#" class="disabled prev">Previous</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search_term); ?>" <?php if ($i == $current_page) echo 'class="active"'; ?>>
+                <?php echo $i; ?>
+            </a>
+        <?php endfor; ?>
+
+        <?php if ($current_page < $total_pages): ?>
+            <a href="?page=<?php echo $current_page + 1; ?>&search=<?php echo urlencode($search_term); ?>" class="next">Next</a>
+        <?php else: ?>
+            <a href="#" class="disabled next">Next</a>
+        <?php endif; ?>
+    </div>
 </div>
 
-<!-- for fullscreen -->
+<!-- Fullscreen image viewer -->
 <div id="fullscreen-overlay">
     <span class="close" onclick="closeFullScreen()">&times;</span>
     <img id="fullscreen-image" src="" alt="">
 </div>
 
 <script>
-    function searchTable(query) {
-        // Get all rows in the table body
-        const rows = document.querySelectorAll('#room-table tbody tr');
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            let match = false;
-            cells.forEach(cell => {
-                if (cell.textContent.toLowerCase().includes(query)) {
-                    match = true;
-                }
-            });
-            row.style.display = match ? '' : 'none'; // Show or hide rows based on match
-        });
-    }
+    // Search functionality with debounce
+    let debounceTimer;
 
-    // Attach the search function to the input element
     document.getElementById('search-input').addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        searchTable(query);
+        clearTimeout(debounceTimer);
+        const searchTerm = this.value.trim().toLowerCase();
+
+        debounceTimer = setTimeout(function () {
+            fetchRooms(searchTerm, 1); // Fetch results for page 1
+        }, 300); // Delay of 300ms before sending the search request
     });
+
+    function fetchRooms(searchTerm, page) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `fetch_rooms.php?search=${encodeURIComponent(searchTerm)}&page=${page}`, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                document.getElementById('room-table-body').innerHTML = response.tableRows;
+                document.querySelector('.pagination').innerHTML = response.pagination;
+            }
+        };
+        xhr.send();
+    }
 </script>
