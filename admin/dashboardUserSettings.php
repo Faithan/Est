@@ -19,7 +19,7 @@ session_start();
         ?>
 
 
-    <title>Dashboard</title>
+    <title>User Settings</title>
 
     <script src="javascripts/switch.js"></script>
 

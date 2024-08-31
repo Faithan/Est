@@ -14,7 +14,7 @@ $search_term = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['s
 $start_item = ($current_page - 1) * $items_per_page;
 
 // Modify the query to include the search term
-$total_items_query = "SELECT COUNT(*) FROM room_tbl WHERE CONCAT(room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status) LIKE '%$search_term%'";
+$total_items_query = "SELECT COUNT(*) FROM cottage_tbl WHERE CONCAT(cottage_number, cottage_type, number_of_person, day_price, night_price, cottage_status) LIKE '%$search_term%'";
 $total_items_result = mysqli_query($con, $total_items_query);
 $total_items = mysqli_fetch_array($total_items_result)[0];
 
@@ -22,13 +22,13 @@ $total_items = mysqli_fetch_array($total_items_result)[0];
 $total_pages = ceil($total_items / $items_per_page);
 
 // Fetch the items for the current page with the search term
-$fetchdata = "SELECT * FROM room_tbl WHERE CONCAT(room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status) LIKE '%$search_term%' ORDER BY id DESC LIMIT $start_item, $items_per_page";
+$fetchdata = "SELECT * FROM cottage_tbl WHERE CONCAT(cottage_number, cottage_type, number_of_person, day_price, night_price, cottage_status) LIKE '%$search_term%' ORDER BY cottage_id DESC LIMIT $start_item, $items_per_page";
 $result = mysqli_query($con, $fetchdata);
 ?>
 
 <div class="container">
     <div class="header-label">
-        <label><i class="fa-solid fa-bed"></i> Rooms</label>
+        <label><i class="fa-solid fa-campground"></i> Cottages</label>
     </div>
 
     <div class="under-buttons-container">
@@ -43,41 +43,37 @@ $result = mysqli_query($con, $fetchdata);
         </div>
 
         <div class="add-reservation">
-            <button onclick="window.location.href = 'room_adding.php'" name="add-reservation"><i class="fa-solid fa-plus"></i> Add Room</button>
+            <button onclick="window.location.href = 'cottage_adding.php'" name="add-reservation"><i class="fa-solid fa-plus"></i> Add Cottage</button>
         </div>
     </div>
 
     <form method="post" action="">
-        <table id="room-table">
+        <table id="cottage-table">
             <thead>
                 <tr>
-                    <th>Room Number</th>
-                    <th>Room Type</th>
-                    <th>Bed Type</th>
-                    <th>Bed Quantity</th>
-                    <th>No. Person</th>
-                    <th>Amenities</th>
-                    <th>Price</th>
+                    <th>Cottage Number</th>
+                    <th>Cottage Type</th>
+                    <th>Number of Persons</th>
+                    <th>Day Price</th>
+                    <th>Night Price</th>
                     <th>Status</th>
                     <th>Photo</th>
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="room-table-body">
+            <tbody id="cottage-table-body">
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                    <td><?php echo $row['room_number']; ?></td>
-                    <td><?php echo $row['room_type']; ?></td>
-                    <td><?php echo $row['bed_type']; ?></td>
-                    <td><?php echo $row['bed_quantity']; ?></td>
-                    <td><?php echo $row['no_persons']; ?></td>
-                    <td><?php echo $row['amenities']; ?></td>
-                    <td><?php echo $row['price']; ?></td>
-                    <td><?php echo $row['status']; ?></td>
-                    <td><img class="room-image" onclick="openFullScreen()" src="<?php echo $row['photo']; ?>"></td>
+                    <td><?php echo $row['cottage_number']; ?></td>
+                    <td><?php echo $row['cottage_type']; ?></td>
+                    <td><?php echo $row['number_of_person']; ?></td>
+                    <td><?php echo $row['day_price']; ?></td>
+                    <td><?php echo $row['night_price']; ?></td>
+                    <td><?php echo $row['cottage_status']; ?></td>
+                    <td><img class="cottage-image" onclick="openFullScreen()" src="<?php echo $row['cottage_photo']; ?>"></td>
                     <td class="edit-btn-holder">
                         <div class="edit-btn">
-                            <a name="manage" href="edit_room.php?manage_id=<?php echo $row['id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a name="manage" href="edit_cottage.php?manage_id=<?php echo $row['cottage_id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -123,17 +119,17 @@ $result = mysqli_query($con, $fetchdata);
         const searchTerm = this.value.trim().toLowerCase();
 
         debounceTimer = setTimeout(function () {
-            fetchRooms(searchTerm, 1); // Fetch results for page 1
+            fetchCottages(searchTerm, 1); // Fetch results for page 1
         }, 300); // Delay of 300ms before sending the search request
     });
 
-    function fetchRooms(searchTerm, page) {
+    function fetchCottages(searchTerm, page) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `fetch_rooms.php?search=${encodeURIComponent(searchTerm)}&page=${page}`, true);
+        xhr.open('GET', `fetch_cottages.php?search=${encodeURIComponent(searchTerm)}&page=${page}`, true);
         xhr.onload = function () {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
-                document.getElementById('room-table-body').innerHTML = response.tableRows;
+                document.getElementById('cottage-table-body').innerHTML = response.tableRows;
                 document.querySelector('.pagination').innerHTML = response.pagination;
             }
         };

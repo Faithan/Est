@@ -13,8 +13,7 @@
                         class="fa-solid fa-caret-down dropdown"></i></a>
                 <!-- dropdown -->
                 <div class="sub-menu">
-                    <a href="dashboardCottageReservation.php" class="sub-menu-item"><i
-                            class="fa-solid fa-umbrella-beach"></i> For Cottages</a>
+                    <a href="dashboardCottageReservation.php" class="sub-menu-item"> <i class="fa-solid fa-campground"></i> For Cottages</a>
                     <a href="dashboardRoomReservation.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> For
                         Rooms</a>
                 </div>
@@ -25,7 +24,7 @@
                         class="fa-solid fa-caret-down dropdown"></i></a>
                 <!-- dropdown -->
                 <div class="sub-menu">
-                    <a href="dashboardCottages.php" class="sub-menu-item"><i class="fa-solid fa-umbrella-beach"></i>
+                    <a href="dashboardCottages.php" class="sub-menu-item"><i class="fa-solid fa-campground"></i>
                         Cottages</a>
                     <a href="dashboardRooms.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> Rooms</a>
                 </div>
@@ -37,6 +36,7 @@
                 <!-- dropdown -->
                 <div class="sub-menu">
                     <a href="dashboardUserSettings.php" class="sub-menu-item"><i class="fa-solid fa-user"></i> User</a>
+                    <a href="extraSettings.php" class="sub-menu-item"><i class="fa-solid fa-gears"></i> Extra</a>
                 </div>
             </div>
         </div>

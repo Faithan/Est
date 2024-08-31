@@ -2,7 +2,7 @@
 include 'db_connect.php';
 
 // Number of items per page
-$items_per_page = 6; // Adjust to match your room page if needed
+$items_per_page = 6; // Adjust to match your cottage page if needed
 
 // Get the current page from the query string, default to 1 if not set
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -34,7 +34,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <td>{$row['day_price']}</td>
         <td>{$row['night_price']}</td>
         <td>{$row['cottage_status']}</td>
-        <td><img class='room-image' onclick='openFullScreen()' src='{$row['cottage_photo']}' alt='Cottage Photo'></td>
+        <td><img class='cottage-image' onclick='openFullScreen()' src='{$row['cottage_photo']}' alt='Cottage Photo'></td>
         <td class='edit-btn-holder'>
             <div class='edit-btn'>
                 <a name='manage' href='edit_cottage.php?manage_id={$row['cottage_id']}'><i class='fa-solid fa-pen-to-square'></i></a>

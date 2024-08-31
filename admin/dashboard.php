@@ -226,7 +226,7 @@ session_start();
 
                         <div class="sbox" onclick="window.location.href='dashboardCottageReservation.php';"
                             style="cursor: pointer;">
-                            <label for="">Today's Cottage Reservation <i class="fa-solid fa-umbrella-beach"></i></label>
+                            <label for="">Today's Cottage Reservation <i class="fa-solid fa-campground"></i></label>
                             <?php
                             // Query to count the number of cottage reservations with today's arrival date
                             $todays_cottage_reservation_query = "SELECT COUNT(*) as todays_cottage_reservations FROM reserve_cottage_tbl WHERE DATE(date_of_arrival) = CURDATE()";
@@ -255,7 +255,7 @@ session_start();
                         <!-- Total Cottage Reservation -->
                         <div class="sbox" onclick="window.location.href='dashboardCottageReservation.php';"
                             style="cursor: pointer;">
-                            <label for="">Total Cottage Reservation <i class="fa-solid fa-umbrella-beach"></i></label>
+                            <label for="">Total Cottage Reservation <i class="fa-solid fa-campground"></i></label>
                             <?php
                             // Query to count the total number of cottage reservations
                             $cottage_reservation_query = "SELECT COUNT(*) as total_cottage_reservations FROM reserve_cottage_tbl";

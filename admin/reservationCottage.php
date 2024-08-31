@@ -4,7 +4,7 @@ require 'db_connect.php';
 
 <div class="container">
     <div class="header-label">
-        <label><i class="fa-solid fa-umbrella-beach"></i> Reservation For Cottages</label>
+        <label><i class="fa-solid fa-campground"></i> Reservation For Cottages</label>
     </div>
 
     <div class="buttons-container">
