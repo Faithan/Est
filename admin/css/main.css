@@ -141,28 +141,28 @@ a {
 }
 
 
-/* scroll bar settings */
+    /* scroll bar settings */
 
 
-/* width */
-::-webkit-scrollbar {
-    width: 6px;
-}
+    /* width */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: var(--first-color);
-}
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--first-color);
+    }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--first-color2);
-}
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--first-color2);
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: var(--seventh-color);
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--seventh-color);
+    }
 
 
 p {

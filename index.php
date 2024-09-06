@@ -79,6 +79,7 @@ session_start();
     <!-- reservation page -->
     <section class="reservation-page">
         <div class="wrapper-main">
+            
             <h1>Reservation</h1>
 
             <p>Welcome to the Reservation Section of Estregan Beach Resort! Experience convenience at your
