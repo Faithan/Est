@@ -465,7 +465,7 @@ if (isset($_POST['checkedin'])) {
             showConfirmButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                document.querySelector('.form-container').reset();
+                window.location.href = 'dashboardRoomReservation.php';
             }
         });
 

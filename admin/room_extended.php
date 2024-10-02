@@ -420,7 +420,7 @@ if (isset($_POST['checkOut'])) {
             showConfirmButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                document.querySelector('.create-room-form').reset();
+                window.location.href = 'dashboardRoomReservation.php';
             }
         });
     </script>

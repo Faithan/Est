@@ -404,7 +404,7 @@ if (isset($_POST['confirm'])) {
             showConfirmButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                document.querySelector('.form-container').reset();
+                window.location.href = 'dashboardCottageReservation.php'; // Change this to your desired page
             }
         });
 

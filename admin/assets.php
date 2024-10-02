@@ -27,3 +27,8 @@ if (!isset($_SESSION['admin'])) {
 
 <!-- header css -->
 <link rel="stylesheet" type="text/css" href="css/header.css?v=<?php echo time(); ?>">
+
+<!-- css and js jquery -->
+<script src="../jquery/jquery-3.6.0.min.js"></script>
+<script src="../jquery/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

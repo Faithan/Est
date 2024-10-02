@@ -497,6 +497,29 @@ em {
     color: var(--seventh-color);
 }
 
+.input-fields input{
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+
+
+.input-fields select {
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--seventh-color3);
+    background-color: var(--first-color);
+    color: var(--seventh-color);
+}
+
+
 
 .input-fields textarea {
     width: 600px;

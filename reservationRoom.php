@@ -280,7 +280,7 @@ if (isset($_GET['manage_id'])) {
 
                         echo '<div class="room-first-container">';
 
-                        $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$room_type'";
+                        $fetchdata = "SELECT * FROM room_tbl WHERE room_type = '$room_type' AND status='available'";
                         $result = mysqli_query($con, $fetchdata);
 
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -388,104 +388,7 @@ if (isset($_GET['manage_id'])) {
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-  
-
- 
     <!-- end of mobile version -->
-
-
-
-
-
 
     <!-- footer -->
     <?php include 'footer.php' ?>

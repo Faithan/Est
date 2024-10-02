@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
 
 
     <!-- reset css -->
@@ -111,9 +111,9 @@ if (isset($_POST['submit'])) {
 
 
     <!-- important additional css -->
-    <?php 
+    <?php
     include 'important.php'
-    ?>
+        ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/reservationForm.css?v=<?php echo time(); ?>">
@@ -185,8 +185,126 @@ if (isset($_POST['submit'])) {
             <label>Email (optional)</label>
             <input class="input4" name="email" onkeyup="changeColor(this)" placeholder="Ex: Name@gmail.com">
 
+
+
+
+            <?php
+            $room_number = $manage_data['room_number'];
+            $query = "SELECT date_of_arrival FROM reserve_room_tbl WHERE room_number = ? AND status IN ('confirmed', 'checkedIn', 'extended')";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("s", $room_number);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $reserved_dates = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $reserved_dates[] = $row['date_of_arrival'];
+            }
+
+            // Pass the reserved dates as a JSON object to JavaScript
+            $disabled_dates = json_encode($reserved_dates);
+
+            ?>
             <label>Arrival Date</label>
-            <input class="input4" type="date" name="date_of_arrival" onkeyup="changeColor(this)" required>
+            <input class="input4" id="date_of_arrival" type="text" name="date_of_arrival" placeholder="Select date" required>
+
+        
+            <!-- Custom CSS for larger datepicker -->
+            <style>
+                /* Increase the size of the datepicker */
+                .ui-datepicker {
+                    font-size: 1.5em;
+                    /* Make the calendar larger */
+                    width: 350px;
+                    /* Increase calendar width */
+                }
+
+                /* Ensure the input field is editable and larger */
+                #date_of_arrival {
+  
+                }
+
+                /* Custom styles for reserved dates */
+                .reserved-date {
+                    background-color: var(--fifth-color) !important;
+                    /* Red background for reserved dates */
+                    cursor: pointer;
+                    /* Still allows clicking */
+                }
+
+                /* Custom styles for past dates */
+                .past-date {
+                    background-color: #e0e0e0 !important;
+                    /* Gray background for past dates */
+                    color: #999 !important;
+                    /* Light gray text */
+                    cursor: not-allowed;
+                    /* Show not-allowed cursor */
+                }
+            </style>
+
+            <script>
+                $(function () {
+                    // Get reserved dates from PHP
+                    var disabledDates = <?php echo $disabled_dates; ?>;
+
+                    // Get today's date
+                    var today = new Date();
+                    today.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+
+                    // Initialize the datepicker
+                    $('#date_of_arrival').datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        beforeShowDay: function (date) {
+                            var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+
+                            // Disable past dates
+                            if (date < today) {
+                                return [false, 'past-date', 'You cannot travel back in time'];
+                            }
+
+                            // Highlight reserved dates
+                            if (disabledDates.indexOf(dateString) !== -1) {
+                                return [true, 'reserved-date', 'This room is reserved on this date'];
+                            }
+
+                            return [true, '', ''];
+                        },
+                        onSelect: function (dateText, inst) {
+                            var selectedDate = new Date(dateText);
+                            selectedDate.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
+
+                            // Check if the selected date is in the past
+                            if (selectedDate < today) {
+                                // Show SweetAlert for past dates
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'You cannot travel back in time!'
+                                });
+                                // Clear the input field
+                                $('#date_of_arrival').val('');
+                                return;
+                            }
+
+                            // Check if the selected date is a reserved date
+                            if (disabledDates.indexOf(dateText) !== -1) {
+                                // Show SweetAlert for reserved dates
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'This date is already reserved for someone else!'
+                                });
+                                // Clear the input field
+                                $('#date_of_arrival').val('');
+                            }
+                        }
+                    });
+                });
+            </script>
+
+
+
 
             <label>Check-in Time </label>
 
