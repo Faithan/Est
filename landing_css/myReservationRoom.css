@@ -316,7 +316,7 @@ input:hover {
     width: 100%;
     padding: 20px;
     border-radius: 5px;
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -337,7 +337,7 @@ input:hover {
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 0 0 4px var(--box-shadow);
+    box-shadow: 0 2px 4px var(--box-shadow);
 }
 
 .items img {
@@ -856,11 +856,12 @@ For larger desktops and laptops:
     .rooms-main-container .content-center {
         padding: 10px;
         border-radius: 5px;
-        background-color: var(--first-color);
+        background-color: var(--first-color2);
         display: flex;
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        justify-content: center;
     }
 
 
@@ -873,11 +874,10 @@ For larger desktops and laptops:
     .items {
         padding-bottom: 10px;
         background-color: var(--first-color);
-
         justify-content: center;
         text-align: center;
         border-radius: 5px;
-        box-shadow: 0 0 4px var(--box-shadow);
+        box-shadow: 0 2px 4px var(--box-shadow);
     }
 
     .items img {

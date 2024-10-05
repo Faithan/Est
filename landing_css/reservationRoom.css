@@ -45,7 +45,7 @@ body {
 
 .container-header {
     width: 100%;
-    padding: 20px 20px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,22 +59,21 @@ body {
     font-size: 2rem;
     text-transform: uppercase;
     font-weight: bold;
-    border-radius: 5px;
+ 
     color: var(--reservation-text);
-    border: 1px solid var(--reservation-titleborder);
+   
 }
 
 .category-container {
     display: flex;
     align-items: center;
-
-    padding: 2px 10px 10px 2px;
+    padding: 10px;
     top: 0;
-    z-index: 700;
-    background-color: var(--first-color2);
-    position: -webkit-sticky;
+    z-index: 800;
+    background-color: var(--first-color);
     position: sticky;
-   
+    margin: 0 20px;
+
 }
 
 .select-container {
@@ -185,8 +184,8 @@ body {
 
 
     border: 1px solid var(--booknow-border);
-  
-   
+
+
 }
 
 
@@ -227,6 +226,7 @@ select option {
 /* rooms-holder */
 .rooms-holder {
     padding: 20px;
+   
 }
 
 
@@ -255,14 +255,13 @@ select option {
 }
 
 .rooms {
-
     display: flex;
     flex-direction: column;
     width: 250px;
     height: 330px;
     background-color: var(--first-color);
     border-radius: 5px;
-    box-shadow: 0 0 4px var(--box-shadow);
+    box-shadow: 0 2px 4px var(--box-shadow);
 }
 
 
@@ -423,3 +422,173 @@ em {
 
 
 
+
+
+
+
+
+/* for small mobile devices */
+@media only screen and (max-width: 480px) {
+
+    .wrapper-main {
+        width: 100%;
+    }
+
+
+
+    .rooms-base-container {
+        padding: 0;
+        margin: 0;
+    }
+
+    .left-background,
+    .right-background {
+        display: none;
+    }
+
+
+    .rooms-container {
+        max-height: 80vh;
+        /* Adjust the height as needed */
+        position: relative;
+        border-radius: 3px;
+        flex-grow: 1;
+        margin: 0;
+        background-color: var(--first-color);
+        overflow-x: none;
+        overflow-y: scroll;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        /* Distribute items evenly */
+    }
+
+    .category-container {
+        display: flex;
+        justify-content: space-between;
+
+        align-items: center;
+        padding: 10px;
+        top: 0;
+        position: -webkit-sticky;
+        position: sticky;
+        margin: 0;
+
+    }
+
+
+
+
+    .select-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+
+
+
+
+    /* rooms-holder */
+    .rooms-holder {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--first-color2);
+    }
+
+
+    .room-first-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 5px 5px 20px 5px;
+        flex-wrap: wrap;
+    }
+
+
+    .rooms-main-container {
+        display: contents;
+    }
+
+
+
+
+
+    /* home content */
+
+
+    .main-home {
+        width: 100%;
+        background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 15vh;
+        background-size: 15vh, cover;
+        background-position: right, center;
+
+    }
+
+    .home-content {
+        color: white;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 10vh;
+
+
+    }
+
+
+
+
+
+    .wave-text {
+        width: 35vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        top: 8vh;
+        text-transform: uppercase;
+    }
+
+    .wave-text h2 {
+        position: absolute;
+        font-size: 1.5rem;
+        transform: translate(0, -50%);
+        font-weight: bold;
+        line-height: 2;
+    }
+
+
+    .wave-text h2:nth-child(1) {
+        color: transparent;
+        background-color: none;
+        -webkit-text-stroke: 1px var(--water-border);
+    }
+
+    .wave-text h2:nth-child(2) {
+        color: var(--water-color);
+        animation: animate 4s ease-in-out infinite;
+    }
+
+    @keyframes animate {
+
+        0%,
+        100% {
+            clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+        }
+
+        50% {
+            clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+        }
+    }
+
+
+
+
+}

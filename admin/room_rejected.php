@@ -69,62 +69,7 @@ if (isset($_GET['manage_id'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Rejected/Cancelled</label>
                 </div>
 
-                <div class="title-head-right">
-                    <div class="switch-mode">
-                        <i class="fa-regular fa-moon" id="icon"></i>
-                    </div>
-
-
-
-                    <!-- switchmode -->
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            // Check localStorage for dark mode status
-                            const darkMode = localStorage.getItem('darkMode') === 'enabled';
-                            const body = document.body;
-                            const icon = document.getElementById('icon');
-                            const logoImg = document.getElementById('logoImg');
-
-                            // If dark mode is enabled, apply the relevant classes
-                            if (darkMode) {
-                                body.classList.add('dark-mode');
-                                if (icon) {
-                                    icon.classList.remove('fa-moon');
-                                    icon.classList.add('fa-sun');
-                                }
-                                if (logoImg) {
-                                    logoImg.classList.add('invert-color');
-                                }
-                            }
-
-                            // Add event listener to toggle dark mode
-                            if (icon) {
-                                icon.addEventListener('click', function () {
-                                    body.classList.toggle('dark-mode');
-
-                                    if (body.classList.contains('dark-mode')) {
-                                        icon.classList.remove('fa-moon');
-                                        icon.classList.add('fa-sun');
-                                        if (logoImg) {
-                                            logoImg.classList.add('invert-color');
-                                        }
-                                        localStorage.setItem('darkMode', 'enabled');
-                                    } else {
-                                        icon.classList.remove('fa-sun');
-                                        icon.classList.add('fa-moon');
-                                        if (logoImg) {
-                                            logoImg.classList.remove('invert-color');
-                                        }
-                                        localStorage.removeItem('darkMode');
-                                    }
-                                });
-                            }
-                        });
-                    </script>
-
-
-                    <img src="../system_images/administrator.png" alt="" id="logoImg">
-                </div>
+               <?php include 'icon-container.php'?>
             </div>
 
 

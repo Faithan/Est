@@ -45,7 +45,7 @@ body {
 
 .container-header {
     width: 100%;
-    padding: 20px 20px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,21 +59,20 @@ body {
     font-size: 2rem;
     text-transform: uppercase;
     font-weight: bold;
-    border-radius: 5px;
+  
     color: var(--reservation-text);
-    border: 1px solid var(--reservation-titleborder);
+   
 }
 
 .category-container {
     display: flex;
     align-items: center;
-
-    padding: 2px 10px 10px 2px;
+    padding: 10px;
     top: 0;
-    z-index: 700;
-    background-color: var(--first-color2);
-    position: -webkit-sticky;
+    z-index: 800;
+    background-color: var(--first-color);
     position: sticky;
+    margin: 0 20px;
    
 }
 
@@ -255,14 +254,13 @@ select option {
 }
 
 .rooms {
-
     display: flex;
     flex-direction: column;
     width: 250px;
     height: 330px;
     background-color: var(--first-color);
     border-radius: 5px;
-    box-shadow: 0 0 4px var(--box-shadow);
+    box-shadow: 0 2px 4px var(--box-shadow);
 }
 
 
@@ -510,8 +508,27 @@ For larger desktops and laptops:
     }
 
     .container-header {
-        display: none;
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    
+    .container-header label {
+        background-color: var(--reservation-title);
+        width: 100%;
+        padding: 10px 10px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-radius:0;
+        color: var(--reservation-text);
+ 
+    }
+    
+    
 
 
     .rooms-base-container {
@@ -543,14 +560,13 @@ For larger desktops and laptops:
     .category-container {
         display: flex;
         justify-content: space-between;
-
+     
         align-items: center;
         padding: 10px;
         top: 0;
-       
-        background-color: var(--first-color2);
         position: -webkit-sticky;
         position: sticky;
+        margin: 0;
       
     }
 
@@ -573,7 +589,7 @@ For larger desktops and laptops:
         padding: 20px;
         display: flex;
         flex-direction: column;
-
+        background-color: var(--first-color2);
     }
 
 
@@ -666,14 +682,6 @@ For larger desktops and laptops:
             clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
         }
     }
-
-
-
-
-
-
-
-
 
 
 

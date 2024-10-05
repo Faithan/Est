@@ -142,18 +142,7 @@ if (isset($_POST['checkedin'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Confirmed Reservation</label>
                 </div>
 
-                <div class="title-head-right">
-                    <div class="switch-mode">
-                        <i class="fa-regular fa-moon" id="icon"></i>
-                    </div>
-
-
-
-             
-
-
-                    <img src="../system_images/administrator.png" alt="" id="logoImg">
-                </div>
+                <?php include 'icon-container.php'?>
             </div>
 
 

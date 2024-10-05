@@ -124,22 +124,6 @@ if (isset($_SESSION['user_id'])) {
     <?php include 'header.php' ?>
 
 
-    <!-- home page -->
-
-    <section class="main-home">
-        <div class="wrapper-main">
-            <div class="home-content">
-                <div>
-                    <div class="wave-text">
-                        <h2>View Reservation</h2>
-                        <h2>View Reservation</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
     <main>
 
         <div class="image-container">

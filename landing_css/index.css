@@ -11,7 +11,7 @@ body {
 
 .main-home {
     width: 100%;
-    height: calc(100vh - 60px);
+    height: 100vh;
     background-image: url(../system_images/Picture4.png), url(../system_images/bg1.png);
     background-size: 60vh, cover;
     background-repeat: no-repeat;

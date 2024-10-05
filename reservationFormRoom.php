@@ -80,7 +80,6 @@ if (isset($_POST['submit'])) {
         $message = "Form Submission Failed!";
         $isSuccess = false;
     }
-
 }
 
 
@@ -113,13 +112,91 @@ if (isset($_POST['submit'])) {
     <!-- important additional css -->
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/reservationForm.css?v=<?php echo time(); ?>">
 
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>Reservation Form</title>
+
+
+
+
+
+
+
+
+
+    <style>
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        .modal-content {
+            -webkit-animation: zoom 0.6s;
+            animation: zoom 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* Close button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 
@@ -158,9 +235,44 @@ if (isset($_POST['submit'])) {
     <main>
 
         <div class="image-container">
-            <img name="photo" src="<?php echo str_replace('../', '', $manage_data['photo']); ?>" alt="">
+            <img id="roomImage" src="<?php echo str_replace('../', '', $manage_data['photo']); ?>" alt="Room Photo" style="cursor: pointer;">
         </div>
 
+
+        <!-- The Modal for full-screen image -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
+
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById("imageModal");
+
+            // Get the image and the modal content
+            var img = document.getElementById("roomImage");
+            var modalImg = document.getElementById("fullImage");
+            var closeModal = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the image, open the modal and display the full image
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+
+            // When the user clicks on (x), close the modal
+            closeModal.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Close the modal if clicked outside the image
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 
         <form action="" method="post" class="reserveForm-contents">
 
@@ -208,7 +320,7 @@ if (isset($_POST['submit'])) {
             <label>Arrival Date</label>
             <input class="input4" id="date_of_arrival" type="text" name="date_of_arrival" placeholder="Select date" required>
 
-        
+
             <!-- Custom CSS for larger datepicker -->
             <style>
                 /* Increase the size of the datepicker */
@@ -219,10 +331,6 @@ if (isset($_POST['submit'])) {
                     /* Increase calendar width */
                 }
 
-                /* Ensure the input field is editable and larger */
-                #date_of_arrival {
-  
-                }
 
                 /* Custom styles for reserved dates */
                 .reserved-date {
@@ -244,7 +352,7 @@ if (isset($_POST['submit'])) {
             </style>
 
             <script>
-                $(function () {
+                $(function() {
                     // Get reserved dates from PHP
                     var disabledDates = <?php echo $disabled_dates; ?>;
 
@@ -255,7 +363,7 @@ if (isset($_POST['submit'])) {
                     // Initialize the datepicker
                     $('#date_of_arrival').datepicker({
                         dateFormat: 'yy-mm-dd',
-                        beforeShowDay: function (date) {
+                        beforeShowDay: function(date) {
                             var dateString = $.datepicker.formatDate('yy-mm-dd', date);
 
                             // Disable past dates
@@ -270,7 +378,7 @@ if (isset($_POST['submit'])) {
 
                             return [true, '', ''];
                         },
-                        onSelect: function (dateText, inst) {
+                        onSelect: function(dateText, inst) {
                             var selectedDate = new Date(dateText);
                             selectedDate.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
 

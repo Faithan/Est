@@ -13,7 +13,7 @@ body {
     height: 15vh;
     background-size: 25vh, cover;
     background-position: right 20% center, center;
-
+    display: none;
 }
 
 .home-content {
@@ -131,6 +131,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     color: var(--seventh-color);
+    background-color: var(--first-color2);
 }
 
 .reserveForm-contents .fixed-value-input{
@@ -147,6 +148,7 @@ body {
     height: 100px;
     border-radius: 5px;
     padding: 5px;
+    background-color: var(--first-color2);
 }
 
 .reserveForm-contents p {

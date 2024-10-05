@@ -86,17 +86,7 @@ if (isset($_GET['manage_id'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Edit Cottage</label>
                 </div>
 
-                <div class="title-head-right">
-                    <div class="switch-mode">
-                        <i class="fa-regular fa-moon" id="icon"></i>
-                    </div>
-
-
-
-                
-
-                    <img src="../system_images/administrator.png" alt="" id="logoImg">
-                </div>
+                <?php include 'icon-container.php'?>
             </div>
 
 

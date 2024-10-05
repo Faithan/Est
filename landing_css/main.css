@@ -24,79 +24,80 @@ a{
     cursor: pointer;
 }
 
-:root {
-    --first-color: white;
-    --first-color2: #E7E7E7;
+
+
+ :root  {
+    font-size: 62.5%;    /* 10px on default */
+
+
+    --first-color2: #18191A;
+    --first-color: #242526;
+    --booknow-text: white;
+    --booknow-text2: #F77F00;
+    --booknow-border: #F77F00;
+    --fourth-color:  #242526;
+    --seventh-color: #e4e4e4;
+    --seventh-color2: #101010;
+    --seventh-color3: #545454;
+    --seventh-color4: #757575;
+    --select-color: #242526;
+    --select-color2: #353738;
+    --box-shadow:#4d4d4d;
+    --after-input:#545454;
+    --water-border: #dddcdb;
+    --water-color:#030c38;
+    
+
+
+    /* no darkmode */
     --second-color: #EAE2B7;
     --third-color: #FCBF49;
     --fourth-color: #F77F00;
     --fifth-color: #D62828;
     --sixth-color: #00527e;
-    --seventh-color: #002334;
-    --seventh-color2: #e0e0e0;
-    --seventh-color3: #e0e0e0;
-    --seventh-color4: #757575;
 
-    --select-color: #F77F00;
-    --select-color2:rgb(205, 106, 0);
-
-    --booknow-text: #ffffff;
-    --booknow-text2: #242526;
-
-
-    --booknow-border: #F77F00;
-
-    --reservation-titleborder:#18191A ;
-    --reservation-title:#18191A; 
+    --reservation-title:#242526; 
     --reservation-text: white;
 
-    --box-shadow:#b4b4b4;
-
-    --after-input:#effaff;
-
-    --water-border:#EAE2B7;
-    --water-color:#0d2cc5;
-
     --gray-button: rgb(70, 70, 70);
-
-    font-size: 62.5%;    /* 10px on default */
-  
-
 
 }
 
 
 
 .dark-mode {
-    --first-color2: #18191A;
-    --first-color: #242526;
 
-    --booknow-text: #F77F00;
-    --booknow-text2: #F77F00;
-    --booknow-border: #F77F00;
-    --fourth-color:  #242526;
+    --first-color: white;     /* has darkmode */
+    --first-color2: #E7E7E7;    /* has darkmode */
+ 
+    --seventh-color: #002334;    /* has darkmode */
+    --seventh-color2: #e0e0e0;    /* has darkmode */
+    --seventh-color3: #e0e0e0;    /* has darkmode */
+ 
 
-    --seventh-color: #e4e4e4;
-    --seventh-color2: #101010;
-    --seventh-color3: #545454;
+    --select-color: #F77F00;    /* has darkmode */
+    --select-color2:rgb(205, 106, 0);    /* has darkmode */
 
-    --select-color: #242526;
-    --select-color2: #353738;
-
-    --box-shadow:#4d4d4d;
-    
-    --after-input:#545454;
-
-    --water-border: #dddcdb;
-    --water-color:#030c38;
+    --booknow-text: #ffffff;     /* has darkmode */
+    --booknow-text2: #242526;    /* has darkmode */
 
 
-    --reservation-titleborder: #F77F00;
+    --booknow-border: #F77F00;     /* has darkmode */
+
+
+    --box-shadow:#b4b4b4;     /* has darkmode */
+
+    --after-input:#effaff;     /* has darkmode */
+
+    --water-border:#EAE2B7;     /* has darkmode */
+    --water-color:#0d2cc5;    /* has darkmode */
+ 
+ 
+
+ 
 }
 
-.invert-color {
-    filter: invert(100%);
-}
+
 
 
 /* scroll bar settings */

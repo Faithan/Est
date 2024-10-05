@@ -70,7 +70,6 @@ if (isset($_POST['submit'])) {
         $message = "Form Submission Failed!";
         $isSuccess = false;
     }
-
 }
 
 
@@ -101,13 +100,71 @@ if (isset($_POST['submit'])) {
     <!-- important additional css -->
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/reservationFormCottage.css?v=<?php echo time(); ?>">
 
     <link rel="shortcut icon" href="system_images/Picture4.png" type="image/png">
     <title>Cottage Reservation Form</title>
+
+
+
+    <style>
+        /* Full-screen modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Modal content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Close button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Animation */
+        .modal-content {
+            animation: zoom 0.6s;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive - image will resize */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
 
 </head>
 
@@ -129,19 +186,7 @@ if (isset($_POST['submit'])) {
 
     <!-- home page -->
 
-    <section class="main-home">
-        <div class="wrapper-main">
-            <div class="home-content">
-                <div>
-                    <div class="wave-text">
-                        <h2>Reservation Form</h2>
-                        <h2>Reservation Form</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </section>
 
     <main>
 
@@ -149,10 +194,42 @@ if (isset($_POST['submit'])) {
             <?php
             $photo = str_replace('../', '', $manage_data['cottage_photo']);
             ?>
-            <img name="photo" src="<?php echo $photo; ?>" alt="">
-
-
+            <img id="cottage-photo" src="<?php echo $photo; ?>" alt="Cottage Photo" style="cursor: pointer;">
         </div>
+
+        <!-- Modal for full-screen image -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-img">
+        </div>
+
+        <script>
+            // Get modal elements
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modal-img");
+            var img = document.getElementById("cottage-photo");
+            var closeBtn = document.getElementsByClassName("close")[0];
+
+            // Open modal when image is clicked
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src; // Use the source of the clicked image
+            }
+
+            // Close the modal when close button is clicked
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Close the modal when anywhere outside the modal image is clicked
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
 
 
         <form action="" method="post" class="reserveForm-contents">
@@ -238,7 +315,7 @@ if (isset($_POST['submit'])) {
             </style>
 
             <script>
-                $(function () {
+                $(function() {
                     // Get reserved dates and times from PHP
                     var disabledDatesTimes = <?php echo $disabled_dates_times; ?>;
 
@@ -249,7 +326,7 @@ if (isset($_POST['submit'])) {
                     // Initialize the datepicker
                     $('#date_of_arrival').datepicker({
                         dateFormat: 'yy-mm-dd',
-                        beforeShowDay: function (date) {
+                        beforeShowDay: function(date) {
                             var dateString = $.datepicker.formatDate('yy-mm-dd', date);
 
                             // Disable past dates
@@ -264,7 +341,7 @@ if (isset($_POST['submit'])) {
 
                             return [true, '', ''];
                         },
-                        onSelect: function (dateText, inst) {
+                        onSelect: function(dateText, inst) {
                             var selectedDate = new Date(dateText);
                             selectedDate.setHours(0, 0, 0, 0);
 
@@ -297,7 +374,7 @@ if (isset($_POST['submit'])) {
                                 }
 
                                 // Disable the reserved times
-                                $('#check_in_time').find('option').each(function () {
+                                $('#check_in_time').find('option').each(function() {
                                     if (reservedTimes.indexOf($(this).val()) !== -1) {
                                         $(this).prop('disabled', true);
                                     } else {
@@ -306,7 +383,7 @@ if (isset($_POST['submit'])) {
                                 });
 
                                 // Disable corresponding price options based on reserved times
-                                $('#price').find('option').each(function () {
+                                $('#price').find('option').each(function() {
                                     if (isDayReserved && $(this).data('time') === 'Day') {
                                         $(this).prop('disabled', true);
                                     }
@@ -334,7 +411,7 @@ if (isset($_POST['submit'])) {
                 });
 
                 // Handle time selection to update price
-                document.getElementById("check_in_time").addEventListener("change", function () {
+                document.getElementById("check_in_time").addEventListener("change", function() {
                     var checkInTime = document.getElementById("check_in_time");
                     var price = document.getElementById("price");
 
@@ -346,7 +423,7 @@ if (isset($_POST['submit'])) {
                 });
 
                 // Ensure price selection syncs with time selection
-                document.getElementById("price").addEventListener("change", function () {
+                document.getElementById("price").addEventListener("change", function() {
                     var price = document.getElementById("price");
                     var checkInTime = document.getElementById("check_in_time");
 

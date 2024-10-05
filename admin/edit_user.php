@@ -80,12 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save'])) {
                     <label for=""><i class="fa-solid fa-user-gear"></i> User Settings</label>
                 </div>
 
-                <div class="title-head-right">
-                    <div class="switch-mode">
-                        <i class="fa-regular fa-moon" id="icon"></i>
-                    </div>
-                    <img src="../system_images/administrator.png" alt="" id="logoImg">
-                </div>
+                <?php include 'icon-container.php'?>
             </div>
 
             <!-- dynamic content -->

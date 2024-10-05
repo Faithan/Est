@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- important additional css -->
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/myReservationCottage.css?v=<?php echo time(); ?>">
@@ -55,20 +55,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- for header -->
     <?php include 'header.php' ?>
 
-    <!-- home page -->
-    <section class="main-home">
-        <div class="wrapper-main">
-            <div class="home-content">
-                <div>
-                    <div class="wave-text">
-                        <h2>My Reserved Cottage</h2>
-                        <h2>My Reserved Cottage</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </section>
 
 
     <main class="rooms-main-container">
@@ -81,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
 
             if ($reservation_count == 0) {
                 // Display if user has no reservations
-                ?>
+            ?>
                 <div class="no-reservation-message">
                     <div class="house-icon"><i class="fa-solid fa-house-circle-exclamation"></i></div>
                     <label>There are no reservations yet. Browse rooms and cottages to reserve.</label>
@@ -95,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-                <div class="content-center">
+                <div class="content-center" style="background-color: var(--first-color2)">
                     <?php $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -108,15 +95,17 @@ if (isset($_SESSION['user_id'])) {
                         $time = $row['time'];
                         $status = $row['reserve_status'];
                         $photo = $row['cottage_photo'];
-                        ?>
+                    ?>
 
 
                         <div class="items">
 
-                        <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
+                            <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
 
 
                             <div class="container-of-labels">
+
+                                <p style="text-align:center; font-weight:bold; text-transform:capitalize;"><?php echo $status ?></p>
 
                                 <div class="label-container">
                                     <div class="title-text-bold"><label>Price :</label></div>
@@ -126,16 +115,18 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
 
                                 <div class="label-container-time">
-                                    <div class="detail-time"><p><?php echo $time ?></p>
+                                    <div class="detail-time">
+                                        <p><?php echo $time ?></p>
                                     </div>
                                 </div>
 
                                 <div class="label-container-time">
-                                    <div class="detail-time"><p><?php echo $date ?></p>
+                                    <div class="detail-time">
+                                        <p><?php echo $date ?></p>
                                     </div>
                                 </div>
 
-                             
+
                                 <div class="label-container">
                                     <div class="title-text"><label><b>Cottage Type:</b></label></div>
                                     <div class="detail">

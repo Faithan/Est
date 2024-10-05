@@ -336,7 +336,7 @@ input:hover {
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 0 0 4px var(--box-shadow);
+    box-shadow: 0 2px 4px var(--box-shadow);
 }
 
 .items img {
@@ -1082,6 +1082,8 @@ For larger desktops and laptops:
         font-weight: bold;
         line-height: 2;
     }
+
+
 }
 
 

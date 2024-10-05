@@ -55,20 +55,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- for header -->
     <?php include 'header.php' ?>
 
-    <!-- home page -->
-    <section class="main-home">
-        <div class="wrapper-main">
-            <div class="home-content">
-                <div>
-                    <div class="wave-text">
-                        <h2>My Reserved Room</h2>
-                        <h2>My Reserved Room</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
+    
 
 
     <main class="rooms-main-container">

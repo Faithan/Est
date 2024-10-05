@@ -36,12 +36,7 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
                 <div class="title-head">
                     <label for=""><i class="fa-solid fa-gears"></i> Extra Settings</label>
                 </div>
-                <div class="title-head-right">
-                    <div class="switch-mode">
-                        <i class="fa-regular fa-moon" id="icon"></i>
-                    </div>
-                    <img src="../system_images/administrator.png" alt="" id="logoImg">
-                </div>
+                <?php include 'icon-container.php'?>
             </div>
             <!-- dynamic content -->
             <div class="center-container">
