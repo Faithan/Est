@@ -9,15 +9,18 @@ session_start();
 $query_room_types = "SELECT * FROM room_type_tbl";
 $query_bed_types = "SELECT * FROM bed_type_tbl";
 $query_room_statuses = "SELECT * FROM room_status_tbl";
+$query_amenities = "SELECT * FROM room_amenities_tbl";
+
 
 $room_types = mysqli_query($con, $query_room_types);
 $bed_types = mysqli_query($con, $query_bed_types);
 $room_statuses = mysqli_query($con, $query_room_statuses);
-
+$room_amenities = mysqli_query($con, $query_amenities);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +31,7 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
     <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
 </head>
+
 <body>
     <main>
         <?php include 'sidenav.php'; ?>
@@ -36,7 +40,7 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
                 <div class="title-head">
                     <label for=""><i class="fa-solid fa-gears"></i> Extra Settings</label>
                 </div>
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
             <!-- dynamic content -->
             <div class="center-container">
@@ -111,6 +115,33 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
                     </div>
                     <button class="add-button" onclick="openAddModal('room_status')"><i class="fa fa-plus"></i> Add Room Status</button>
                 </div>
+
+
+
+
+                <!-- Room Amenities Section -->
+                <div class="content-container">
+                    <label for="">Room Amenities</label>
+                    <div class="main-content">
+                        <?php if (mysqli_num_rows($room_amenities) > 0): ?>
+                            <?php while ($amenity = mysqli_fetch_assoc($room_amenities)): ?>
+                                <div class="room-box">
+                                    <h3><?php echo htmlspecialchars($amenity['amenity_name']); ?></h3>
+                                    <p><strong>ID:</strong> <?php echo htmlspecialchars($amenity['amenity_id']); ?></p>
+                                    <p><?php echo htmlspecialchars($amenity['amenity_description']); ?></p>
+                                    <div class="button-group">
+                                        <button class="edit-button"
+                                            onclick="openEditModal('edit_amenity', <?php echo $amenity['amenity_id']; ?>, '<?php echo htmlspecialchars($amenity['amenity_name']); ?>', '<?php echo htmlspecialchars($amenity['amenity_description']); ?>')">Edit</button>
+                                        <button class="delete-button"
+                                            onclick="deleteItem('delete_amenity', <?php echo $amenity['amenity_id']; ?>)">Delete</button>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
+                    </div>
+                    <button class="add-button" onclick="openAddModal('amenity')"><i class="fa fa-plus"></i> Add Room Amenity</button>
+                </div>
+
             </div>
         </section>
 
@@ -146,51 +177,64 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
         </div>
     </main>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
-    function openEditModal(type, id, name, description) {
-        document.getElementById('edit_id').value = id;
-        document.getElementById('edit_type').value = type;
-        document.getElementById('edit_name').value = name;
-        document.getElementById('edit_description').value = description;
-        document.getElementById('editModal').style.display = 'block';
-    }
+        function openEditModal(type, id, name, description) {
+            document.getElementById('edit_id').value = id;
+            document.getElementById('edit_type').value = type;
+            document.getElementById('edit_name').value = name;
+            document.getElementById('edit_description').value = description;
+            document.getElementById('editModal').style.display = 'block';
+        }
 
-    function openAddModal(type) {
-        document.getElementById('add_type').value = type;
-        document.getElementById('add_name').value = '';
-        document.getElementById('add_description').value = '';
-        document.getElementById('addModal').style.display = 'block';
-    }
+        function openAddModal(type) {
+            document.getElementById('add_type').value = type;
+            document.getElementById('add_name').value = '';
+            document.getElementById('add_description').value = '';
+            document.getElementById('addModal').style.display = 'block';
+        }
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
 
-    function deleteItem(type, id) {
-    if (confirm('Are you sure you want to delete this item?')) {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'room_settings_delete.php'; // Make sure this matches your PHP file
+        function deleteItem(type, id) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'room_settings_delete.php'; // Make sure this matches your PHP file
 
-        const inputType = document.createElement('input');
-        inputType.type = 'hidden';
-        inputType.name = 'type';
-        inputType.value = type;
-        form.appendChild(inputType);
+                const inputType = document.createElement('input');
+                inputType.type = 'hidden';
+                inputType.name = 'type';
+                inputType.value = type;
+                form.appendChild(inputType);
 
-        const inputId = document.createElement('input');
-        inputId.type = 'hidden';
-        inputId.name = 'id';
-        inputId.value = id;
-        form.appendChild(inputId);
+                const inputId = document.createElement('input');
+                inputId.type = 'hidden';
+                inputId.name = 'id';
+                inputId.value = id;
+                form.appendChild(inputId);
 
-        document.body.appendChild(form);
-        form.submit();
-    }
-}
-
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
     </script>
 </body>
+
 </html>
 
 
@@ -205,155 +249,177 @@ $room_statuses = mysqli_query($con, $query_room_statuses);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
-        /* Your CSS styles here */
-        
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+    /* Your CSS styles here */
 
-        .room-box {
-            background-color: var(--first-color);
-            border: 1px solid var(--seventh-color3);
-            border-radius: 8px;
-            padding: 20px;
-            width: calc(33.333% - 20px);
-            box-sizing: border-box;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
+    .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-        .room-box h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: var(--seventh-color);
-        }
+    .room-box {
+        background-color: var(--first-color);
+        border: 1px solid var(--seventh-color3);
+        border-radius: 8px;
+        padding: 20px;
+        width: calc(33.333% - 20px);
+        box-sizing: border-box;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
 
-        .room-box p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: var(--seventh-color);
-        }
+    .room-box h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: var(--seventh-color);
+    }
 
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
+    .room-box p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: var(--seventh-color);
+    }
 
-        .edit-button,
-        .delete-button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
 
-        .edit-button {
-            background-color: var(--proceed-bgcolor);
-            color: var(--proceed-color);
-            border: 1px solid var(--seventh-color3);
-        }
+    .edit-button,
+    .delete-button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
 
-        .delete-button {
-            background-color: var(--cancel-bgcolor);
-            color: var(--cancel-color);
-            border: 1px solid var(--seventh-color3);
-        }
+    .edit-button {
+        background-color: var(--proceed-bgcolor);
+        color: var(--proceed-color);
+        border: 1px solid var(--seventh-color3);
+    }
 
-        .edit-button:hover {
-            background-color: #0056b3;
-        }
+    .delete-button {
+        background-color: var(--cancel-bgcolor);
+        color: var(--cancel-color);
+        border: 1px solid var(--seventh-color3);
+    }
 
-        .delete-button:hover {
-            background-color: #c82333;
-        }
+    .edit-button:hover {
+        background-color: #0056b3;
+    }
 
-        .add-button {
-            background-color: var(--first-color2);
-            color: var(--seventh-color);
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 20px;
-        }
+    .delete-button:hover {
+        background-color: #c82333;
+    }
 
-        .add-button:hover {
-            background-color: #218838;
-            color: var(--pure-white);
-            transition: ease-in-out 0.3s;
-        }
+    .add-button {
+        background-color: var(--first-color2);
+        color: var(--seventh-color);
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 20px;
+    }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
+    .add-button:hover {
+        background-color: #218838;
+        color: var(--pure-white);
+        transition: ease-in-out 0.3s;
+    }
 
-        .modal-content {
-            background-color: var(--first-color);
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid var(--seventh-color3);
-            width: 50%;
-            border-radius: 8px;
-        }
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
 
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .modal-content {
+        background-color: var(--first-color);
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid var(--seventh-color3);
+        width: 50%;
+        border-radius: 8px;
+    }
 
-        .close-btn:hover,
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-        }
+    .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-        .modal label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--seventh-color);
-        }
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+    }
 
-        .modal input,
-        .modal textarea {
-            width: 97%;
-            padding: 8px;
-            margin-bottom: 16px;
-            border: 1px solid var(--seventh-color3);
-            border-radius: 4px;
-            background-color: var(--first-color2);
-            color: var(--seventh-color);
-        }
+    .modal label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: var(--seventh-color);
+    }
 
-        .modal button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .modal input,
+    .modal textarea {
+        width: 97%;
+        padding: 8px;
+        margin-bottom: 16px;
+        border: 1px solid var(--seventh-color3);
+        border-radius: 4px;
+        background-color: var(--first-color2);
+        color: var(--seventh-color);
+    }
 
-        .modal button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    .modal button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .modal button:hover {
+        background-color: #0056b3;
+    }
+</style>

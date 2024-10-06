@@ -57,7 +57,7 @@ if (isset($_POST['addroom'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Room Adding</title>
@@ -95,7 +95,7 @@ if (isset($_POST['addroom'])) {
 
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
 
@@ -110,7 +110,7 @@ if (isset($_POST['addroom'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Room Adding</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -153,7 +153,7 @@ if (isset($_POST['addroom'])) {
 
                             <?php
                             // Assuming you've included the necessary database connection file
-                            
+
                             // Query to select distinct room type names
                             $sql = "SELECT DISTINCT room_type_name FROM room_type_tbl";
                             $result = $con->query($sql);
@@ -181,7 +181,7 @@ if (isset($_POST['addroom'])) {
                             <label for="bed_type">Bed Type:</label>
                             <?php
                             // Assuming you've included the necessary database connection file
-                            
+
                             // Query to select distinct bed type names
                             $sql = "SELECT DISTINCT bed_type_name FROM bed_type_tbl";
                             $result = $con->query($sql);
@@ -220,11 +220,131 @@ if (isset($_POST['addroom'])) {
                                 onkeyup="changeColor(this)" required>
                         </div>
 
+
+
                         <div class="input-fields">
-                            <label for="room_type">Amenities:</label>
-                            <input type="text" name="amenities" id="amenities" class="input_fields"
-                                onkeyup="changeColor(this)" required>
+                            <label for="amenities">Amenities:</label>
+                            <div class="custom-select">
+                                <div id="amenitiesSelectBox" class="select-box" onclick="toggleDropdown()">
+                                    <span id="selectedAmenities">Select Amenities</span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                                <div id="amenitiesDropdown" class="dropdown-content">
+                                    <?php
+                                    // Fetch amenities from the database
+                                    $sql = "SELECT amenity_name FROM room_amenities_tbl";
+                                    $result = $con->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $amenityName = ucwords(strtolower($row["amenity_name"])); // Capitalize and format the amenity name
+                                            echo "<label><input type='checkbox' value='$amenityName' onchange='updateSelectedAmenities()'> $amenityName</label><br>";
+                                        }
+                                    } else {
+                                        echo "<label>No amenities found.</label>";
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="amenities" id="selectedAmenitiesInput">
                         </div>
+
+
+                        <script>
+                            function toggleDropdown() {
+                                const dropdown = document.getElementById("amenitiesDropdown");
+                                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+                            }
+
+                            function updateSelectedAmenities() {
+                                const checkboxes = document.querySelectorAll('#amenitiesDropdown input[type="checkbox"]');
+                                let selected = [];
+
+                                checkboxes.forEach((checkbox) => {
+                                    if (checkbox.checked) {
+                                        selected.push(checkbox.value);
+                                    }
+                                });
+
+                                // Update the displayed selected amenities
+                                const selectedText = selected.length > 0 ? selected.join(', ') : 'Select Amenities';
+                                document.getElementById("selectedAmenities").textContent = selectedText;
+
+                                // Update the hidden input value for form submission
+                                document.getElementById("selectedAmenitiesInput").value = selected.join(', ');
+                            }
+
+                            // Close dropdown when clicking outside of it
+                            window.onclick = function(event) {
+                                const dropdown = document.getElementById("amenitiesDropdown");
+                                const selectBox = document.getElementById("amenitiesSelectBox");
+
+                                // Check if the click was outside the dropdown and the select box
+                                if (!event.target.matches('.select-box') && !selectBox.contains(event.target)) {
+                                    if (dropdown.style.display === "block") {
+                                        dropdown.style.display = "none";
+                                    }
+                                }
+                            };
+                        </script>
+
+                        <style>
+                            .custom-select {
+                                position: relative;
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                            .select-box {
+                                border: 1px solid #ccc;
+                                padding: 10px;
+                                cursor: pointer;
+                                background-color: var(--first-color);
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-size: 1.4rem;
+                                border-radius: 5px;
+                                color: var(--seventh-color);
+                            }   
+
+                            .select-box span {
+                                flex-grow: 1;
+                                
+                            }
+
+                            .dropdown-content {
+                                display: none;
+                                position: absolute;
+                         
+                                border: 1px solid #ccc;
+                                width: 100%;
+                                z-index: 1;
+                                max-height: 200px;
+                                overflow-y: auto;
+                                background-color: var(--first-color);
+                                color: var(--seventh-color);
+                            }
+
+                            .dropdown-content label {
+                                display: block;
+                                padding: 10px;
+                                cursor: pointer;
+                                font-size: 1.2rem;
+                            }
+
+                            .dropdown-content label:hover {
+                                background-color: var(--seventh-color3);
+                            }
+
+                            .dropdown-content input {
+                                margin-right: 10px;
+                            }
+                        </style>
+
+
+
+
 
                         <div class="input-fields">
                             <label for="room_type">Good for 22 hours:</label>
@@ -238,7 +358,7 @@ if (isset($_POST['addroom'])) {
                             <label for="status">Status:</label>
                             <?php
                             // Assuming you've included the necessary database connection file
-                            
+
                             // Query to select distinct status names from the room_status_tbl
                             $sql = "SELECT DISTINCT room_status_name FROM room_status_tbl";
                             $result = $con->query($sql);
@@ -308,7 +428,7 @@ if (isset($_POST['addroom'])) {
                             showConfirmButton: true
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = window.location.href;
+                                window.location.href = 'dashboardRooms.php';
                             }
                         });
                     </script>

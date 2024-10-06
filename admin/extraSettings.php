@@ -222,6 +222,35 @@ if (isset($_GET['manage_id'])) {
                                 ?>
                             </div>
 
+
+                            <div class="input-fields">
+                                <label for="status">Amenities:</label>
+                                <?php
+                                // Assuming you've included the necessary database connection file
+                                
+                                // Query to select distinct status names from the room_status_tbl
+                                $sql = "SELECT DISTINCT aminity_name FROM room_amenities_tbl";
+                                $result = $con->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    echo "<select name='status' class='select_fields' id='statusSelect' onchange='changeColorSelect(this)' required>";
+
+                                    echo "<option disabled selected value=''>Choose an Option</option>";
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        $status = ucwords(strtolower($row["aminity_name"])); // Capitalize and format the status name
+                                        echo "<option value='" . $status . "'>" . $status . "</option>";
+                                    }
+                                    echo "</select>";
+                                } else {
+                                    echo "<select name='status' id='statusSelect' class='select_fields' required>";
+                                    echo "<option disabled selected value=''>Choose an Option</option>";
+                                    echo "<option value=''>No options found.</option>";
+                                    echo "</select>";
+                                }
+                                ?>
+                            </div>
+
                         </div>
 
                         <a href="extraSettingsRoom.php"><i class="fa-solid fa-pen-to-square"></i> OPEN</a>

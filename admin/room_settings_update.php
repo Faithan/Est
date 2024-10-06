@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'edit_room_status':
             $query = "UPDATE room_status_tbl SET room_status_name = ?, room_status_description = ? WHERE room_status_id = ?";
             break;
+        case 'edit_amenity': // New case for editing room amenities
+            $query = "UPDATE room_amenities_tbl SET amenity_name = ?, amenity_description = ? WHERE amenity_id = ?";
+            break;
         default:
             die('Invalid type');
     }
@@ -28,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param('ssi', $name, $description, $id);
     $stmt->execute();
     $stmt->close();
+
+    // Redirect to the settings page after updating
     header('Location: extraSettingsRoom.php');
 }
 ?>

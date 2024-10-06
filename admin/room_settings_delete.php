@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'delete_room_status':
             $query = "DELETE FROM room_status_tbl WHERE room_status_id = ?";
             break;
+        case 'delete_amenity': // New case for deleting a room amenity
+            $query = "DELETE FROM room_amenities_tbl WHERE amenity_id = ?";
+            break;
         default:
             die('Invalid type');
     }

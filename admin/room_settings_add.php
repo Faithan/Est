@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'room_status':
             $query = "INSERT INTO room_status_tbl (room_status_name, room_status_description) VALUES (?, ?)";
             break;
+        case 'amenity': // New case for adding a room amenity
+            $query = "INSERT INTO room_amenities_tbl (amenity_name, amenity_description) VALUES (?, ?)";
+            break;
         default:
             die('Invalid type');
     }
