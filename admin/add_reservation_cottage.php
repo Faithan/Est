@@ -18,7 +18,7 @@ session_start();
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Walk-in Room Reservation</title>
@@ -60,7 +60,7 @@ session_start();
 
             <?php
             include 'logoutbtn.php'
-                ?>
+            ?>
 
         </section>
 
@@ -72,7 +72,7 @@ session_start();
                     <label for=""><i class="fa-solid fa-gear"></i> Walk-in Room Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -113,7 +113,7 @@ session_start();
 
                                     <?php
                                     // Assuming you've included the necessary database connection file
-                                    
+
                                     // Query to select distinct cottage type names
                                     $sql = "SELECT DISTINCT cottage_type_name FROM cottage_type_tbl";
                                     $result = $con->query($sql);
@@ -157,26 +157,7 @@ session_start();
                                             });
                                         }
                                     }
-
                                 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -200,7 +181,7 @@ session_start();
                             while ($typeRow = mysqli_fetch_assoc($cottageTypesResult)) {
                                 $cottage_type = $typeRow['cottage_type_name'];
                                 $cottage_type_id = strtolower(str_replace(' ', '-', $cottage_type)); // Convert room type to a valid ID
-                            
+
                                 echo "<div class='title-head' id='{$cottage_type_id}'>";
                                 echo "<label>$cottage_type</label>";
                                 echo '</div>';
@@ -219,7 +200,15 @@ session_start();
                                     $status = $row['cottage_status'];
                                     $noPersons = $row['number_of_person'];
                                     $photo = $row['cottage_photo'];
-                                    ?>
+
+
+                                    // Add this section where you fetch cottage details
+                                    $statusQuery = "SELECT reserve_status FROM reserve_cottage_tbl WHERE cottage_number = '$cottageNumber' AND reserve_status IN ('checkedIn')";
+                                    $statusResult = mysqli_query($con, $statusQuery);
+
+                                    $cottageStatusToday = mysqli_num_rows($statusResult) > 0 ? 'Occupied' : 'Available';
+
+                            ?>
 
                                     <div class="rooms">
 
@@ -243,34 +232,51 @@ session_start();
                                             <div class="room-details"><label for="">Number of persons: </label>
                                                 <p> <?php echo $noPersons ?></p>
                                             </div>
+                                            <div class="room-details">
+                                                <label>Cottage Status (Today): </label>
+                                                <p><?php echo $cottageStatusToday; ?></p>
+                                            </div>
 
 
                                         </div>
 
                                         <div class="button-container">
-                                            <?php
-
-                                            ?>
-                                            <a href="add_reservation_cottage2.php?manage_id=<?php echo $id; ?>" name="book_now">
-                                                <button class="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24"
-                                                        height="24" fill="none" class="svg-icon">
-                                                        <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                                                            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                                            <path d="m8 3v4"></path>
-                                                            <path d="m16 3v4"></path>
-                                                            <path d="m4 11h16"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="label">Select</span>
-                                                </button>
-                                            </a>
+                                            <?php if ($cottageStatusToday === 'Occupied') { ?>
+                                                <a href="javascript:void(0);" style="cursor: not-allowed;">
+                                                    <button class="button" disabled style="cursor: not-allowed;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
+                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                <path d="m8 3v4"></path>
+                                                                <path d="m16 3v4"></path>
+                                                                <path d="m4 11h16"></path>
+                                                            </g>
+                                                        </svg>
+                                                        <span class="label">Unavailable</span>
+                                                    </button>
+                                                </a> <!-- Button is disabled when occupied -->
+                                            <?php } else { ?>
+                                                <a href="add_reservation_cottage2.php?manage_id=<?php echo $id; ?>" name="book_now">
+                                                    <button class="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
+                                                            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                                                                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                                                                <path d="m8 3v4"></path>
+                                                                <path d="m16 3v4"></path>
+                                                                <path d="m4 11h16"></path>
+                                                            </g>
+                                                        </svg>
+                                                        <span class="label">Select</span>
+                                                    </button>
+                                                </a>
+                                            <?php } ?>
                                         </div>
+
                                     </div>
 
 
 
-                                    <?php
+                            <?php
                                 }
 
                                 echo '</div>'; // Close room-first-container
@@ -291,9 +297,6 @@ session_start();
 
 
             </div>
-
-
-
 
 
         </section>

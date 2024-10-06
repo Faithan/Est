@@ -11,29 +11,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .container-header label {
     background-color: var(--reservation-title);
     width: 100%;
     padding: 10px;
+    margin: 0 20px;
     text-align: center;
     font-size: 2rem;
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--reservation-text);
-    border: 1px solid var(--reservation-titleborder);
+    color: var(--seventh-color);
+    background-color: var(--first-color);
+ 
 }
 
 .category-container {
     display: flex;
     align-items: center;
 
-    padding: 2px 10px 10px 2px;
+    padding: 10px;
     top: 0;
     z-index: 700;
-    background-color: var(--first-color2);
+    background-color: var(--first-color);
     position: -webkit-sticky;
     position: sticky;
 
@@ -170,7 +172,8 @@ select option {
 
 /* rooms container */
 
-.rooms-container {
+.rooms-container,
+.cottages-container {
     max-height: 82vh;
     /* Adjust the height as needed */
     position: relative;
@@ -187,7 +190,8 @@ select option {
 
 
 /* rooms-holder */
-.rooms-holder {
+.rooms-holder,
+.cottages-holder{
     padding: 20px;
 }
 
@@ -211,7 +215,8 @@ select option {
 
 /* rooms */
 
-.room-first-container {
+.room-first-container,
+.cottage-first-container{
     display: flex;
     gap: 20px;
     padding: 5px;
@@ -219,24 +224,27 @@ select option {
     margin-bottom: 20px;
 }
 
-.rooms {
+.rooms,
+.cottages {
     display: flex;
     flex-direction: column;
     width: 250px;
     height: 340px;
     background-color: var(--first-color);
     border-radius: 5px;
-    box-shadow: 0 0 4px var(--box-shadow);
+    box-shadow: 0 2px 4px var(--box-shadow);
 }
 
 
-.rooms label {
+.rooms label,
+.cottages label {
     font-size: 1.3rem;
     font-weight: normal;
     color: var(--seventh-color);
 }
 
-.rooms img {
+.rooms img,
+.cottages img {
     height: 150px;
     width: 100%;
     border-top-left-radius: 5px;
@@ -244,7 +252,8 @@ select option {
 }
 
 
-.rooms .info-container {
+.rooms .info-container,
+.cottages .info-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -252,22 +261,27 @@ select option {
     overflow-y: scroll;
 }
 
-.info-container .room-details {
+.info-container .room-details,
+.info-container .cottage-details {
     display: flex;
     justify-content: space-between;
 
 }
 
-.room-details label {
+.room-details label,
+.cottage-details label {
     font-size: 1.2rem;
 }
 
-.room-details p {
+.room-details p,
+.cottage-details p {
     font-size: 1.2rem;
 }
 
 .room-details label[for="bold-text"],
-.room-details p[for="bold-text"] {
+.room-details p[for="bold-text"],
+.cottage-details label[for="bold-text"],
+.cottage-details p[for="bold-text"]  {
     font-weight: bold;
     font-size: 1.4rem;
 }
@@ -297,7 +311,11 @@ em {
 
 
 
-
+.togglebutton{
+    background-color: var(--first-color);
+    border: 1px solid var(--booknow-border);
+    color: var(--booknow-border);
+}
 
 
 
@@ -503,7 +521,7 @@ em {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid var(--seventh-color3);
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     color: var(--seventh-color);
 }
 
@@ -515,7 +533,7 @@ em {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid var(--seventh-color3);
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     color: var(--seventh-color);
 }
 
@@ -527,7 +545,7 @@ em {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid var(--seventh-color3);
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     color: var(--seventh-color);
 }
 

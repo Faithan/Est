@@ -43,7 +43,7 @@
     width: 250px;
     height: 30px;
     color: var(--seventh-color);
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     border: 1px solid var(--seventh-color3);
     border-radius: 5px;
     padding: 0 5px;
@@ -68,7 +68,7 @@ select:hover {
     width: 260px;
     height: 35px;
     color: var(--seventh-color);
-    background-color: var(--first-color);
+    background-color: var(--first-color2);
     border: 1px solid var(--seventh-color3);
     border-radius: 5px;
     padding: 0 5px;

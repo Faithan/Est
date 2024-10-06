@@ -229,7 +229,7 @@ if (isset($_GET['manage_id'])) {
                                 // Assuming you've included the necessary database connection file
                                 
                                 // Query to select distinct status names from the room_status_tbl
-                                $sql = "SELECT DISTINCT aminity_name FROM room_amenities_tbl";
+                                $sql = "SELECT DISTINCT amenity_name FROM room_amenities_tbl";
                                 $result = $con->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -238,8 +238,8 @@ if (isset($_GET['manage_id'])) {
                                     echo "<option disabled selected value=''>Choose an Option</option>";
 
                                     while ($row = $result->fetch_assoc()) {
-                                        $status = ucwords(strtolower($row["aminity_name"])); // Capitalize and format the status name
-                                        echo "<option value='" . $status . "'>" . $status . "</option>";
+                                        $amenities = ucwords(strtolower($row["amenity_name"])); // Capitalize and format the status name
+                                        echo "<option value='" . $amenities . "'>" . $amenities . "</option>";
                                     }
                                     echo "</select>";
                                 } else {

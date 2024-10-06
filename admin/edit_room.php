@@ -366,6 +366,12 @@
                             </script>
 
                             <style>
+                                .input-fields label {
+                                    font-size: 1.5rem;
+                                    color: var(--seventh-color);
+                                    
+                                }
+
                                 .custom-select {
                                     position: relative;
                                     display: inline-block;
@@ -376,13 +382,14 @@
                                     border: 1px solid #ccc;
                                     padding: 10px;
                                     cursor: pointer;
-                                    background-color: var(--first-color);
+                                    background-color: var(--first-color2);
                                     display: flex;
                                     justify-content: space-between;
                                     align-items: center;
                                     font-size: 1.4rem;
                                     border-radius: 5px;
                                     color: var(--seventh-color);
+                                    
                                 }
 
                                 .select-box span {

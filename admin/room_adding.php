@@ -299,7 +299,7 @@ if (isset($_POST['addroom'])) {
                                 border: 1px solid #ccc;
                                 padding: 10px;
                                 cursor: pointer;
-                                background-color: var(--first-color);
+                                background-color: var(--first-color2);
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
