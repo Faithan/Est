@@ -264,9 +264,7 @@ if (isset($_POST['submit'])) {
                                 /* Increase calendar width */
                             }
 
-                            /* Ensure the input field is editable and larger */
-                            #date_of_arrival {}
-
+                 
                             /* Custom styles for reserved dates */
                             .reserved-date {
                                 background-color: var(--fifth-color) !important;

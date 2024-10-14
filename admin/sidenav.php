@@ -7,7 +7,7 @@
 
         <div class="menu">
             <div class="item"><a href="dashboard.php"><i class="fa-solid fa-chart-simple"></i> Overview</a></div>
-
+            <div class="item"><a href="calendar.php"><i class="fa-solid fa-calendar-days"></i> Calendar</a></div>
             <div class="item">
                 <a href="#" class="dropdown-link"><i class="fa-solid fa-calendar"></i> Reservations <i
                         class="fa-solid fa-caret-down dropdown"></i></a>
@@ -42,11 +42,11 @@
         </div>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 const dropdownLinks = document.querySelectorAll(".dropdown-link");
 
                 dropdownLinks.forEach(dropdown => {
-                    dropdown.addEventListener("click", function (e) {
+                    dropdown.addEventListener("click", function(e) {
                         e.preventDefault(); // Prevent default anchor behavior for dropdown links
 
                         const submenu = this.nextElementSibling;
@@ -77,7 +77,7 @@
 
 
 <script>
-    document.getElementById('logoutLink').addEventListener('click', function (e) {
+    document.getElementById('logoutLink').addEventListener('click', function(e) {
         e.preventDefault(); // Prevent the default link behavior
 
         // Show SweetAlert confirmation dialog
