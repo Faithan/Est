@@ -24,7 +24,7 @@ if (mysqli_num_rows($result) > 0) {
             $firstName = $row['fname'];
             $lastName = $row['lname'];
         }
-
+        echo "<div class='reserve-box'>";
         // Display additional details based on reservation type
         if ($type == 'cottage') {
             echo "<p><strong>Cottage Number:</strong> " . $row['cottage_number'] . "</p>";
@@ -40,20 +40,25 @@ if (mysqli_num_rows($result) > 0) {
         }
 
         echo "<p><strong>Arrival Date:</strong> " . $row['date_of_arrival'] . "</p>";
-       // Display additional details based on reservation type
-       if ($type == 'cottage') {
-        echo "<p><strong>Time:</strong> " . $row['time'] . "</p>";
-    } else if ($type == 'room') {
-        echo "<p><strong>time:</strong> " . $row['time_of_arrival'] . "</p>";
-    }
+        // Display additional details based on reservation type
+        if ($type == 'cottage') {
+            echo "<p><strong>Time:</strong> " . $row['time'] . "</p>";
+        } else if ($type == 'room') {
+            echo "<p><strong>time:</strong> " . $row['time_of_arrival'] . "</p>";
+        }
 
         // Display reservation details
         echo "<p><strong>Name:</strong> " . $firstName . " " . $lastName . "</p>";
-     
+
         echo "<p><strong>Price:</strong> ₱" . $row['price'] . "</p>";
 
+        if ($type == 'cottage') {
+            echo "<img src='".$row['cottage_photo']."' >";
+        } else if ($type == 'room') {
+            echo "<img src='".$row['photo']."' >";
+        }
 
-        echo "<hr>";
+        echo "</div>";
     }
 } else {
     echo "No reservation found for this date.";

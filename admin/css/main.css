@@ -26,6 +26,27 @@ a {
 
 :root {
 
+
+    --first-color: white;     /* has darkmode */
+    --first-color2: #E7E7E7;     /* has darkmode */
+    --second-color: #EAE2B7;
+    --fourth-color: #F77F00;     /* has darkmode */
+    --seventh-color: #18191A;     /* has darkmode */
+    --seventh-color2: #e0e0e0;     /* has darkmode */
+    --seventh-color3: #e0e0e0;     /* has darkmode */
+    --select-color: #F77F00;     /* has darkmode */
+    --select-color2: #cd6a00;    /* has darkmode */
+    --booknow-text: #ffffff;     /* has darkmode */
+    --booknow-text2: #242526;     /* has darkmode */
+    --booknow-border: #F77F00;     /* has darkmode */
+    --reservation-titleborder: #18191A;     /* has darkmode */
+    --box-shadow: #b4b4b4;     /* has darkmode */
+    --after-input: #effaff;     /* has darkmode */ 
+    --water-border: #EAE2B7;     /* has darkmode */
+    --water-color: #0d2cc5;     /* has darkmode */
+ 
+
+
     --pure-white: white;
     --third-color: #FCBF49;
     --fifth-color: #D62828;
@@ -35,24 +56,9 @@ a {
     --eight-color2: #001824;
     --reservation-title: #18191A;
     --reservation-text: white;
-    --first-color2: #18191A;
-    --first-color: #242526;
-    --booknow-text: #F77F00;
-    --booknow-text2: #F77F00;
-    --booknow-border: #F77F00;
-    --fourth-color: #242526;
-    --seventh-color: #e4e4e4;
-    --seventh-color2: #101010;
-    --seventh-color3: #545454;
-    --select-color: #242526;
-    --select-color2: #353738;
-    --box-shadow: #4d4d4d;
-    --after-input: #545454;
-    --water-border: #dddcdb;
-    --water-color: #030c38;
-    --reservation-titleborder: #F77F00;
 
-    
+
+
 
 
 
@@ -93,25 +99,24 @@ a {
 
 
 
-    --first-color: white;     /* has darkmode */
-    --first-color2: #E7E7E7;     /* has darkmode */
-    --second-color: #EAE2B7;
-    --fourth-color: #F77F00;     /* has darkmode */
-    --seventh-color: #18191A;     /* has darkmode */
-    --seventh-color2: #e0e0e0;     /* has darkmode */
-    --seventh-color3: #e0e0e0;     /* has darkmode */
-    --select-color: #F77F00;     /* has darkmode */
-    --select-color2: #cd6a00;    /* has darkmode */
-    --booknow-text: #ffffff;     /* has darkmode */
-    --booknow-text2: #242526;     /* has darkmode */
-    --booknow-border: #F77F00;     /* has darkmode */
-    --reservation-titleborder: #18191A;     /* has darkmode */
-    --box-shadow: #b4b4b4;     /* has darkmode */
-    --after-input: #effaff;     /* has darkmode */ 
-    --water-border: #EAE2B7;     /* has darkmode */
-    --water-color: #0d2cc5;     /* has darkmode */
- 
+    --first-color2: #18191A;
+    --first-color: #242526;
+    --booknow-text: #F77F00;
+    --booknow-text2: #F77F00;
+    --booknow-border: #F77F00;
+    --fourth-color: #242526;
+    --seventh-color: #e4e4e4;
+    --seventh-color2: #101010;
+    --seventh-color3: #545454;
+    --select-color: #242526;
+    --select-color2: #353738;
+    --box-shadow: #4d4d4d;
+    --after-input: #545454;
+    --water-border: #dddcdb;
+    --water-color: #030c38;
+    --reservation-titleborder: #F77F00;
 
+    
 
 
   /* for proceed */

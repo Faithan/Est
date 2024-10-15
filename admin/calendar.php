@@ -183,19 +183,24 @@ $all_dates = array_merge($cottage_dates, $room_dates);
 
 <style>
     #calendar {
-        background-color: var(--first-color2);
+        background-color: var(--first-color);
 
     }
 
+    table{
+        background-color: var(--first-color);
+    }
+    
     /* Customize the calendar header */
     .fc-header-toolbar {
         background-color: var(--first-color);
         /* Light background color for header */
-        border-bottom: 1px solid var(--first-color);
+  
         /* Subtle border at the bottom */
         padding: 10px;
         /* Padding for spacing */
         color: var(--seventh-color);
+        margin: 0;
     }
 
     /* Style the calendar title */
@@ -223,12 +228,10 @@ $all_dates = array_merge($cottage_dates, $room_dates);
         /* Transition for hover effect */
     }
 
-    #calendar button {
-        background-color: var(--first-color2);
-        color: var(--seventh-color)
+    .fc-button-group button span{
+        color: #18191A;
+     
     }
-
-
     /* Change button color on hover */
     .fc-button:hover {
         background-color: var(--seventh-color2);
@@ -237,7 +240,7 @@ $all_dates = array_merge($cottage_dates, $room_dates);
 
     /* Style the days in the calendar */
     .fc-day {
-        border: 1px solid var(--seventh-color2);
+        border: 1px solid var(--seventh-color);
         /* Light border for each day */
         background-color: var(--first-color2);
         /* White background for days */
@@ -316,7 +319,7 @@ $all_dates = array_merge($cottage_dates, $room_dates);
     /* Modal Content */
     .modal-content {
         background-color: var(--first-color2);
-        margin: 5% auto;
+        margin: 2% auto;
         /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
@@ -334,8 +337,21 @@ $all_dates = array_merge($cottage_dates, $room_dates);
     #modalBody {
         display: flex;
         flex-direction: column;
+        color: var(--seventh-color);
+      
+       
         gap: 10px;
-        color: var(--seventh-color)
+    }
+
+    #modalBody .reserve-box{
+        background-color: var(--first-color);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #modalBody img{
+        max-height: 200px;
+        max-width: 200px;
     }
 
     /* Close Button */

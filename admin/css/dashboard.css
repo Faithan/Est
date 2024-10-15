@@ -156,6 +156,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--seventh-color3);
 
 }
 
@@ -237,6 +238,7 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--seventh-color3);
 }
 
 .sbox label {
@@ -268,7 +270,7 @@ main {
     display: flex;
     align-items: center;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: 10px;
@@ -282,6 +284,7 @@ canvas {
     border-radius: 5px;
     padding: 20px;
     color: var(--seventh-color);
+    border: 1px solid var(--seventh-color3);
 }
 
 
@@ -693,6 +696,7 @@ table img {
     padding: 20px;
     display: flex;
     flex-direction: column;
+  
 }
 
 
@@ -919,7 +923,9 @@ table img {
 
 }
 
-
+.sbox{
+    border: 1px solid var(--seventh-color3);
+}
 
 
 
