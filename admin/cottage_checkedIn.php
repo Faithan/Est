@@ -35,7 +35,7 @@ if (isset($_GET['manage_id'])) {
 
 if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
-   
+
 
     // Update query to match your data structure
     $update_query = "UPDATE reserve_cottage_tbl 
@@ -89,7 +89,7 @@ if (isset($_POST['confirm'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Pendings</title>
@@ -124,7 +124,7 @@ if (isset($_POST['confirm'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -137,7 +137,7 @@ if (isset($_POST['confirm'])) {
                         Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -230,7 +230,7 @@ if (isset($_POST['confirm'])) {
                                 <div>
                                     <label>Cottage Number</label><br>
                                     <input type="number" name="cottage_number"
-                                        value="<?php echo $manage_data['cottage_number']; ?>" disabled> 
+                                        value="<?php echo $manage_data['cottage_number']; ?>" disabled>
                                 </div>
 
                                 <div>
@@ -275,6 +275,10 @@ if (isset($_POST['confirm'])) {
 
                                 <div class="line">
                                     <div>
+                                        <label>Reference Number:</label><br>
+                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                    </div>
+                                    <div>
                                         <label>Reservation Fee (Paid)</label><br>
                                         <input type="number" name="cottage_reserve_fee" value="<?php echo $manage_data["cottage_reserve_fee"] ?>" disabled>
                                     </div>
@@ -300,12 +304,12 @@ if (isset($_POST['confirm'])) {
 
 
 
-          
+
 
                             <!-- reason for rejection -->
                             <br>
-                        
- 
+
+
                         </div>
 
 
@@ -317,7 +321,7 @@ if (isset($_POST['confirm'])) {
                             <button class="check-btn" type="submit" name="confirm"><i
                                     class="fa-solid fa-check-to-slot"></i>
                                 Check Out</button>
-                          
+
                         </div>
                     </form>
                 </div>
@@ -363,7 +367,5 @@ if (isset($_POST['confirm'])) {
                 window.location.href = 'dashboardCottageReservation.php'; // Change this to your desired page
             }
         });
-
     </script>
 <?php endif; ?>
-

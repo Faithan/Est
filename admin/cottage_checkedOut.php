@@ -46,7 +46,7 @@ if (isset($_GET['manage_id'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Pendings</title>
@@ -81,7 +81,7 @@ if (isset($_GET['manage_id'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -94,7 +94,7 @@ if (isset($_GET['manage_id'])) {
                         Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -187,7 +187,7 @@ if (isset($_GET['manage_id'])) {
                                 <div>
                                     <label>Cottage Number</label><br>
                                     <input type="number" name="cottage_number"
-                                        value="<?php echo $manage_data['cottage_number']; ?>" disabled> 
+                                        value="<?php echo $manage_data['cottage_number']; ?>" disabled>
                                 </div>
 
                                 <div>
@@ -232,6 +232,10 @@ if (isset($_GET['manage_id'])) {
 
                                 <div class="line">
                                     <div>
+                                        <label>Reference Number:</label><br>
+                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                    </div>
+                                    <div>
                                         <label>Reservation Fee (Paid)</label><br>
                                         <input type="number" name="cottage_reserve_fee" value="<?php echo $manage_data["cottage_reserve_fee"] ?>" disabled>
                                     </div>
@@ -250,19 +254,19 @@ if (isset($_GET['manage_id'])) {
 
                             <div class="note">
                                 <p>
-                                <b>Note:</b> This form is for recorded data only.
+                                    <b>Note:</b> This form is for recorded data only.
 
                                 </p>
                             </div>
 
 
 
-          
+
 
                             <!-- reason for rejection -->
                             <br>
-                        
- 
+
+
                         </div>
 
 
@@ -270,7 +274,7 @@ if (isset($_GET['manage_id'])) {
 
 
 
-                      
+
                     </form>
                 </div>
 
@@ -295,9 +299,3 @@ if (isset($_GET['manage_id'])) {
 </body>
 
 </html>
-
-
-
-
-
-

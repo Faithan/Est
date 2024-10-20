@@ -149,6 +149,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     background-color: var(--first-color2);
+    color: var(--seventh-color);
 }
 
 .reserveForm-contents p {

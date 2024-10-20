@@ -19,7 +19,7 @@ session_start();
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Dashboard</title>
@@ -38,7 +38,7 @@ session_start();
 
         <?php
         include 'sidenav.php'
-            ?>
+        ?>
 
         <section class="middle-container">
 
@@ -47,7 +47,7 @@ session_start();
                     <label for=""><i class="fa-solid fa-table-cells-large"></i> Dashboard</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -217,27 +217,26 @@ session_start();
 
                         <div class="sbox" onclick="window.location.href='dashboardCottageReservation.php';"
                             style="cursor: pointer;">
-                            <label for="">Today's Cottage Reservation <i class="fa-solid fa-campground"></i></label>
+                            <label for="">Pending Cottage Reservation <i class="fa-solid fa-campground"></i></label>
                             <?php
-                            // Query to count the number of cottage reservations with today's arrival date
-                            $todays_cottage_reservation_query = "SELECT COUNT(*) as todays_cottage_reservations FROM reserve_cottage_tbl WHERE DATE(date_of_arrival) = CURDATE()";
-                            $todays_cottage_reservation_result = mysqli_query($con, $todays_cottage_reservation_query);
+                            // Query to count the number of pending cottage reservations
+                            $pending_cottage_reservation_query = "SELECT COUNT(*) as pending_cottage_reservations FROM reserve_cottage_tbl WHERE reserve_status = 'pending'";
+                            $pending_cottage_reservation_result = mysqli_query($con, $pending_cottage_reservation_query);
 
-                            if ($todays_cottage_reservation_result) {
-                                $row = mysqli_fetch_assoc($todays_cottage_reservation_result);
-                                $todays_cottage_reservations = $row['todays_cottage_reservations'];
+                            if ($pending_cottage_reservation_result) {
+                                $row = mysqli_fetch_assoc($pending_cottage_reservation_result);
+                                $pending_cottage_reservations = $row['pending_cottage_reservations'];
                             } else {
-                                $todays_cottage_reservations = 0; // Default value if query fails
+                                $pending_cottage_reservations = 0; // Default value if query fails
                             }
                             ?>
 
-
-
-                            <p><?php echo $todays_cottage_reservations; ?></p>
-                            <?php if ($todays_cottage_reservations > 0): ?>
+                            <p><?php echo $pending_cottage_reservations; ?></p>
+                            <?php if ($pending_cottage_reservations > 0): ?>
                                 <span class="red-dot"></span> <!-- Red dot notification -->
                             <?php endif; ?>
                         </div>
+
 
 
 
@@ -264,29 +263,30 @@ session_start();
                         </div>
 
 
+
+
                         <div class="sbox" onclick="window.location.href='dashboardRoomReservation.php';"
                             style="cursor: pointer;">
-                            <label for="">Today's Room Reservation <i class="fa-solid fa-bed"></i></label>
+                            <label for="">Pending Room Reservation <i class="fa-solid fa-bed"></i></label>
                             <?php
-                            // Query to count the number of room reservations with today's arrival date
-                            $todays_room_reservation_query = "SELECT COUNT(*) as todays_room_reservations FROM reserve_room_tbl WHERE DATE(date_of_arrival) = CURDATE()";
-                            $todays_room_reservation_result = mysqli_query($con, $todays_room_reservation_query);
+                            // Query to count the number of pending room reservations
+                            $pending_room_reservation_query = "SELECT COUNT(*) as pending_room_reservations FROM reserve_room_tbl WHERE status = 'pending'";
+                            $pending_room_reservation_result = mysqli_query($con, $pending_room_reservation_query);
 
-                            if ($todays_room_reservation_result) {
-                                $row = mysqli_fetch_assoc($todays_room_reservation_result);
-                                $todays_room_reservations = $row['todays_room_reservations'];
+                            if ($pending_room_reservation_result) {
+                                $row = mysqli_fetch_assoc($pending_room_reservation_result);
+                                $pending_room_reservations = $row['pending_room_reservations'];
                             } else {
-                                $todays_room_reservations = 0; // Default value if query fails
+                                $pending_room_reservations = 0; // Default value if query fails
                             }
                             ?>
 
-
-
-                            <p><?php echo $todays_room_reservations; ?></p>
-                            <?php if ($todays_room_reservations > 0): ?>
+                            <p><?php echo $pending_room_reservations; ?></p>
+                            <?php if ($pending_room_reservations > 0): ?>
                                 <span class="red-dot"></span> <!-- Red dot notification -->
                             <?php endif; ?>
                         </div>
+
 
 
 
@@ -416,7 +416,7 @@ session_start();
                                 'rgba(255, 206, 86, 0.6)', // Yellow
                                 'rgba(75, 192, 192, 0.6)', // Green
                                 'rgba(153, 102, 255, 0.6)', // Purple
-                                'rgba(255, 159, 64, 0.6)'  // Orange
+                                'rgba(255, 159, 64, 0.6)' // Orange
                             ];
 
                             // Utility function to get CSS variable

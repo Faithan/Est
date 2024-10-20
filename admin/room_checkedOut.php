@@ -43,7 +43,7 @@ if (isset($_GET['manage_id'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Checked Out</title>
@@ -77,7 +77,7 @@ if (isset($_GET['manage_id'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -91,7 +91,7 @@ if (isset($_GET['manage_id'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Checked Out Reservation</label>
                 </div>
 
-              <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -249,6 +249,10 @@ if (isset($_GET['manage_id'])) {
                                 </div>
 
                                 <div class="line">
+                                    <div>
+                                        <label>Reference Number:</label><br>
+                                        <input type="number" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                    </div>
 
                                     <div>
                                         <label>Reservation Payment (Paid)</label><br>

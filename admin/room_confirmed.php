@@ -75,7 +75,6 @@ if (isset($_POST['checkedin'])) {
     if ($query) {
         $message = "Changes Saved Successfully!";
         $isSuccess = true;
-
     } else {
         $message = "Failed!";
         $isSuccess = false;
@@ -95,7 +94,7 @@ if (isset($_POST['checkedin'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Confirmed</title>
@@ -129,7 +128,7 @@ if (isset($_POST['checkedin'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -142,7 +141,7 @@ if (isset($_POST['checkedin'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Confirmed Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -320,6 +319,10 @@ if (isset($_POST['checkedin'])) {
                             <div class="payment-container">
 
                                 <div class="line">
+                                    <div>
+                                        <label>Reference Number:</label><br>
+                                        <input type="number"  value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                    </div>
 
                                     <div>
                                         <label>Reservation Payment (Paid)</label><br>
@@ -457,7 +460,6 @@ if (isset($_POST['checkedin'])) {
                 window.location.href = 'dashboardRoomReservation.php';
             }
         });
-
     </script>
 <?php endif; ?>
 
@@ -485,7 +487,7 @@ if (isset($_POST['checkedin'])) {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'cancel.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     if (xhr.responseText === 'success') {

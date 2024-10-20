@@ -50,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- important additional css -->
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/viewReservationCottage.css?v=<?php echo time(); ?>">
@@ -97,7 +97,7 @@ if (isset($_SESSION['user_id'])) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'cancel_reservationCottage.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         Swal.fire({
@@ -124,12 +124,12 @@ if (isset($_SESSION['user_id'])) {
     <?php include 'header.php' ?>
 
 
-    
+
 
     <main>
 
         <div class="image-container">
-           
+
             <?php
             $photo = str_replace('../', '', $manage_data['cottage_photo']);
             ?>
@@ -153,7 +153,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-       
+
 
             <p id="note">
                 This section displays the status of your reservation, including pending, checked in, extended, checked
@@ -198,7 +198,7 @@ if (isset($_SESSION['user_id'])) {
             <label>Time </label>
 
             <input class="fixed-value-input" type="text" name="time" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data["time"]?>" required readonly>
+                value="<?php echo $manage_data["time"] ?>" required readonly>
             <p id="comment"> (fixed)</p>
 
             <label class="bold-text">Room Details</label>
@@ -211,12 +211,12 @@ if (isset($_SESSION['user_id'])) {
             <input class="fixed-value-input" name="cottage_type" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['cottage_type']; ?>" readonly>
 
-    
+
             <label>Number of Persons:</label>
             <input class="fixed-value-input" name="number_of_person" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['number_of_person']; ?>" readonly>
 
-           
+
 
             <label>Price (₱)</label>
             <input class="fixed-value-input" name="price" onkeyup="changeColor(this)"
@@ -249,7 +249,94 @@ if (isset($_SESSION['user_id'])) {
 
                 <a href="myReservationCottage.php" class="back-btn">Back</a>
             </div>
+
+
+
+            <?php
+            // Assuming you have already connected to your database via db_connect.php
+            require('db_connect.php');
+
+            // Fetch the gcash details from the database (assuming id = 1)
+            $gcash_number = "";
+            $gcash_photo = "";
+
+            $sql = "SELECT gcash_number, gcash_photo FROM gcash_tbl WHERE id = 1";
+            $result = $con->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $gcash_number = $row['gcash_number'];
+                $gcash_photo = $row['gcash_photo'];
+            }
+            ?>
+
+            <label class="bold-text">Reservation Payment Section</label>
+
+            <label for="">Gcash Account Number:</label>
+            <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
+
+            <label class="bold-text">OR</label>
+
+            <label for=""><i class="fa-solid fa-money-bill"></i> Scan QR Code</label>
+            <!-- Displaying Gcash photo and number based on the database -->
+            <img id="gcashImage" src="<?php echo !empty($gcash_photo) ? 'admin/' . $gcash_photo : 'default-image.jpg'; ?>" alt="Gcash Photo" style="margin-bottom: 50px; cursor:pointer; " onclick="viewFullScreen(this)">
+
+
         </form>
+
+
+        <form id="reference-form" action="update_reference_cottage.php" method="post" class="reserveForm-contents">
+            <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
+            <label for="reference_number">Reference Number:</label>
+            <input type="number" name="reference_number" id="reference_number" style="background-color:<?php echo ($manage_data['reserve_status'] === 'pending') ? '' : 'var(--after-input)'; ?>;" value="<?php echo $manage_data['reference_number']; ?>" required <?php echo ($manage_data['reserve_status'] === 'pending') ? '' : 'readonly'; ?>>
+            <button id="reference-submit" type="submit" style="color:var(--seventh-color); border: 1px solid var(--seventh-color3); padding: 10px; background-color:var(--sixth-color); font-size:1.5rem; font-weight:bold; border-radius: 5px; display:<?php echo ($manage_data['reserve_status'] === 'pending') ? '' : 'none'; ?>;">Submit</button>
+        </form>
+
+
+        <script>
+            document.getElementById('reference-form').addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated!',
+                                text: data.message,
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#3085d6',
+                            }).then(() => {
+                                // Optionally reload the page or update the UI
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: data.message,
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#d33',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Something went wrong. Please try again.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#d33',
+                        });
+                    });
+            });
+        </script>
+
 
 
     </main>
@@ -269,3 +356,112 @@ if (isset($_SESSION['user_id'])) {
 
 
 </html>
+
+
+
+
+<!-- Full-screen Modal -->
+<div id="fullScreenModal" class="modal">
+    <span class="close" onclick="closeFullScreen()">&times;</span>
+    <img class="modal-content" id="fullImage">
+    <a id="downloadLink" href="#" download>
+        <button><i class="fa-solid fa-download"></i> Download</button>
+    </a>
+</div>
+
+
+<style>
+    /* Style for the modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Add animation to zoom image */
+    .modal-content {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Download button styling */
+    #downloadLink button {
+        position: absolute;
+        top: 20px;
+        right: 70px;
+        padding: 12px 24px;
+
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    #downloadLink button:hover {
+        background-color: var(--seventh-color3);
+    }
+
+    #downloadLink button i {
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    // Function to view the image in full screen
+    function viewFullScreen(imgElement) {
+        var modal = document.getElementById("fullScreenModal");
+        var fullImage = document.getElementById("fullImage");
+        var downloadLink = document.getElementById("downloadLink");
+
+        modal.style.display = "block"; // Show the modal
+        fullImage.src = imgElement.src; // Set the modal image to the clicked image
+
+        // Set the download link for the image
+        downloadLink.href = imgElement.src;
+    }
+
+    // Function to close the full-screen modal
+    function closeFullScreen() {
+        var modal = document.getElementById("fullScreenModal");
+        modal.style.display = "none"; // Hide the modal
+    }
+</script>

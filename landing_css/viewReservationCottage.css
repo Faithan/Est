@@ -126,9 +126,10 @@ body {
 
 .reserveForm-contents input {
     font-size: 1.4rem;
-    border: 1px solid var(--seventh-color);
+    border: 0;
+    border-bottom: 1px solid var(--seventh-color);
     line-height: 2;
-    border-radius: 5px;
+    border-radius: 0;
     padding-left: 5px;
     color: var(--seventh-color);
 }
@@ -142,6 +143,9 @@ body {
 
 .reserveForm-contents .fixed-value-input{
     background-color: var(--after-input);
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--seventh-color);
 }
 
 

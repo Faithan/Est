@@ -57,9 +57,6 @@ if (isset($_POST['checkOut'])) {
     if ($query) {
         $message = "Checked Out Successfully!";
         $isSuccess = true;
-
-
-
     } else {
         $message = "Failed!";
         $isSuccess = false;
@@ -78,7 +75,7 @@ if (isset($_POST['checkOut'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Extended</title>
@@ -112,7 +109,7 @@ if (isset($_POST['checkOut'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -126,7 +123,7 @@ if (isset($_POST['checkOut'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Extended Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -280,6 +277,10 @@ if (isset($_POST['checkOut'])) {
 
                             </div>
                             <div class="line">
+                                <div>
+                                    <label>Reference Number:</label><br>
+                                    <input type="number" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                </div>
 
                                 <div>
                                     <label>Reservation Payment (Paid)</label><br>

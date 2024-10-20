@@ -105,7 +105,7 @@ if (isset($_POST['confirm'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Pendings</title>
@@ -140,7 +140,7 @@ if (isset($_POST['confirm'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -153,7 +153,7 @@ if (isset($_POST['confirm'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Pending Cottage Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -305,6 +305,11 @@ if (isset($_POST['confirm'])) {
                             <div class="payment-container">
 
                                 <div class="line">
+
+                                    <div>
+                                        <label>Reference Number:</label><br>
+                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                    </div>
                                     <div>
                                         <label>Reservation Fee</label><br>
                                         <input type="number" name="cottage_reserve_fee" required>
@@ -392,7 +397,6 @@ if (isset($_POST['confirm'])) {
                 window.location.href = 'dashboardCottageReservation.php'; // Change this to your desired page
             }
         });
-
     </script>
 <?php endif; ?>
 
@@ -420,7 +424,7 @@ if (isset($_POST['confirm'])) {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'cottage_reject.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     if (xhr.responseText === 'success') {
