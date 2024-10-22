@@ -159,6 +159,8 @@ body {
     height: 100px;
     border-radius: 5px;
     padding: 5px;
+    border: 0;
+    border-bottom: 1px solid var(--seventh-color);
 }
 
 .reserveForm-contents p {

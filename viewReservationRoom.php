@@ -298,7 +298,7 @@ if (isset($_SESSION['user_id'])) {
         </form>
 
 
-        <form id="reference-form" action="update_reference.php" method="post" class="reserveForm-contents">
+        <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents">
             <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
             <label for="reference_number">Reference Number:</label>
             <input type="number" name="reference_number" id="reference_number" style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--after-input)'; ?>;" value="<?php echo $manage_data['reference_number']; ?>" required <?php echo ($manage_data['status'] === 'pending') ? '' : 'readonly'; ?>>

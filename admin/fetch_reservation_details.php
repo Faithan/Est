@@ -24,7 +24,7 @@ if (mysqli_num_rows($result) > 0) {
             $firstName = $row['fname'];
             $lastName = $row['lname'];
         }
-        echo "<div class='reserve-box'>";
+        echo "<div class='reserve-box' >";
         // Display additional details based on reservation type
         if ($type == 'cottage') {
             echo "<p><strong>Cottage Number:</strong> " . $row['cottage_number'] . "</p>";
@@ -58,8 +58,30 @@ if (mysqli_num_rows($result) > 0) {
             echo "<img src='".$row['photo']."' >";
         }
 
+        echo "<br>";
+        echo "<br>";
+
+        if ($type == 'cottage') {
+            echo "<a class='anchor-tag' href='dashboardCottageReservation.php'>Go to Reservations</a>";
+        } else if ($type == 'room') {
+            echo "<a class='anchor-tag' href='dashboardRoomReservation.php'>Go to Reservations</a>";
+        }
+
+
+
         echo "</div>";
     }
 } else {
     echo "No reservation found for this date.";
 }
+
+
+?>
+
+<style>
+    .anchor-tag{
+        margin-top: 10px;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+</style>
