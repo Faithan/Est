@@ -23,7 +23,7 @@ if (isset($_GET['manage_id'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Rejected/Cancelled</title>
@@ -57,7 +57,7 @@ if (isset($_GET['manage_id'])) {
                 </div>
             </div>
 
-            <?php 
+            <?php
             include 'logoutbtn.php'
             ?>
         </section>
@@ -72,7 +72,7 @@ if (isset($_GET['manage_id'])) {
                         Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -94,6 +94,7 @@ if (isset($_GET['manage_id'])) {
                     </div>
 
 
+
                     <form method="post" action="" class="form-container">
 
                         <div class="info-container">
@@ -111,6 +112,12 @@ if (isset($_GET['manage_id'])) {
                                 <label>CUSTOMER AND RESERVATION INFO</label>
                             </div>
 
+                            <div class="line">
+                                <div>
+                                    <label>Reservation ID</label><br>
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
+                            </div>
 
                             <div class="line">
                                 <div>

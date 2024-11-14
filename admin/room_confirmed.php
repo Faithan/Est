@@ -181,6 +181,14 @@ if (isset($_POST['checkedin'])) {
                                 <label>CUSTOMER AND RESERVATION INFO</label>
                             </div>
 
+                            <div class="line">
+                                <div>
+                                    <label>Reservation ID</label><br>
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
+                            </div>
+
+
                             <div>
                                 <!-- hidden id -->
                                 <input type="hidden" name="reserve_id"
@@ -321,7 +329,7 @@ if (isset($_POST['checkedin'])) {
                                 <div class="line">
                                     <div>
                                         <label>Reference Number:</label><br>
-                                        <input type="number"  value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                        <input type="number" value="<?php echo $manage_data['reference_number']; ?>" readonly>
                                     </div>
 
                                     <div>

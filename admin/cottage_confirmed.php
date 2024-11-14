@@ -112,7 +112,7 @@ if (isset($_POST['confirm'])) {
     ?>
 
 
-    <title>Pendings</title>
+    <title>Confirmed</title>
 
     <script src="javascripts/totalFee.js" defer></script>
     <script src="javascripts/switch.js"></script>
@@ -200,6 +200,12 @@ if (isset($_POST['confirm'])) {
                                 <label>CUSTOMER AND RESERVATION INFO</label>
                             </div>
 
+                            <div class="line">
+                                <div>
+                                    <label>Reservation ID</label><br>
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
+                            </div>
 
                             <div class="line">
                                 <div>

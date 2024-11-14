@@ -128,6 +128,14 @@ if (isset($_GET['manage_id'])) {
                             <div class="header-label2">
                                 <label>RESERVATION INFO</label>
                             </div>
+
+                            <div class="line">
+                                <div>
+                                    <label>Reservation ID</label><br>
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
+                            </div>
+
                             <div>
                                 <div>
                                     <div class="line">

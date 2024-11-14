@@ -1,5 +1,5 @@
 <?php
-include ('db_connect.php');
+include('db_connect.php');
 session_start();
 
 
@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- important additional css -->
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/myReservationRoom.css?v=<?php echo time(); ?>">
@@ -55,7 +55,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- for header -->
     <?php include 'header.php' ?>
 
-    
+
 
 
     <main class="rooms-main-container">
@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
 
             if ($reservation_count == 0) {
                 // Display if user has no reservations
-                ?>
+            ?>
                 <div class="no-reservation-message">
                     <div class="house-icon"><i class="fa-solid fa-house-circle-exclamation"></i></div>
                     <label>There are no reservations yet. Browse rooms and cottages to reserve.</label>
@@ -78,13 +78,15 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             <?php } else { ?>
 
-            
+
 
 
 
                 <div class="content-center">
-                    <?php $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id";
+                    <?php
+                    $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id AND status != 'checkedOut'";
                     $result = mysqli_query($con, $fetchdata);
+
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];
                         $roomNumber = $row['room_number'];
@@ -96,14 +98,15 @@ if (isset($_SESSION['user_id'])) {
                         $price = $row['price'];
                         $status = $row['status'];
                         $photo = $row['photo'];
-                        ?>
 
+                        // Your HTML and display code for each reservation item
+                    ?>
 
                         <div class="items">
 
-                        <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
+                            <img src="<?php echo str_replace('../', '', $photo); ?>" alt="">
 
-
+                            <p style="text-align:center; font-weight:bold; text-transform:capitalize;"><?php echo $status ?></p>
                             <div class="container-of-labels">
 
                                 <div class="label-container">

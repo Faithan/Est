@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2024 at 04:11 AM
+-- Generation Time: Oct 22, 2024 at 09:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin_tbl` (
 --
 
 INSERT INTO `admin_tbl` (`admin_id`, `admin_type`, `first_name`, `last_name`, `username`, `password`) VALUES
-(1, 'super admin', 'admin', 'admin', 'super admin', 'admin');
+(1, 'admin', 'admin', 'admin', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE `cottage_status_tbl` (
 --
 
 INSERT INTO `cottage_status_tbl` (`cottage_status_id`, `cottage_status_name`, `cottage_status_description`) VALUES
-(1, 'standard', 'asdas'),
+(1, 'available', 'none'),
 (2, 'occupied', 'none\r\n'),
 (5, 'under management', 'none'),
 (6, 'under management', 'none'),
@@ -112,13 +112,12 @@ CREATE TABLE `cottage_tbl` (
 --
 
 INSERT INTO `cottage_tbl` (`cottage_id`, `cottage_status`, `cottage_number`, `cottage_type`, `number_of_person`, `day_price`, `night_price`, `cottage_photo`) VALUES
-(1, 'Available', 1234, 'Standard', 12, 1000, 1200, '../images/cottage.jpg'),
-(2, 'Available', 1234, 'Family', 13, 1000, 1200, '../images/bg9.jpg'),
-(3, 'Available', 1236, 'Standard', 13, 1000, 1200, '../images/cottage.jpg'),
-(5, 'Available', 1234, 'Standard', 12, 1000, 1200, '../images/cottage.jpg'),
-(6, 'Available', 1234, 'Barkadahan', 12, 1000, 1200, '../images/cottage.jpg'),
-(7, 'Available', 1235, 'Exclusive', 12, 1000, 1200, '../images/cottage.jpg'),
-(8, 'Available', 3214, 'Barkadahan', 12, 1000, 1200, '../images/cottage.jpg');
+(2, 'Available', 1239, 'Standard', 13, 1000, 1200, '../images/bg9.jpg'),
+(3, 'Available', 1238, 'Standard', 13, 1000, 1200, '../images/cottage.jpg'),
+(5, 'Available', 1237, 'Standard', 12, 1000, 1200, '../images/cottage.jpg'),
+(6, 'Available', 1236, 'Standard', 12, 1000, 1200, '../images/cottage.jpg'),
+(7, 'Available', 1235, 'Standard', 12, 1000, 1200, '../images/cottage.jpg'),
+(8, 'Available', 1234, 'Standard', 12, 1000, 1200, '../images/cottage.jpg');
 
 -- --------------------------------------------------------
 
@@ -137,10 +136,26 @@ CREATE TABLE `cottage_type_tbl` (
 --
 
 INSERT INTO `cottage_type_tbl` (`cottage_type_id`, `cottage_type_name`, `cottage_type_description`) VALUES
-(1, 'standard', '213124'),
-(2, 'family', 'none'),
-(6, 'barkadahan', 'none'),
-(8, 'superior', 'none');
+(1, 'standard', '213124');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gcash_tbl`
+--
+
+CREATE TABLE `gcash_tbl` (
+  `id` int(11) NOT NULL,
+  `gcash_number` varchar(255) NOT NULL,
+  `gcash_photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gcash_tbl`
+--
+
+INSERT INTO `gcash_tbl` (`id`, `gcash_number`, `gcash_photo`) VALUES
+(1, '0975467346', 'gcash_photo/gcash_pic.jpg');
 
 -- --------------------------------------------------------
 
@@ -167,6 +182,7 @@ CREATE TABLE `reserve_cottage_tbl` (
   `number_of_person` int(255) NOT NULL,
   `special_request` text NOT NULL,
   `cottage_photo` varchar(255) NOT NULL,
+  `reference_number` bigint(255) NOT NULL,
   `cottage_reserve_fee` bigint(255) NOT NULL,
   `rejection_reason` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -175,17 +191,11 @@ CREATE TABLE `reserve_cottage_tbl` (
 -- Dumping data for table `reserve_cottage_tbl`
 --
 
-INSERT INTO `reserve_cottage_tbl` (`reserve_id`, `user_id`, `reserve_status`, `reserve_type`, `first_name`, `middle_name`, `last_name`, `reserve_address`, `phone_number`, `email`, `date_of_arrival`, `time`, `price`, `cottage_number`, `cottage_type`, `number_of_person`, `special_request`, `cottage_photo`, `cottage_reserve_fee`, `rejection_reason`) VALUES
-(1, 38, 'cancelled', 'online', 'mark', 'jon', 'paul', 'asdafasf', 91215613215, '', '2024-07-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 100, ''),
-(2, 38, 'checkedOut', 'online', 'asasfasa', 'sfasfas', 'safasfa', 'sfasfasd', 34265235, '', '2024-08-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 100, ''),
-(3, 50, 'rejected', 'online', 'john ', 'asfas', ' bonustro', 'rebe, lala, lDN', 9456632525, 'Arjay@gmail.com', '2024-08-24', 'Night (6:00 PM to 5:00 AM)', 1200, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, ''),
-(4, 38, 'pending', 'online', 'user', 'user', 'user', 'marandi,lala, ldn', 968685567, '', '2024-08-25', 'Night (6:00 PM to 5:00 AM)', 1200, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, ''),
-(5, 38, 'checkedOut', 'online', 'arjay', 'llagas', 'bonustro', 'rebe, lala, ldn', 92632134125, '', '2024-08-28', 'Night (6:00 PM to 5:00 AM)', 1200, 1234, 'Standard', 12, '', '../images/cottage.jpg', 100, ''),
-(6, 0, 'pending', 'walk-in', 'arjay', 'bonustro', 'vvv', 'rebe', 9567473435, '', '2024-08-28', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, ''),
-(7, 0, 'pending', 'walk-in', 'arjay', 'llgas', 'bonustro', 'rebe, ', 91231512, '', '2024-08-28', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, ''),
-(8, 0, 'rejected', 'walk-in', 'hagorn', 'yb', 'huy', 'huyuhuy', 1234, 'ardbhs@gmail.com', '2024-08-28', 'Night (6:00 PM to 5:00 AM)', 1200, 1234, 'Standard', 12, 'naay chix', '../images/cottage.jpg', 0, ''),
-(9, 0, 'pending', 'walk-in', 'newuser', 'new', 'new', 'newuser', 92131515, '', '2024-08-31', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, ''),
-(10, 0, 'pending', 'walk-in', 'new', 'new', 'nrew', 'new', 91231512, '', '2024-08-30', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, '');
+INSERT INTO `reserve_cottage_tbl` (`reserve_id`, `user_id`, `reserve_status`, `reserve_type`, `first_name`, `middle_name`, `last_name`, `reserve_address`, `phone_number`, `email`, `date_of_arrival`, `time`, `price`, `cottage_number`, `cottage_type`, `number_of_person`, `special_request`, `cottage_photo`, `reference_number`, `cottage_reserve_fee`, `rejection_reason`) VALUES
+(15, 0, 'checkedIn', 'walk-in', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 9079678585687, 'johnwick@gmail.com', '2024-10-06', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, 100, ''),
+(16, 38, 'checkedOut', 'online', 'arjay', 'llagas', 'bunostro', 'marandi,lala, ldn', 912151121, '', '2024-10-25', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 1281798571, 200, ''),
+(17, 38, 'confirmed', 'online', 'sdfaa', 'fasfsa', 'asfaasf', 'hafafafaf', 89758438, '', '2024-10-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 200, ''),
+(18, 38, 'pending', 'online', 'sdfaa', 'fasfsa', 'asfaasf', 'hafafafaf', 89758438, '', '2024-10-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -215,6 +225,7 @@ CREATE TABLE `reserve_room_tbl` (
   `price` bigint(255) NOT NULL,
   `special_request` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
+  `reference_number` bigint(255) NOT NULL,
   `reservation_fee` bigint(255) NOT NULL,
   `extra_bed` int(255) NOT NULL,
   `extra_person` int(255) NOT NULL,
@@ -230,29 +241,35 @@ CREATE TABLE `reserve_room_tbl` (
 -- Dumping data for table `reserve_room_tbl`
 --
 
-INSERT INTO `reserve_room_tbl` (`reserve_id`, `user_id`, `status`, `reservation_type`, `fname`, `mname`, `lname`, `address`, `phone_number`, `email`, `date_of_arrival`, `time_of_arrival`, `room_number`, `room_type`, `bed_type`, `bed_quantity`, `number_of_person`, `amenities`, `price`, `special_request`, `photo`, `reservation_fee`, `extra_bed`, `extra_person`, `total_fee`, `extend_time`, `extend_price`, `additional_payment`, `time_out`, `rejection_reason`) VALUES
-(48, 0, 'checkedOut', '', 'arjay', '', 'bonustro', 'Purok-3 Rebe, Lala, Lanao Del Norte ', 9366307608, ' arjaybonustro@gmail.com', '2024-04-26', '15:00:00', 0, 'Standard', 'Double bed', 1, 2, 'Free wifi and Aircon split type', 91, '', '../images/standard1.jpg', 100, 0, 0, 0, 0, 0, 0, '12:00:00', ''),
-(49, 0, 'confirmed', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 9366307608, ' paul@gmail.com', '2024-04-25', '13:00:00', 0, 'Barkadahan', 'Bunk bed', 5, 10, 'Aircon-wifi-Dining area', 341, '', '../images/fg.jpg', 100, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(50, 0, 'checkedOut', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 9366307608, ' paul@gmail.com', '2024-04-25', '11:00:00', 0, 'Standard', 'Double bed', 1, 2, 'Free wifi and Aircon split type', 91, '', '../images/standard1.jpg', 100, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(51, 0, 'checkedOut', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 9366307608, ' paul@gmail.com', '2024-04-25', '11:00:00', 0, 'Barkadahan', 'Bunk bed', 5, 12, 'Aircon-wifi-Dining area-TV', 350, '', '../images/sax.jpg', 100, 0, 0, 0, 0, 0, 0, '12:00:00', ''),
-(52, 0, 'rejected', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 74298472398, ' paul@gmail.com', '2024-04-26', '14:00:00', 0, 'Barkadahan', 'Bunk bed', 5, 12, 'Aircon-wifi-Dining area-TV', 350, '', '../images/sax.jpg', 100, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(53, 0, 'checkedOut', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 9309023902, ' paul@gmail.com', '2024-04-25', '14:00:00', 0, 'Barkadahan', 'Bunk bed', 5, 12, 'Aircon-wifi-Dining area-TV', 350, '', '../images/sax.jpg', 100, 0, 0, 0, 0, 0, 0, '15:00:00', ''),
-(54, 0, 'checkedOut', '', 'paul', '', 'eyy', 'purok 3 Banana village, Kapatagan Lanao del norte ', 255444645, ' paul@gmail.com', '2024-04-25', '14:00:00', 0, 'Standard', 'Queen bed', 1, 2, 'Free wifi, Aircon split type and TV', 100, '', '../images/qw.jpg', 100, 0, 0, 0, 2, 200, 400, '10:00:00', ''),
-(55, 0, 'checkedOut', '', 'jm', '', 'maka', 'lapinig Kapatagan lala lanao del norte ', 9366639585, ' jm@gmail.com', '2024-04-26', '14:00:00', 0, 'Family', 'Bunk bed', 4, 10, 'Aircon-wifi-Dining area', 250, '', '../images/pa.jpg', 100, 0, 0, 150, 0, 0, 0, '11:00:00', ''),
-(56, 0, 'cancelled', '', 'paul', '', 'eyy', 'Purok-3 Rebe, Lala, Lanao Del Norte ', 9366307608, ' paul@gmail.com', '2024-05-05', '14:00:00', 0, 'Standard', 'Double bed', 1, 2, 'Free wifi, Aircon split type and TV', 150, '', '../images/qw.jpg', 100, 0, 0, 150, 0, 0, 0, '11:00:00', 'wa ni dayun'),
-(57, 0, 'checkedOut', '', 'arjay', 'loverboy', ' bonustro', 'marandi,lala, ldn ', 91251616136, ' Arjay@gmail.com', '2024-05-28', '14:00:00', 0, 'Superior', 'Double bed', 12, 12, 'free wifi and aircon', 2000, 'none', '../images/standard1.jpg', 0, 0, 0, 2000, 0, 0, 0, '11:00:00', ''),
-(66, 38, 'cancelled', 'online', 'john ', 'loverboy', 'Oni', 'marandi,lala, ldn', 4745464327, '', '2024-07-03', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', 'images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(71, 50, 'cancelled', 'online', 'arjay', 'llagas', 'Bonustro', 'rebe, lala, lDN', 123456, 'Arjay@gmail.com', '2024-08-24', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(72, 50, 'cancelled', 'online', 'john ', 'Babayaga', ' bonustro', 'rebe, lala, lDN', 123151346, 'johnwick@gmail.com', '2024-08-24', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(76, 38, 'confirmed', 'online', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 92523513, 'johnwick@gmail.com', '2024-08-24', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 2000, 0, 0, 0, '11:00:00', ''),
-(77, 38, 'extended', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 89676854, 'user@gmail.com', '2024-08-24', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 200, 1, 0, 2400, 1, 100, 100, '12:00:00', ''),
-(78, 38, 'rejected', 'online', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 9798795, 'user@gmail.com', '2024-08-24', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', 'no vacant'),
-(79, 38, 'pending', 'online', 'user', 'user', 'user', 'tenazas, Lala, LDN', 92314125124, '', '2024-08-25', '14:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(80, 0, 'pending', 'walk-in', 'arjay', 'llagas', 'bonustro', 'rebe,lala, ldn', 9213241254, '', '2024-08-28', '00:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 0, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(81, 0, 'pending', 'walk-in', 'arjay', 'llasga', 'adagasdr', 'reve', 987436345, '', '2024-08-28', '00:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 1, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(82, 0, 'pending', 'walk-in', 'arjau', 'asdafaga', 'adasdad', 'fafafa', 9867855, '', '2024-08-28', '14:38:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 1, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(83, 0, 'pending', 'walk-in', 'arjay', 'llagas', 'bonustro', 'rebe', 91234125, '', '2024-08-28', '15:04:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
-(84, 0, 'pending', 'walk-in', 'new', 'new', 'new', 'new', 98678595, '', '2024-08-30', '02:00:00', 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, '00:00:00', '');
+INSERT INTO `reserve_room_tbl` (`reserve_id`, `user_id`, `status`, `reservation_type`, `fname`, `mname`, `lname`, `address`, `phone_number`, `email`, `date_of_arrival`, `time_of_arrival`, `room_number`, `room_type`, `bed_type`, `bed_quantity`, `number_of_person`, `amenities`, `price`, `special_request`, `photo`, `reference_number`, `reservation_fee`, `extra_bed`, `extra_person`, `total_fee`, `extend_time`, `extend_price`, `additional_payment`, `time_out`, `rejection_reason`) VALUES
+(88, 0, 'checkedIn', 'walk-in', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 92352626, '', '2024-10-06', '18:29:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 200, 0, 0, 1800, 0, 0, 0, '11:00:00', ''),
+(89, 0, 'confirmed', 'walk-in', 'john ', 'llagas', 'Oni', 'rebe, lala, lDN', 923663626, '', '2024-10-15', '12:59:00', 1236, 'Standard', 'Single Bed', 2, 2, '', 1000, '', '../images/standard1.jpg', 0, 200, 0, 0, 1000, 0, 0, 0, '11:00:00', ''),
+(90, 0, 'confirmed', 'walk-in', 'arjay', 'llagas', 'bonustro', 'rebe, lala, lDN', 92262625, '', '2024-10-15', '12:01:00', 1235, 'Standard', 'Single Bed', 1, 2, '', 1000, '', '../images/af11d9a50d3ce7d5d7929df98d25271b.jpg', 0, 200, 0, 0, 1000, 0, 0, 0, '11:00:00', ''),
+(91, 38, 'checkedOut', 'online', 'username', 'usermname', 'userlastname', 'rebe, lala, lDN', 91215412516, 'user@gmail.com', '2024-10-26', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 182515116, 200, 0, 0, 1800, 0, 0, 0, '11:00:00', ''),
+(92, 38, 'confirmed', 'online', 'arjay', 'llagas', 'bunostro', 'marandi,lala, ldn', 912315116, '', '2024-10-26', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 465485454, 200, 0, 0, 2000, 0, 0, 0, '11:00:00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room_amenities_tbl`
+--
+
+CREATE TABLE `room_amenities_tbl` (
+  `amenity_id` int(11) NOT NULL,
+  `amenity_name` varchar(255) NOT NULL,
+  `amenity_description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `room_amenities_tbl`
+--
+
+INSERT INTO `room_amenities_tbl` (`amenity_id`, `amenity_name`, `amenity_description`) VALUES
+(1, 'air condition', 'none'),
+(2, 'wi-fi', 'none'),
+(3, 'television', 'none'),
+(4, 'robes and slippers', 'none'),
+(6, 'hair dryer', 'none');
 
 -- --------------------------------------------------------
 
@@ -272,7 +289,6 @@ CREATE TABLE `room_status_tbl` (
 
 INSERT INTO `room_status_tbl` (`room_status_id`, `room_status_name`, `room_status_description`) VALUES
 (1, 'available', 'none\r\n'),
-(2, 'occupied', 'none'),
 (4, 'unavailable', 'none'),
 (5, 'under management', 'under2');
 
@@ -300,13 +316,13 @@ CREATE TABLE `room_tbl` (
 --
 
 INSERT INTO `room_tbl` (`id`, `room_number`, `room_type`, `bed_type`, `bed_quantity`, `no_persons`, `amenities`, `price`, `status`, `photo`) VALUES
-(89, 1214, 'Superior', 'Double bed', 12, 12, 'free wifi and aircon', 2000, 'Coming soon', '../images/standard1.jpg'),
-(91, 1235, 'Standard', 'Single bed', 1, 1, 'free wifi', 2000, 'Available', '../images/single.jpg'),
-(98, 1858, 'Exclusive', 'King bed', 2, 2, 'free wifi, aircon, hot and cold shower and dining area', 2000, 'Available', '../images/single.jpg'),
-(100, 12443, 'Barkadahan', 'King bed', 2, 2, 'free wifi, aircon, hot and cold shower and dining area', 2000, 'Available', '../images/single.jpg'),
-(101, 1231541, 'Family', 'Single bed', 2, 2, 'free wifi, aircon, hot and cold shower and dining area', 1000, 'Available', '../images/standard1.jpg'),
-(102, 12415, 'Standard', 'Single bed', 2, 2, 'free wifi, aircon, hot and cold shower and dining area', 1000, 'Occupied', '../images/standard1.jpg'),
-(104, 1241, 'Standard', 'Single Bed', 1, 2, 'free wifi and aircon', 1000, 'Available', '../images/af11d9a50d3ce7d5d7929df98d25271b.jpg');
+(91, 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, 'Available', '../images/single.jpg'),
+(100, 1238, 'Barkadahan', 'King Bed', 2, 2, 'Air Condition, Wi-fi, Television', 2000, 'Available', '../images/single.jpg'),
+(101, 1237, 'Family', 'Single Bed', 2, 2, '', 1000, 'Available', '../images/standard1.jpg'),
+(102, 1236, 'Standard', 'Single Bed', 2, 2, '', 1000, 'Available', '../images/standard1.jpg'),
+(104, 1235, 'Standard', 'Single Bed', 1, 2, '', 1000, 'Available', '../images/af11d9a50d3ce7d5d7929df98d25271b.jpg'),
+(119, 1234, 'Standard', 'Single Bed', 1, 1, 'Wi-fi, Television, Robes And Slippers', 500, 'Available', '../images/670200092df4a5.59484472.jpg'),
+(120, 1239, 'Standard', 'Single Bed', 2, 24, 'Air Condition, Wi-fi, Television, Robes And Slippers', 2000, 'Available', '../images/671723ddbd93e1.97552534.jpg');
 
 -- --------------------------------------------------------
 
@@ -404,6 +420,12 @@ ALTER TABLE `cottage_type_tbl`
   ADD PRIMARY KEY (`cottage_type_id`);
 
 --
+-- Indexes for table `gcash_tbl`
+--
+ALTER TABLE `gcash_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reserve_cottage_tbl`
 --
 ALTER TABLE `reserve_cottage_tbl`
@@ -414,6 +436,12 @@ ALTER TABLE `reserve_cottage_tbl`
 --
 ALTER TABLE `reserve_room_tbl`
   ADD PRIMARY KEY (`reserve_id`);
+
+--
+-- Indexes for table `room_amenities_tbl`
+--
+ALTER TABLE `room_amenities_tbl`
+  ADD PRIMARY KEY (`amenity_id`);
 
 --
 -- Indexes for table `room_status_tbl`
@@ -477,13 +505,19 @@ ALTER TABLE `cottage_type_tbl`
 -- AUTO_INCREMENT for table `reserve_cottage_tbl`
 --
 ALTER TABLE `reserve_cottage_tbl`
-  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `reserve_room_tbl`
 --
 ALTER TABLE `reserve_room_tbl`
-  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+
+--
+-- AUTO_INCREMENT for table `room_amenities_tbl`
+--
+ALTER TABLE `room_amenities_tbl`
+  MODIFY `amenity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `room_status_tbl`
@@ -495,7 +529,7 @@ ALTER TABLE `room_status_tbl`
 -- AUTO_INCREMENT for table `room_tbl`
 --
 ALTER TABLE `room_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `room_type_tbl`

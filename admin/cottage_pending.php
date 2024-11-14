@@ -197,8 +197,17 @@ if (isset($_POST['confirm'])) {
                                 <label>CUSTOMER AND RESERVATION INFO</label>
                             </div>
 
+                            <div class="line">
+
+                            <div>
+                                <label>Reservation ID</label><br>
+                                <input value="<?php echo $manage_data['reserve_id']; ?>">
+                            </div>
+
+                            </div>
 
                             <div class="line">
+
                                 <div>
                                     <label>First Name</label><br>
                                     <input name="first_name" value="<?php echo $manage_data['first_name']; ?>">
