@@ -84,7 +84,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'] ?? null;
 
 // Check for pending reservations in reserve_cottage_tbl
 $cottage_pending = false;
@@ -154,21 +154,21 @@ $any_pending = $cottage_pending || $room_pending;
 
 
             <li class="dropdown">
-                <a href="myReservation.php" class="reservation-link">
-                    <?php if ($any_pending) : ?>
+                <a href="#" class="reservation-link">
+                    <?php if ($any_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                         <span class="red-dot"></span>
                     <?php endif; ?>
                     <i class="fa-solid fa-calendar-day"></i> My Reservation
                 </a>
                 <div class="dropdown-content">
                     <a href="myReservationCottage.php" onclick="checkLoggedIn(event)" class="reservation-item">
-                        <?php if ($cottage_pending) : ?>
+                        <?php if ($cottage_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                             <span class="red-dot"></span>
                         <?php endif; ?>
                         <i class="fa-solid fa-umbrella-beach"></i>For Cottages
                     </a>
                     <a href="myReservationRoom.php" onclick="checkLoggedIn(event)" class="reservation-item">
-                        <?php if ($room_pending) : ?>
+                        <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                             <span class="red-dot"></span>
                         <?php endif; ?>
                         <i class="fa-solid fa-bed"></i>For Rooms
@@ -204,7 +204,9 @@ $any_pending = $cottage_pending || $room_pending;
         <div class="burger-icon">
             <i class="fa-solid fa-bars"></i>
             <?php if ($any_pending) : ?>
-                <span class="red-dot" style="right:15px;"></span>
+                <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
+                    <span class="red-dot"></span>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>
@@ -247,7 +249,7 @@ $any_pending = $cottage_pending || $room_pending;
 
     <!-- Mobile Menu -->
     <a id="submenu2" class="mobile-reservation-link">
-        <?php if ($any_pending) : ?>
+        <?php if ($any_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
             <span class="red-dot"></span>
         <?php endif; ?>
         <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i>
@@ -255,13 +257,13 @@ $any_pending = $cottage_pending || $room_pending;
 
     <div class="submenu" id="subMenuContent2">
         <a href="myReservationCottage.php" onclick="checkLoggedIn(event)" class="mobile-reservation-item">
-            <?php if ($cottage_pending) : ?>
+            <?php if ($cottage_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                 <span class="red-dot"></span>
             <?php endif; ?>
             <i class="fa-solid fa-umbrella-beach"></i>For Cottages
         </a>
         <a href="myReservationRoom.php" onclick="checkLoggedIn(event)" class="mobile-reservation-item">
-            <?php if ($room_pending) : ?>
+            <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                 <span class="red-dot"></span>
             <?php endif; ?>
             <i class="fa-solid fa-bed"></i>For Rooms
