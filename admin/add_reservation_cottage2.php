@@ -49,6 +49,7 @@ if (isset($_POST['submit'])) {
     '$special_request',
     '$cottage_photo',
     '',
+    '',
     ''
     )";
 

@@ -70,16 +70,16 @@ a {
     --tdeven-color: #0023340c;
 
 
-     /* for proceed */
-     --proceed-color: white;
-     --proceed-bgcolor:  #242526;
- 
-     /* for cancel */
-     --cancel-color: white;
-     --cancel-bgcolor: #242526;
+  /* for proceed */
+  --proceed-color: white;
+  --proceed-bgcolor: #00527e;
 
-     --fixed-color: #242526;
-   
+  /* for cancel */
+  --cancel-color: white;
+  --cancel-bgcolor: #D62828;
+  --fixed-color: #effaff;
+
+
 
 
     --graph-title-color: #777; /* Change to your desired title color */
