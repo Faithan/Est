@@ -125,14 +125,12 @@ body {
 
 
 .reserveForm-contents input {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border: 1px solid var(--seventh-color);
+    background-color: var(--first-color2);
     line-height: 2;
-    border-radius: 5px;
     padding-left: 5px;
-    color: var(--seventh-color);
-    border: 0;
-    border-bottom: 1px solid var(--seventh-color);
+    color: gray;
 }
 
 .reserveForm-contents input[name="status"]{
@@ -143,10 +141,10 @@ body {
 }
 
 .reserveForm-contents .fixed-value-input{
-    background-color: var(--after-input);
     border: 0;
-    border-bottom: 1px solid var(--seventh-color);
-    
+    border-left: 1px dashed var(--seventh-color);
+    background-color: var(--first-color2);
+  
 }
 
 
@@ -156,12 +154,12 @@ body {
 
 .reserveForm-contents textarea {
     font-size: 1.4rem;
-    border: 1px solid var(--seventh-color);
+    border-left: 1px dashed var(--seventh-color);
+    background-color: var(--first-color2);
     height: 100px;
-    border-radius: 5px;
     padding: 5px;
-    border: 0;
-    border-bottom: 1px solid var(--seventh-color);
+   
+ 
 }
 
 .reserveForm-contents p {
@@ -183,16 +181,10 @@ body {
 .reserveForm-contents textarea.has-value {
     background-color: var(--after-input);
     color: var(--seventh-color);
-    border: 0;
-    border-bottom: 1px solid var(--seventh-color);
+  
     
 }
 
-.reserveForm-contents .fixed-value-textarea{
-    background-color: var(--after-input);
-    border: 0;
-    border-bottom: 1px solid var(--seventh-color);
-}
 
 
 .status-error {
@@ -441,16 +433,6 @@ For larger desktops and laptops:
     }
 
 
-    .reserveForm-contents input {
-        font-size: 1.4rem;
-        border: 0;
-        border-bottom: 1px solid var(--seventh-color);
-        line-height: 2;
-        border-radius: 0;
-        padding-left: 5px;
-        color: var(--seventh-color);
-    }
-
     .reserveForm-contents input[name="status"]{
         text-align: center;
         text-transform: uppercase;
@@ -458,22 +440,12 @@ For larger desktops and laptops:
         font-weight: bold;
     }
 
-    .reserveForm-contents .fixed-value-input{
-        background-color: var(--after-input);
-    }
+ }
 
 
 
 
    
-
-    .reserveForm-contents textarea {
-        font-size: 1.4rem;
-        border: 1px solid var(--seventh-color);
-        height: 100px;
-        border-radius: 5px;
-        padding: 5px;
-    }
 
     .reserveForm-contents p {
         font-size: 1.3rem;
@@ -495,10 +467,6 @@ For larger desktops and laptops:
         background-color: var(--after-input);
         color: var(--seventh-color);
         
-    }
-
-    .reserveForm-contents .fixed-value-textarea{
-        background-color: var(--after-input);
     }
 
 

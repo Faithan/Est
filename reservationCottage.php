@@ -108,6 +108,7 @@ if (isset($_GET['manage_id'])) {
 
                         echo $selectBox;
                         ?>
+                              <div><em style="color:var(--seventh-color);">*for Scrolling only*</em></div>
                     </div>
 
                     <!-- cottage type script -->

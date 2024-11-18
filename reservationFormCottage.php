@@ -436,13 +436,16 @@ if (isset($_POST['submit'])) {
                 });
             </script>
 
+            
+
 
 
             <!-- <p id="comment"> (fixed) Good for 22 hours, start time 2:00PM - 11:00AM</p> -->
 
 
 
-            <label class="bold-text">Room Details</label>
+            <label class="bold-text">Cottage Details</label>
+            
 
             <label>Cottage Number</label>
             <input class="fixed-value-input" name="cottage_number" onkeyup="changeColor(this)"
@@ -484,6 +487,10 @@ if (isset($_POST['submit'])) {
                 submitted data, we will be in contact with you.
             </p>
 
+            
+
+             
+
 
             <div class="reservationForm-buttons">
                 <button class="submit-btn" name="submit" type="submit">Submit</button>
@@ -494,6 +501,8 @@ if (isset($_POST['submit'])) {
 
 
     </main>
+
+
 
 
 

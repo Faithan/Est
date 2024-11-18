@@ -103,7 +103,7 @@ body {
 /* reserveform contents */
 
 .reserveForm-contents {
-    padding: 20px 400px;
+    padding: 20px 300px;
     display: flex;
     flex-direction: column;
     background-color: var(--first-color);

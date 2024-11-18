@@ -108,6 +108,8 @@ if (isset($_GET['manage_id'])) {
 
                         echo $selectBox;
                         ?>
+                        <br>
+                        <div><em style="color:var(--seventh-color);">*for Scrolling only*</em></div>
                     </div>
 
                     <!-- room type script -->
@@ -161,9 +163,12 @@ if (isset($_GET['manage_id'])) {
                             echo "<select name='bed_type' id='bedTypeSelect'>";
                             echo "<option disabled selected value=''>Select a Bed Type</option>";
                             echo "<option value=''>No bed types found.</option>";
-                            echo "</select>";
+                            echo "</select> ";
                         }
                         ?>
+                         <br>
+                        <div><em style="color:var(--seventh-color);">*for Filtering only*</em></div>
+                       
                     </div>
 
 

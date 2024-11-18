@@ -84,7 +84,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user_id'];
 
 // Check for pending reservations in reserve_cottage_tbl
 $cottage_pending = false;
@@ -249,7 +249,7 @@ $any_pending = $cottage_pending || $room_pending;
 
     <!-- Mobile Menu -->
     <a id="submenu2" class="mobile-reservation-link">
-        <?php if ($any_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
+        <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
             <span class="red-dot"></span>
         <?php endif; ?>
         <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i>

@@ -306,7 +306,7 @@ if (isset($_SESSION['user_id'])) {
         <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents">
             <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
             <label for="reference_number">Reference Number:</label>
-            <input type="number" name="reference_number" id="reference_number" style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--after-input)'; ?>;" value="<?php echo $manage_data['reference_number']; ?>" required <?php echo ($manage_data['status'] === 'pending') ? '' : 'readonly'; ?>>
+            <input type="number" name="reference_number" id="reference_number" style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--first-color2)'; ?>;" value="<?php echo $manage_data['reference_number']; ?>" required <?php echo ($manage_data['status'] === 'pending') ? '' : 'readonly'; ?>>
             <p>Note: Please ensure that the payment reference number is correct. If there is an error, you may resubmit the correct reference number. Once the reservation is confirment you can no longer change the reference number.</p>
             <button id="reference-submit" type="submit" style="color:var(--seventh-color); border: 1px solid var(--seventh-color3); padding: 10px; background-color:var(--sixth-color); font-size:1.5rem; font-weight:bold; border-radius: 5px; display:<?php echo ($manage_data['status'] === 'pending') ? '' : 'none'; ?>;">Submit</button>
         </form>
