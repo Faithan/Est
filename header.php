@@ -84,7 +84,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'] ?? NULL;
 
 // Check for pending reservations in reserve_cottage_tbl
 $cottage_pending = false;

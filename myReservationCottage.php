@@ -83,7 +83,7 @@ if (isset($_SESSION['user_id'])) {
 
 
                 <div class="content-center" style="background-color: var(--first-color2)">
-                    <?php $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id AND reserve_status != 'checkedOut'  AND reserve_status != 'cancelled'";
+                    <?php $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id AND reserve_status != 'checkedOut'  AND reserve_status != 'cancelled' ORDER BY reserve_Id DESC";
                     $result = mysqli_query($con, $fetchdata);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $reserve_id = $row['reserve_id'];

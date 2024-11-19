@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2024 at 09:04 AM
+-- Generation Time: Nov 19, 2024 at 01:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -192,10 +192,26 @@ CREATE TABLE `reserve_cottage_tbl` (
 --
 
 INSERT INTO `reserve_cottage_tbl` (`reserve_id`, `user_id`, `reserve_status`, `reserve_type`, `first_name`, `middle_name`, `last_name`, `reserve_address`, `phone_number`, `email`, `date_of_arrival`, `time`, `price`, `cottage_number`, `cottage_type`, `number_of_person`, `special_request`, `cottage_photo`, `reference_number`, `cottage_reserve_fee`, `rejection_reason`) VALUES
-(15, 0, 'checkedIn', 'walk-in', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 9079678585687, 'johnwick@gmail.com', '2024-10-06', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, 100, ''),
+(15, 0, 'checkedOut', 'walk-in', 'john ', 'Babayaga', 'wick', 'marandi,lala, ldn', 9079678585687, 'johnwick@gmail.com', '2024-10-06', 'Day (6:00 AM to 5:00 PM)', 1000, 1234, 'Standard', 12, '', '../images/cottage.jpg', 0, 100, ''),
 (16, 38, 'checkedOut', 'online', 'arjay', 'llagas', 'bunostro', 'marandi,lala, ldn', 912151121, '', '2024-10-25', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 1281798571, 200, ''),
 (17, 38, 'confirmed', 'online', 'sdfaa', 'fasfsa', 'asfaasf', 'hafafafaf', 89758438, '', '2024-10-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 200, ''),
-(18, 38, 'pending', 'online', 'sdfaa', 'fasfsa', 'asfaasf', 'hafafafaf', 89758438, '', '2024-10-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, '');
+(18, 38, 'pending', 'online', 'sdfaa', 'fasfsa', 'asfaasf', 'hafafafaf', 89758438, '', '2024-10-26', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 9999999999999999, 0, ''),
+(19, 0, 'checkedOut', 'walk-in', 'john', 'llagas', 'bunostro', 'rebe, lala, lDN', 9121151161, '', '2024-11-17', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(20, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'rebe, lala, lDN', 92324234234, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(21, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'rebe, lala, lDN', 92324234234, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(22, 38, 'rejected', 'online', 'john ', 'llagas', ' bonustro', 'rebe, lala, lDN', 909685856757, '', '2024-11-18', 'Night (6:00 PM to 5:00 AM)', 1200, 1239, 'Standard', 13, '', '', 0, 0, ''),
+(23, 38, 'rejected', 'online', 'john ', 'Babayaga', ' bonustro', 'rebe, lala, lDN', 956456456456, '', '2024-11-18', 'Night (6:00 PM to 5:00 AM)', 1200, 1239, 'Standard', 13, '', '', 0, 0, ''),
+(24, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'rebe, lala, lDN', 954646456456, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '', 0, 0, ''),
+(25, 38, 'rejected', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 945645645654, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '', 0, 0, ''),
+(26, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9456464564, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(27, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9456464564, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(28, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9456464564, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(29, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9456464564, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(30, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9456464564, '', '2024-11-18', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(31, 38, 'pending', 'online', 'adadasd', 'asdasdad', 'asdasdad', 'gfhfhghfhfg', 906757575, '', '2024-11-25', 'Night (6:00 PM to 5:00 AM)', 1200, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(32, 38, 'pending', 'online', 'adadasd', 'asdasdad', 'asdasdad', 'gfhfhghfhfg', 906757575, '', '2024-11-25', 'Night (6:00 PM to 5:00 AM)', 1200, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, ''),
+(33, 38, 'checkedIn', 'online', 'john', 'asdasdad', 'adadasdas', 'asdadada', 908776867876, '', '2024-11-23', 'Day (6:00 AM to 5:00 PM)', 1000, 1238, 'Standard', 13, '', '../images/cottage.jpg', 0, 200, ''),
+(34, 38, 'pending', 'online', 'asdads', 'asdasdad', 'adadada', 'asdada', 98798798, '', '2024-11-22', 'Day (6:00 AM to 5:00 PM)', 1000, 1239, 'Standard', 13, '', '../images/bg9.jpg', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -246,7 +262,16 @@ INSERT INTO `reserve_room_tbl` (`reserve_id`, `user_id`, `status`, `reservation_
 (89, 0, 'confirmed', 'walk-in', 'john ', 'llagas', 'Oni', 'rebe, lala, lDN', 923663626, '', '2024-10-15', '12:59:00', 1236, 'Standard', 'Single Bed', 2, 2, '', 1000, '', '../images/standard1.jpg', 0, 200, 0, 0, 1000, 0, 0, 0, '11:00:00', ''),
 (90, 0, 'confirmed', 'walk-in', 'arjay', 'llagas', 'bonustro', 'rebe, lala, lDN', 92262625, '', '2024-10-15', '12:01:00', 1235, 'Standard', 'Single Bed', 1, 2, '', 1000, '', '../images/af11d9a50d3ce7d5d7929df98d25271b.jpg', 0, 200, 0, 0, 1000, 0, 0, 0, '11:00:00', ''),
 (91, 38, 'checkedOut', 'online', 'username', 'usermname', 'userlastname', 'rebe, lala, lDN', 91215412516, 'user@gmail.com', '2024-10-26', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 182515116, 200, 0, 0, 1800, 0, 0, 0, '11:00:00', ''),
-(92, 38, 'confirmed', 'online', 'arjay', 'llagas', 'bunostro', 'marandi,lala, ldn', 912315116, '', '2024-10-26', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 465485454, 200, 0, 0, 2000, 0, 0, 0, '11:00:00', '');
+(92, 38, 'confirmed', 'online', 'arjay', 'llagas', 'bunostro', 'marandi,lala, ldn', 912315116, '', '2024-10-26', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 465485454, 200, 0, 0, 2000, 0, 0, 0, '11:00:00', ''),
+(93, 0, 'checkedOut', 'walk-in', 'john ', 'llagas', ' bonustro', 'rebe, lala, lDN', 925262262, '', '2024-11-17', '00:20:00', 1236, 'Standard', 'Single Bed', 2, 2, '', 1000, '', '../images/standard1.jpg', 0, 0, 0, 0, 1000, 0, 0, 0, '11:00:00', ''),
+(94, 38, 'pending', 'online', 'john ', 'Babayaga', ' bonustro', 'marandi,lala, ldn', 9345345345, '', '2024-11-22', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(95, 38, 'pending', 'online', 'asdasd', 'asdasd', 'asdasd', 'asdasd', 8898979, '', '2024-11-21', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(96, 38, 'pending', 'online', 'asdasd', 'asdasd', 'asdasd', 'asdasd', 8898979, '', '2024-11-21', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(97, 38, 'pending', 'online', 'asdasd', 'asdasd', 'asdasdas', 'asdasd', 9787687, '', '2024-11-22', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(98, 38, 'pending', 'online', 'ertert', 'ertert', 'ertet', 'rebe, lala, lDN', 9078978979, '', '2024-11-23', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(99, 38, 'pending', 'online', 'john ', 'fdsfsf', 'sfsdfsf', 'sdfsf', 9675675756, '', '2024-11-23', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(100, 38, 'cancelled', 'online', 'asdasd', 'asdasdasda', 'dasdasdad', 'adadasda', 965756757, '', '2024-11-22', '14:00:00', 1239, 'Standard', 'Single Bed', 1, 1, '', 2000, '', '../images/single.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', ''),
+(101, 38, 'cancelled', 'online', 'asdaa', 'asdadad', 'dad', 'asdads', 98978686, '', '2024-11-23', '14:00:00', 1236, 'Standard', 'Single Bed', 2, 2, '', 1000, '', '../images/standard1.jpg', 0, 0, 0, 0, 0, 0, 0, 0, '00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -505,13 +530,13 @@ ALTER TABLE `cottage_type_tbl`
 -- AUTO_INCREMENT for table `reserve_cottage_tbl`
 --
 ALTER TABLE `reserve_cottage_tbl`
-  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `reserve_room_tbl`
 --
 ALTER TABLE `reserve_room_tbl`
-  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `room_amenities_tbl`
