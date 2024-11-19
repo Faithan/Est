@@ -84,7 +84,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <div class="content-center">
                     <?php
-                    $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id AND status != 'checkedOut'";
+                    $fetchdata = "SELECT * FROM reserve_room_tbl WHERE user_id = $user_id AND status != 'checkedOut' AND status != 'cancelled'";
                     $result = mysqli_query($con, $fetchdata);
 
                     while ($row = mysqli_fetch_assoc($result)) {

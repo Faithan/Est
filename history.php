@@ -11,13 +11,13 @@ if (isset($_SESSION['user_id'])) {
 $roomQuery = "
     SELECT reserve_id, user_id, status, room_number, room_type, price, date_of_arrival, photo 
     FROM reserve_room_tbl 
-    WHERE user_id = $user_id AND status = 'checkedOut'
+    WHERE user_id = $user_id AND status = 'checkedOut' OR status = 'cancelled'
     ORDER BY date_of_arrival DESC";
 
 $cottageQuery = "
     SELECT reserve_id, user_id, reserve_status, cottage_number, cottage_type, price, date_of_arrival, cottage_photo 
     FROM reserve_cottage_tbl 
-    WHERE user_id = $user_id AND reserve_status = 'checkedOut'
+    WHERE user_id = $user_id AND reserve_status = 'checkedOut' OR reserve_status = 'cancelled'
     ORDER BY date_of_arrival DESC";
 
 // Execute both queries
@@ -88,7 +88,7 @@ usort($reservations, function ($a, $b) {
 
             <?php if (count($reservations) > 0): ?>
                 <?php foreach ($reservations as $reservation) :      ?>
-                    
+
                     <div class="reservation-card">
                         <!-- Display label for Room or Cottage -->
                         <?php if (isset($reservation['room_number'])): ?>
@@ -98,23 +98,32 @@ usort($reservations, function ($a, $b) {
                                 <label for="" class="reservation-label" style="background-color: #2980B9;">Room Reservation</label>
                                 <p class="title">Room Number: <?php echo $reservation['room_number']; ?> - <?php echo $reservation['room_type']; ?></p>
                                 <p class="date">Date of Arrival: <?php echo date('F d, Y', strtotime($reservation['date_of_arrival'])); ?></p>
-                                <p >Reservation Status: <?php echo $reservation['status']; ?></p>
+                                <p>Reservation Status: <?php echo $reservation['status']; ?></p>
                                 <a href="viewReservationRoom.php?manage_id=<?php echo $reservation['reserve_id']; ?>"><i class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         <?php else: ?>
 
                             <img src="<?php echo str_replace('../', '', $reservation['cottage_photo']); ?>" alt="Cottage Image">
                             <div class="info">
-                                <label for="" class="reservation-label"  style="background-color: red;">Cottage Reservation</label>
+                                <label for="" class="reservation-label" style="background-color: red;">Cottage Reservation</label>
                                 <p class="title">Cottage Number: <?php echo $reservation['cottage_number']; ?> - <?php echo $reservation['cottage_type']; ?></p>
                                 <p class="date">Date of Arrival: <?php echo date('F d, Y', strtotime($reservation['date_of_arrival'])); ?></p>
-                                <p >Reservation Status: <?php echo $reservation['reserve_status']; ?></p>
-                                <a href="viewReservationCottage.php?manage_id=<?php echo $reservation['reserve_id']; ?>"><i class="fa-regular fa-eye"></i> OPEN</a> 
+                                <p>Reservation Status: <?php echo $reservation['reserve_status']; ?></p>
+                                <a href="viewReservationCottage.php?manage_id=<?php echo $reservation['reserve_id']; ?>"><i class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         <?php endif; ?>
 
                         <div class="price">
-                            ₱<?php echo number_format($reservation['price'], 2); ?>
+                            <?php
+                            // Check if the status or reserve_status is cancelled for rooms or cottages
+                            if (isset($reservation['status']) && $reservation['status'] == 'cancelled') {
+                                echo "CANCELLED";
+                            } elseif (isset($reservation['reserve_status']) && $reservation['reserve_status'] == 'cancelled') {
+                                echo "CANCELLED";
+                            } else {
+                                echo "₱" . number_format($reservation['price'], 2);
+                            }
+                            ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -234,7 +243,7 @@ usort($reservations, function ($a, $b) {
             padding: 25px;
         }
 
-    
+
         .reservation-card img {
             width: 200px;
             height: 150px;

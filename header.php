@@ -103,7 +103,7 @@ if (mysqli_num_rows($result_room) > 0) {
 }
 
 // Check if either table has pending reservations
-$any_pending = $cottage_pending || $room_pending;
+$any_pending = $cottage_pending && $room_pending;
 ?>
 
 
@@ -161,18 +161,31 @@ $any_pending = $cottage_pending || $room_pending;
                     <i class="fa-solid fa-calendar-day"></i> My Reservation
                 </a>
                 <div class="dropdown-content">
-                    <a href="myReservationCottage.php" onclick="checkLoggedIn(event)" class="reservation-item">
+
+
+
+                    <a style="position: relative;" href="myReservationCottage.php" onclick="checkLoggedIn(event)" class="reservation-item">
                         <?php if ($cottage_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                             <span class="red-dot"></span>
                         <?php endif; ?>
                         <i class="fa-solid fa-umbrella-beach"></i>For Cottages
                     </a>
-                    <a href="myReservationRoom.php" onclick="checkLoggedIn(event)" class="reservation-item">
+
+
+
+
+
+
+                    <a style="position: relative;" href="myReservationRoom.php" onclick="checkLoggedIn(event)" class="reservation-item">
                         <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
                             <span class="red-dot"></span>
                         <?php endif; ?>
                         <i class="fa-solid fa-bed"></i>For Rooms
                     </a>
+
+
+
+
                 </div>
             </li>
 
@@ -249,7 +262,7 @@ $any_pending = $cottage_pending || $room_pending;
 
     <!-- Mobile Menu -->
     <a id="submenu2" class="mobile-reservation-link">
-        <?php if ($room_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
+        <?php if ($room_pending || $cottage_pending && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
             <span class="red-dot"></span>
         <?php endif; ?>
         <i class="fa-solid fa-calendar-day"></i> My Reservation <i class="fa-solid fa-caret-down"></i>

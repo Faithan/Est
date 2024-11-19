@@ -106,10 +106,6 @@ if (isset($_POST['submit'])) {
 
     <!-- javascript -->
 
-    <script src="landing_js/mobileMenu.js" defer></script>
-    <script src="landing_js/inputColor.js" defer></script>
-
-
     <!-- important additional css -->
     <?php
     include 'important.php'
@@ -209,9 +205,13 @@ if (isset($_POST['submit'])) {
                 title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',
                 text: '<?php echo $message; ?>',
                 icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
+            }).then(function() {
+                // Redirect to another page after the SweetAlert is closed
+                window.location.href = "reservationRoom.php"; // Replace with the actual URL you want to redirect to
             });
         </script>
     <?php endif; ?>
+
 
     <!-- for header -->
     <?php include 'header.php' ?>
@@ -456,6 +456,46 @@ if (isset($_POST['submit'])) {
             <label>Do you have any special request?</label>
             <textarea name="special_request" onkeyup="changeColor(this)"></textarea>
 
+            <!-- Terms and Conditions checkbox -->
+            <label class="checkbox-label">
+                <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
+                I agree to the <a href="termsAndCondition.php" target="_blank" style="color:blue;">Terms and Conditions.</a>
+            </label>
+
+            <style>
+                .checkbox-label {
+                    font-size: 2rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                 
+                }
+
+                /* Style the checkbox itself */
+                input[type="checkbox"] {
+                    width: 18px;
+                    /* Adjust the size */
+                    height: 18px;
+                    background-color: #fff;
+                    /* Background color */
+                    border: 2px solid #333;
+                    /* Border around checkbox */
+                    border-radius: 4px;
+                    /* Rounded corners */
+                    cursor: pointer;
+                    /* Show a pointer cursor on hover */
+                }
+
+
+                input[type="checkbox"]:checked {
+                    background-color: blue;
+                    /* Change background color when checked */
+                    border-color: #388e3c;
+                    /* Change border color */
+                }
+            </style>
+
+
             <p id="note">
                 <b>Note:</b> Please kindly provide all the necessary information required for your reservation.
                 Once you have submitted your reservation, please await confirmation. During the review of your
@@ -463,8 +503,9 @@ if (isset($_POST['submit'])) {
             </p>
 
 
+
             <div class="reservationForm-buttons">
-                <button class="submit-btn" name="submit" type="submit">Submit</button>
+                <button class="submit-btn" name="submit" type="submit" onclick="return checkTermsAndConditions()">Submit</button>
 
                 <a href="reservationRoom.php" class="cancel-btn">Cancel</a>
             </div>
@@ -473,6 +514,21 @@ if (isset($_POST['submit'])) {
 
     </main>
 
+    <script>
+        function checkTermsAndConditions() {
+            var termsCheckbox = document.getElementById("termsCheckbox");
+            if (!termsCheckbox.checked) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Terms & Conditions',
+                    text: 'Please agree to the Terms and Conditions before submitting the form.'
+                });
+                return false; // Prevent form submission
+            }
+            
+            return true; // Allow form submission if checked
+        }
+    </script>
 
 
 
