@@ -382,7 +382,7 @@ if (isset($_POST['checkedin'])) {
                                 </div>
 
                                 <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0; gap: 10px; font-size:1.2rem">
-                                    <input type="checkbox" id="confirmationCheckbox">
+                                    <input type="checkbox" id="confirmationCheckbox" required>
                                     <label for="confirmationCheckbox"> I confirm that the balance is paid</label>
 
                                 </div>

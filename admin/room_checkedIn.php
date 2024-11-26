@@ -388,6 +388,23 @@ if (isset($_POST['extended'])) {
 
                                 </div>
 
+                                <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0; gap: 10px; font-size:1.2rem">
+                                    <input type="checkbox" id="confirmationCheckbox" required>
+                                    <label for="confirmationCheckbox"> I confirm that the additional payment is paid</label>
+
+                                </div>
+                                <script>
+                                    // Handle form submission
+                                    document.querySelector('form').addEventListener('submit', function(event) {
+                                        const checkbox = document.getElementById('confirmationCheckbox');
+
+                                        // Prevent form submission if checkbox is not checked
+                                        if (!checkbox.checked) {
+                                            event.preventDefault();
+                                            alert('Please confirm that the balance is paid by checking the box.');
+                                        }
+                                    });
+                                </script>
 
                                 <div class="note">
                                     <p>
