@@ -64,429 +64,6 @@ session_start();
 
             <div class="center-container">
 
-                <div class="reports-base-container">
-
-                    <div class="reports-container">
-                        <h1>Cottage Reservation Summary</h1>
-                        <div class="base-income-container">
-                            <?php
-                            // Calculate income for cottages based on daily, monthly, and yearly intervals
-                            $cottageDailyIncome = $cottageMonthlyIncome = $cottageYearlyIncome = 0;
-
-                            // Query to get daily, monthly, and yearly income for cottages with "checkedOut" status
-                            $cottageIncomeQuery = "SELECT price, DATE(date_of_arrival) AS arrival_date 
-                                   FROM reserve_cottage_tbl 
-                                   WHERE reserve_status = 'checkedOut'";
-                            $cottageIncomeResult = $con->query($cottageIncomeQuery);
-
-                            if ($cottageIncomeResult->num_rows > 0) {
-                                while ($row = $cottageIncomeResult->fetch_assoc()) {
-                                    $price = $row['price'];
-                                    $arrivalDate = new DateTime($row['arrival_date']);
-                                    $today = new DateTime();
-
-                                    // Add to daily income if the arrival date is today
-                                    if ($arrivalDate->format('Y-m-d') == $today->format('Y-m-d')) {
-                                        $cottageDailyIncome += $price;
-                                    }
-
-                                    // Add to monthly income if the arrival date is within the current month
-                                    if ($arrivalDate->format('Y-m') == $today->format('Y-m')) {
-                                        $cottageMonthlyIncome += $price;
-                                    }
-
-                                    // Add to yearly income if the arrival date is within the current year
-                                    if ($arrivalDate->format('Y') == $today->format('Y')) {
-                                        $cottageYearlyIncome += $price;
-                                    }
-                                }
-                            }
-                            ?>
-                            <div class="income-container">
-                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($cottageDailyIncome, 2); ?></p>
-
-                            </div>
-                            <div class="income-container">
-                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($cottageMonthlyIncome, 2); ?></p>
-
-                            </div>
-                            <div class="income-container">
-                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($cottageYearlyIncome, 2); ?></p>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
-                                <?php
-                                // Query to calculate the total income from checked-out cottage reservations
-                                $totalIncomeCottagesQuery = "SELECT SUM(price) AS total_income FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
-                                $totalIncomeCottagesResult = $con->query($totalIncomeCottagesQuery);
-
-                                if ($totalIncomeCottagesResult) {
-                                    $incomeData = $totalIncomeCottagesResult->fetch_assoc();
-                                    $totalIncome = $incomeData['total_income'] ?? 0;
-                                    echo "<p>PHP " . number_format($totalIncome, 2) . "</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-                            <div class="income-container">
-                                <h2>Daily Checkouts <i class="fa-solid fa-campground"></i></h2>
-                                <?php
-                                // Query to count daily checked-out cottage reservations
-                                $dailyCheckedOutCottagesQuery = "SELECT COUNT(*) AS daily_checked_out 
-                                     FROM reserve_cottage_tbl 
-                                     WHERE reserve_status = 'checkedOut' 
-                                     AND DATE(date_of_arrival) = CURDATE()";
-                                $dailyCheckedOutCottagesResult = $con->query($dailyCheckedOutCottagesQuery);
-
-                                if ($dailyCheckedOutCottagesResult) {
-                                    $dailyCheckedOut = $dailyCheckedOutCottagesResult->fetch_assoc();
-                                    echo "<p> {$dailyCheckedOut['daily_checked_out']}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Monthly Checkouts <i class="fa-solid fa-campground"></i></h2>
-                                <?php
-                                // Query to count the number of checked-out cottages for the current month
-                                $monthlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
-                                $monthlyCheckedOutCottagesResult = $con->query($monthlyCheckedOutCottagesQuery);
-
-                                if ($monthlyCheckedOutCottagesResult) {
-                                    $monthlyData = $monthlyCheckedOutCottagesResult->fetch_assoc();
-                                    $monthlyCheckedOut = $monthlyData['monthly_checked_out'] ?? 0;
-                                    echo "<p> {$monthlyCheckedOut}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Yearly Checkouts <i class="fa-solid fa-campground"></i></h2>
-                                <?php
-                                // Query to count the number of checked-out cottages for the current year
-                                $yearlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
-                                $yearlyCheckedOutCottagesResult = $con->query($yearlyCheckedOutCottagesQuery);
-
-                                if ($yearlyCheckedOutCottagesResult) {
-                                    $yearlyData = $yearlyCheckedOutCottagesResult->fetch_assoc();
-                                    $yearlyCheckedOut = $yearlyData['yearly_checked_out'] ?? 0;
-                                    echo "<p> {$yearlyCheckedOut}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-
-                            <div class="income-container">
-                                <h2>Total Checkouts <i class="fa-solid fa-campground"></i></h2>
-                                <?php
-                                // Query to count checked-out cottage reservations
-                                $totalCheckedOutCottagesQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
-                                $totalCheckedOutCottagesResult = $con->query($totalCheckedOutCottagesQuery);
-
-                                if ($totalCheckedOutCottagesResult) {
-                                    $checkedOutCottage = $totalCheckedOutCottagesResult->fetch_assoc();
-                                    echo "<p>{$checkedOutCottage['total_checked_out']}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-
-                        </div>
-                        <?php
-                        // Query to fetch checked-out cottage reservations
-                        $cottageQuery = "SELECT * 
-                     FROM reserve_cottage_tbl 
-                     WHERE reserve_status = 'checkedOut'";
-                        $cottageResult = $con->query($cottageQuery);
-
-                        if ($cottageResult->num_rows > 0) {
-                            while ($row = $cottageResult->fetch_assoc()) {
-                                echo "
-            <div class='report-card'>
-                <p><strong>Reservation id:</strong> {$row['reserve_id']}</p>
-                <p><strong>Guest:</strong> {$row['first_name']} {$row['last_name']}</p>
-                <p><strong>Checked-in Date:</strong> {$row['date_of_arrival']}</p>
-                    <p style='color:green;'><strong>Status:</strong> Checked Out</p>
-                <p><strong>Income:</strong> PHP " . number_format($row['price'], 2) . "</p>
-            </div>";
-                            }
-                        } else {
-                            echo "<p>No checked-out cottage reservations.</p>";
-                        }
-                        ?>
-                    </div>
-
-                    <div class="reports-container">
-                        <h1>Room Reservation Summary</h1>
-                        <div class="base-income-container">
-                            <?php
-                            // Calculate income for rooms based on daily, monthly, and yearly intervals
-                            $roomDailyIncome = $roomMonthlyIncome = $roomYearlyIncome = 0;
-
-                            // Query to get daily, monthly, and yearly income for rooms with "checkedOut" status
-                            $roomIncomeQuery = "SELECT price, extend_price, DATE(date_of_arrival) AS arrival_date 
-                                FROM reserve_room_tbl 
-                                WHERE status = 'checkedOut'";
-                            $roomIncomeResult = $con->query($roomIncomeQuery);
-
-                            if ($roomIncomeResult->num_rows > 0) {
-                                while ($row = $roomIncomeResult->fetch_assoc()) {
-                                    $price = $row['price'] + ($row['extend_price'] ?? 0);
-                                    $arrivalDate = new DateTime($row['arrival_date']);
-                                    $today = new DateTime();
-
-                                    // Add to daily income if the arrival date is today
-                                    if ($arrivalDate->format('Y-m-d') == $today->format('Y-m-d')) {
-                                        $roomDailyIncome += $price;
-                                    }
-
-                                    // Add to monthly income if the arrival date is within the current month
-                                    if ($arrivalDate->format('Y-m') == $today->format('Y-m')) {
-                                        $roomMonthlyIncome += $price;
-                                    }
-
-                                    // Add to yearly income if the arrival date is within the current year
-                                    if ($arrivalDate->format('Y') == $today->format('Y')) {
-                                        $roomYearlyIncome += $price;
-                                    }
-                                }
-                            }
-                            ?>
-                            <div class="income-container">
-                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($roomDailyIncome, 2); ?> </p>
-
-                            </div>
-                            <div class="income-container">
-                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($roomMonthlyIncome, 2); ?></p>
-                            </div>
-                            <div class="income-container">
-                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
-                                <p>PHP <?php echo number_format($roomYearlyIncome, 2); ?></p>
-                            </div>
-                            <div class="income-container">
-                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
-                                <?php
-                                // Query to calculate the total income from checked-out room reservations, including extended prices
-                                $totalIncomeRoomsQuery = "SELECT SUM(price + IFNULL(extend_price, 0)) AS total_income FROM reserve_room_tbl WHERE status = 'checkedOut'";
-                                $totalIncomeRoomsResult = $con->query($totalIncomeRoomsQuery);
-
-                                if ($totalIncomeRoomsResult) {
-                                    $incomeData = $totalIncomeRoomsResult->fetch_assoc();
-                                    $totalIncome = $incomeData['total_income'] ?? 0;
-                                    echo "<p>PHP " . number_format($totalIncome, 2) . "</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Daily Checkouts <i class="fa-solid fa-bed"></i></h2>
-                                <?php
-                                // Query to count the number of checked-out rooms for today
-                                $dailyCheckedOutRoomsQuery = "SELECT COUNT(*) AS daily_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND DATE(date_of_arrival) = CURDATE()";
-                                $dailyCheckedOutRoomsResult = $con->query($dailyCheckedOutRoomsQuery);
-
-                                if ($dailyCheckedOutRoomsResult) {
-                                    $dailyData = $dailyCheckedOutRoomsResult->fetch_assoc();
-                                    $dailyCheckedOut = $dailyData['daily_checked_out'] ?? 0;
-                                    echo "<p> {$dailyCheckedOut}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Monthly Checkouts <i class="fa-solid fa-bed"></i></h2>
-                                <?php
-                                // Query to count the number of checked-out rooms for the current month
-                                $monthlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
-                                $monthlyCheckedOutRoomsResult = $con->query($monthlyCheckedOutRoomsQuery);
-
-                                if ($monthlyCheckedOutRoomsResult) {
-                                    $monthlyData = $monthlyCheckedOutRoomsResult->fetch_assoc();
-                                    $monthlyCheckedOut = $monthlyData['monthly_checked_out'] ?? 0;
-                                    echo "<p> {$monthlyCheckedOut}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-                            <div class="income-container">
-                                <h2>Yearly Checkouts <i class="fa-solid fa-bed"></i></h2>
-                                <?php
-                                // Query to count the number of checked-out rooms for the current year
-                                $yearlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
-                                $yearlyCheckedOutRoomsResult = $con->query($yearlyCheckedOutRoomsQuery);
-
-                                if ($yearlyCheckedOutRoomsResult) {
-                                    $yearlyData = $yearlyCheckedOutRoomsResult->fetch_assoc();
-                                    $yearlyCheckedOut = $yearlyData['yearly_checked_out'] ?? 0;
-                                    echo "<p> {$yearlyCheckedOut}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-
-
-
-
-                            <div class="income-container">
-                                <h2>Total Checkouts <i class="fa-solid fa-bed"></i></h2>
-                                <?php
-                                // Query to count checked-out room reservations
-                                $totalCheckedOutRoomsQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut'";
-                                $totalCheckedOutRoomsResult = $con->query($totalCheckedOutRoomsQuery);
-
-                                if ($totalCheckedOutRoomsResult) {
-                                    $checkedOutRoom = $totalCheckedOutRoomsResult->fetch_assoc();
-                                    echo "<p> {$checkedOutRoom['total_checked_out']}</p>";
-                                } else {
-                                    echo "<p>No data available.</p>";
-                                }
-                                ?>
-                            </div>
-
-
-
-                        </div>
-                        <?php
-                        // Query to fetch checked-out room reservations
-                        $roomQuery = "SELECT *
-                  FROM reserve_room_tbl 
-                  WHERE status = 'checkedOut'";
-                        $roomResult = $con->query($roomQuery);
-
-                        if ($roomResult->num_rows > 0) {
-                            while ($row = $roomResult->fetch_assoc()) {
-                                // Calculate total price including extended price if present
-                                $totalPrice = $row['price'] + ($row['extend_price'] ?? 0);
-
-                                echo "
-            <div class='report-card'>
-                <p><strong>Reservation id:</strong> {$row['reserve_id']}</p>
-                <p><strong>Guest:</strong> {$row['fname']} {$row['lname']}</p>
-                <p><strong>Checked-in Date:</strong> {$row['date_of_arrival']}</p>
-                <p style='color:green;'><strong >Status:</strong> Checked Out</p>
-                <p><strong>Income:</strong> PHP " . number_format($totalPrice, 2) . "</p>
-            </div>";
-                            }
-                        } else {
-                            echo "<p>No checked-out room reservations.</p>";
-                        }
-                        ?>
-                    </div>
-
-
-                </div>
-
-                <style>
-                    .base-income-container {
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: wrap;
-                        gap: 5px;
-                    }
-
-                    .income-container {
-                        border: 1px dashed var(--box-shadow);
-                        padding: 10px;
-                        flex-grow: 1;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 5px;
-
-                    }
-
-                    .income-container h2 {
-                        font-size: 1.2rem;
-                        color: var(--seventh-color);
-                    }
-
-                    .income-container p {
-                        font-size: 1.1rem;
-                    }
-
-                    /* Report Card Styling */
-                    .report-card {
-                        background-color: var(--first-color);
-                        border: 1px dashed var(--box-shadow);
-                        border-top-left-radius: 5px solid Green;
-                        padding: 10px;
-                        border-left: 5px solid orange;
-                        border-radius: 5px;
-
-                    }
-
-                    .report-card p {
-
-                        color: gray;
-                        font-size: 1.2rem;
-                    }
-
-                    .report-card p strong {
-                        color: var(--seventh-color);
-
-
-                    }
-
-                    .reports-base-container {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        padding: 10px;
-                        gap: 10px;
-
-                    }
-
-                    .reports-container {
-                        flex-grow: 1;
-                        background-color: var(--first-color);
-                        padding: 10px;
-                        border: 1px solid var(--box-shadow);
-                        display: flex;
-                        flex-direction: column;
-                        gap: 5px;
-                        overflow-y: scroll;
-                        min-height: 600px;
-                        max-height: 600px;
-
-                    }
-
-                    .reports-container h1 {
-                        text-align: center;
-                        font-size: 2rem;
-                        color: var(--pure-white);
-                        background-color: var(--eight-color);
-                        padding: 5px;
-                        border: 1px solid var(--box-shadow);
-                        position: sticky;
-                        top: 0;
-                        z-index: 999;
-                    }
-                </style>
-
 
 
 
@@ -993,12 +570,437 @@ session_start();
 
 
                 </div>
+
+
+
+                <div class="reports-base-container">
+
+                    <div class="reports-container">
+                        <h1>Short Cottage Reservation Summary</h1>
+                        <div class="base-income-container">
+                            <?php
+                            // Calculate income for cottages based on daily, monthly, and yearly intervals
+                            $cottageDailyIncome = $cottageMonthlyIncome = $cottageYearlyIncome = 0;
+
+                            // Query to get daily, monthly, and yearly income for cottages with "checkedOut" status
+                            $cottageIncomeQuery = "SELECT price, DATE(date_of_arrival) AS arrival_date 
+               FROM reserve_cottage_tbl 
+               WHERE reserve_status = 'checkedOut'";
+                            $cottageIncomeResult = $con->query($cottageIncomeQuery);
+
+                            if ($cottageIncomeResult->num_rows > 0) {
+                                while ($row = $cottageIncomeResult->fetch_assoc()) {
+                                    $price = $row['price'];
+                                    $arrivalDate = new DateTime($row['arrival_date']);
+                                    $today = new DateTime();
+
+                                    // Add to daily income if the arrival date is today
+                                    if ($arrivalDate->format('Y-m-d') == $today->format('Y-m-d')) {
+                                        $cottageDailyIncome += $price;
+                                    }
+
+                                    // Add to monthly income if the arrival date is within the current month
+                                    if ($arrivalDate->format('Y-m') == $today->format('Y-m')) {
+                                        $cottageMonthlyIncome += $price;
+                                    }
+
+                                    // Add to yearly income if the arrival date is within the current year
+                                    if ($arrivalDate->format('Y') == $today->format('Y')) {
+                                        $cottageYearlyIncome += $price;
+                                    }
+                                }
+                            }
+                            ?>
+                            <div class="income-container">
+                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($cottageDailyIncome, 2); ?></p>
+
+                            </div>
+                            <div class="income-container">
+                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($cottageMonthlyIncome, 2); ?></p>
+
+                            </div>
+                            <div class="income-container">
+                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($cottageYearlyIncome, 2); ?></p>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
+                                <?php
+                                // Query to calculate the total income from checked-out cottage reservations
+                                $totalIncomeCottagesQuery = "SELECT SUM(price) AS total_income FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
+                                $totalIncomeCottagesResult = $con->query($totalIncomeCottagesQuery);
+
+                                if ($totalIncomeCottagesResult) {
+                                    $incomeData = $totalIncomeCottagesResult->fetch_assoc();
+                                    $totalIncome = $incomeData['total_income'] ?? 0;
+                                    echo "<p>PHP " . number_format($totalIncome, 2) . "</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+                            <div class="income-container">
+                                <h2>Daily Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <?php
+                                // Query to count daily checked-out cottage reservations
+                                $dailyCheckedOutCottagesQuery = "SELECT COUNT(*) AS daily_checked_out 
+                 FROM reserve_cottage_tbl 
+                 WHERE reserve_status = 'checkedOut' 
+                 AND DATE(date_of_arrival) = CURDATE()";
+                                $dailyCheckedOutCottagesResult = $con->query($dailyCheckedOutCottagesQuery);
+
+                                if ($dailyCheckedOutCottagesResult) {
+                                    $dailyCheckedOut = $dailyCheckedOutCottagesResult->fetch_assoc();
+                                    echo "<p> {$dailyCheckedOut['daily_checked_out']}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Monthly Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <?php
+                                // Query to count the number of checked-out cottages for the current month
+                                $monthlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
+                                $monthlyCheckedOutCottagesResult = $con->query($monthlyCheckedOutCottagesQuery);
+
+                                if ($monthlyCheckedOutCottagesResult) {
+                                    $monthlyData = $monthlyCheckedOutCottagesResult->fetch_assoc();
+                                    $monthlyCheckedOut = $monthlyData['monthly_checked_out'] ?? 0;
+                                    echo "<p> {$monthlyCheckedOut}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Yearly Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <?php
+                                // Query to count the number of checked-out cottages for the current year
+                                $yearlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
+                                $yearlyCheckedOutCottagesResult = $con->query($yearlyCheckedOutCottagesQuery);
+
+                                if ($yearlyCheckedOutCottagesResult) {
+                                    $yearlyData = $yearlyCheckedOutCottagesResult->fetch_assoc();
+                                    $yearlyCheckedOut = $yearlyData['yearly_checked_out'] ?? 0;
+                                    echo "<p> {$yearlyCheckedOut}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+
+                            <div class="income-container">
+                                <h2>Total Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <?php
+                                // Query to count checked-out cottage reservations
+                                $totalCheckedOutCottagesQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
+                                $totalCheckedOutCottagesResult = $con->query($totalCheckedOutCottagesQuery);
+
+                                if ($totalCheckedOutCottagesResult) {
+                                    $checkedOutCottage = $totalCheckedOutCottagesResult->fetch_assoc();
+                                    echo "<p>{$checkedOutCottage['total_checked_out']}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+
+                        </div>
+                        <?php
+                        // Query to fetch checked-out cottage reservations
+                        $cottageQuery = "SELECT * 
+ FROM reserve_cottage_tbl 
+ WHERE reserve_status = 'checkedOut'";
+                        $cottageResult = $con->query($cottageQuery);
+
+                        if ($cottageResult->num_rows > 0) {
+                            while ($row = $cottageResult->fetch_assoc()) {
+                                echo "
+<div class='report-card'>
+<p><strong>Reservation id:</strong> {$row['reserve_id']}</p>
+<p><strong>Guest:</strong> {$row['first_name']} {$row['last_name']}</p>
+<p><strong>Checked-in Date:</strong> {$row['date_of_arrival']}</p>
+<p style='color:green;'><strong>Status:</strong> Checked Out</p>
+<p><strong>Income:</strong> PHP " . number_format($row['price'], 2) . "</p>
+</div>";
+                            }
+                        } else {
+                            echo "<p>No checked-out cottage reservations.</p>";
+                        }
+                        ?>
+                    </div>
+
+                    <div class="reports-container">
+                        <h1>Short Room Reservation Summary</h1>
+                        <div class="base-income-container">
+                            <?php
+                            // Calculate income for rooms based on daily, monthly, and yearly intervals
+                            $roomDailyIncome = $roomMonthlyIncome = $roomYearlyIncome = 0;
+
+                            // Query to get daily, monthly, and yearly income for rooms with "checkedOut" status
+                            $roomIncomeQuery = "SELECT price, extend_price, DATE(date_of_arrival) AS arrival_date 
+            FROM reserve_room_tbl 
+            WHERE status = 'checkedOut'";
+                            $roomIncomeResult = $con->query($roomIncomeQuery);
+
+                            if ($roomIncomeResult->num_rows > 0) {
+                                while ($row = $roomIncomeResult->fetch_assoc()) {
+                                    $price = $row['price'] + ($row['extend_price'] ?? 0);
+                                    $arrivalDate = new DateTime($row['arrival_date']);
+                                    $today = new DateTime();
+
+                                    // Add to daily income if the arrival date is today
+                                    if ($arrivalDate->format('Y-m-d') == $today->format('Y-m-d')) {
+                                        $roomDailyIncome += $price;
+                                    }
+
+                                    // Add to monthly income if the arrival date is within the current month
+                                    if ($arrivalDate->format('Y-m') == $today->format('Y-m')) {
+                                        $roomMonthlyIncome += $price;
+                                    }
+
+                                    // Add to yearly income if the arrival date is within the current year
+                                    if ($arrivalDate->format('Y') == $today->format('Y')) {
+                                        $roomYearlyIncome += $price;
+                                    }
+                                }
+                            }
+                            ?>
+                            <div class="income-container">
+                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($roomDailyIncome, 2); ?> </p>
+
+                            </div>
+                            <div class="income-container">
+                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($roomMonthlyIncome, 2); ?></p>
+                            </div>
+                            <div class="income-container">
+                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
+                                <p>PHP <?php echo number_format($roomYearlyIncome, 2); ?></p>
+                            </div>
+                            <div class="income-container">
+                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
+                                <?php
+                                // Query to calculate the total income from checked-out room reservations, including extended prices
+                                $totalIncomeRoomsQuery = "SELECT SUM(price + IFNULL(extend_price, 0)) AS total_income FROM reserve_room_tbl WHERE status = 'checkedOut'";
+                                $totalIncomeRoomsResult = $con->query($totalIncomeRoomsQuery);
+
+                                if ($totalIncomeRoomsResult) {
+                                    $incomeData = $totalIncomeRoomsResult->fetch_assoc();
+                                    $totalIncome = $incomeData['total_income'] ?? 0;
+                                    echo "<p>PHP " . number_format($totalIncome, 2) . "</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Daily Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <?php
+                                // Query to count the number of checked-out rooms for today
+                                $dailyCheckedOutRoomsQuery = "SELECT COUNT(*) AS daily_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND DATE(date_of_arrival) = CURDATE()";
+                                $dailyCheckedOutRoomsResult = $con->query($dailyCheckedOutRoomsQuery);
+
+                                if ($dailyCheckedOutRoomsResult) {
+                                    $dailyData = $dailyCheckedOutRoomsResult->fetch_assoc();
+                                    $dailyCheckedOut = $dailyData['daily_checked_out'] ?? 0;
+                                    echo "<p> {$dailyCheckedOut}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Monthly Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <?php
+                                // Query to count the number of checked-out rooms for the current month
+                                $monthlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
+                                $monthlyCheckedOutRoomsResult = $con->query($monthlyCheckedOutRoomsQuery);
+
+                                if ($monthlyCheckedOutRoomsResult) {
+                                    $monthlyData = $monthlyCheckedOutRoomsResult->fetch_assoc();
+                                    $monthlyCheckedOut = $monthlyData['monthly_checked_out'] ?? 0;
+                                    echo "<p> {$monthlyCheckedOut}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+                            <div class="income-container">
+                                <h2>Yearly Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <?php
+                                // Query to count the number of checked-out rooms for the current year
+                                $yearlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
+                                $yearlyCheckedOutRoomsResult = $con->query($yearlyCheckedOutRoomsQuery);
+
+                                if ($yearlyCheckedOutRoomsResult) {
+                                    $yearlyData = $yearlyCheckedOutRoomsResult->fetch_assoc();
+                                    $yearlyCheckedOut = $yearlyData['yearly_checked_out'] ?? 0;
+                                    echo "<p> {$yearlyCheckedOut}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+
+
+
+
+                            <div class="income-container">
+                                <h2>Total Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <?php
+                                // Query to count checked-out room reservations
+                                $totalCheckedOutRoomsQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut'";
+                                $totalCheckedOutRoomsResult = $con->query($totalCheckedOutRoomsQuery);
+
+                                if ($totalCheckedOutRoomsResult) {
+                                    $checkedOutRoom = $totalCheckedOutRoomsResult->fetch_assoc();
+                                    echo "<p> {$checkedOutRoom['total_checked_out']}</p>";
+                                } else {
+                                    echo "<p>No data available.</p>";
+                                }
+                                ?>
+                            </div>
+
+
+
+                        </div>
+                        <?php
+                        // Query to fetch checked-out room reservations
+                        $roomQuery = "SELECT *
+FROM reserve_room_tbl 
+WHERE status = 'checkedOut'";
+                        $roomResult = $con->query($roomQuery);
+
+                        if ($roomResult->num_rows > 0) {
+                            while ($row = $roomResult->fetch_assoc()) {
+                                // Calculate total price including extended price if present
+                                $totalPrice = $row['price'] + ($row['extend_price'] ?? 0);
+
+                                echo "
+<div class='report-card'>
+<p><strong>Reservation id:</strong> {$row['reserve_id']}</p>
+<p><strong>Guest:</strong> {$row['fname']} {$row['lname']}</p>
+<p><strong>Checked-in Date:</strong> {$row['date_of_arrival']}</p>
+<p style='color:green;'><strong >Status:</strong> Checked Out</p>
+<p><strong>Income:</strong> PHP " . number_format($totalPrice, 2) . "</p>
+</div>";
+                            }
+                        } else {
+                            echo "<p>No checked-out room reservations.</p>";
+                        }
+                        ?>
+                    </div>
+
+
+                </div>
+
+                <style>
+                    .base-income-container {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap: 5px;
+                    }
+
+                    .income-container {
+                        border: 1px dashed var(--box-shadow);
+                        padding: 10px;
+                        flex-grow: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 5px;
+
+                    }
+
+                    .income-container h2 {
+                        font-size: 1.2rem;
+                        color: var(--seventh-color);
+                    }
+
+                    .income-container p {
+                        font-size: 1.1rem;
+                    }
+
+                    /* Report Card Styling */
+                    .report-card {
+                        background-color: var(--first-color);
+                        border: 1px dashed var(--box-shadow);
+                        border-top-left-radius: 5px solid Green;
+                        padding: 10px;
+                        border-left: 5px solid orange;
+                        border-radius: 5px;
+
+                    }
+
+                    .report-card p {
+
+                        color: gray;
+                        font-size: 1.2rem;
+                    }
+
+                    .report-card p strong {
+                        color: var(--seventh-color);
+
+
+                    }
+
+                    .reports-base-container {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                        gap: 10px;
+
+                    }
+
+                    .reports-container {
+                        flex-grow: 1;
+                        background-color: var(--first-color);
+                        padding: 10px;
+                        border: 1px solid var(--box-shadow);
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        overflow-y: scroll;
+                        min-height: 600px;
+                        max-height: 600px;
+
+                    }
+
+                    .reports-container h1 {
+                        text-align: center;
+                        font-size: 2rem;
+                        color: var(--pure-white);
+                        background-color: var(--eight-color);
+                        padding: 5px;
+                        border: 1px solid var(--box-shadow);
+                        position: sticky;
+                        top: 0;
+                        z-index: 999;
+                    }
+                </style>
+
+
+
+
+                <!-- center contianer -->
             </div>
-
-
-
-
-
 
         </section>
 

@@ -8,6 +8,7 @@
         <div class="menu">
             <div class="item"><a href="dashboard.php"><i class="fa-solid fa-chart-simple"></i> Overview</a></div>
             <div class="item"><a href="calendar.php"><i class="fa-solid fa-calendar-days"></i> Calendar</a></div>
+
             <div class="item">
                 <a href="#" class="dropdown-link"><i class="fa-solid fa-calendar"></i> Reservations <i
                         class="fa-solid fa-caret-down dropdown"></i></a>
@@ -28,6 +29,18 @@
                         Cottages</a>
                     <a href="dashboardRooms.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> Rooms</a>
                 </div>
+            </div>
+
+            <div class="item">
+
+                <a href="#" class="dropdown-link"><i class="fa-solid fa-clipboard-list"></i> Reports <i
+                        class="fa-solid fa-caret-down dropdown"></i></a>
+                <!-- dropdown -->
+                <div class="sub-menu">
+                    <a href="cottageReservationReports.php" class="sub-menu-item"> <i class="fa-solid fa-campground"></i> For Cottages</a>
+                    <a href="roomReservationReports.php" class="sub-menu-item"><i class="fa-solid fa-bed"></i> For Rooms</a>
+                </div>
+                
             </div>
 
             <div class="item">

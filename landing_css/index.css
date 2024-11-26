@@ -45,7 +45,7 @@ body {
 .wave-text h2 {
     position: absolute;
 
-    font-size: 4.5rem;
+    font-size: 4rem;
     transform: translate(0, -50%);
     font-weight: bold;
     line-height: 2;
@@ -823,7 +823,7 @@ For larger desktops and laptops:
     .wave-text h2 {
     
     
-        font-size: 4rem;
+        font-size: 3.5rem;
         transform: translate(0, -50%);
       
     }

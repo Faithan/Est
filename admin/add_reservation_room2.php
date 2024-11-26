@@ -60,6 +60,7 @@ if (isset($_POST['submit'])) {
     '',
     '',
     '',
+    '',
     '')";
 
     $query = (mysqli_query($con, $savedata));
@@ -74,7 +75,6 @@ if (isset($_POST['submit'])) {
         $message = "Form Submission Failed!";
         $isSuccess = false;
     }
-
 }
 
 
@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Walk-in Room Reservation</title>
@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
 
             <?php
             include 'logoutbtn.php'
-                ?>
+            ?>
 
         </section>
 
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Walk-in Room Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -265,7 +265,7 @@ if (isset($_POST['submit'])) {
                                 /* Increase calendar width */
                             }
 
-                 
+
                             /* Custom styles for reserved dates */
                             .reserved-date {
                                 background-color: var(--fifth-color) !important;
@@ -286,7 +286,7 @@ if (isset($_POST['submit'])) {
                         </style>
 
                         <script>
-                            $(function () {
+                            $(function() {
                                 // Get reserved dates from PHP
                                 var disabledDates = <?php echo $disabled_dates; ?>;
 
@@ -297,7 +297,7 @@ if (isset($_POST['submit'])) {
                                 // Initialize the datepicker
                                 $('#date_of_arrival').datepicker({
                                     dateFormat: 'yy-mm-dd',
-                                    beforeShowDay: function (date) {
+                                    beforeShowDay: function(date) {
                                         var dateString = $.datepicker.formatDate('yy-mm-dd', date);
 
                                         // Disable past dates
@@ -312,7 +312,7 @@ if (isset($_POST['submit'])) {
 
                                         return [true, '', ''];
                                     },
-                                    onSelect: function (dateText, inst) {
+                                    onSelect: function(dateText, inst) {
                                         var selectedDate = new Date(dateText);
                                         selectedDate.setHours(0, 0, 0, 0); // Set time to 00:00:00 for comparison
 

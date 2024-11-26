@@ -43,6 +43,8 @@ if (isset($_POST['submit'])) {
     '$date_of_arrival',
     '$time',
     '$price',
+     '',
+      '',
     '$cottage_number',
     '$cottage_type',
     '$number_of_person',
@@ -65,7 +67,6 @@ if (isset($_POST['submit'])) {
         $message = "Form Submission Failed!";
         $isSuccess = false;
     }
-
 }
 
 
@@ -81,7 +82,7 @@ if (isset($_POST['submit'])) {
     <!-- important files -->
     <?php
     include 'assets.php'
-        ?>
+    ?>
 
 
     <title>Walk-in Room Reservation</title>
@@ -122,7 +123,7 @@ if (isset($_POST['submit'])) {
 
             <?php
             include 'logoutbtn.php'
-                ?>
+            ?>
 
 
         </section>
@@ -135,7 +136,7 @@ if (isset($_POST['submit'])) {
                     <label for=""><i class="fa-solid fa-gear"></i> Walk-in Room Reservation</label>
                 </div>
 
-                <?php include 'icon-container.php'?>
+                <?php include 'icon-container.php' ?>
             </div>
 
 
@@ -287,7 +288,7 @@ if (isset($_POST['submit'])) {
                         </style>
 
                         <script>
-                            $(function () {
+                            $(function() {
                                 // Get reserved dates and times from PHP
                                 var disabledDatesTimes = <?php echo $disabled_dates_times; ?>;
 
@@ -298,7 +299,7 @@ if (isset($_POST['submit'])) {
                                 // Initialize the datepicker
                                 $('#date_of_arrival').datepicker({
                                     dateFormat: 'yy-mm-dd',
-                                    beforeShowDay: function (date) {
+                                    beforeShowDay: function(date) {
                                         var dateString = $.datepicker.formatDate('yy-mm-dd', date);
 
                                         // Disable past dates
@@ -313,7 +314,7 @@ if (isset($_POST['submit'])) {
 
                                         return [true, '', ''];
                                     },
-                                    onSelect: function (dateText, inst) {
+                                    onSelect: function(dateText, inst) {
                                         var selectedDate = new Date(dateText);
                                         selectedDate.setHours(0, 0, 0, 0);
 
@@ -346,7 +347,7 @@ if (isset($_POST['submit'])) {
                                             }
 
                                             // Disable the reserved times
-                                            $('#check_in_time').find('option').each(function () {
+                                            $('#check_in_time').find('option').each(function() {
                                                 if (reservedTimes.indexOf($(this).val()) !== -1) {
                                                     $(this).prop('disabled', true);
                                                 } else {
@@ -355,7 +356,7 @@ if (isset($_POST['submit'])) {
                                             });
 
                                             // Disable corresponding price options based on reserved times
-                                            $('#price').find('option').each(function () {
+                                            $('#price').find('option').each(function() {
                                                 if (isDayReserved && $(this).data('time') === 'Day') {
                                                     $(this).prop('disabled', true);
                                                 }
@@ -383,7 +384,7 @@ if (isset($_POST['submit'])) {
                             });
 
                             // Handle time selection to update price
-                            document.getElementById("check_in_time").addEventListener("change", function () {
+                            document.getElementById("check_in_time").addEventListener("change", function() {
                                 var checkInTime = document.getElementById("check_in_time");
                                 var price = document.getElementById("price");
 
@@ -395,7 +396,7 @@ if (isset($_POST['submit'])) {
                             });
 
                             // Ensure price selection syncs with time selection
-                            document.getElementById("price").addEventListener("change", function () {
+                            document.getElementById("price").addEventListener("change", function() {
                                 var price = document.getElementById("price");
                                 var checkInTime = document.getElementById("check_in_time");
 
