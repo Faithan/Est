@@ -49,6 +49,8 @@ if (isset($_POST['submit'])) {
     '$date_of_arrival',
     '$time',
     '$price',
+    '',
+    '',
     '$cottage_number',
     '$cottage_type',
     '$number_of_person',
@@ -170,8 +172,8 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-     <!-- sweetalert -->
-     <?php if (!empty($message)): ?>
+    <!-- sweetalert -->
+    <?php if (!empty($message)): ?>
         <script>
             Swal.fire({
                 title: '<?php echo $isSuccess ? "Success!" : "Error!"; ?>',

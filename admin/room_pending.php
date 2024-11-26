@@ -37,15 +37,15 @@ if (isset($_POST['confirm'])) {
     $price = $_POST['price'];
     $special_request = $_POST['special_request'];
     $reservation_fee = $_POST['reservation_fee'];
-    $extraBed = $_POST['extra_bed'];
-    $extraPerson = $_POST['extra_person'];
+    $extraBedAndPerson = $_POST['extra_bed_and_person'];
+
     $totalFee = $_POST['total_fee'];
 
     $update_query = "UPDATE reserve_room_tbl SET status='confirmed', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
-     room_number='$room_number', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',
-      number_of_person='$number_of_person', amenities='$amenities' , price='$price', 
-      special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , 
-      extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
+    room_number='$room_number', room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity',
+    number_of_person='$number_of_person', amenities='$amenities' , price='$price', 
+    special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed_and_person='$extraBedAndPerson' , 
+    total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
         'reserve_id' => '',
@@ -187,7 +187,7 @@ if (isset($_POST['confirm'])) {
                             <div class="line">
                                 <div>
                                     <label>Reservation ID</label><br>
-                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>" readonly>
                                 </div>
                             </div>
 
@@ -305,7 +305,8 @@ if (isset($_POST['confirm'])) {
                                     <b>Note:</b> Please note that the input fields are intentionally left open for any
                                     necessary modifications or changes to customer and reservation information. We
                                     understand that there may be updates or adjustments to be provided by the customer
-                                    during the confirmation of their reservation. Rest assured, we are committed to
+                                    during the confirmation of their reservation. Also, the customer is welcome to request additional beds or
+                                    accommodate more people. We strive to ensure a seamless and comfortable experience for our guests throughout their stay. Rest assured, we are committed to
                                     accommodating any necessary revisions to ensure a seamless and satisfactory
                                     experience.
 
@@ -315,13 +316,8 @@ if (isset($_POST['confirm'])) {
 
                             <div class="line">
                                 <div>
-                                    <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                                    <input type="number" class="notransform" name="extra_bed" value="0">
-                                </div>
-
-                                <div>
-                                    <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
-                                    <input type="number" name="extra_person" value="0">
+                                    <label>Extra Bed And Person (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
+                                    <input type="number" class="notransform" name="extra_bed_and_person" value="0">
                                 </div>
 
 
@@ -337,16 +333,16 @@ if (isset($_POST['confirm'])) {
                             <script>
                                 function calculateTotalFee() {
                                     // Get the input values
-                                    const extraBed = parseInt(document.querySelector('input[name="extra_bed"]').value);
-                                    const extraPerson = parseInt(document.querySelector('input[name="extra_person"]').value);
+                                    const extraBedAndPerson = parseInt(document.querySelector('input[name="extra_bed_and_person"]').value);
+
                                     const price = parseInt(document.querySelector('input[name="price"]').value);
 
                                     // Calculate the additional charges
-                                    const extraBedCharge = extraBed * 600;
-                                    const extraPersonCharge = extraPerson * 600;
+                                    const extraBedAndPersonCharge = extraBedAndPerson * 600;
+
 
                                     // Calculate the total fee
-                                    const totalFee = price + extraBedCharge + extraPersonCharge;
+                                    const totalFee = price + extraBedAndPersonCharge;
 
                                     // Set the value of the "Total Fee" input field
                                     document.querySelector('input[name="total_fee"]').value = totalFee;
@@ -356,7 +352,7 @@ if (isset($_POST['confirm'])) {
                                 calculateTotalFee();
 
                                 // Listen for input and change events on Extra Bed, Extra Person, and Price fields
-                                document.querySelectorAll('input[name="extra_bed"], input[name="extra_person"], input[name="rate_per_hour"]').forEach(input => {
+                                document.querySelectorAll('input[name="extra_bed_and_person"], input[name="rate_per_hour"]').forEach(input => {
                                     input.addEventListener('input', calculateTotalFee);
                                     input.addEventListener('change', calculateTotalFee);
                                 });

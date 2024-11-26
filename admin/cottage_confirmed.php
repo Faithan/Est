@@ -35,31 +35,19 @@ if (isset($_GET['manage_id'])) {
 
 if (isset($_POST['confirm'])) {
     $reserve_id = $_POST['reserve_id'];
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $last_name = $_POST['last_name'];
-    $reserve_address = $_POST['reserve_address'];
-    $phone_number = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $date_of_arrival = $_POST['date_of_arrival'];
-    $time = $_POST['time'];
-    $cottage_number = $_POST['cottage_number'];
-    $cottage_type = $_POST['cottage_type'];
-    $number_of_person = $_POST['number_of_person'];
     $price = $_POST['price'];
-    $special_request = $_POST['special_request'];
+    $payment = $_POST['payment'];
+    $balance = $_POST['balance'];
+ 
     $cottage_reserve_fee = $_POST['cottage_reserve_fee'];
     $rejection_reason = $_POST['rejection_reason'] ?? '';
 
     // Update query to match your data structure
     $update_query = "UPDATE reserve_cottage_tbl 
-                     SET reserve_status='checkedIn', first_name='$first_name', middle_name='$middle_name', last_name='$last_name', 
-                         reserve_address='$reserve_address', phone_number='$phone_number', email='$email', 
-                         date_of_arrival='$date_of_arrival', time='$time', 
-                         cottage_number='$cottage_number', cottage_type='$cottage_type', 
-                         number_of_person='$number_of_person', price='$price', 
-                         special_request='$special_request', cottage_reserve_fee='$cottage_reserve_fee', 
-                         rejection_reason='$rejection_reason'
+                     SET reserve_status='checkedIn', 
+                        payment='$payment',
+                        balance='$balance',
+                        rejection_reason='$rejection_reason'
                      WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
@@ -311,6 +299,75 @@ if (isset($_POST['confirm'])) {
                                     </div>
 
                                 </div>
+
+
+                                <div class="line">
+                                    <div>
+                                        <label>Payment (₱)</label><br>
+                                        <input type="number" name="payment" value="" required>
+                                    </div>
+
+                                    <div>
+                                        <label>Balance (₱)</label><br>
+                                        <input type="number" name="balance" value="" required readonly>
+
+                                    </div>
+
+                                </div>
+
+                                <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0; gap: 10px; font-size:1.2rem">
+                                    <input type="checkbox" id="confirmationCheckbox">
+                                    <label for="confirmationCheckbox"> I confirm that the balance is paid</label>
+
+                                </div>
+                                <script>
+                                    // Handle form submission
+                                    document.querySelector('form').addEventListener('submit', function(event) {
+                                        const checkbox = document.getElementById('confirmationCheckbox');
+
+                                        // Prevent form submission if checkbox is not checked
+                                        if (!checkbox.checked) {
+                                            event.preventDefault();
+                                            alert('Please confirm that the balance is paid by checking the box.');
+                                        }
+                                    });
+                                </script>
+
+
+
+                                <script>
+                                    // Initialize balance based on price and reservation fee
+                                    function initializeBalance() {
+                                        const price = parseFloat(document.querySelector('input[name="price"]').value) || 0;
+                                        const cottageReserveFee = parseFloat(document.querySelector('input[name="cottage_reserve_fee"]').value) || 0;
+
+                                        // Calculate balance as price - reservation fee
+                                        const balance = Math.max(price - cottageReserveFee, 0); // Prevent negative balance
+
+                                        // Set the balance value
+                                        document.querySelector('input[name="balance"]').value = balance;
+                                    }
+
+                                    // Update balance dynamically based on payment
+                                    function updateBalance() {
+                                        const price = parseFloat(document.querySelector('input[name="price"]').value) || 0;
+                                        const cottageReserveFee = parseFloat(document.querySelector('input[name="cottage_reserve_fee"]').value) || 0;
+                                        const payment = parseFloat(document.querySelector('input[name="payment"]').value) || 0;
+
+                                        // Calculate balance as price - reservation fee - payment
+                                        const balance = Math.max(price - cottageReserveFee - payment, 0); // Prevent negative balance
+
+                                        // Update balance field
+                                        document.querySelector('input[name="balance"]').value = balance;
+                                    }
+
+                                    // Initialize balance on page load
+                                    initializeBalance();
+
+                                    // Attach event listener to payment input
+                                    document.querySelector('input[name="payment"]').addEventListener('input', updateBalance);
+                                </script>
+
 
                                 <div class="invisible-id">
                                     <div>

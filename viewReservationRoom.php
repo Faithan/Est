@@ -242,6 +242,30 @@ if (isset($_SESSION['user_id'])) {
                 readonly></textarea>
 
 
+            <label class="bold-text" style="margin-top:20px;">Payment Details</label>
+
+            <label>Extra Bed and Person <em style="font-size: 1rem; color:gray">(+600 ₱)</em></label>
+            <input class="fixed-value-input" name="extra_bed_and_person" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['extra_bed_and_person']; ?>" readonly>
+
+            <label>Reservation Fee (₱)<em style="font-size: 1rem; color:gray">(paid)</em></label>
+            <input class="fixed-value-input" name="reservation_fee" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['reservation_fee']; ?>" readonly>
+
+            <label>Total Fee (₱)<em style="font-size: 1rem; color:gray">(price + (600 ₱ * extra bed and person) - reservation fee)</em></label>
+            <input class="fixed-value-input" name="total_fee" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['total_fee']; ?>" readonly>
+
+
+            <label>Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <input class="fixed-value-input" name="payment" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['payment']; ?>" readonly>
+
+            <label>Balance (₱)</label>
+            <input class="fixed-value-input" name="balance" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['balance']; ?>" readonly>
+
+
 
             <p id="note">
                 <b>Note:</b>
@@ -287,7 +311,7 @@ if (isset($_SESSION['user_id'])) {
             }
             ?>
 
-            <label class="bold-text">Reservation Payment Section</label>
+            <label class="bold-text" style="margin-top:200px;">Reservation Payment Section</label>
 
             <label for="">Gcash Account Number:</label>
             <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
@@ -306,7 +330,7 @@ if (isset($_SESSION['user_id'])) {
         <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents">
             <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
             <label for="reference_number">Reference Number:</label>
-            
+
             <input type="number" name="reference_number" id="reference_number"
                 style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--first-color2)'; ?>;"
                 value="<?php echo $manage_data['reference_number']; ?>" required

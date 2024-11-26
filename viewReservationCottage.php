@@ -233,6 +233,51 @@ if (isset($_SESSION['user_id'])) {
             <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
                 readonly></textarea>
 
+
+            <label class="bold-text" style="margin-top:20px;">Payment Details</label>
+
+
+            <label>Reservation Fee (₱)<em style="font-size: 1rem; color:gray">(paid)</em></label>
+            <input class="fixed-value-input" name="cottage_reserve_fee" onkeyup="calculateFees()"
+                value="<?php echo $manage_data['cottage_reserve_fee']; ?>" readonly>
+
+            <label>Total Fee (₱)<em style="font-size: 1rem; color:gray">(price - reservation fee)</em></label>
+            <input class="fixed-value-input" name="total_fee" id="total_fee" onkeyup="calculateFees()"
+                value="" readonly>
+
+            <label>Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <input class="fixed-value-input" name="payment" id="payment" onkeyup="calculateFees()"
+                value="<?php echo $manage_data['payment']; ?>" readonly>
+
+            <label>Balance (₱)</label>
+            <input class="fixed-value-input" name="balance" id="balance" value="<?php echo $manage_data['balance']; ?>" readonly>
+
+            <script>
+                // Function to calculate total fee and balance dynamically
+                function calculateFees() {
+                    const price = parseFloat(document.querySelector('input[name="price"]').value) || 0;
+                    const cottageReserveFee = parseFloat(document.querySelector('input[name="cottage_reserve_fee"]').value) || 0;
+                    const payment = parseFloat(document.querySelector('input[name="payment"]').value) || 0;
+
+                    // Calculate total fee as price - cottage reserve fee
+                    const totalFee = Math.max(price - cottageReserveFee, 0); // Prevent negative values
+
+                    // Update total fee field
+                    document.querySelector('input[name="total_fee"]').value = totalFee;
+
+                    // Calculate balance as total fee - payment
+                    const balance = Math.max(totalFee - payment, 0); // Prevent negative balance
+
+                    // Update balance field
+                    document.querySelector('input[name="balance"]').value = balance;
+                }
+
+                // Call the function once to initialize on page load
+                calculateFees();
+            </script>
+
+
+
             <p id="note">
                 <b>Note:</b>
                 Once you have submitted your reservation, please await confirmation. During the review of your
@@ -275,7 +320,7 @@ if (isset($_SESSION['user_id'])) {
             }
             ?>
 
-            <label class="bold-text">Reservation Payment Section</label>
+            <label class="bold-text" style="margin-top:200px;">Reservation Payment Section</label>
 
             <label for="">Gcash Account Number:</label>
             <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
@@ -293,7 +338,7 @@ if (isset($_SESSION['user_id'])) {
         <form id="reference-form" action="update_reference_cottage.php" method="post" class="reserveForm-contents">
             <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
             <label for="reference_number">Reference Number:</label>
-            
+
             <input type="text" name="reference_number" id="reference_number"
                 style="background-color:<?php echo ($manage_data['reserve_status'] === 'pending') ? '' : 'var(--first-color2)'; ?>;"
                 value="<?php echo $manage_data['reference_number']; ?>" required

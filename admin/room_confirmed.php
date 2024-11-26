@@ -19,30 +19,19 @@ if (isset($_GET['manage_id'])) {
 }
 
 if (isset($_POST['checkedin'])) {
+
     $reserve_id = $_POST['reserve_id'];
-    $fname = $_POST['first_name'];
-    $mname = $_POST['middle_name'];
-    $lname = $_POST['last_name'];
-    $address = $_POST['address'];
-    $phone_number = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $date_of_arrival = $_POST['date_of_arrival'];
-    $time_of_arrival = $_POST['time_of_arrival'];
-    $checkOutTime = $_POST['time_out'];
-    $room_type = $_POST['room_type'];
-    $bed_type = $_POST['bed_type'];
-    $bed_quantity = $_POST['bed_quantity'];
-    $number_of_person = $_POST['number_of_person'];
-    $amenities = $_POST['amenities'];
-    $price = $_POST['price'];
-    $special_request = $_POST['special_request'];
-    $reservation_fee = $_POST['reservation_fee'];
-    $extraBed = $_POST['extra_bed'];
-    $extraPerson = $_POST['extra_person'];
+
+    $rejection_reason = $_POST['rejection_reason'];
+
     $totalFee = $_POST['total_fee'];
 
-    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', fname='$fname', mname='$mname', lname='$lname', address='$address', phone_number='$phone_number', email='$email', date_of_arrival='$date_of_arrival', time_of_arrival='$time_of_arrival', time_out='$checkOutTime',
-    room_type='$room_type', bed_type='$bed_type', bed_quantity='$bed_quantity', number_of_person='$number_of_person', amenities='$amenities' , price='$price', special_request='$special_request', reservation_fee='$reservation_fee' , extra_bed='$extraBed' , extra_person='$extraPerson', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
+    $payment= $_POST['payment'];
+    $balance = $_POST['balance'];
+
+
+
+    $update_query = "UPDATE reserve_room_tbl SET status='checkedIn', rejection_reason='$rejection_reason', payment='$payment', balance='$balance', total_fee='$totalFee'  WHERE reserve_id='$reserve_id'";
 
     $manage_data = [
         'reserve_id' => '',
@@ -184,7 +173,7 @@ if (isset($_POST['checkedin'])) {
                             <div class="line">
                                 <div>
                                     <label>Reservation ID</label><br>
-                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>" readonly>
                                 </div>
                             </div>
 
@@ -312,11 +301,7 @@ if (isset($_POST['checkedin'])) {
                                     <b>Note:</b> Once the customer has arrived at the hotel, this form will be marked as
                                     "checked in." Please note that any modifications to the customer's information above
                                     are no
-                                    longer allowed. However, the customer is welcome to request additional beds or
-                                    accommodate
-                                    more people, provided that the required additional amount is paid. We strive to
-                                    ensure a
-                                    seamless and comfortable experience for our guests throughout their stay.
+                                    longer allowed.
 
                                 </p>
                             </div>
@@ -339,35 +324,28 @@ if (isset($_POST['checkedin'])) {
                                     </div>
 
                                     <div>
-                                        <label>Extra Bed (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                                        <input type="number" class="notransform" name="extra_bed" value="0">
-                                    </div>
-
-                                    <div>
-                                        <label>Extra Person (+₱600) <em id="goodfor">*If Applicable*</em></label><br>
-                                        <input type="number" name="extra_person" value="0">
+                                        <label> Reserved Extra Bed And Person</label><br>
+                                        <input type="number" class="notransform" name="extra_bed_and_person" value="<?php echo $manage_data['extra_bed_and_person']; ?>" readonly>
                                     </div>
 
                                     <div>
                                         <label>New Total Fee (₱)</label><br>
-                                        <input type="number" name="total_fee" value="" required>
+                                        <input type="number" name="total_fee" value="" required readonly>
                                     </div>
 
                                     <script>
                                         // Function to calculate total fee and deduct from reservation fee
                                         function calculateTotalFee() {
                                             // Get the input values
-                                            const extraBed = parseInt(document.querySelector('input[name="extra_bed"]').value);
-                                            const extraPerson = parseInt(document.querySelector('input[name="extra_person"]').value);
+                                            const extraBedAndPerson = parseInt(document.querySelector('input[name="extra_bed_and_person"]').value);
                                             const price = parseInt(document.querySelector('input[name="price"]').value);
                                             const reservationFee = parseInt(document.querySelector('input[name="reservation_fee"]').value);
 
                                             // Calculate the additional charges
-                                            const extraBedCharge = extraBed * 600;
-                                            const extraPersonCharge = extraPerson * 600;
+                                            const extraBedAndPersonCharge = extraBedAndPerson * 600;
 
                                             // Calculate the total fee
-                                            const totalFee = price + extraBedCharge + extraPersonCharge;
+                                            const totalFee = price + extraBedAndPersonCharge;
 
                                             // Deduct the total fee from the reservation fee
                                             const remainingFee = totalFee - reservationFee;
@@ -380,13 +358,80 @@ if (isset($_POST['checkedin'])) {
                                         calculateTotalFee();
 
                                         // Listen for input and change events on Extra Bed, Extra Person, Price, and Reservation Fee fields
-                                        document.querySelectorAll('input[name="extra_bed"], input[name="extra_person"], input[name="rate_per_hour"], input[name="reservation_fee"]').forEach(input => {
+                                        document.querySelectorAll('input[name="extra_bed_and_person"], input[name="total_fee"], input[name="reservation_fee"]').forEach(input => {
                                             input.addEventListener('input', calculateTotalFee);
                                             input.addEventListener('change', calculateTotalFee);
                                         });
                                     </script>
 
                                 </div>
+
+
+                                <div class="line">
+                                    <div>
+                                        <label>Payment (₱)</label><br>
+                                        <input type="number" name="payment" value="" required>
+                                    </div>
+
+                                    <div>
+                                        <label>Balance (₱)</label><br>
+                                        <input type="number" name="balance" value="" required readonly>
+
+                                    </div>
+
+                                </div>
+
+                                <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0; gap: 10px; font-size:1.2rem">
+                                    <input type="checkbox" id="confirmationCheckbox">
+                                    <label for="confirmationCheckbox"> I confirm that the balance is paid</label>
+
+                                </div>
+                                <script>
+                                    // Handle form submission
+                                    document.querySelector('form').addEventListener('submit', function(event) {
+                                        const checkbox = document.getElementById('confirmationCheckbox');
+
+                                        // Prevent form submission if checkbox is not checked
+                                        if (!checkbox.checked) {
+                                            event.preventDefault();
+                                            alert('Please confirm that the balance is paid by checking the box.');
+                                        }
+                                    });
+                                </script>
+
+
+
+
+                                <script>
+                                    // Initialize balance to the value of total_fee
+                                    function initializeBalance() {
+                                        const totalFee = parseInt(document.querySelector('input[name="total_fee"]').value) || 0;
+                                        document.querySelector('input[name="balance"]').value = totalFee;
+                                    }
+
+                                    // Update balance dynamically based on payment
+                                    function updateBalance() {
+                                        const totalFee = parseInt(document.querySelector('input[name="total_fee"]').value) || 0;
+                                        const payment = parseInt(document.querySelector('input[name="payment"]').value) || 0;
+
+                                        // Calculate balance
+                                        const balance = Math.max(totalFee - payment, 0); // Prevent negative balance
+
+                                        // Update balance field
+                                        document.querySelector('input[name="balance"]').value = balance;
+                                    }
+
+                                    // Initialize balance on page load
+                                    initializeBalance();
+
+                                    // Attach event listener to payment input
+                                    document.querySelector('input[name="payment"]').addEventListener('input', updateBalance);
+                                </script>
+
+
+
+
+
 
                             </div>
 

@@ -67,6 +67,7 @@ if (isset($_POST['submit'])) {
     '',
     '',
     '',
+    '',
     '')";
 
     $query = (mysqli_query($con, $savedata));

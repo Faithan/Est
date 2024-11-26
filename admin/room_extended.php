@@ -297,42 +297,49 @@ if (isset($_POST['checkOut'])) {
                                         value="<?php echo $manage_data['reservation_fee']; ?>" disabled>
                                 </div>
 
-                                <div>
-                                    <label>Extra Bed (+₱600) <em id="goodfor">*records only*</em></label><br>
-                                    <input type="number" class="notransform" name="extra_bed"
-                                        value="<?php echo $manage_data['extra_bed']; ?>" disabled>
-                                </div>
 
                                 <div>
-                                    <label>Extra Person (+₱600) <em id="goodfor">*records only*</em></label><br>
-                                    <input type="number" name="extra_person"
-                                        value="<?php echo $manage_data['extra_person']; ?>" disabled>
+                                    <label> Reserved Extra Bed And Person <em id="goodfor">*record only*</em></label><br>
+                                    <input type="number" class="notransform" name="extra_bed_and_person" value="<?php echo $manage_data['extra_bed_and_person']; ?>" readonly>
                                 </div>
-
                                 <div>
-                                    <label>New Total Fee (₱) <em id="goodfor">*Paid*</em></label><br>
+                                    <label>Total Fee(₱) <em id="goodfor">*Paid*</em></label><br>
                                     <input type="number" name="total_fee"
                                         value="<?php echo $manage_data['total_fee']; ?>" disabled>
                                 </div>
 
                             </div>
 
+
+                            <div class="line">
+                                <div>
+                                    <label>Payment (₱) <em id="goodfor">*record only*</em></label><br>
+                                    <input type="number" name="payment" value="<?php echo $manage_data['payment']; ?>" required readonly>
+                                </div>
+
+                                <div>
+                                    <label>Balance (₱) <em id="goodfor">*Paid*</em></label><br>
+                                    <input type="number" name="balance" value="<?php echo $manage_data['balance']; ?>" required readonly>
+
+                                </div>
+                            </div>
+
                             <div class="line">
 
                                 <div>
-                                    <label>Extended Time (hrs) <em id="goodfor">*records only*</em></label><br>
+                                    <label>Extended Time (hrs) <em id="goodfor">*record only*</em></label><br>
                                     <input type="number" class="notransform" name="extended_time"
                                         value="<?php echo $manage_data['extend_time']; ?>" disabled>
                                 </div>
 
                                 <div>
-                                    <label>Price per Hour (₱) <em id="goodfor">*records only*</em></label><br>
+                                    <label>Price per Hour (₱) <em id="goodfor">*record only*</em></label><br>
                                     <input type="number" class="notransform" name="extended_price"
                                         value="<?php echo $manage_data['extend_price']; ?>" disabled>
                                 </div>
 
                                 <div>
-                                    <label>Additional Payment (₱) <em id="goodfor">*records only*</em></label><br>
+                                    <label>Additional Payment (₱) <em id="goodfor">*record only*</em></label><br>
                                     <input type="number" class="notransform" name="additional_payment"
                                         value="<?php echo $manage_data['additional_payment']; ?>" disabled>
                                 </div>

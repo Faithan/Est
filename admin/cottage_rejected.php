@@ -208,6 +208,19 @@ if (isset($_GET['manage_id'])) {
                                 </div>
                             </div>
 
+                            <div class="line">
+                                <div>
+                                    <label>Payment (₱) <em id="goodfor">*record only*</em></label><br>
+                                    <input type="number" name="payment" value="<?php echo $manage_data['payment']; ?>" required readonly>
+                                </div>
+
+                                <div>
+                                    <label>Balance (₱) <em id="goodfor">*Paid*</em></label><br>
+                                    <input type="number" name="balance" value="<?php echo $manage_data['balance']; ?>" required readonly>
+
+                                </div>
+                            </div>
+
 
 
                             <div class="payment-container">
