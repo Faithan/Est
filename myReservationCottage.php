@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="wrapper-main">
 
             <?php
-            $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id";
+            $fetchdata = "SELECT * FROM reserve_cottage_tbl WHERE user_id = $user_id AND reserve_status != 'checkedOut'";
             $result = mysqli_query($con, $fetchdata);
             $reservation_count = mysqli_num_rows($result);
 

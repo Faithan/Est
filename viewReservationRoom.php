@@ -261,6 +261,10 @@ if (isset($_SESSION['user_id'])) {
             <input class="fixed-value-input" name="payment" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['payment']; ?>" readonly>
 
+            <label>Additional Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <input class="fixed-value-input" name="additional_payment" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['additional_payment']; ?>" readonly>
+
             <label>Balance (₱)</label>
             <input class="fixed-value-input" name="balance" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['balance']; ?>" readonly>
