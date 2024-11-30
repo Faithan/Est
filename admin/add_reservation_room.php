@@ -182,7 +182,7 @@ session_start();
                                         $roomType = $row['room_type'];
                                         $bedType = $row['bed_type'];
                                         $bed_quantity = $row['bed_quantity'];
-                                        $noPersons = $row['no_persons'];
+                                        $roomNumber = $row['room_number'];
                                         $amenities = $row['amenities'];
                                         $price = $row['price'];
                                         $photo = $row['photo'];
@@ -220,13 +220,14 @@ session_start();
                                                     <p><?php echo $bedType ?></p>
                                                 </div>
                                                 <div class="room-details">
+                                                    <label>Room Number: </label>
+                                                    <p><?php echo $roomNumber ?></p>
+                                                </div>
+                                                <div class="room-details">
                                                     <label>No. of Beds: </label>
                                                     <p><?php echo $bed_quantity ?></p>
                                                 </div>
-                                                <div class="room-details">
-                                                    <label>No. of Persons: </label>
-                                                    <p><?php echo $noPersons ?></p>
-                                                </div>
+                                              
 
 
 
@@ -304,7 +305,7 @@ session_start();
                                                 $roomNumber = $row['room_number'];
                                                 $bedType = $row['bed_type'];
                                                 $bed_quantity = $row['bed_quantity'];
-                                                $noPersons = $row['no_persons'];
+                                                $roomNumber = $row['room_number'];
                                                 $price = $row['price'];
 
                                                 // Check the reserve_room_tbl to determine room status
@@ -323,8 +324,9 @@ session_start();
                                                     <td><?php echo ucwords(strtolower($room_type)); ?></td>
                                                     <td><?php echo $roomNumber; ?></td>
                                                     <td><?php echo ucwords(strtolower($bedType)); ?></td>
+                                                    <td><?php echo $roomNumber; ?></td>
                                                     <td><?php echo $bed_quantity; ?></td>
-                                                    <td><?php echo $noPersons; ?></td>
+                                               
                                                     <td><?php echo ucwords($roomStatusToday); ?></td> <!-- Room Status (today) -->
                                                     <td>₱ <?php echo $price; ?></td>
                                                     <td>

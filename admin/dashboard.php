@@ -83,11 +83,11 @@ session_start();
                             <label for="">Total Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' room reservations
-                            $room_revenue_query = "SELECT SUM(price) as total_room_revenue FROM reserve_room_tbl WHERE status = 'checkedOut'";
+                            $room_revenue_query = "SELECT SUM(reservation_fee + payment + additional_payment) as total_room_revenue FROM reserve_room_tbl ";
                             $room_revenue_result = mysqli_query($con, $room_revenue_query);
 
                             // Query to sum up the price for 'checkedOut' cottage reservations
-                            $cottage_revenue_query = "SELECT SUM(price) as total_cottage_revenue FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
+                            $cottage_revenue_query = "SELECT SUM(cottage_reserve_fee + payment) as total_cottage_revenue FROM reserve_cottage_tbl ";
                             $cottage_revenue_result = mysqli_query($con, $cottage_revenue_query);
 
                             // Initialize total revenue
@@ -123,7 +123,7 @@ session_start();
                             <label for="">Total Cottage Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' reservations in cottages
-                            $cottage_revenue_query = "SELECT SUM(price) as total_revenue FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
+                            $cottage_revenue_query = "SELECT SUM(cottage_reserve_fee + payment) as total_revenue FROM reserve_cottage_tbl";
                             $cottage_revenue_result = mysqli_query($con, $cottage_revenue_query);
 
                             if ($cottage_revenue_result) {
@@ -150,7 +150,7 @@ session_start();
                             <label for="">Total Room Revenue <i class="fa-solid fa-coins"></i></label>
                             <?php
                             // Query to sum up the price for 'checkedOut' reservations
-                            $revenue_query = "SELECT SUM(price) as total_revenue FROM reserve_room_tbl WHERE status = 'checkedOut'";
+                            $revenue_query = "SELECT SUM(reservation_fee + payment + additional_payment) as total_revenue FROM reserve_room_tbl";
                             $revenue_result = mysqli_query($con, $revenue_query);
 
                             if ($revenue_result) {
@@ -572,7 +572,7 @@ session_start();
                 </div>
 
 
-
+<!-- 
                 <div class="reports-base-container">
 
                     <div class="reports-container">
@@ -612,22 +612,22 @@ session_start();
                             }
                             ?>
                             <div class="income-container">
-                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>Today's Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($cottageDailyIncome, 2); ?></p>
 
                             </div>
                             <div class="income-container">
-                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>This Month's Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($cottageMonthlyIncome, 2); ?></p>
 
                             </div>
                             <div class="income-container">
-                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>This Year's Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($cottageYearlyIncome, 2); ?></p>
                             </div>
 
                             <div class="income-container">
-                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>All Time Income <i class="fa-solid fa-coins"></i></h2>
                                 <?php
                                 // Query to calculate the total income from checked-out cottage reservations
                                 $totalIncomeCottagesQuery = "SELECT SUM(price) AS total_income FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
@@ -643,7 +643,7 @@ session_start();
                                 ?>
                             </div>
                             <div class="income-container">
-                                <h2>Daily Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <h2>Today's Checkouts <i class="fa-solid fa-campground"></i></h2>
                                 <?php
                                 // Query to count daily checked-out cottage reservations
                                 $dailyCheckedOutCottagesQuery = "SELECT COUNT(*) AS daily_checked_out 
@@ -662,7 +662,7 @@ session_start();
                             </div>
 
                             <div class="income-container">
-                                <h2>Monthly Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <h2>This Month's Checkouts <i class="fa-solid fa-campground"></i></h2>
                                 <?php
                                 // Query to count the number of checked-out cottages for the current month
                                 $monthlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
@@ -679,7 +679,7 @@ session_start();
                             </div>
 
                             <div class="income-container">
-                                <h2>Yearly Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <h2>This Year's Checkouts <i class="fa-solid fa-campground"></i></h2>
                                 <?php
                                 // Query to count the number of checked-out cottages for the current year
                                 $yearlyCheckedOutCottagesQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
@@ -697,7 +697,7 @@ session_start();
 
 
                             <div class="income-container">
-                                <h2>Total Checkouts <i class="fa-solid fa-campground"></i></h2>
+                                <h2>All Time Checkouts <i class="fa-solid fa-campground"></i></h2>
                                 <?php
                                 // Query to count checked-out cottage reservations
                                 $totalCheckedOutCottagesQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_cottage_tbl WHERE reserve_status = 'checkedOut'";
@@ -775,20 +775,20 @@ session_start();
                             }
                             ?>
                             <div class="income-container">
-                                <h2>Daily Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>Today's Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($roomDailyIncome, 2); ?> </p>
 
                             </div>
                             <div class="income-container">
-                                <h2>Monthly Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>This Month's Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($roomMonthlyIncome, 2); ?></p>
                             </div>
                             <div class="income-container">
-                                <h2>Yearly Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>This Years Income <i class="fa-solid fa-coins"></i></h2>
                                 <p>PHP <?php echo number_format($roomYearlyIncome, 2); ?></p>
                             </div>
                             <div class="income-container">
-                                <h2>Total Income <i class="fa-solid fa-coins"></i></h2>
+                                <h2>All Time Income <i class="fa-solid fa-coins"></i></h2>
                                 <?php
                                 // Query to calculate the total income from checked-out room reservations, including extended prices
                                 $totalIncomeRoomsQuery = "SELECT SUM(price + IFNULL(extend_price, 0)) AS total_income FROM reserve_room_tbl WHERE status = 'checkedOut'";
@@ -805,7 +805,7 @@ session_start();
                             </div>
 
                             <div class="income-container">
-                                <h2>Daily Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <h2>Today's Checkouts <i class="fa-solid fa-bed"></i></h2>
                                 <?php
                                 // Query to count the number of checked-out rooms for today
                                 $dailyCheckedOutRoomsQuery = "SELECT COUNT(*) AS daily_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND DATE(date_of_arrival) = CURDATE()";
@@ -822,7 +822,7 @@ session_start();
                             </div>
 
                             <div class="income-container">
-                                <h2>Monthly Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <h2>This Month's Checkouts <i class="fa-solid fa-bed"></i></h2>
                                 <?php
                                 // Query to count the number of checked-out rooms for the current month
                                 $monthlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS monthly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND MONTH(date_of_arrival) = MONTH(CURDATE()) AND YEAR(date_of_arrival) = YEAR(CURDATE())";
@@ -839,7 +839,7 @@ session_start();
                             </div>
 
                             <div class="income-container">
-                                <h2>Yearly Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <h2>This Year's Checkouts <i class="fa-solid fa-bed"></i></h2>
                                 <?php
                                 // Query to count the number of checked-out rooms for the current year
                                 $yearlyCheckedOutRoomsQuery = "SELECT COUNT(*) AS yearly_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut' AND YEAR(date_of_arrival) = YEAR(CURDATE())";
@@ -860,7 +860,7 @@ session_start();
 
 
                             <div class="income-container">
-                                <h2>Total Checkouts <i class="fa-solid fa-bed"></i></h2>
+                                <h2>All Time Checkouts <i class="fa-solid fa-bed"></i></h2>
                                 <?php
                                 // Query to count checked-out room reservations
                                 $totalCheckedOutRoomsQuery = "SELECT COUNT(*) AS total_checked_out FROM reserve_room_tbl WHERE status = 'checkedOut'";
@@ -906,7 +906,7 @@ WHERE status = 'checkedOut'";
                     </div>
 
 
-                </div>
+                </div> -->
 
                 <style>
                     .base-income-container {
@@ -917,7 +917,7 @@ WHERE status = 'checkedOut'";
                     }
 
                     .income-container {
-                        border: 1px dashed var(--box-shadow);
+                        border: 1px solid var(--box-shadow);
                         padding: 10px;
                         flex-grow: 1;
                         display: flex;
@@ -940,7 +940,7 @@ WHERE status = 'checkedOut'";
                     /* Report Card Styling */
                     .report-card {
                         background-color: var(--first-color);
-                        border: 1px dashed var(--box-shadow);
+                        border: 1px solid var(--box-shadow);
                         border-top-left-radius: 5px solid Green;
                         padding: 10px;
                         border-left: 5px solid orange;

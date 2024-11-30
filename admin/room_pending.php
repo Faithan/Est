@@ -317,10 +317,8 @@ if (isset($_POST['confirm'])) {
                             <div class="line">
                                 <div>
                                     <label>Extra Bed And Person (+₱600)<em id="goodfor">*If Applicable*</em></label><br>
-                                    <input type="number" class="notransform" name="extra_bed_and_person" value="0">
+                                    <input type="number" class="notransform" name="extra_bed_and_person" value="0" min="0">
                                 </div>
-
-
 
                                 <div>
                                     <label>Total Fee (₱)</label><br>
@@ -413,7 +411,7 @@ if (isset($_POST['confirm'])) {
                                 Confirm</button>
                             <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
                                     class="fa-solid fa-trash"></i>
-                                Reject</a>
+                                Cancel</a>
                         </div>
                     </form>
                 </div>

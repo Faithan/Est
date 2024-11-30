@@ -198,7 +198,7 @@ session_start();
                                     $day_price = $row['day_price'];
                                     $night_price = $row['night_price'];
                                     $status = $row['cottage_status'];
-                                    $noPersons = $row['number_of_person'];
+                                    $cottageNumber= $row['cottage_number'];
                                     $photo = $row['cottage_photo'];
 
 
@@ -229,8 +229,8 @@ session_start();
                                             </div>
 
 
-                                            <div class="room-details"><label for="">Number of persons: </label>
-                                                <p> <?php echo $noPersons ?></p>
+                                            <div class="room-details"><label for="">Cottage Number: </label>
+                                                <p> <?php echo $cottageNumber ?></p>
                                             </div>
                                             <div class="room-details">
                                                 <label>Cottage Status (Today): </label>

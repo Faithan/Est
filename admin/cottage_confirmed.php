@@ -304,7 +304,7 @@ if (isset($_POST['confirm'])) {
                                 <div class="line">
                                     <div>
                                         <label>Payment (₱)</label><br>
-                                        <input type="number" name="payment" value="" required>
+                                        <input type="number" name="payment" value="" min="0" required>
                                     </div>
 
                                     <div>

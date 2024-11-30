@@ -20,12 +20,19 @@ if (isset($_POST['login'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        $_SESSION['admin'] = $username;
+        // Fetch the admin data
+        $admin_data = $result->fetch_assoc();
+        
+        // Store admin info in session
+        $_SESSION['admin'] = $admin_data['username'];
+        $_SESSION['admin_id'] = $admin_data['admin_id'];  // Store admin_id in session
+        
         header("Location: dashboard.php");
         exit();
     } else {
         $error_message = "Invalid admin username or password.";
     }
+    
 }
 ?>
 

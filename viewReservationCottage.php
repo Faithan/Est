@@ -223,33 +223,36 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-            <label>Price (₱)</label>
-            <input class="fixed-value-input" name="price" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['price']; ?>" readonly>
 
             <p id="comment">(fixed)</p>
 
             <label>Special Request</label>
             <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
-                readonly></textarea>
+                readonly><?php echo $manage_data['special_request']; ?></textarea>
 
 
             <label class="bold-text" style="margin-top:20px;">Payment Details</label>
 
 
-            <label>Reservation Fee (₱)<em style="font-size: 1rem; color:gray">(paid)</em></label>
+
+            <label>Price (Php)</label>
+            <input class="fixed-value-input" name="price" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['price']; ?>" readonly>
+
+
+            <label>Reservation Payment (Php)<em style="font-size: 1rem; color:gray">(paid)</em></label>
             <input class="fixed-value-input" name="cottage_reserve_fee" onkeyup="calculateFees()"
                 value="<?php echo $manage_data['cottage_reserve_fee']; ?>" readonly>
 
-            <label>Total Fee (₱)<em style="font-size: 1rem; color:gray">(price - reservation fee)</em></label>
+            <label>Total Fee (Php)<em style="font-size: 1rem; color:gray">(price - reservation fee)</em></label>
             <input class="fixed-value-input" name="total_fee" id="total_fee" onkeyup="calculateFees()"
                 value="" readonly>
 
-            <label>Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <label>Payment (Php)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
             <input class="fixed-value-input" name="payment" id="payment" onkeyup="calculateFees()"
                 value="<?php echo $manage_data['payment']; ?>" readonly>
 
-            <label>Balance (₱)</label>
+            <label>Balance (Php)</label>
             <input class="fixed-value-input" name="balance" id="balance" value="<?php echo $manage_data['balance']; ?>" readonly>
 
             <script>
@@ -275,6 +278,13 @@ if (isset($_SESSION['user_id'])) {
                 // Call the function once to initialize on page load
                 calculateFees();
             </script>
+
+
+            <label class="bold-text" style="margin-top:20px; color: red;">Reason of Cancellation</label>
+
+            <label>Reason <em style="color:gray; font-size: 1rem;">*if cancelled by admin*</em></label>
+            <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
+                readonly><?php echo $manage_data['rejection_reason']; ?></textarea>
 
 
 

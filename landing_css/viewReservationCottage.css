@@ -161,7 +161,8 @@ body {
     padding: 5px;
     border-left: 1px dashed var(--seventh-color);
     background-color: var(--first-color2);
-  
+    color: gray;
+    
 }
 
 .reserveForm-contents p {

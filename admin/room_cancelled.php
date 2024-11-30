@@ -66,7 +66,7 @@ if (isset($_GET['manage_id'])) {
             <div class="header-container">
                 <div class="title-head">
 
-                    <label for=""><i class="fa-solid fa-gear"></i> Rejected/Cancelled</label>
+                    <label for=""><i class="fa-solid fa-gear"></i> Cancelled</label>
                 </div>
 
                 <?php include 'icon-container.php' ?>
@@ -87,7 +87,7 @@ if (isset($_GET['manage_id'])) {
             <div class="center-container">
                 <div class="container">
                     <div class="header-label">
-                        <label for="">REJECTED</label>
+                        <label for="">CANCELLED</label>
                     </div>
 
 
@@ -234,7 +234,7 @@ if (isset($_GET['manage_id'])) {
                                 <div>
                                     <div class="line">
                                         <div>
-                                            <label style="color: red;">Reason for Rejection/Cancellation</label><br>
+                                            <label style="color: red;">Reason for Cancellation</label><br>
                                             <textarea name="rejection_reason" id=""
                                                 disabled><?php echo $manage_data['rejection_reason']; ?></textarea>
                                         </div>

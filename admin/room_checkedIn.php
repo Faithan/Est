@@ -373,12 +373,12 @@ if (isset($_POST['extended'])) {
 
                                     <div>
                                         <label>Extended Time (hrs) <em id="goodfor">*if applicable*</em></label><br>
-                                        <input type="number" class="notransform" name="extended_time" value="0">
+                                        <input type="number" class="notransform" name="extended_time" min="0" value="0">
                                     </div>
 
                                     <div>
                                         <label>Price per Hour (₱) <em id="goodfor">*by management*</em></label><br>
-                                        <input type="number" class="notransform" name="extended_price" value="0">
+                                        <input type="number" class="notransform" name="extended_price" min="0" value="0">
                                     </div>
 
                                     <div>

@@ -76,6 +76,7 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'assets.php'; ?>
     <title>Cottage Reservation Reports</title>
+
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="../system_images/Picture4.png" type="image/png">
@@ -93,72 +94,102 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
                 <?php include 'icon-container.php' ?>
             </div>
 
-            <div class="center-container">
-            
-                    <div class="report-container" id="report-container">
+            <div class="center-container" style="background-color: white;">
 
-                        <div style="margin-bottom: 10px; ">
-                            <h2><i class="fa-solid fa-campground"></i> Estregan Cottage Reservation Reports</h2>
-                        </div>
+                <div class="report-container" id="report-container">
 
-                        <div class="filters">
-                            <form method="POST" action="">
-                                <label for="from_date">From: </label>
-                                <input type="date" id="from_date" name="from_date" value="<?php echo $from_date; ?>">
-                                <label for="to_date">To: </label>
-                                <input type="date" id="to_date" name="to_date" value="<?php echo $to_date; ?>">
-                                <button type="submit">Filter</button>
-                            </form>
-                        </div>
-
-                        <div class="summary-box">
-                            <div>
-                                <h3>Total Income</h3>
-                                <p><?php echo number_format($income_data['total_income'], 2); ?> PHP</p>
-                            </div>
-                            <div>
-                                <h3>Total Reservations</h3>
-                                <p><?php echo $reservation_data['total_reservations']; ?></p>
-                            </div>
-                            <div>
-                                <h3>Most Reserved Cottage No.</h3>
-                                <p><?php echo $most_reserved_cottage['cottage_number']; ?></p>
-                                <p><?php echo $most_reserved_cottage['reservation_count']; ?> Reservations</p>
-                            </div>
-                        </div>
-
-                        <?php if (mysqli_num_rows($result) > 0): ?>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Reservation ID</th>
-                                        <th>Customer</th>
-                                        <th>Cottage</th>
-                                        <th>Date of Arrival</th>
-                                        <th>Status</th>
-                                        <th>Total Fee</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php while ($row = $result->fetch_assoc()): ?>
-                                        <tr>
-                                            <td><?php echo $row['reserve_id']; ?></td>
-                                            <td><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></td>
-                                            <td><?php echo $row['cottage_number']; ?></td>
-                                            <td><?php echo $row['date_of_arrival']; ?></td>
-                                            <td><?php echo $row['reserve_status']; ?></td>
-                                            <td><?php echo $row['price']; ?> PHP</td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        <?php else: ?>
-                            <div class="no-records">No records found for the selected date range.</div>
-                        <?php endif; ?>
+                    <div style="margin-bottom: 10px; ">
+                        <h2><i class="fa-solid fa-campground"></i> Estregan Cottage Reservation Reports</h2>
                     </div>
 
-                    <!-- for print div -->
-              
+                    <div class="filters">
+                        <form method="POST" action="">
+                            <label for="from_date">From: </label>
+                            <input type="date" id="from_date" name="from_date" value="<?php echo $from_date; ?>">
+                            <label for="to_date">To: </label>
+                            <input type="date" id="to_date" name="to_date" value="<?php echo $to_date; ?>">
+                            <button type="submit">Filter</button>
+                        </form>
+                    </div>
+
+                    <div class="summary-box">
+                        <div>
+                            <h3>Total Income</h3>
+                            <p><?php echo number_format($income_data['total_income'], 2); ?> PHP</p>
+                        </div>
+                        <div>
+                            <h3>Total Reservations</h3>
+                            <p><?php echo $reservation_data['total_reservations']; ?></p>
+                        </div>
+                        <div>
+                            <h3>Most Reserved Cottage No.</h3>
+                            <p><?php echo $most_reserved_cottage['cottage_number']; ?></p>
+                            <p><?php echo $most_reserved_cottage['reservation_count']; ?> Reservations</p>
+                        </div>
+                    </div>
+
+                    <?php if (mysqli_num_rows($result) > 0): ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reservation ID</th>
+                                    <th>User ID</th>
+                                    <th>Status</th>
+                                    <th>Type</th>
+                                    <th>Date of Arrival</th>
+                                    <th>Time</th>
+                                    <th>Cottage Number</th>
+                                    <th>Cottage Type</th>
+                                    <th>Cottage Photo</th>
+                                    <th>Price</th>
+                                    <th>Cottage Reserve Payment</th>
+                                    <th>Payment</th>
+                                    <th>Balance</th>
+                             
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $result->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo $row['reserve_id']; ?></td>
+                                        <td><?php echo $row['user_id']; ?></td>
+                                        <td><?php echo $row['reserve_status']; ?></td>
+                                        <td><?php echo $row['reserve_type']; ?></td>
+                                        <td><?php echo $row['date_of_arrival']; ?></td>
+                                        <td><?php echo $row['time']; ?></td>
+                                        <td><?php echo $row['cottage_number']; ?></td>
+                                        <td><?php echo $row['cottage_type']; ?></td>
+                                        <td>
+                                            <?php if ($row['cottage_photo']): ?>
+                                                <img src="<?php echo $row['cottage_photo']; ?>" alt="Cottage Photo" style="max-width: 30px; max-height: 30px; object-fit: cover;">
+                                            <?php else: ?>
+                                                No Image
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo number_format($row['price'], 2); ?> PHP</td>
+                                        <td><?php echo number_format($row['cottage_reserve_fee'], 2); ?> PHP</td>
+                                        <td><?php echo number_format($row['payment'], 2); ?> PHP</td>
+                                        <td><?php echo number_format($row['balance'], 2); ?> PHP</td>
+                                     
+
+
+
+
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <div class="no-records">No records found for the selected date range.</div>
+                    <?php endif; ?>
+
+                </div>
+
+                <!-- for print div -->
+
 
                 <!-- Download Button -->
                 <div style="text-align: center; margin-bottom: 20px; padding:10px;">
@@ -176,7 +207,7 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
 
                     // Set options for html2pdf
                     const options = {
-                        margin: [0.2, 0.2, 0.2, 0.2], // Smaller margins for more content space
+                        margin: [0.2, 0.1, 0.2, 0.1], // Smaller margins for more content space
                         filename: 'cottage_reservation_report.pdf',
                         image: {
                             type: 'jpeg',
@@ -190,7 +221,7 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
                         jsPDF: {
                             unit: 'in',
                             format: 'a4', // A4 page size for standard invoice
-                            orientation: 'portrait' // Portrait layout
+                            orientation: 'landscape' // Portrait layout
                         }
                     };
 
@@ -219,9 +250,11 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
 
 
 <style>
+    .center-contianer {}
+
     .report-container {
         padding: 20px;
-        background-color: var(--first-color2);
+        background-color: white;
 
     }
 
@@ -287,23 +320,23 @@ if ($most_reserved_result && mysqli_num_rows($most_reserved_result) > 0) {
 
     .summary-box div {
         background-color: var(--first-color);
-        padding: 15px;
+        padding: 10px;
         border-radius: 5px;
-        width: 24%;
+      
         text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border: 1px solid #fff;
+        flex: 1;
+        border: 1px solid var(--box-shadow);
 
     }
 
     .summary-box div h3 {
         margin: 0;
-        font-size: 18px;
+        font-size: 1.6rem;
         color: var(--seventh-color);
     }
 
     .summary-box div p {
-        font-size: 22px;
+        font-size: 1.5rem;
         margin: 5px 0;
         color: gray;
         text-align: center;

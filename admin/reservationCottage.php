@@ -16,8 +16,8 @@ require 'db_connect.php';
             In</button>
         <button onclick="showTable(3, 3)" id="checkedOut-btn"><i class="fa-solid fa-user-check"></i> Checked
             Out</button>
-        <button onclick="showTable(4, 4)" id="rejected-btn" class="rejected-btn"><i class="fa-solid fa-user-xmark"></i>
-            Rejected</button>
+        <button onclick="showTable(4, 4)" id="cancelled-btn" class="cancelled-btn"><i class="fa-solid fa-user-xmark"></i>
+            Cancelled</button>
     </div>
 
     <div class="under-buttons-container">
@@ -41,7 +41,7 @@ require 'db_connect.php';
 
             function searchTable(query) {
                 // Get all table rows in each table
-                const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
+                const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-cancelled"];
                 tables.forEach(tableId => {
                     const rows = document.querySelectorAll(`#${tableId} table tr:not(:first-child)`); // Exclude the header row
                     rows.forEach(row => {
@@ -131,7 +131,7 @@ require 'db_connect.php';
     renderTable($con, 'confirmed');
     renderTable($con, 'checkedIn');
     renderTable($con, 'checkedOut');
-    renderTable($con, 'rejected');
+    renderTable($con, 'cancelled');
     ?>
 
 </div>
@@ -139,9 +139,9 @@ require 'db_connect.php';
 <script>
     function showTable(tableIndex, buttonIndex) {
         // Array of table and button IDs
-        const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-rejected"];
-        const buttons = ["pending-btn", "confirmed-btn", "checkedIn-btn", "checkedOut-btn", "rejected-btn"];
-        const colors = { active: 'white', inactive: '#002334', rejectedActive: '#650000', rejectedInactive: 'white' };
+        const tables = ["table-container-pending", "table-container-confirmed", "table-container-checkedIn", "table-container-checkedOut", "table-container-cancelled"];
+        const buttons = ["pending-btn", "confirmed-btn", "checkedIn-btn", "checkedOut-btn", "cancelled-btn"];
+        const colors = { active: 'white', inactive: '#002334', cancelledActive: '#650000', cancelledInactive: 'white' };
 
         // Set table display
         tables.forEach((table, index) => {
@@ -152,8 +152,8 @@ require 'db_connect.php';
         buttons.forEach((button, index) => {
             const btnElement = document.getElementById(button);
             if (index === buttonIndex) {
-                btnElement.style.backgroundColor = button === "rejected-btn" ? colors.rejectedInactive : colors.active;
-                btnElement.style.color = button === "rejected-btn" ? colors.rejectedActive : colors.inactive;
+                btnElement.style.backgroundColor = button === "cancelled-btn" ? colors.cancelledInactive : colors.active;
+                btnElement.style.color = button === "cancelled-btn" ? colors.cancelledActive : colors.inactive;
             } else {
                 btnElement.style.backgroundColor = colors.inactive;
                 btnElement.style.color = colors.active;
@@ -170,7 +170,7 @@ require 'db_connect.php';
             "table-container-confirmed": 1,
             "table-container-checkedIn": 2,
             "table-container-checkedOut": 3,
-            "table-container-rejected": 4
+            "table-container-cancelled": 4
         };
 
         const activeTable = localStorage.getItem('activeTable');
@@ -184,7 +184,7 @@ require 'db_connect.php';
     document.getElementById("confirmed-btn").onclick = () => showTable(1, 1);
     document.getElementById("checkedIn-btn").onclick = () => showTable(2, 2);
     document.getElementById("checkedOut-btn").onclick = () => showTable(3, 3);
-    document.getElementById("rejected-btn").onclick = () => showTable(4, 4);
+    document.getElementById("cancelled-btn").onclick = () => showTable(4, 4);
 </script>
 
 <!-- end -->

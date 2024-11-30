@@ -340,7 +340,7 @@ if (isset($_POST['confirm'])) {
                             <div>
                                 <div class="line">
                                     <div>
-                                        <label style="color: red;">Reason for Rejection <em id="goodfor">*If
+                                        <label style="color: red;">Reason for Cancellation <em id="goodfor">*If
                                                 rejected*</em></label><br>
                                         <textarea name="rejection_reason" id=""></textarea>
                                     </div>
@@ -360,7 +360,7 @@ if (isset($_POST['confirm'])) {
                                 Confirm</button>
                             <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
                                     class="fa-solid fa-trash"></i>
-                                Reject</a>
+                                Cancel</a>
                         </div>
                     </form>
                 </div>

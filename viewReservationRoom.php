@@ -231,44 +231,42 @@ if (isset($_SESSION['user_id'])) {
             <input class="fixed-value-input" name="amenities" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['amenities']; ?>" readonly>
 
-            <label>Price (₱)</label>
-            <input class="fixed-value-input" name="rate_per_hour" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['price']; ?>" readonly>
 
-            <p id="comment"> (fixed) Good for 22 hours</p>
+
 
             <label>Special Request</label>
+
             <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
-                readonly></textarea>
+                readonly><?php echo $manage_data['special_request']; ?></textarea>
 
 
             <label class="bold-text" style="margin-top:20px;">Payment Details</label>
 
-            <label>Extra Bed and Person <em style="font-size: 1rem; color:gray">(+600 ₱)</em></label>
-            <input class="fixed-value-input" name="extra_bed_and_person" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['extra_bed_and_person']; ?>" readonly>
+            <label>Price (Php)</label>
+            <input class="fixed-value-input" name="rate_per_hour" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['price']; ?>" readonly>
 
-            <label>Reservation Fee (₱)<em style="font-size: 1rem; color:gray">(paid)</em></label>
+            <label>Extra Bed and Person Price(Php)<em style="font-size: 1rem; color:gray">( <?php echo $manage_data['extra_bed_and_person']; ?> * 600 Php)</em></label>
+            <input class="fixed-value-input" name="extra_bed_and_person" onkeyup="changeColor(this)"
+                value="<?php echo $manage_data['extra_bed_and_person'] * 600; ?>" readonly>
+
+            <label>Reservation Fee (Php)<em style="font-size: 1rem; color:gray"> (paid)</em></label>
             <input class="fixed-value-input" name="reservation_fee" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['reservation_fee']; ?>" readonly>
 
-            <label>Total Fee (₱)<em style="font-size: 1rem; color:gray">(price + (600 ₱ * extra bed and person) - reservation fee)</em></label>
-            <input class="fixed-value-input" name="total_fee" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['total_fee']; ?>" readonly>
-
-
-            <label>Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <label>Payment (Php)<em style="font-size: 1rem; color:gray"> (walk-in)</em></label>
             <input class="fixed-value-input" name="payment" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['payment']; ?>" readonly>
 
-            <label>Additional Payment (₱)<em style="font-size: 1rem; color:gray">(walk-in)</em></label>
+            <label>Additional Payment (Php)<em style="font-size: 1rem; color:gray"> (for extended stays only)</em></label>
             <input class="fixed-value-input" name="additional_payment" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['additional_payment']; ?>" readonly>
 
-            <label>Balance (₱)</label>
-            <input class="fixed-value-input" name="balance" onkeyup="changeColor(this)"
-                value="<?php echo $manage_data['balance']; ?>" readonly>
+            <label class="bold-text" style="margin-top:20px; color: red;">Reason of Cancellation</label>
 
+            <label>Reason <em style="color:gray; font-size: 1rem;">*if cancelled by admin*</em></label>
+            <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
+                readonly><?php echo $manage_data['rejection_reason']; ?></textarea>
 
 
             <p id="note">

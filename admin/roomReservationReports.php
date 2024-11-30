@@ -92,7 +92,15 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'assets.php'; ?>
+
+
+    <!-- important files -->
+    <?php
+    include 'assets.php'
+    ?>
+
+
+
     <title>Room Reservation Reports</title>
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
@@ -111,9 +119,10 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                 <?php include 'icon-container.php' ?>
             </div>
 
-            <div class="center-container">
-                <div id="center-container">
+            <div class="center-container" style="background-color: white;">
+                <div id="center-container" >
                     <div class="report-container" id="report-container">
+
                         <div style="margin-bottom: 10px; ">
                             <h2><i class="fa-solid fa-bed"></i> Estregan Room Reservation Reports</h2>
                         </div>
@@ -130,13 +139,13 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 
                         <div class="summary-box">
                             <div>
-                                <h3>Total Income (Filtered Date)</h3>
+                                <h3>Total Income (Filtered)</h3>
                                 <p>
                                     <?php echo $income_data ? number_format($income_data['total_income'], 2) : '0.00'; ?> PHP
                                 </p>
                             </div>
                             <div>
-                                <h3>Total Reservations (Filtered Date)</h3>
+                                <h3>Total Reservations (Filtered)</h3>
                                 <p>
                                     <?php echo $total_reservations_data ? $total_reservations_data['total_reservations'] : '0'; ?>
                                 </p>
@@ -157,10 +166,23 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>User ID</th>
+                                        <th>Status</th>
+                                        <th>Reservation Type</th>
+                                        <th>Date</th>
                                         <th>Room Number</th>
                                         <th>Room Type</th>
-                                        <th>Date of Arrival</th>
+                                        <th>Bed Type</th>
+                                        <th>Price</th>
+                                        <th>Photo</th>
+                                        <th>Extra B&P</th>
+                                        <th>Reservation Payment</th>
                                         <th>Total Fee</th>
+                                        <th>Payment</th>
+                                        <th>Balance</th>
+                                        <th>Extend Time</th>
+                                        <th>Extend Price</th>
+                                        <th>Additional Payment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,20 +190,45 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                         <?php while ($row = $result->fetch_assoc()) : ?>
                                             <tr>
                                                 <td><?php echo $row['reserve_id']; ?></td>
+                                                <td><?php echo $row['user_id']; ?></td>
+                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo $row['reservation_type']; ?></td>
+                                                <td><?php echo $row['date_of_arrival']; ?></td>
                                                 <td><?php echo $row['room_number']; ?></td>
                                                 <td><?php echo $row['room_type']; ?></td>
-                                                <td><?php echo $row['date_of_arrival']; ?></td>
-                                                <td><?php echo number_format($row['total_fee'] + $row['reservation_fee'] + $row['additional_payment'], 2); ?> PHP</td>
+                                                <td><?php echo $row['bed_type']; ?></td>
+
+                                                <td><?php echo number_format($row['price'], 2); ?> PHP</td>
+
+                                                <td>
+                                                    <?php if (!empty($row['photo'])): ?>
+                                                        <img src="<?php echo $row['photo']; ?>" alt="Room Photo" style="width: 50px; height: auto;">
+                                                    <?php else: ?>
+                                                        N/A
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?php echo $row['extra_bed_and_person']; ?></td>
+                                                <td><?php echo number_format($row['reservation_fee'], 2); ?> PHP</td>
+
+                                                <td><?php echo number_format($row['total_fee'], 2); ?> PHP</td>
+                                                <td><?php echo number_format($row['payment'], 2); ?> PHP</td>
+                                                <td><?php echo number_format($row['balance'], 2); ?> PHP</td>
+                                                <td><?php echo $row['extend_time']; ?></td>
+                                                <td><?php echo number_format($row['extend_price'], 2); ?> PHP</td>
+                                                <td><?php echo number_format($row['additional_payment'], 2); ?> PHP</td>
+
+
                                             </tr>
                                         <?php endwhile; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="5">No data available for the selected date range.</td>
+                                            <td colspan="33">No data available.</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
 
@@ -221,7 +268,7 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 
         // Set options for html2pdf
         const options = {
-            margin: [0.2, 0.2, 0.2, 0.2], // Smaller margins for more content space
+            margin: [0.2, 0.1, 0.2, 0.1], // Smaller margins for more content space
             filename: 'cottage_reservation_report.pdf',
             image: {
                 type: 'jpeg',
@@ -235,7 +282,7 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
             jsPDF: {
                 unit: 'in',
                 format: 'a4', // A4 page size for standard invoice
-                orientation: 'portrait' // Portrait layout
+                orientation: 'landscape' // Portrait layout
             }
         };
 
@@ -256,7 +303,7 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 <style>
     .report-container {
         padding: 20px;
-        background-color: var(--first-color2);
+        background-color: white;
 
     }
 
@@ -285,9 +332,11 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
     }
 
     table {
-        width: 100%;
+
         border-collapse: collapse;
         margin-top: 20px;
+
+
     }
 
     table,
@@ -322,23 +371,21 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 
     .summary-box div {
         background-color: var(--first-color);
-        padding: 15px;
+        padding: 10px;
         border-radius: 5px;
-        width: 24%;
         text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border: 1px solid #fff;
-
+        border: 1px solid var(--box-shadow);
+        flex-grow: 1;
     }
 
     .summary-box div h3 {
         margin: 0;
-        font-size: 18px;
+        font-size: 1.6rem;
         color: var(--seventh-color);
     }
 
     .summary-box div p {
-        font-size: 22px;
+        font-size: 1.5rem;
         margin: 5px 0;
         color: gray;
         text-align: center;
