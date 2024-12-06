@@ -100,7 +100,6 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
     ?>
 
 
-
     <title>Room Reservation Reports</title>
     <link rel="stylesheet" type="text/css" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css?v=<?php echo time(); ?>">
@@ -120,7 +119,7 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
             </div>
 
             <div class="center-container" style="background-color: white;">
-                <div id="center-container" >
+                <div id="center-container">
                     <div class="report-container" id="report-container">
 
                         <div style="margin-bottom: 10px; ">
@@ -166,23 +165,20 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>User ID</th>
-                                        <th>Status</th>
+                                    
                                         <th>Reservation Type</th>
                                         <th>Date</th>
                                         <th>Room Number</th>
-                                        <th>Room Type</th>
-                                        <th>Bed Type</th>
                                         <th>Price</th>
                                         <th>Photo</th>
                                         <th>Extra B&P</th>
                                         <th>Reservation Payment</th>
-                                        <th>Total Fee</th>
                                         <th>Payment</th>
                                         <th>Balance</th>
                                         <th>Extend Time</th>
                                         <th>Extend Price</th>
                                         <th>Additional Payment</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -190,16 +186,11 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                         <?php while ($row = $result->fetch_assoc()) : ?>
                                             <tr>
                                                 <td><?php echo $row['reserve_id']; ?></td>
-                                                <td><?php echo $row['user_id']; ?></td>
-                                                <td><?php echo $row['status']; ?></td>
+                                              
                                                 <td><?php echo $row['reservation_type']; ?></td>
                                                 <td><?php echo $row['date_of_arrival']; ?></td>
                                                 <td><?php echo $row['room_number']; ?></td>
-                                                <td><?php echo $row['room_type']; ?></td>
-                                                <td><?php echo $row['bed_type']; ?></td>
-
                                                 <td><?php echo number_format($row['price'], 2); ?> PHP</td>
-
                                                 <td>
                                                     <?php if (!empty($row['photo'])): ?>
                                                         <img src="<?php echo $row['photo']; ?>" alt="Room Photo" style="width: 50px; height: auto;">
@@ -210,12 +201,13 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                                 <td><?php echo $row['extra_bed_and_person']; ?></td>
                                                 <td><?php echo number_format($row['reservation_fee'], 2); ?> PHP</td>
 
-                                                <td><?php echo number_format($row['total_fee'], 2); ?> PHP</td>
+                                             
                                                 <td><?php echo number_format($row['payment'], 2); ?> PHP</td>
                                                 <td><?php echo number_format($row['balance'], 2); ?> PHP</td>
                                                 <td><?php echo $row['extend_time']; ?></td>
                                                 <td><?php echo number_format($row['extend_price'], 2); ?> PHP</td>
                                                 <td><?php echo number_format($row['additional_payment'], 2); ?> PHP</td>
+                                                <td><?php echo $row['status']; ?></td>
 
 
                                             </tr>
@@ -233,11 +225,13 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                 </div>
 
 
-
-                <!-- Download Button -->
+                <!-- for print div -->
                 <div style="text-align: center; margin-bottom: 20px; padding:10px;">
-                    <button id="download-button" style="padding:5px;"><i class="fa-solid fa-download"></i> Download Report</button>
+                    <a href="generateRoom_pdf.php?from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>" target="_blank">
+                        <button style="padding:5px;"><i class="fa-solid fa-download"></i> Download Report</button>
+                    </a>
                 </div>
+
 
             </div>
         </section>
@@ -254,42 +248,6 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 
 
 
-
-
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-    document.getElementById('download-button').addEventListener('click', function() {
-        // Select the invoice container
-        const element = document.getElementById('report-container');
-
-        // Set options for html2pdf
-        const options = {
-            margin: [0.2, 0.1, 0.2, 0.1], // Smaller margins for more content space
-            filename: 'cottage_reservation_report.pdf',
-            image: {
-                type: 'jpeg',
-                quality: 5 // High-quality images
-            },
-            html2canvas: {
-                scale: 5, // Higher scaling for better rendering
-                scrollX: 0,
-                scrollY: 0
-            },
-            jsPDF: {
-                unit: 'in',
-                format: 'a4', // A4 page size for standard invoice
-                orientation: 'landscape' // Portrait layout
-            }
-        };
-
-        // Trigger the download
-        html2pdf().set(options).from(element).save();
-    });
-</script>
 
 
 
@@ -380,14 +338,16 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
 
     .summary-box div h3 {
         margin: 0;
-        font-size: 1.6rem;
-        color: var(--seventh-color);
+        font-size: 1rem;
+        color: gray;
     }
 
     .summary-box div p {
-        font-size: 1.5rem;
+        font-weight: bold;
+        font-size: 2rem;
         margin: 5px 0;
         color: gray;
         text-align: center;
+        color: var(--seventh-color);
     }
 </style>

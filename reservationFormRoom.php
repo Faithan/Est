@@ -208,7 +208,7 @@ if (isset($_POST['submit'])) {
                 icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
             }).then(function() {
                 // Redirect to another page after the SweetAlert is closed
-                window.location.href = "reservationRoom.php"; // Replace with the actual URL you want to redirect to
+                window.location.href = "myReservationRoom.php"; // Replace with the actual URL you want to redirect to
             });
         </script>
     <?php endif; ?>
@@ -304,7 +304,7 @@ if (isset($_POST['submit'])) {
 
             <?php
             $room_number = $manage_data['room_number'];
-            $query = "SELECT date_of_arrival FROM reserve_room_tbl WHERE room_number = ? AND status IN ('confirmed', 'checkedIn', 'extended')";
+            $query = "SELECT date_of_arrival FROM reserve_room_tbl WHERE room_number = ? AND status IN ('pending','confirmed', 'checkedIn', 'extended')";
             $stmt = $con->prepare($query);
             $stmt->bind_param("s", $room_number);
             $stmt->execute();
@@ -420,7 +420,7 @@ if (isset($_POST['submit'])) {
 
             <input class="fixed-value-input" type="time" name="time_of_arrival" onkeyup="changeColor(this)"
                 value="14:00" required readonly>
-            <p id="comment"> (fixed) Good for 22 hours, start time 2:00PM - 11:00AM</p>
+            <p id="comment"> (fixed) Good for 23 hours, start time 2:00PM - 12:00AM</p>
 
             <label class="bold-text">Room Details</label>
 
@@ -452,7 +452,7 @@ if (isset($_POST['submit'])) {
             <input class="fixed-value-input" name="rate_per_hour" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['price']; ?>" readonly>
 
-            <p id="comment"> (fixed) Good for 22 hours</p>
+            <p id="comment"> (fixed) Good for 23 hours</p>
 
             <label>Do you have any special request?</label>
             <textarea name="special_request" onkeyup="changeColor(this)"></textarea>

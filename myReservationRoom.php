@@ -111,7 +111,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="container-of-labels">
 
                                 <div class="label-container">
-                                    <div class="title-text-bold"><label>Price (Good for 22hrs):</label></div>
+                                    <div class="title-text-bold"><label>Price (Good for 23hrs):</label></div>
                                     <div class="detail-bold">
                                         <p>₱<?php echo $price ?></p>
                                     </div>

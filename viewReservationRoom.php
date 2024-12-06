@@ -136,6 +136,97 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
+          <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents" style="padding-top:30px;">
+      <?php
+            // Assuming you have already connected to your database via db_connect.php
+            require('db_connect.php');
+
+            // Fetch the gcash details from the database (assuming id = 1)
+            $gcash_number = "";
+            $gcash_photo = "";
+
+            $sql = "SELECT gcash_number, gcash_photo FROM gcash_tbl WHERE id = 1";
+            $result = $con->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $gcash_number = $row['gcash_number'];
+                $gcash_photo = $row['gcash_photo'];
+            }
+            ?>
+
+            <label class="bold-text" >Reservation Payment Section</label>
+
+            <label for="">Gcash Account Number:</label>
+            <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
+
+            <label class="bold-text">OR</label>
+
+            <label for=""><i class="fa-solid fa-money-bill"></i> Scan QR Code</label>
+            <!-- Displaying Gcash photo and number based on the database -->
+            <img id="gcashImage" src="<?php echo !empty($gcash_photo) ? 'admin/' . $gcash_photo : 'default-image.jpg'; ?>" alt="Gcash Photo" style="margin-bottom: 50px; cursor:pointer; " onclick="viewFullScreen(this)">
+
+            <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
+            <label for="reference_number">Reference Number:</label>
+
+            <input type="number" name="reference_number" id="reference_number"
+                style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--first-color2)'; ?>;"
+                value="<?php echo $manage_data['reference_number']; ?>" required
+                <?php echo ($manage_data['status'] === 'pending') ? '' : 'readonly'; ?>
+                min="0" oninput="this.value = this.value.slice(0, 16)">
+
+
+            <p>Note: Please ensure that the payment reference number is correct. If there is an error, you may resubmit the correct reference number. Once the reservation is confirment you can no longer change the reference number.</p>
+            <button id="reference-submit" type="submit" style="color:var(--seventh-color); border: 1px solid var(--seventh-color3); padding: 10px; background-color:var(--sixth-color); font-size:1.5rem; font-weight:bold; border-radius: 5px; display:<?php echo ($manage_data['status'] === 'pending') ? '' : 'none'; ?>;">Submit</button>
+        </form>
+
+        <script>
+            document.getElementById('reference-form').addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated!',
+                                text: data.message,
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#3085d6',
+                            }).then(() => {
+                                // Optionally reload the page or update the UI
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: data.message,
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#d33',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Something went wrong. Please try again.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#d33',
+                        });
+                    });
+            });
+        </script>
+
+
+
+
         <form action="" method="post" class="reserveForm-contents">
             <input type="hidden" name="reserve_id" id="" value="<?php echo $manage_data['reserve_id']; ?>">
 
@@ -203,7 +294,7 @@ if (isset($_SESSION['user_id'])) {
 
             <input class="fixed-value-input" type="time" name="time_of_arrival" onkeyup="changeColor(this)"
                 value="14:00" required readonly>
-            <p id="comment"> (fixed) Good for 22 hours, start time 2:00PM - 11:00AM</p>
+            <p id="comment"> (fixed) Good for 23 hours, start time 2:00PM - 12:00AM</p>
 
             <label class="bold-text">Room Details</label>
 
@@ -292,103 +383,17 @@ if (isset($_SESSION['user_id'])) {
 
                 <a href="myReservationRoom.php" class="back-btn">Back</a>
             </div>
+     </form>
+
+
+      
 
 
 
-            <?php
-            // Assuming you have already connected to your database via db_connect.php
-            require('db_connect.php');
-
-            // Fetch the gcash details from the database (assuming id = 1)
-            $gcash_number = "";
-            $gcash_photo = "";
-
-            $sql = "SELECT gcash_number, gcash_photo FROM gcash_tbl WHERE id = 1";
-            $result = $con->query($sql);
-
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $gcash_number = $row['gcash_number'];
-                $gcash_photo = $row['gcash_photo'];
-            }
-            ?>
-
-            <label class="bold-text" style="margin-top:200px;">Reservation Payment Section</label>
-
-            <label for="">Gcash Account Number:</label>
-            <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
-
-            <label class="bold-text">OR</label>
-
-            <label for=""><i class="fa-solid fa-money-bill"></i> Scan QR Code</label>
-            <!-- Displaying Gcash photo and number based on the database -->
-            <img id="gcashImage" src="<?php echo !empty($gcash_photo) ? 'admin/' . $gcash_photo : 'default-image.jpg'; ?>" alt="Gcash Photo" style="margin-bottom: 50px; cursor:pointer; " onclick="viewFullScreen(this)">
+   
 
 
-
-        </form>
-
-
-        <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents">
-            <input type="hidden" name="reserve_id" value="<?php echo $manage_data['reserve_id']; ?>">
-            <label for="reference_number">Reference Number:</label>
-
-            <input type="number" name="reference_number" id="reference_number"
-                style="background-color:<?php echo ($manage_data['status'] === 'pending') ? '' : 'var(--first-color2)'; ?>;"
-                value="<?php echo $manage_data['reference_number']; ?>" required
-                <?php echo ($manage_data['status'] === 'pending') ? '' : 'readonly'; ?>
-                min="0" oninput="this.value = this.value.slice(0, 16)">
-
-
-            <p>Note: Please ensure that the payment reference number is correct. If there is an error, you may resubmit the correct reference number. Once the reservation is confirment you can no longer change the reference number.</p>
-            <button id="reference-submit" type="submit" style="color:var(--seventh-color); border: 1px solid var(--seventh-color3); padding: 10px; background-color:var(--sixth-color); font-size:1.5rem; font-weight:bold; border-radius: 5px; display:<?php echo ($manage_data['status'] === 'pending') ? '' : 'none'; ?>;">Submit</button>
-        </form>
-
-        <script>
-            document.getElementById('reference-form').addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent the default form submission
-
-                const formData = new FormData(this);
-
-                fetch(this.action, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Updated!',
-                                text: data.message,
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: '#3085d6',
-                            }).then(() => {
-                                // Optionally reload the page or update the UI
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: data.message,
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: '#d33',
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops!',
-                            text: 'Something went wrong. Please try again.',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#d33',
-                        });
-                    });
-            });
-        </script>
-
-
+      
 
 
 

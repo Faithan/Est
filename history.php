@@ -2,36 +2,72 @@
 include('db_connect.php');
 session_start();
 
-// Retrieve the user ID of the logged-in user from the session if the user is logged in
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
+// Ensure the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
 }
 
-// Fetch checked-out reservations from both reserve_room_tbl and reserve_cottage_tbl
+// Retrieve the user ID of the logged-in user
+$user_id = $_SESSION['user_id'];
+
+// Fetch checked-out or cancelled reservations for the logged-in user
 $roomQuery = "
-    SELECT reserve_id, user_id, status, room_number, room_type, price, date_of_arrival, photo 
-    FROM reserve_room_tbl 
-    WHERE user_id = $user_id AND status = 'checkedOut' OR status = 'cancelled'
-    ORDER BY date_of_arrival DESC";
+    SELECT 
+        reserve_id, 
+        user_id, 
+        status, 
+        room_number, 
+        room_type, 
+        price, 
+        date_of_arrival, 
+        photo 
+    FROM 
+        reserve_room_tbl 
+    WHERE 
+        user_id = ? 
+        AND (status = 'checkedOut' OR status = 'cancelled')
+    ORDER BY 
+        date_of_arrival DESC";
 
 $cottageQuery = "
-    SELECT reserve_id, user_id, reserve_status, cottage_number, cottage_type, price, date_of_arrival, cottage_photo 
-    FROM reserve_cottage_tbl 
-    WHERE user_id = $user_id AND reserve_status = 'checkedOut' OR reserve_status = 'cancelled'
-    ORDER BY date_of_arrival DESC";
+    SELECT 
+        reserve_id, 
+        user_id, 
+        reserve_status AS status, 
+        cottage_number, 
+        cottage_type, 
+        price, 
+        date_of_arrival, 
+        cottage_photo  
+    FROM 
+        reserve_cottage_tbl 
+    WHERE 
+        user_id = ? 
+        AND (reserve_status = 'checkedOut' OR reserve_status = 'cancelled')
+    ORDER BY 
+        date_of_arrival DESC";
 
-// Execute both queries
-$roomResult = mysqli_query($con, $roomQuery);
-$cottageResult = mysqli_query($con, $cottageQuery);
+// Prepare and execute room query
+$roomStmt = $con->prepare($roomQuery);
+$roomStmt->bind_param("i", $user_id);
+$roomStmt->execute();
+$roomResult = $roomStmt->get_result();
+
+// Prepare and execute cottage query
+$cottageStmt = $con->prepare($cottageQuery);
+$cottageStmt->bind_param("i", $user_id);
+$cottageStmt->execute();
+$cottageResult = $cottageStmt->get_result();
 
 // Combine both results into one array
 $reservations = [];
 
-while ($row = mysqli_fetch_assoc($roomResult)) {
+while ($row = $roomResult->fetch_assoc()) {
     $reservations[] = $row;
 }
 
-while ($row = mysqli_fetch_assoc($cottageResult)) {
+while ($row = $cottageResult->fetch_assoc()) {
     $reservations[] = $row;
 }
 
@@ -40,7 +76,6 @@ usort($reservations, function ($a, $b) {
     return strtotime($b['date_of_arrival']) - strtotime($a['date_of_arrival']);
 });
 ?>
-
 
 
 
@@ -98,7 +133,7 @@ usort($reservations, function ($a, $b) {
                                 <label for="" class="reservation-label" style="background-color: #2980B9;">Room Reservation</label>
                                 <p class="title">Room Number: <?php echo $reservation['room_number']; ?> - <?php echo $reservation['room_type']; ?></p>
                                 <p class="date">Date of Arrival: <?php echo date('F d, Y', strtotime($reservation['date_of_arrival'])); ?></p>
-                                <p>Reservation Status: <?php echo $reservation['status']; ?></p>
+                              
                                 <a href="viewReservationRoom.php?manage_id=<?php echo $reservation['reserve_id']; ?>"><i class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         <?php else: ?>
@@ -108,7 +143,7 @@ usort($reservations, function ($a, $b) {
                                 <label for="" class="reservation-label" style="background-color: red;">Cottage Reservation</label>
                                 <p class="title">Cottage Number: <?php echo $reservation['cottage_number']; ?> - <?php echo $reservation['cottage_type']; ?></p>
                                 <p class="date">Date of Arrival: <?php echo date('F d, Y', strtotime($reservation['date_of_arrival'])); ?></p>
-                                <p>Reservation Status: <?php echo $reservation['reserve_status']; ?></p>
+                           
                                 <a href="viewReservationCottage.php?manage_id=<?php echo $reservation['reserve_id']; ?>"><i class="fa-regular fa-eye"></i> OPEN</a>
                             </div>
                         <?php endif; ?>
@@ -121,7 +156,7 @@ usort($reservations, function ($a, $b) {
                             } elseif (isset($reservation['reserve_status']) && $reservation['reserve_status'] == 'cancelled') {
                                 echo "CANCELLED";
                             } else {
-                                echo "₱" . number_format($reservation['price'], 2);
+                                echo "CHECKED OUT";
                             }
                             ?>
                         </div>

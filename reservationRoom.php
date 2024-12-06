@@ -433,7 +433,7 @@ if (isset($_GET['manage_id'])) {
                                         <p for="bold-text">₱ <?php echo $price ?></p>
                                     </div>
                                     <div class="room-details" id="good-for">
-                                        <p><em>Good For 22hours</em></p>
+                                        <p><em>Good For 23hours</em></p>
                                     </div>
                                     <div class="room-details"><label for="">Room Type: </label>
                                         <p><?php echo $roomType ?></p>

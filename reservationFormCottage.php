@@ -181,7 +181,7 @@ if (isset($_POST['submit'])) {
                 icon: '<?php echo $isSuccess ? "success" : "error"; ?>'
             }).then(function() {
                 // Redirect to another page after the SweetAlert is closed
-                window.location.href = "reservationCottage.php"; // Replace with the actual URL you want to redirect to
+                window.location.href = "myReservationCottage.php"; // Replace with the actual URL you want to redirect to
             });
         </script>
     <?php endif; ?>
@@ -268,13 +268,14 @@ if (isset($_POST['submit'])) {
             <?php
             // Fetch reserved arrival dates and times for a specific cottage
             $cottage_number = $manage_data['cottage_number'];
-            $query = "SELECT date_of_arrival, time FROM reserve_cottage_tbl WHERE cottage_number = ? AND reserve_status IN ('confirmed', 'checkedIn')";
+            $query = "SELECT date_of_arrival, time FROM reserve_cottage_tbl WHERE cottage_number = ? AND reserve_status IN ('pending','confirmed', 'checkedIn')";
             $stmt = $con->prepare($query);
             $stmt->bind_param("s", $cottage_number);
             $stmt->execute();
             $result = $stmt->get_result();
             $reserved_dates_times = [];
 
+            
             while ($row = $result->fetch_assoc()) {
                 $reserved_dates_times[$row['date_of_arrival']][] = $row['time'];
             }
