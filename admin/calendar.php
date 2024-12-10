@@ -3,7 +3,7 @@ require 'db_connect.php';
 session_start();
 
 // Fetch reserve cottage data where reserve_status is either 'confirmed' or 'checkedIn'
-$cottage_query = "SELECT date_of_arrival FROM reserve_cottage_tbl WHERE reserve_status IN ('confirmed', 'checkedIn')";
+$cottage_query = "SELECT date_of_arrival FROM reserve_cottage_tbl WHERE reserve_status IN ('pending','confirmed', 'checkedIn')";
 $cottage_result = mysqli_query($con, $cottage_query);
 $cottage_dates = [];
 while ($row = mysqli_fetch_assoc($cottage_result)) {
@@ -11,7 +11,7 @@ while ($row = mysqli_fetch_assoc($cottage_result)) {
 }
 
 // Fetch reserve room data where status is either 'confirmed', 'checkedIn', or 'extended'
-$room_query = "SELECT date_of_arrival FROM reserve_room_tbl WHERE status IN ('confirmed', 'checkedIn', 'extended')";
+$room_query = "SELECT date_of_arrival FROM reserve_room_tbl WHERE status IN ('pending','confirmed', 'checkedIn', 'extended')";
 $room_result = mysqli_query($con, $room_query);
 $room_dates = [];
 while ($row = mysqli_fetch_assoc($room_result)) {
