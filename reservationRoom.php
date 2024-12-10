@@ -283,6 +283,7 @@ if (isset($_GET['manage_id'])) {
                             $bedType = $row['bed_type'];
                             $bed_quantity = $row['bed_quantity'];
                             $roomNumber = $row['room_number'];
+                            $noPersons= $row['no_persons'];
                             $amenities = $row['amenities'];
                             $price = $row['price'];
                             $status = $row['status'];
@@ -449,6 +450,15 @@ if (isset($_GET['manage_id'])) {
                                     <div class="room-details"><label for="">No. of Beds: </label>
                                         <p> <?php echo $bed_quantity ?></p>
                                     </div>
+
+                                    <div class="room-details"><label for="">No. of Person: </label>
+                                        <p> <?php echo $noPersons ?></p>
+                                    </div>
+
+                                    <div class="room-details"><label for="">Amenities: </label>
+                                        <p style="text-align:right; text-wrap:wrap; max-width: 120px;"> <?php echo $amenities ?></p>
+                                    </div>
+                                   
                                    
                                 </div>
 

@@ -171,6 +171,7 @@ if (isset($_GET['manage_id'])) {
                             $night_price = $row['night_price'];
                             $status = $row['cottage_status'];
                             $cottageNumber = $row['cottage_number'];
+                            $noPersons = $row['number_of_person'];
                             $photo = $row['cottage_photo'];
                     ?>
 
@@ -319,6 +320,10 @@ if (isset($_GET['manage_id'])) {
 
                                     <div class="room-details"><label for="">Cottage Number: </label>
                                         <p> <?php echo $cottageNumber ?></p>
+                                    </div>
+
+                                    <div class="room-details"><label for="">No. of Persons: </label>
+                                        <p> <?php echo $noPersons ?></p>
                                     </div>
 
 
