@@ -113,10 +113,10 @@ session_start();
                 <h1 for="">About Estregan </h1>
 
                 <hr>
-                <p>Estregan Beach Resort provides the best quality services, featuring top-quality cottages, rooms, and conference facilities to meet the specific needs of every customer. 
-                    We strive to provide our customers with a unique experience, connecting them with the finest our resort has to offer. Our commitment to top-quality service ensures comfort, relaxation, and abundance throughout your stay.
-
-                    Join us at Estregan Beach Resort and experience the vacation of your dreams!</p>
+                <p>Estregan Beach Resort provides the best quality services, featuring top-quality cottages and rooms to meet the specific needs of every customer. 
+                    We strive to provide our customers with a unique experience, connecting them with the finest our resort has to offer.
+                     Our commitment to top-quality service ensures comfort, relaxation, and abundance throughout your stay. 
+                     Join us at Estregan Beach Resort and experience the vacation of your dreams!</p>
                 <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
             </div>
 
