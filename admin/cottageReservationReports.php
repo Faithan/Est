@@ -141,13 +141,9 @@
                                         <th>Cottage Number</th>
                                         <th>Cottage Type</th>
                                         <th>Cottage Photo</th>
-                                        <th>Price</th>
                                         <th>Cottage Reserve Payment</th>
                                         <th>Payment</th>
-                                        <th>Balance</th>
                                         <th>Status</th>
-
-
 
                                     </tr>
                                 </thead>
@@ -169,10 +165,10 @@
                                                     No Image
                                                 <?php endif; ?>
                                             </td>
-                                            <td><?php echo number_format($row['price'], 2); ?> PHP</td>
+                                        
                                             <td><?php echo number_format($row['cottage_reserve_fee'], 2); ?> PHP</td>
                                             <td><?php echo number_format($row['payment'], 2); ?> PHP</td>
-                                            <td><?php echo number_format($row['balance'], 2); ?> PHP</td>
+                                         
                                             <td><?php echo $row['reserve_status']; ?></td>
 
 

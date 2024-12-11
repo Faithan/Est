@@ -165,18 +165,13 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                    
                                         <th>Reservation Type</th>
                                         <th>Date</th>
                                         <th>Room Number</th>
-                                        <th>Price</th>
                                         <th>Photo</th>
                                         <th>Extra B&P</th>
                                         <th>Reservation Payment</th>
                                         <th>Payment</th>
-                                        <th>Balance</th>
-                                        <th>Extend Time</th>
-                                        <th>Extend Price</th>
                                         <th>Additional Payment</th>
                                         <th>Status</th>
                                     </tr>
@@ -186,11 +181,9 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                         <?php while ($row = $result->fetch_assoc()) : ?>
                                             <tr>
                                                 <td><?php echo $row['reserve_id']; ?></td>
-                                              
                                                 <td><?php echo $row['reservation_type']; ?></td>
                                                 <td><?php echo $row['date_of_arrival']; ?></td>
                                                 <td><?php echo $row['room_number']; ?></td>
-                                                <td><?php echo number_format($row['price'], 2); ?> PHP</td>
                                                 <td>
                                                     <?php if (!empty($row['photo'])): ?>
                                                         <img src="<?php echo $row['photo']; ?>" alt="Room Photo" style="width: 50px; height: auto;">
@@ -200,12 +193,7 @@ $most_reserved_room = $most_reserved_result->fetch_assoc();
                                                 </td>
                                                 <td><?php echo $row['extra_bed_and_person']; ?></td>
                                                 <td><?php echo number_format($row['reservation_fee'], 2); ?> PHP</td>
-
-                                             
                                                 <td><?php echo number_format($row['payment'], 2); ?> PHP</td>
-                                                <td><?php echo number_format($row['balance'], 2); ?> PHP</td>
-                                                <td><?php echo $row['extend_time']; ?></td>
-                                                <td><?php echo number_format($row['extend_price'], 2); ?> PHP</td>
                                                 <td><?php echo number_format($row['additional_payment'], 2); ?> PHP</td>
                                                 <td><?php echo $row['status']; ?></td>
 

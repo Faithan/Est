@@ -24,7 +24,7 @@ session_start();
 
     <?php
     include 'important.php'
-        ?>
+    ?>
 
     <!-- current page css -->
     <link rel="stylesheet" href="landing_css/index.css?v=<?php echo time(); ?>">
@@ -59,12 +59,11 @@ session_start();
                     </div>
 
                     <script>
-                        document.querySelector('.btn').addEventListener('click', function () {
+                        document.querySelector('.btn').addEventListener('click', function() {
                             document.getElementById('about-page').scrollIntoView({
                                 behavior: 'smooth'
                             });
                         });
-
                     </script>
 
                 </div>
@@ -79,7 +78,7 @@ session_start();
     <!-- reservation page -->
     <section class="reservation-page">
         <div class="wrapper-main">
-            
+
             <h1>Reservation</h1>
 
             <p>Welcome to the Reservation Section of Estregan Beach Resort! Experience convenience at your
@@ -114,11 +113,10 @@ session_start();
                 <h1 for="">About Estregan </h1>
 
                 <hr>
-                <p>Estregan Beach Resort provides the best quality of services applying top quality guest house
-                    and conference facilities, in order to fulfill the best way in the relevant needs of every guest.
-                    Provide our guests a unique experience, through which they connect with the best in our company,
-                    and to offer top quality service to our entire guest and provided comfort abundance. Join us, and
-                    experience the vacation of your dreams at Estregan Beach Resort.</p>
+                <p>Estregan Beach Resort provides the best quality services, featuring top-quality cottages, rooms, and conference facilities to meet the specific needs of every customer. 
+                    We strive to provide our customers with a unique experience, connecting them with the finest our resort has to offer. Our commitment to top-quality service ensures comfort, relaxation, and abundance throughout your stay.
+
+                    Join us at Estregan Beach Resort and experience the vacation of your dreams!</p>
                 <div class="image-holder"><img src="system_images/estregan.png" alt="Estregan Beach"></div>
             </div>
 
