@@ -136,7 +136,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-          <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents" style="padding-top:30px;">
+          <form id="reference-form" action="update_reference_room.php" method="post" class="reserveForm-contents" style="padding-top:30px; display: <?php echo ($manage_data['status'] === 'cancelled' || $manage_data['status'] === 'checkedOut') ? 'none' : ''; ?>">
       <?php
             // Assuming you have already connected to your database via db_connect.php
             require('db_connect.php');
@@ -353,10 +353,10 @@ if (isset($_SESSION['user_id'])) {
             <input class="fixed-value-input" name="additional_payment" onkeyup="changeColor(this)"
                 value="<?php echo $manage_data['additional_payment']; ?>" readonly>
 
-            <label class="bold-text" style="margin-top:20px; color: red;">Reason of Cancellation</label>
+            <label class="bold-text" style="margin-top:20px; color: red; display: <?php echo ($manage_data['status'] === 'cancelled') ? '' : 'none'; ?>">Reason of Cancellation</label>
 
-            <label>Reason <em style="color:gray; font-size: 1rem;">*if cancelled by admin*</em></label>
-            <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
+            <label style="display: <?php echo ($manage_data['status'] === 'cancelled') ? '' : 'none'; ?>">Reason <em style="color:gray; font-size: 1rem; ">*if cancelled by admin*</em></label>
+            <textarea class="fixed-value-textarea" name="special_request" style="display: <?php echo ($manage_data['status'] === 'cancelled') ? '' : 'none'; ?>" onkeyup="changeColor(this)"
                 readonly><?php echo $manage_data['rejection_reason']; ?></textarea>
 
 

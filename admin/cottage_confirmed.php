@@ -38,7 +38,7 @@ if (isset($_POST['confirm'])) {
     $price = $_POST['price'];
     $payment = $_POST['payment'];
     $balance = $_POST['balance'];
- 
+
     $cottage_reserve_fee = $_POST['cottage_reserve_fee'];
     $rejection_reason = $_POST['rejection_reason'] ?? '';
 
@@ -310,10 +310,37 @@ if (isset($_POST['confirm'])) {
                                     <div>
                                         <label>Balance (₱)</label><br>
                                         <input type="number" name="balance" value="" required readonly>
-
                                     </div>
-
                                 </div>
+
+                                <script>
+                                    const paymentInput = document.querySelector('input[name="payment"]');
+                                    const balanceInput = document.querySelector('input[name="balance"]');
+
+                                    function validatePayment() {
+                                        const payment = parseFloat(paymentInput.value) || 0;
+                                        const balance = parseFloat(balanceInput.value) || 0;
+
+                                        if (payment > balance) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Invalid Payment',
+                                                text: 'Payment cannot exceed the balance.',
+                                            });
+                                            paymentInput.value = balance;
+                                        } else if (payment < balance) {
+                                            Swal.fire({
+                                                icon: 'warning',
+                                                text: 'Payment cannot be less than the balance, we automatically input it for you.',
+                                            });
+                                            paymentInput.value = balance;
+                                        }
+                                    }
+
+                                    paymentInput.addEventListener('input', validatePayment);
+                                </script>
+
+
 
                                 <div style="display:flex; align-items:center; justify-content:center; margin: 20px 0; gap: 10px; font-size:1.2rem">
                                     <input type="checkbox" id="confirmationCheckbox">

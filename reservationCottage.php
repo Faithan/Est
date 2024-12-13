@@ -160,7 +160,7 @@ if (isset($_GET['manage_id'])) {
 
                         echo '<div class="room-first-container">';
 
-                        $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = '$cottage_type'";
+                        $fetchdata = "SELECT * FROM cottage_tbl WHERE cottage_type = '$cottage_type' AND cottage_status='available'";
                         $result = mysqli_query($con, $fetchdata);
 
                         while ($row = mysqli_fetch_assoc($result)) {

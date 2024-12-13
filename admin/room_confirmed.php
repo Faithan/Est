@@ -26,7 +26,7 @@ if (isset($_POST['checkedin'])) {
 
     $totalFee = $_POST['total_fee'];
 
-    $payment= $_POST['payment'];
+    $payment = $_POST['payment'];
     $balance = $_POST['balance'];
 
 
@@ -372,6 +372,37 @@ if (isset($_POST['checkedin'])) {
                                         <label>Payment (₱)</label><br>
                                         <input type="number" name="payment" value="" min="0" required>
                                     </div>
+
+                                    <script>
+                                        // Function to validate the payment against the balance
+                                        function validatePayment() {
+                                            const paymentInput = document.querySelector('input[name="payment"]');
+                                            const balance = parseFloat(document.querySelector('input[name="balance"]').value) || 0;
+                                            let payment = parseFloat(paymentInput.value) || 0; // Default to 0 if empty
+
+                                            // Ensure the payment is not less than the balance or greater than the balance
+                                            if (payment < balance) {
+                                                payment = balance; // Set payment to the balance if it's less
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    text: 'Payment cannot be less than or greater than the balance, we automatically input it for you.'
+                                                });
+                                            } else if (payment > balance) {
+                                                payment = balance; // Set payment to the balance if it's greater
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    text: 'Payment cannot be less than or greater than the balance, we automatically input it for you.'
+                                                });
+                                            }
+
+                                            // Update the payment input with the valid value
+                                            paymentInput.value = payment;
+                                        }
+
+                                        // Listen for changes in the payment field and validate
+                                        document.querySelector('input[name="payment"]').addEventListener('input', validatePayment);
+                                    </script>
+
 
                                     <div>
                                         <label>Balance (₱)</label><br>

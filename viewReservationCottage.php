@@ -138,8 +138,8 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-          <form id="reference-form" action="update_reference_cottage.php" method="post" class="reserveForm-contents" style="padding-top:30px;">
-   <?php
+        <form id="reference-form" action="update_reference_cottage.php" method="post" class="reserveForm-contents" style="padding-top:30px; display:<?php echo ($manage_data['reserve_status'] === 'cancelled' || $manage_data['reserve_status'] === 'checkedOut') ? 'none' : ''; ?>">
+            <?php
             // Assuming you have already connected to your database via db_connect.php
             require('db_connect.php');
 
@@ -157,7 +157,7 @@ if (isset($_SESSION['user_id'])) {
             }
             ?>
 
-            <label class="bold-text" >Reservation Payment Section</label>
+            <label class="bold-text">Reservation Payment Section</label>
 
             <label for="">Gcash Account Number:</label>
             <p id="gcashNumber" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-phone"></i> <?php echo !empty($gcash_number) ? $gcash_number : 'No Gcash Number Set'; ?></p>
@@ -374,10 +374,10 @@ if (isset($_SESSION['user_id'])) {
             </script>
 
 
-            <label class="bold-text" style="margin-top:20px; color: red;">Reason of Cancellation</label>
+            <label class="bold-text" style="margin-top:20px; color: red; display:<?php echo ($manage_data['reserve_status'] === 'cancelled') ? '' : 'none'; ?>">Reason of Cancellation</label>
 
-            <label>Reason <em style="color:gray; font-size: 1rem;">*if cancelled by admin*</em></label>
-            <textarea class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
+            <label style="display:<?php echo ($manage_data['reserve_status'] === 'cancelled') ? '' : 'none'; ?>">Reason <em style="color:gray; font-size: 1rem;">*if cancelled by admin*</em></label>
+            <textarea style="display:<?php echo ($manage_data['reserve_status'] === 'cancelled') ? '' : 'none'; ?>" class="fixed-value-textarea" name="special_request" onkeyup="changeColor(this)"
                 readonly><?php echo $manage_data['rejection_reason']; ?></textarea>
 
 
@@ -406,12 +406,12 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-         
+
 
         </form>
 
 
-      
+
 
     </main>
 

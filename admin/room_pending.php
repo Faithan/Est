@@ -350,7 +350,7 @@ if (isset($_POST['confirm'])) {
                                 calculateTotalFee();
 
                                 // Listen for input and change events on Extra Bed, Extra Person, and Price fields
-                                document.querySelectorAll('input[name="extra_bed_and_person"], input[name="rate_per_hour"]').forEach(input => {
+                                document.querySelectorAll('input[name="extra_bed_and_person"], input[name="price"]').forEach(input => {
                                     input.addEventListener('input', calculateTotalFee);
                                     input.addEventListener('change', calculateTotalFee);
                                 });
@@ -368,12 +368,50 @@ if (isset($_POST['confirm'])) {
 
                                     <div>
                                         <label>Reference Number:</label><br>
-                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                        <input type="number" name="reference_number" value="<?php echo $manage_data['reference_number']; ?>" readonly>
                                     </div>
                                     <div>
                                         <label>Reservation Fee</label><br>
                                         <input type="number" name="reservation_fee" required>
                                     </div>
+
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            // Function to validate reservation fee
+                                            function validateReservationFee() {
+                                                const reservationFeeInput = document.querySelector('input[name="reservation_fee"]');
+                                                const totalFee = parseFloat(document.querySelector('input[name="total_fee"]').value) || 0;
+                                                let reservationFee = parseFloat(reservationFeeInput.value) || 0; // Default to 0 if empty
+
+                                                // Ensure reservation fee is not negative and does not exceed total fee
+                                                if (reservationFee < 0) {
+                                                    reservationFee = 0; // Reset to 0 if negative   
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Invalid Reservation Fee',
+                                                        text: 'Reservation fee cannot be negative.',
+                                                    });
+                                                } else if (reservationFee > totalFee) {
+                                                    reservationFee = totalFee; // Reset to total fee if it exceeds
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Invalid Reservation Fee',
+                                                        text: 'Reservation fee cannot exceed the total fee.',
+                                                    });
+                                                }
+
+                                                // Update the input value with the valid reservation fee
+                                                reservationFeeInput.value = reservationFee;
+                                            }
+
+                                            // Listen for changes in the reservation fee input and validate
+                                            const reservationFeeInput = document.querySelector('input[name="reservation_fee"]');
+                                            if (reservationFeeInput) {
+                                                reservationFeeInput.addEventListener('input', validateReservationFee);
+                                            }
+                                        });
+                                    </script>
+
 
                                 </div>
 

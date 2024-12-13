@@ -199,10 +199,10 @@ if (isset($_POST['confirm'])) {
 
                             <div class="line">
 
-                            <div>
-                                <label>Reservation ID</label><br>
-                                <input value="<?php echo $manage_data['reserve_id']; ?>">
-                            </div>
+                                <div>
+                                    <label>Reservation ID</label><br>
+                                    <input value="<?php echo $manage_data['reserve_id']; ?>">
+                                </div>
 
                             </div>
 
@@ -317,12 +317,54 @@ if (isset($_POST['confirm'])) {
 
                                     <div>
                                         <label>Reference Number:</label><br>
-                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly>
+                                        <input type="number" name="reservation_fee" value="<?php echo $manage_data['reference_number']; ?>" readonly required>
                                     </div>
+
+                                    
                                     <div>
                                         <label>Reservation Fee</label><br>
-                                        <input type="number" name="cottage_reserve_fee" required>
+                                        <input
+                                            type="number"
+                                            name="cottage_reserve_fee"
+                                            id="cottage_reserve_fee"
+                                            required
+                                            oninput="validateReservationFee()">
                                     </div>
+                                    <script>
+                                        function validateReservationFee() {
+                                            const reservationFeeInput = document.getElementById('cottage_reserve_fee');
+                                            const priceInput = document.querySelector('input[name="price"]'); // Ensure your price input exists and has a 'name="price"' attribute
+                                            const reservationFee = parseFloat(reservationFeeInput.value) || 0;
+                                            const price = parseFloat(priceInput.value) || 0;
+
+                                            // Check for negative values
+                                            if (reservationFee < 0) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Invalid Input',
+                                                    text: 'Reservation Fee cannot be negative.',
+                                                    confirmButtonText: 'OK'
+                                                }).then(() => {
+                                                    reservationFeeInput.value = ''; // Clear the input after the alert
+                                                });
+                                            }
+
+                                            // Check if reservation fee exceeds the price
+                                            else if (reservationFee > price) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Invalid Reservation Fee',
+                                                    text: 'Reservation Fee should not exceed the Price.',
+                                                    confirmButtonText: 'OK'
+                                                }).then(() => {
+                                                    reservationFeeInput.value = ''; // Clear the input after the alert
+                                                });
+                                            }
+                                        }
+                                    </script>
+
+
+
 
                                 </div>
 

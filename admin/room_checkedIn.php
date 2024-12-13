@@ -509,8 +509,27 @@ if (isset($_POST['extended'])) {
 
 
                 <div class="button-holder">
-                    <button class="check-btn" type="submit" name="extended"><i class="fa-solid fa-check-to-slot"></i>
-                        Extend</button>
+                    <!-- Extend Button -->
+                    <button class="check-btn" type="submit" name="extended" id="extendBtn"><i class="fa-solid fa-check-to-slot"></i> Extend</button>
+
+                    <script>
+                        // Function to check the additional payment
+                        document.getElementById('extendBtn').addEventListener('click', function(event) {
+                            // Get the value of additional payment
+                            const additionalPayment = parseFloat(document.querySelector('input[name="additional_payment"]').value) || 0;
+
+                            // If additional payment is 0, show SweetAlert message and prevent form submission
+                            if (additionalPayment === 0) {
+                                event.preventDefault(); // Prevent form submission
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'No Additional Payment',
+                                    text: 'Please enter an additional payment to extend the stay.',
+                                });
+                            }
+                        });
+                    </script>
+
 
                     <button class="reject-btn" type="submit" name="checkOut"><i class="fa-solid fa-check-to-slot"></i>
                         Check Out</button>
