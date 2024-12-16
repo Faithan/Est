@@ -24,27 +24,34 @@ if (isset($_POST['addroom'])) {
     $uniqueFileName = uniqid('', true) . '.' . $fileExt;
     $fileDestination = $uploadDir . $uniqueFileName;
 
-    if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
-        if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
-            // Insert data into database
-            $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
-                       VALUES ('$roomNumber', '$roomType', '$bedType', '$bedQuantity', '$noPersons', '$amenities', '$price', '$status', '$fileDestination')";
+    // Check if the room number already exists
+    $checkRoomQuery = "SELECT * FROM room_tbl WHERE room_number = '$roomNumber'";
+    $checkResult = mysqli_query($con, $checkRoomQuery);
+    if (mysqli_num_rows($checkResult) > 0) {
+        $message = "Room number already exists! Please choose a different number.";
+        $isSuccess = false;
+    } else {
+        // Proceed with file upload and room data insertion
+        if (in_array($fileExt, $allowedExts) && $photo['error'] === 0 && $photo['size'] < 10000000) {
+            if (move_uploaded_file($photo['tmp_name'], $fileDestination)) {
+                // Insert data into database
+                $saveData = "INSERT INTO room_tbl (room_number, room_type, bed_type, bed_quantity, no_persons, amenities, price, status, photo) 
+                            VALUES ('$roomNumber', '$roomType', '$bedType', '$bedQuantity', '$noPersons', '$amenities', '$price', '$status', '$fileDestination')";
 
-            if (mysqli_query($con, $saveData)) {
-                $message = "Saved Successfully!";
-                $isSuccess = true;
+                if (mysqli_query($con, $saveData)) {
+                    $message = "Saved Successfully!";
+                    $isSuccess = true;
+                } else {
+                    $message = "Failed to save data!";
+                }
             } else {
-                $message = "Failed to save data!";
+                $message = "Failed to move uploaded file!";
             }
         } else {
-            $message = "Failed to move uploaded file!";
+            $message = "Failed to upload file!";
         }
-    } else {
-        $message = "Failed to upload file!";
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -306,17 +313,17 @@ if (isset($_POST['addroom'])) {
                                 font-size: 1.4rem;
                                 border-radius: 5px;
                                 color: var(--seventh-color);
-                            }   
+                            }
 
                             .select-box span {
                                 flex-grow: 1;
-                                
+
                             }
 
                             .dropdown-content {
                                 display: none;
                                 position: absolute;
-                         
+
                                 border: 1px solid #ccc;
                                 width: 100%;
                                 z-index: 1;
@@ -347,7 +354,7 @@ if (isset($_POST['addroom'])) {
 
 
                         <div class="input-fields">
-                            <label for="room_type">Good for 22 hours:</label>
+                            <label for="room_type">Good for 23 hours:</label>
                             <input type="number" name="price" id="price" class="input_fields"
                                 onkeyup="changeColor(this)" placeholder="₱" required>
 

@@ -417,15 +417,28 @@ if (isset($_POST['checkedin'])) {
                                     <label for="confirmationCheckbox"> I confirm that the balance is paid</label>
 
                                 </div>
+
+                                
                                 <script>
                                     // Handle form submission
                                     document.querySelector('form').addEventListener('submit', function(event) {
                                         const checkbox = document.getElementById('confirmationCheckbox');
+                                        const balance = parseFloat(document.querySelector('input[name="balance"]').value) || 0;
 
-                                        // Prevent form submission if checkbox is not checked
                                         if (!checkbox.checked) {
                                             event.preventDefault();
-                                            alert('Please confirm that the balance is paid by checking the box.');
+                                            Swal.fire({
+                                                icon: 'warning',
+                                                title: 'Confirmation Required',
+                                                text: 'Please confirm that the balance is paid by checking the box.',
+                                            });
+                                        } else if (balance !== 0) {
+                                            event.preventDefault();
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Balance Not Paid',
+                                                text: 'Please ensure the balance is paid before proceeding.',
+                                            });
                                         }
                                     });
                                 </script>

@@ -438,7 +438,30 @@ if (isset($_POST['confirm'])) {
 
 
 
+                        <script>
+                            // Handle form submission
+                            document.querySelector('form').addEventListener('submit', function(event) {
+                                const checkbox = document.getElementById('confirmationCheckbox');
+                                const balance = parseFloat(document.querySelector('input[name="balance"]').value) || 0;
 
+                                // Prevent form submission if checkbox is not checked or if balance is not 0
+                                if (!checkbox.checked) {
+                                    event.preventDefault();
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Confirmation Required',
+                                        text: 'Please confirm that the balance is paid by checking the box.',
+                                    });
+                                } else if (balance !== 0) {
+                                    event.preventDefault();
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Balance Not Paid',
+                                        text: 'Please ensure the balance is paid before proceeding.',
+                                    });
+                                }
+                            });
+                        </script>
 
 
                         <div class="button-holder">
@@ -447,7 +470,7 @@ if (isset($_POST['confirm'])) {
                                 Check In</button>
                             <a class="reject-btn" id="reject-btn" name="reject" onclick="confirmReject()"><i
                                     class="fa-solid fa-trash"></i>
-                                Reject</a>
+                                Cancel</a>
                         </div>
                     </form>
                 </div>
