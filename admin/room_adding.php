@@ -12,7 +12,9 @@ if (isset($_POST['addroom'])) {
     $noPersons = $_POST['no_persons'];
     $amenities = $_POST['amenities'];
     $price = $_POST['price'];
-    $status = $_POST['status'];
+    
+    // Set the status automatically to "available"
+    $status = 'Available'; 
 
     // Handle file upload
     $photo = $_FILES['photo'];
@@ -53,6 +55,7 @@ if (isset($_POST['addroom'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -361,33 +364,7 @@ if (isset($_POST['addroom'])) {
                         </div>
 
 
-                        <div class="input-fields">
-                            <label for="status">Status:</label>
-                            <?php
-                            // Assuming you've included the necessary database connection file
-
-                            // Query to select distinct status names from the room_status_tbl
-                            $sql = "SELECT DISTINCT room_status_name FROM room_status_tbl";
-                            $result = $con->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                echo "<select name='status' class='select_fields' id='statusSelect' onchange='changeColorSelect(this)' required>";
-
-                                echo "<option disabled selected value=''>Choose an Option</option>";
-
-                                while ($row = $result->fetch_assoc()) {
-                                    $status = ucwords(strtolower($row["room_status_name"])); // Capitalize and format the status name
-                                    echo "<option value='" . $status . "'>" . $status . "</option>";
-                                }
-                                echo "</select>";
-                            } else {
-                                echo "<select name='status' id='statusSelect' class='select_fields' required>";
-                                echo "<option disabled selected value=''>Choose an Option</option>";
-                                echo "<option value=''>No options found.</option>";
-                                echo "</select>";
-                            }
-                            ?>
-                        </div>
+                     
 
 
 

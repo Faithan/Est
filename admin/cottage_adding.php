@@ -12,7 +12,9 @@ if (isset($_POST['addcottage'])) {
     $noPersons = $_POST['number_of_person'];
     $dayPrice = $_POST['day_price'];
     $nightPrice = $_POST['night_price'];
-    $cottageStatus = $_POST['cottage_status'];
+
+    // Set the status automatically to "available"
+    $cottageStatus = 'Available'; 
 
     $photo = $_FILES['cottage_photo'];
 
@@ -177,29 +179,7 @@ if (isset($_POST['addcottage'])) {
                             <input type="number" name="night_price" id="night_price" class="input_fields" required>
                         </div>
 
-                        <div class="input-fields">
-                            <label for="cottage_status">Cottage Status:</label>
-                            <?php
-                            // Query to select distinct cottage status names
-                            $sql = "SELECT DISTINCT cottage_status_name FROM cottage_status_tbl";
-                            $result = $con->query($sql);
-
-                            $selectBox = "<select name='cottage_status' class='select_fields' id='cottageStatusSelect' onchange='filterCottagesByStatus()'>";
-                            $selectBox .= "<option disabled selected value=''>Select a Cottage Status</option>";
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $cottageStatus = ucwords(strtolower($row["cottage_status_name"])); // Capitalize and format the cottage status
-                                    $selectBox .= "<option value='" . $cottageStatus . "'>" . $cottageStatus . "</option>";
-                                }
-                            } else {
-                                $selectBox .= "<option value=''>No cottage statuses found.</option>";
-                            }
-
-                            $selectBox .= "</select>";
-                            echo $selectBox;
-                            ?>
-                        </div>
+                        <!-- Removed the cottage status input as it's set to 'available' by default -->
                     </div>
 
                     <div class="adding-photo-container">
